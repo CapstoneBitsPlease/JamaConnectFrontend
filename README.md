@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Duc's section:
+
+## How did I initialize this?
+
+Mostly follow: 
+  1. https://itnext.io/how-to-use-tailwind-css-with-react-16e9d478b8b1
+  2. https://medium.com/@harryhedger/quick-how-to-setup-tailwind-with-create-react-app-6e7af96ad32c
+
+
+# React's default section:
 ## Available Scripts
 
 In the project directory, you can run:
@@ -67,8 +77,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### How did I initialize this?
-
-Mostly follow: 
-  1. https://itnext.io/how-to-use-tailwind-css-with-react-16e9d478b8b1
-  2. https://medium.com/@harryhedger/quick-how-to-setup-tailwind-with-create-react-app-6e7af96ad32c
