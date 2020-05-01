@@ -14,6 +14,9 @@ Mostly follow:
 
 In the project directory, you can run:
 
+### `npm install`
+Some libraries won't be included in the commit. Use `npm install` to install the library in package.json if there is any missing library error.
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
