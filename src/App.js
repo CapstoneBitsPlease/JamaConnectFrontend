@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsPage from 'components/SettingsPage.js';
+import SettingsPage from 'pages/SettingsPage.js';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/main/App.sass';

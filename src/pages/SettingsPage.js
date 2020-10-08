@@ -1,21 +1,25 @@
 /* 
-Functional React component to render the sync settings page by an admin
+Functional React component to render the sync settings page by an administrator
 */
 
+/* 
+Route: https://capstone2020.jamacloud.com/perspective.req#/ 
+id of "settings" element: ext-gen2804
+*/
 
 import React, {useState} from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import SettingsForm from './SettingsForm.js'
-import '../SettingsPage.css';
+import '../styles/pages/Settings.style.sass';
 import '../styles/main/theme.sass';
 
 /* 
 TODOS:
-- get route to where button will be that directs admin to settings page
+- get rid of modal components
+- get route to where button will be that directs user to sync settings page
 - get actual data 
-- check user permissions
+- check user permissions?
 */
 
 function SettingsPage(props) {
@@ -27,39 +31,49 @@ function SettingsPage(props) {
   // set initial state with useState hook
   const [showSettings, setShowSettings] = useState(false);
 
-  /* Event handlers for buttons */
-  // show the settings page
-  const handleShowSettings = () => setShowSettings(true);
-
-  // close the settings page 
-  const handleClosePage = () => setShowSettings(false);
-
   // get number of items currently ready to sync (for now just returning hard-coded answers)
   function countItems() { return itemsToSync; }
 
   // get previous length of time it took to sync items (for now just returning hard-coded answers)
   function getPrevSyncTime() { return [prevSyncTime, timeUnit]; }
 
-  return (
-    <div className="App" role="main">
+  // shows settings page 
+  function showPage(showSettings) {
+    let style = {}
 
-      <Button variant="dark" onClick={handleShowSettings}>Sync Settings</Button>
+    if(showSettings) {
+      style = {"display": "block"}
+    }
+    else style = {"display": "hidden"}
+    
+    return style
+      
+  }
+
+
+  //() => setShowSettings(true)
+  return (
+    <div className="settings_page_container" role="main">
+      <button className="apply_button" onClick={() => setShowSettings(true)}>Sync Settings</button>
+      <div className="settings_form_container" style={showPage(showSettings)}>
       <Modal
         show={showSettings}
-        onHide={handleClosePage}
-        dialogClassName="modal-100w"
+        onHide={() => setShowSettings(false)}
+        size="lg"
         animation={false}
         backdrop="static"
-      > 
+      >
         <ModalHeader closeButton>
           <Modal.Title className="page_name">Sync Settings</Modal.Title>
         </ModalHeader>
+
         <SettingsForm 
-          prevSyncTime={prevSyncTime} 
-          itemsToSync={itemsToSync} 
-         />
+          showSettings={showSettings}
+          prevSyncTime={getPrevSyncTime()} 
+          itemsToSync={countItems()} 
+        />
       </Modal>
-      
+      </div>
     </div>
     
   );
