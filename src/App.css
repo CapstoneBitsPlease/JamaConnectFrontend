@@ -1,9 +1,7 @@
-/* Centers data */
 .App {
   text-align: center;
 }
 
-/* Centers header */ 
 .App-header {
   background-color: white;
   min-height: 10vh;

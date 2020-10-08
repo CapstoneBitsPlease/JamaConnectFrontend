@@ -1,7 +1,6 @@
 import React from 'react';
 import SettingsPage from 'pages/SettingsPage.js';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/main/App.sass';
 import './styles/main/theme.sass';
 
