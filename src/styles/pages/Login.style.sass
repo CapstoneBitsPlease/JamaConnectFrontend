@@ -1,0 +1,38 @@
+.login
+  &-container
+    @apply flex flex-col 
+    @apply items-center justify-center
+    @apply h-screen
+  &-wrapper
+    @apply flex flex-col
+    @apply w-64
+    input
+      @apply p-2
+      @apply rounded-md border-solid
+      &:focus
+        @apply outline-none
+     
+    label
+      @apply text-gray-500
+    button
+      @apply text-white
+      @apply bg-blue-700
+      @apply p-2
+      @apply border-none 
+      @apply outline-none
+      &:hover
+        @apply bg-blue-600
+    p
+      @apply text-blue-700
+  &-line 
+    @apply flex flex-row
+    @apply items-center justify-center
+    @apply mb-4
+    hr 
+      @apply bg-gray-500 w-40
+  &-forgot
+    @apply flex flex-row
+    @apply justify-between
+    @apply my-4
+      
+  
