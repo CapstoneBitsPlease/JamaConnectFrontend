@@ -2,9 +2,11 @@
   Functional React component to render the sync settings form  
 */
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import '../styles/pages/Settings.style.sass';
 import '../styles/main/theme.sass';
+
 
 function SettingsForm(props) {
     // initialize state
@@ -15,6 +17,23 @@ function SettingsForm(props) {
         e.preventDefault();
         console.log(syncInterval)
     }
+
+    // api calls will be made in useEffect hooks (testing with projects for now)
+    useEffect(() => {
+        const url = "https://www.capstone2020.jamacloud/rest/v1/projects";
+        const key = "";
+        console.log("starting api call");
+        axios.get((url), {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Basic`
+          }
+        })
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error))
+          console.log("ending api call");
+    }, [])
 
     return (
     <div>
