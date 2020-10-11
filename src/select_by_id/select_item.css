@@ -1,0 +1,27 @@
+body{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    height: 50%;
+}
+
+
+form{
+    margin: auto;
+    text-align: left;
+    padding: 20px;
+    left: 50%;
+    margin:0px auto;
+    border: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.col div{
+    width: fit-content;
+    height: fit-content;
+    border: 1px black solid;
+}
+
