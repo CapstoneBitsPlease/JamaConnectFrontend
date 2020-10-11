@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import './styles/main/theme.sass';
-import { select_item } from './Page/select_item';
+import Select_item  from './Page/Select_item';
 
 function App() {
   return (
     <div>
-      <select_item />
+      <Select_item></Select_item>
     </div>
 
   );

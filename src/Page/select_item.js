@@ -1,34 +1,46 @@
 import React from 'react';
 import "../styles/Page/select_item.sass";
 
-const select_item = () => {
-    return (
-        <div className="select_item-container">
-            <form className="select_item-select">
-                    <legend>Item Selection</legend>
+const Select_item = () => {
+	return (
+		<div className="select_item-container">
+			<form className="select_item-selecting" >
+				<legend class="mx-auto border-separate font-bold italic text-xl">Item Selection</legend>
+				<div className="select_item-item">
 
-                    <div className="item">
+					<table className="select_item-table">
+						<tbody>
 
-                        <table>
-                            <tbody>
+							<div className="dropdown">
+								<select className="list1" name="pid" id="proid">
+									<option></option>
+								</select>
 
-                                <select name="pid" id="proid"></select>
+								<br />
 
-                                <select name="itype" id="itemtype"></select>
+								<select className="list2" name="itype" id="itemtype">
+									<option></option>
+								</select>
+							</div>
 
-                                <input
-                                    type="text"
-                                    id='itemid'
-                                    placeholder="Enter the item ID here"
-                                />
+							<div className="textfield">
+								<input
+									className="field"
+									type="text"
+									id='itemid'
+									placeholder="Enter the item ID here"
+								/>
+							</div>
 
-                            </tbody>
-                        </table>
-                    </div>
-            </form>
+							<button type='button' className='but'>Search</button>
 
-        </div>
-    );
+						</tbody>
+					</table>
+				</div>
+			</form>
+
+		</div>
+	);
 }
 
-export default select_item;
+export default Select_item;
