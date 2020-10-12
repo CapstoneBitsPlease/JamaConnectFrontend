@@ -1,7 +1,26 @@
 import React from 'react';
+import axios from 'axios'
 import "../styles/Page/select_item.sass";
+import { useEffect, useState } from 'react';
+import { data } from 'autoprefixer';
+
 
 const Select_item = () => {
+	const [projects, setproject] = useState([])
+
+	useEffect(() => {
+		axios.get('https://capstone2020.jamacloud.com/rest/v1/projects')
+			.then(res => {
+				console.log(res)
+			})
+			.catch(err => {
+				console.log(err)
+			})
+
+	},[])
+
+
+
 	return (
 		<div className="select_item-container">
 			<form className="select_item-selecting" >
@@ -13,7 +32,10 @@ const Select_item = () => {
 
 							<div className="dropdown">
 								<select className="list1" name="pid" id="proid">
-									<option></option>
+									{
+										projects.map(project => (
+											<option key={project.data}>{project.name}</option>
+										))}
 								</select>
 
 								<br />
@@ -32,7 +54,9 @@ const Select_item = () => {
 								/>
 							</div>
 
-							<button type='button' className='but'>Search</button>
+							<div className="btn">
+								<button type='button' className='but'>Search</button>
+							</div>
 
 						</tbody>
 					</table>
