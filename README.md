@@ -1,7 +1,7 @@
 C2TB
 ====
 
-This repo contains the frontend for the Team Bits Please Capstone Project sponsored by Jama Software.
+This repo contains the frontend components for our team's capstone project.
 
 To run:
 -------
@@ -13,4 +13,4 @@ To run:
 Sources:
 --------
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and generated from a React-TailwindCSS template created by [ptmdmusique](https://github.com/ptmdmusique/react-tailwind-sass-template).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and generated from a React-Tailwind-Sass template created by [ptmdmusique](https://github.com/ptmdmusique/react-tailwind-sass-template).
