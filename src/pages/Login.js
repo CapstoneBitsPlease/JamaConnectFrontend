@@ -1,7 +1,36 @@
 import React from "react";
+import axios from "axios";
+import makeToast from "../Toaster";
 import "../styles/pages/Login.style.sass";
 
 const Login = () => {
+  const userNameRef = React.createRef();
+  const passwordRef = React.createRef();
+  const organizationRef = React.createRef();
+
+  const loginUser = () => {
+    const userName = userNameRef.current.value;
+    const password = passwordRef.current.value;
+    const organization = organizationRef.current.value;
+
+    axios
+      .post(
+        `http://127.0.0.1:5000/login/basic?username=${userName}&password=${password}&organization=${organization}`
+      )
+      .then((response) => {
+        makeToast("success", response.data.message);
+      })
+      .catch((err) => {
+        if (
+          err &&
+          err.response &&
+          err.response.data &&
+          err.response.data.message
+        )
+          makeToast("error", err.response.data.message);
+      });
+  };
+
   return (
     <div className="login-container">
       <div className="login-wrapper">
@@ -12,6 +41,7 @@ const Login = () => {
           name="username"
           id="username"
           placeholder="Username"
+          ref={userNameRef}
         />
         <label htmlFor="password">Password</label>
         <input
@@ -19,10 +49,15 @@ const Login = () => {
           name="password"
           id="password"
           placeholder="Password"
+          ref={passwordRef}
         />
-        <div className = "login-forgot">
+        <label htmlFor="organization">Organization</label>
+        <select id="user-registration" ref={organizationRef}>
+          <option value="capstone2020">Capstone2020</option>
+        </select>
+        <div className="login-forgot">
           <p>Forgot your password?</p>
-          <button>Sign in</button>
+          <button onClick={loginUser}>Sign in</button>
         </div>
         <div className="login-line">
           <hr /> OR <hr />
