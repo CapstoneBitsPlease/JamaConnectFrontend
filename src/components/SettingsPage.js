@@ -19,7 +19,7 @@ const SettingsPage = (props) => {
       .post(api)
       .then(response => {
         console.log("success");
-        data = response.json();
+        console.log(response.data)
       })
       .catch(error => {
         console.log(error);
@@ -31,8 +31,12 @@ const SettingsPage = (props) => {
 
   // makes request, returns number of items currently ready to sync
   const getNumItemsToSync = () => { 
-    var count = 5;
-    var api = "";
+    var count = 5; // change this
+    var route = "/login/basic"; // and this
+    const username = process.env.USERNAME;
+    const password = process.env.PASSWORD;
+    const organization = process.env.ORGANIZATION;
+    var api = `http://127.0.0.1:5000${route}?username=${username}&password=${password}&organization=${organization}`;
 
     // get data 
     makeRequest(api);
@@ -43,9 +47,14 @@ const SettingsPage = (props) => {
 
   // makes request, returns previous length of time it took to sync items
   const getPrevSyncTime = () => { 
-    var currentTime = 30;
-    var units = " seconds";
-    var api = "";
+    var currentTime = 30; // change this 
+    var units = " seconds"; // and this 
+    var route = "/login/basic";
+    var host = "http://127.0.0.1:5000";
+    const username = process.env.USERNAME;
+    const password = process.env.PASSWORD;
+    const organization = process.env.ORGANIZATION;
+    var api = `${host}${route}?username=${username}&password=${password}&organization=${organization}`;
 
     // get data
     makeRequest(api);
