@@ -27,7 +27,7 @@
             "key": "example-section-link",
             "location": "admin_plugins_menu/my-web-section",
             "name": {
-                "value": "Sync Settings"
+                "value": "Sync settings"
             },
             "url": "/SettingPage"
         }

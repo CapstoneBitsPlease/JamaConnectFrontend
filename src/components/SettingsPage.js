@@ -10,13 +10,19 @@ const SettingsPage = (props) => {
   const [timeUnit, setTimeUnit] = useState("");
   const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
-
+  
   // makes request to backend, returns the data if successful, otherwise returns and logs an error
-  const makeRequest = (api) => {
+  const makeRequest = (url) => {
     var data = [];
+    var token = "";
 
     axios
-      .post(api)
+      .post(url, {
+        headers:{
+          "Authorization" : `Bearer ${token}`
+        }
+      }
+        )
       .then(response => {
         console.log("success");
         console.log(response.data)
@@ -32,14 +38,15 @@ const SettingsPage = (props) => {
   // makes request, returns number of items currently ready to sync
   const getNumItemsToSync = () => { 
     var count = 5; // change this
-    var route = "/login/basic"; // and this
-    const username = process.env.USERNAME;
+    var host = "http://127.0.0.1:5000";
+    var route = "/get_user"; // and this
+    /*const username = process.env.USERNAME;
     const password = process.env.PASSWORD;
-    const organization = process.env.ORGANIZATION;
-    var api = `http://127.0.0.1:5000${route}?username=${username}&password=${password}&organization=${organization}`;
+    const organization = process.env.ORGANIZATION;*/
+    var url = `${host}${route}`;
 
     // get data 
-    makeRequest(api);
+    makeRequest(url);
 
     // set state
     setNumItemsToSync(count);
@@ -49,15 +56,15 @@ const SettingsPage = (props) => {
   const getPrevSyncTime = () => { 
     var currentTime = 30; // change this 
     var units = " seconds"; // and this 
-    var route = "/login/basic";
     var host = "http://127.0.0.1:5000";
-    const username = process.env.USERNAME;
+    var route = "/login/basic";
+    /*const username = process.env.USERNAME;
     const password = process.env.PASSWORD;
-    const organization = process.env.ORGANIZATION;
-    var api = `${host}${route}?username=${username}&password=${password}&organization=${organization}`;
+    const organization = process.env.ORGANIZATION;*/
+    var url = `${host}${route}`;
 
     // get data
-    makeRequest(api);
+    makeRequest(url);
 
     // set state 
     setPrevSyncTime(currentTime);
