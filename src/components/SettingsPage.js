@@ -14,15 +14,11 @@ const SettingsPage = (props) => {
   // makes request to backend, returns the data if successful, otherwise returns and logs an error
   const makeRequest = (url) => {
     var data = [];
-    var token = "";
 
     axios
       .post(url, {
-        headers:{
-          "Authorization" : `Bearer ${token}`
-        }
-      }
-        )
+        headers: ""
+      })
       .then(response => {
         console.log("success");
         console.log(response.data)
@@ -37,12 +33,9 @@ const SettingsPage = (props) => {
 
   // makes request, returns number of items currently ready to sync
   const getNumItemsToSync = () => { 
-    var count = 5; // change this
+    var count = 5; // placeholders
     var host = "http://127.0.0.1:5000";
-    var route = "/get_user"; // and this
-    /*const username = process.env.USERNAME;
-    const password = process.env.PASSWORD;
-    const organization = process.env.ORGANIZATION;*/
+    var route = "/get_num_items_to_sync"; 
     var url = `${host}${route}`;
 
     // get data 
@@ -54,13 +47,10 @@ const SettingsPage = (props) => {
 
   // makes request, returns previous length of time it took to sync items
   const getPrevSyncTime = () => { 
-    var currentTime = 30; // change this 
-    var units = " seconds"; // and this 
+    var currentTime = 30; // placeholders 
+    var units = " seconds";  
     var host = "http://127.0.0.1:5000";
-    var route = "/login/basic";
-    /*const username = process.env.USERNAME;
-    const password = process.env.PASSWORD;
-    const organization = process.env.ORGANIZATION;*/
+    var route = "/get_prev_sync_time";
     var url = `${host}${route}`;
 
     // get data
