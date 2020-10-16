@@ -9,7 +9,13 @@ const Select_item = () => {
 	const [projects, setproject] = useState([])
 
 	useEffect(() => {
-		axios.get('https://capstone2020.jamacloud.com/rest/v1/projects')
+		axios.get('https://capstone2020.jamacloud.com/rest/v1/projects',
+			{
+				headers: {
+					'Access-Control-Allow-Origin' : '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS' ,
+				}
+			})
 			.then(res => {
 				console.log(res)
 			})
@@ -17,7 +23,7 @@ const Select_item = () => {
 				console.log(err)
 			})
 
-	},[])
+	}, [])
 
 
 
@@ -34,7 +40,7 @@ const Select_item = () => {
 								<select className="list1" name="pid" id="proid">
 									{
 										projects.map(project => (
-											<option key={project.data}>{project.name}</option>
+											<option key={project.data.id}>{project.data.name}</option>
 										))}
 								</select>
 

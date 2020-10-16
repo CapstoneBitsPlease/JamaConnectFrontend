@@ -9,11 +9,11 @@
     "axios": "^0.20.0",
     "customize-cra": "^0.9.1",
     "easy-peasy": "^3.3.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
-    "react": "^16.13.1",
-    "react-app-rewired": "^2.1.5",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-app-rewired": "^2.1.6",
+    "react-dom": "^16.14.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -38,8 +38,9 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "postcss-cli": "^7.1.0",
-    "tailwindcss": "^1.8.13"
-  }
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^7.1.2",
+    "tailwindcss": "^1.9.2"
+  },
+  "proxy": "http://localhost:4200"
 }
