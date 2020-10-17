@@ -17,23 +17,20 @@ const Login = () => {
       .post(
         `http://127.0.0.1:5000/login/basic?username=${userName}&password=${password}&organization=${organization}`
       )
-      .then((response) => {
-        makeToast("success", response.data.message);
+      .then(() => {
+        makeToast("success", "User has been authenticated");
       })
-      .catch((err) => {
-        if (
-          err &&
-          err.response &&
-          err.response.data &&
-          err.response.data.message
-        )
-          makeToast("error", err.response.data.message);
+      .catch(() => {
+        makeToast("error", "Invalid login");
       });
+  };
+  const handleForm = (event) => {
+    event.preventDefault();
   };
 
   return (
     <div className="login-container">
-      <div className="login-wrapper">
+      <form className="login-wrapper" onSubmit={handleForm}>
         <h1>Authentication</h1>
         <label htmlFor="username">Username</label>
         <input
@@ -52,18 +49,24 @@ const Login = () => {
           ref={passwordRef}
         />
         <label htmlFor="organization">Organization</label>
-        <select id="user-registration" ref={organizationRef}>
-          <option value="capstone2020">Capstone2020</option>
-        </select>
+        <input
+          type="organization"
+          name="organization"
+          id="organization"
+          placeholder="Organization"
+          ref={organizationRef}
+        />
         <div className="login-forgot">
           <p>Forgot your password?</p>
-          <button onClick={loginUser}>Sign in</button>
+          <button onClick={loginUser} type="submit">
+            Sign in
+          </button>
         </div>
         <div className="login-line">
           <hr /> OR <hr />
         </div>
         <button>Sign in with OAuth</button>
-      </div>
+      </form>
     </div>
   );
 };
