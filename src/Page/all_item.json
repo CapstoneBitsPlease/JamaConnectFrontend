@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "status": "OK",
+    "timestamp": "2020-10-21T03:40:21.944+0000",
+    "pageInfo": {
+      "startIndex": 0,
+      "resultCount": 6,
+      "totalResults": 6
+    }
+  },
+  "links": {
+    "data.createdBy": {
+      "type": "users",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/users/{data.createdBy}"
+    },
+    "data.childItemType": {
+      "type": "itemtypes",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/itemtypes/{data.childItemType}"
+    },
+    "data.fields.requirement_type$118": {
+      "type": "picklistoptions",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/picklistoptions/{data.fields.requirement_type$118}"
+    },
+    "data.modifiedBy": {
+      "type": "users",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/users/{data.modifiedBy}"
+    },
+    "data.fields.release": {
+      "type": "releases",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/releases/{data.fields.release}"
+    },
+    "data.fields.assignedTo": {
+      "type": "users",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/users/{data.fields.assignedTo}"
+    },
+    "data.location.parent.item": {
+      "type": "items",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/items/{data.location.parent.item}"
+    },
+    "data.project": {
+      "type": "projects",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/projects/{data.project}"
+    },
+    "data.itemType": {
+      "type": "itemtypes",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/itemtypes/{data.itemType}"
+    },
+    "data.location.parent.project": {
+      "type": "projects",
+      "href": "https://capstone2020.jamacloud.com/rest/v1/projects/{data.location.parent.project}"
+    }
+  },
+  "data": [
+    {
+      "id": 7828,
+      "documentKey": "DEMO-TXT-1",
+      "globalId": "GID-55598",
+      "itemType": 33,
+      "project": 46,
+      "createdDate": "2020-08-06T22:51:52.000+0000",
+      "modifiedDate": "2020-08-06T22:51:52.000+0000",
+      "lastActivityDate": "2020-08-06T22:51:52.000+0000",
+      "createdBy": 14,
+      "modifiedBy": 14,
+      "fields": {
+        "documentKey": "DEMO-TXT-1",
+        "globalId": "GID-55598",
+        "name": "root text",
+        "description": "<p>asdfasdf</p>\n"
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 0,
+        "globalSortOrder": 2145,
+        "sequence": "1",
+        "parent": {
+          "project": 46
+        }
+      },
+      "lock": {
+        "locked": false,
+        "lastLockedDate": "2020-10-06T01:13:09.000+0000"
+      },
+      "type": "items"
+    },
+    {
+      "id": 7831,
+      "documentKey": "DEMO-SET-1",
+      "globalId": "GID-55599",
+      "itemType": 31,
+      "project": 46,
+      "createdDate": "2020-08-06T22:52:05.000+0000",
+      "modifiedDate": "2020-08-06T22:52:05.000+0000",
+      "lastActivityDate": "2020-08-06T22:52:05.000+0000",
+      "createdBy": 14,
+      "modifiedBy": 14,
+      "fields": {
+        "setKey": "CODE",
+        "globalId": "GID-55599",
+        "documentKey": "DEMO-SET-1",
+        "name": "Codes",
+        "description": ""
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 1,
+        "globalSortOrder": 3218,
+        "sequence": "2",
+        "parent": {
+          "project": 46
+        }
+      },
+      "lock": {
+        "locked": false
+      },
+      "childItemType": 114,
+      "type": "items"
+    },
+    {
+      "id": 7834,
+      "documentKey": "DEMO-CODE-1",
+      "globalId": "GID-55600",
+      "itemType": 114,
+      "project": 46,
+      "createdDate": "2020-08-06T22:52:27.000+0000",
+      "modifiedDate": "2020-08-06T23:06:59.000+0000",
+      "lastActivityDate": "2020-08-06T23:06:59.000+0000",
+      "createdBy": 14,
+      "modifiedBy": 14,
+      "fields": {
+        "documentKey": "DEMO-CODE-1",
+        "globalId": "GID-55600",
+        "name": "code 0",
+        "description": "updated from api",
+        "assignedTo": 26,
+        "release": 58,
+        "code_version$114": "12"
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 0,
+        "globalSortOrder": 4291,
+        "sequence": "2.1",
+        "parent": {
+          "item": 7831
+        }
+      },
+      "lock": {
+        "locked": false,
+        "lastLockedDate": "2020-08-06T23:22:49.000+0000"
+      },
+      "type": "items"
+    },
+    {
+      "id": 7843,
+      "documentKey": "DEMO-CODE-2",
+      "globalId": "GID-55603",
+      "itemType": 114,
+      "project": 46,
+      "createdDate": "2020-08-06T22:53:43.000+0000",
+      "modifiedDate": "2020-08-06T22:53:43.000+0000",
+      "lastActivityDate": "2020-08-06T22:53:43.000+0000",
+      "createdBy": 14,
+      "modifiedBy": 14,
+      "fields": {
+        "documentKey": "DEMO-CODE-2",
+        "globalId": "GID-55603",
+        "name": "code 1",
+        "description": "<p><img alt=\"\" height=\"428\" src=\"https://capstone2020.jamacloud.com/attachment/319/samoyed.jpg\" width=\"590\" /></p>\n"
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 1,
+        "globalSortOrder": 5364,
+        "sequence": "2.2",
+        "parent": {
+          "item": 7831
+        }
+      },
+      "lock": {
+        "locked": false
+      },
+      "type": "items"
+    },
+    {
+      "id": 7858,
+      "documentKey": "DEMO-SET-3",
+      "globalId": "GID-55605",
+      "itemType": 31,
+      "project": 46,
+      "createdDate": "2020-08-06T23:40:15.000+0000",
+      "modifiedDate": "2020-08-06T23:40:15.000+0000",
+      "lastActivityDate": "2020-08-06T23:40:19.000+0000",
+      "createdBy": 40,
+      "modifiedBy": 40,
+      "fields": {
+        "setKey": "L1",
+        "globalId": "GID-55605",
+        "documentKey": "DEMO-SET-3",
+        "name": "System Requirements",
+        "description": ""
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 2,
+        "globalSortOrder": 6437,
+        "sequence": "3",
+        "parent": {
+          "project": 46
+        }
+      },
+      "lock": {
+        "locked": false
+      },
+      "childItemType": 118,
+      "type": "items"
+    },
+    {
+      "id": 7861,
+      "documentKey": "DEMO-L1-1",
+      "globalId": "GID-55606",
+      "itemType": 118,
+      "project": 46,
+      "createdDate": "2020-08-06T23:43:30.000+0000",
+      "modifiedDate": "2020-08-06T23:43:30.000+0000",
+      "lastActivityDate": "2020-08-06T23:43:30.000+0000",
+      "createdBy": 40,
+      "modifiedBy": 40,
+      "fields": {
+        "documentKey": "DEMO-L1-1",
+        "globalId": "GID-55606",
+        "name": "Do the thing",
+        "description": "",
+        "requirement_type$118": 519,
+        "owner$118": "Zhu Li",
+        "key_driving_requirement$118": true
+      },
+      "resources": {
+        "self": {
+          "allowed": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      },
+      "location": {
+        "sortOrder": 0,
+        "globalSortOrder": 1073745042,
+        "sequence": "3.1",
+        "parent": {
+          "item": 7858
+        }
+      },
+      "lock": {
+        "locked": false
+      },
+      "type": "items"
+    }
+  ]
+}
