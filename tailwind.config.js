@@ -14,6 +14,16 @@ module.exports = {
       '0': 0,
       '1/2': '50%',
       '1/4': '25%',
+    },
+    borderRadius: {
+      'none': '0',
+      'sm': '0.125rem',
+      default: '0.25rem',
+      default: '4px',
+      'md': '0.375rem',
+      'lg': '0.5rem',
+      'full': '9999px',
+      'large': '12px',
     }
   },
   corePlugins: {},

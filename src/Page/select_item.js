@@ -9,7 +9,6 @@ import Select from 'react-select'
 
 const Select_item = () => {
 
-
 	// const [projects, setproject] = useState([])
 
 	// useEffect(() => {
@@ -46,6 +45,15 @@ const Select_item = () => {
 		});
 		return tempArray;
 	}
+  
+	const temp = () => {
+		const tempArray = [];
+		type.data.map((element) => {
+			tempArray.push(element.display);
+		});
+		return tempArray;
+	}
+
 
 
 	return (
@@ -75,10 +83,17 @@ const Select_item = () => {
 							className="field"
 							type="text"
 							id='itemid'
-							placeholder="Enter the item ID here"
+							placeholder=" Enter the item ID here"
 						/>
 					</div>
 
+					<div className="item_display">
+						<ul>
+							{temp().map(s => (<li>{s}</li>))}
+						</ul>
+					</div>
+
+					<br/>
 
 
 					<div className="btn">

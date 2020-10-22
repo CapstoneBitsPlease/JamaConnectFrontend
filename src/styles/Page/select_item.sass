@@ -1,8 +1,8 @@
 .select_item
     &-selecting
+        @apply absolute top-1/4 left-1/4 mb-32
         @apply max-w-screen-md
-        @apply absolute top-1/4 left-1/4
-        @apply w-1/2 h-auto max-h-full
+        @apply w-1/2 h-auto
         @apply border border-blue-500
     &-item
         @apply mx-auto mt-2 mb-4
@@ -12,12 +12,15 @@
             @apply w-full border border-blue-500
             @apply mt-6
         .field
-            @apply mb-5
+            @apply mb-5 h-8
+            @apply border rounded-md outline-none
         .btn
             @apply w-1/2 mx-auto
         .but
             @apply bg-blue-500 text-white
-            @apply w-full
+            @apply w-full rounded-md outline-none
+        .item_display
+            @apply text-center
 
         
 
