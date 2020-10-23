@@ -1,9 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
-import Button from '@atlaskit/button';
-//import ErrorIcon from '@atlaskit/icon/glyph/error';
-//import Banner from '@atlaskit/banner';
-import '../styles/components/Settings.style.sass';
 import axios from 'axios';
+import Button from '@atlaskit/button';
+import '../styles/components/Settings.style.sass';
 
 /* Component to render sync settings page */
 const SettingsPage = (props) => {
@@ -14,8 +12,10 @@ const SettingsPage = (props) => {
   const [syncInterval, setSyncInterval] = useState("");
   const token = process.env.REACT_APP_TOKEN;
   
-  // makes request to backend, returns the data if successful, otherwise returns and logs an error
-  const makePostRequest = (url) => {
+  // Post creds to retrieve jwt to make other calls 
+  const login = () => {
+    var url = 'http://127.0.0.1:5000/login/jama/basic?username=process.env.REACT_APP_USERNAME&password=process.env.REACT_APP_PASSWORD&organization=process.env.REACT_APP_ORG';
+
     axios
       .post(url)
       .then(response => {
@@ -28,9 +28,9 @@ const SettingsPage = (props) => {
       });
   }
 
-  // makes request to backend, returns the data if successful, otherwise returns and logs an error
-  const makeGetRequest = (url) => {
-    var data = [];
+  // makes request to backend, changes prevSync data if successful, otherwise returns and logs an error
+  const getPrevSyncTime = () => {
+    var url = "http://127.0.0.1:5000/last_sync_time";
     
     axios
       .get(url, {
@@ -40,30 +40,34 @@ const SettingsPage = (props) => {
       })
       .then(response => {
         console.log(response.data);
-        setPrevSyncTime(response.data);
+        setPrevSyncTime(response.data[0]);
+        setTimeUnit(response.data[1]);
       })
       .catch(error => {
         console.log(error);
         // add it to the log on server
-        data = error;
       });
   }
 
-  // makes request, returns previous length of time it took to sync items
-  const getPrevSyncTime = () => { 
-    var url = "http://127.0.0.1:5000/last_sync_time";
-    // get data 
-    makeGetRequest(url);
-    // set state
-    setTimeUnit("seconds");
-  }
+  // makes request to backend, changes numItemsToSync data if successful, otherwise returns and logs an error
+  const getItemsToSync = () => {
+    var url = "http://127.0.0.1:5000/items_ready_to_sync";
 
-  // makes request, returns number of items currently ready to sync
-  const getNumItemsToSync = () => { 
-    var count = 0
-    //var url = `http://127.0.0.1:5000/num_items_to_sync`;
+    axios
+      .get(url, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        setNumItemsToSync(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+        // add it to the log on server
+      });
 
-   //makeGetRequest(url);
   }
 
   // on click of the button, prints updated sync interval to console and updates sync process 
@@ -71,13 +75,14 @@ const SettingsPage = (props) => {
     e.preventDefault();
     console.log(syncInterval);
 
-    // updateSync(); 
+    // make request to update sync process 
 }
 
 // calls to backend made when component mounts
   useEffect(() => {
-    getNumItemsToSync();
+    login(); // won't be necessary once our components are connected
     getPrevSyncTime();
+    getItemsToSync();
     // eslint-disable-next-line
 }, [])
 
