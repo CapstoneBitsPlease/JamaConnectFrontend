@@ -4,17 +4,20 @@ import Button from '@atlaskit/button';
 import '../styles/components/Settings.style.sass';
 
 /* Component to render sync settings page */
-const SettingsPage = (props) => {
+const SettingsPage = () => {
   const [prevSyncTime, setPrevSyncTime] = useState(0); 
-  const [numItemsToSync, setNumItemsToSync] = useState(0);
+  const [numFieldsToSync, setNumFieldsToSync] = useState(0);
   const [timeUnit, setTimeUnit] = useState("");
   const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
   const token = process.env.REACT_APP_TOKEN;
+  const user = process.env.REACT_APP_USERNAME;
+  const pass = process.env.REACT_APP_PASSWORD;
+  const org = process.env.REACT_APP_ORG;
   
   // Post creds to retrieve jwt to make other calls 
   const login = () => {
-    var url = 'http://127.0.0.1:5000/login/jama/basic?username=process.env.REACT_APP_USERNAME&password=process.env.REACT_APP_PASSWORD&organization=process.env.REACT_APP_ORG';
+    var url = 'http://127.0.0.1:5000/login/jama/basic?username=user&password=pass&organization=org';
 
     axios
       .post(url)
@@ -28,7 +31,7 @@ const SettingsPage = (props) => {
       });
   }
 
-  // makes request to backend, changes prevSync data if successful, otherwise returns and logs an error
+  // makes request to backend and changes prevSync data if successful, otherwise returns and logs an error
   const getPrevSyncTime = () => {
     var url = "http://127.0.0.1:5000/last_sync_time";
     
@@ -49,9 +52,9 @@ const SettingsPage = (props) => {
       });
   }
 
-  // makes request to backend, changes numItemsToSync data if successful, otherwise returns and logs an error
-  const getItemsToSync = () => {
-    var url = "http://127.0.0.1:5000/items_ready_to_sync";
+  // makes request to backend and changes numFieldsToSync data if successful, otherwise returns and logs an error
+  const getFieldsToSync = () => {
+    var url = "http://127.0.0.1:5000/fields_ready_to_sync";
 
     axios
       .get(url, {
@@ -61,7 +64,7 @@ const SettingsPage = (props) => {
       })
       .then(response => {
         console.log(response.data);
-        setNumItemsToSync(response.data);
+        setNumFieldsToSync(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -82,7 +85,7 @@ const SettingsPage = (props) => {
   useEffect(() => {
     login(); // won't be necessary once our components are connected
     getPrevSyncTime();
-    getItemsToSync();
+    getFieldsToSync();
     // eslint-disable-next-line
 }, [])
 
@@ -98,8 +101,8 @@ const SettingsPage = (props) => {
               <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">{prevSyncTime} {timeUnit}</td>
             </tr>
             <tr>
-              <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Items to sync:</th>
-              <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">{numItemsToSync}</td>
+              <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Fields to sync:</th>
+              <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">{numFieldsToSync}</td>
             </tr>
             <tr>
               <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Sync interval:</th>
