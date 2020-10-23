@@ -23,15 +23,15 @@
             }
           ],
         "webItems": [
-        {
-            "key": "example-section-link",
-            "location": "admin_plugins_menu/my-web-section",
-            "name": {
+            {
+              "key": "example-section-link",
+              "location": "admin_plugins_menu/my-web-section",
+              "name": {
                 "value": "Sync settings"
-            },
-            "url": "/SettingPage"
-        }
-    ]
+              },
+              "url": "/SettingPage"
+          }
+        ]
         
     }
 }

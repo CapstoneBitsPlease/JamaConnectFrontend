@@ -5,6 +5,7 @@ import './styles/main/App.sass';
 import './styles/main/theme.sass';
 
 function App() {
+  // insert conditional rendering of pages here
 
   return (
     <div className="App">

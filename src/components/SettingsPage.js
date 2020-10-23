@@ -1,5 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Button from '@atlaskit/button';
+//import ErrorIcon from '@atlaskit/icon/glyph/error';
+//import Banner from '@atlaskit/banner';
 import '../styles/components/Settings.style.sass';
 import axios from 'axios';
 
@@ -10,58 +12,59 @@ const SettingsPage = (props) => {
   const [timeUnit, setTimeUnit] = useState("");
   const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
+  const token = process.env.REACT_APP_TOKEN;
   
   // makes request to backend, returns the data if successful, otherwise returns and logs an error
-  const makeRequest = (url) => {
-    var data = [];
-
+  const makePostRequest = (url) => {
     axios
-      .post(url, {
-        headers: ""
-      })
+      .post(url)
       .then(response => {
         console.log("success");
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
         // add it to the log on server
       });
-
-      return data;
   }
 
-  // makes request, returns number of items currently ready to sync
-  const getNumItemsToSync = () => { 
-    var count = 5; // placeholders
-    var host = "http://127.0.0.1:5000";
-    var route = "/get_num_items_to_sync"; 
-    var url = `${host}${route}`;
-
-    // get data 
-    makeRequest(url);
-
-    // set state
-    setNumItemsToSync(count);
+  // makes request to backend, returns the data if successful, otherwise returns and logs an error
+  const makeGetRequest = (url) => {
+    var data = [];
+    
+    axios
+      .get(url, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        setPrevSyncTime(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+        // add it to the log on server
+        data = error;
+      });
   }
 
   // makes request, returns previous length of time it took to sync items
   const getPrevSyncTime = () => { 
-    var currentTime = 30; // placeholders 
-    var units = " seconds";  
-    var host = "http://127.0.0.1:5000";
-    var route = "/get_prev_sync_time";
-    var url = `${host}${route}`;
-
-    // get data
-    makeRequest(url);
-
-    // set state 
-    setPrevSyncTime(currentTime);
-    setTimeUnit(units);
+    var url = "http://127.0.0.1:5000/last_sync_time";
+    // get data 
+    makeGetRequest(url);
+    // set state
+    setTimeUnit("seconds");
   }
 
-  // const updateSync = () => {}
+  // makes request, returns number of items currently ready to sync
+  const getNumItemsToSync = () => { 
+    var count = 0
+    //var url = `http://127.0.0.1:5000/num_items_to_sync`;
+
+   //makeGetRequest(url);
+  }
 
   // on click of the button, prints updated sync interval to console and updates sync process 
   const handleSubmit = (e) => {
@@ -117,6 +120,7 @@ const SettingsPage = (props) => {
           </table>
     
         <Button className="apply_button" type="submit" onClick={handleSubmit}>Apply</Button>
+       
    
       </form>
   </div>
