@@ -1,17 +1,25 @@
 import React from 'react';
-import SettingsPage from 'components/SettingsPage.js';
+import SyncSettingsPage from 'components/SyncSettingsPage.js';
+import SyncFieldsPage from 'components/SyncFieldsPage.js';
 import './App.css';
 import './styles/main/App.sass';
 import './styles/main/theme.sass';
 
 function App() {
-  // insert conditional rendering of pages here
+  // insert better conditional rendering of pages here soon 
+    var toggle = 'SyncSettingsPage';
 
-  return (
-    <div className="App">
-      <SettingsPage />
-    </div>
-  );
+    return (
+      <div className="App">
+        {
+          {
+            'SyncFieldsPage': <SyncFieldsPage />,
+            'SyncSettingsPage': <SyncSettingsPage />
+          }[toggle]
+        }
+      </div>
+    );
+  
 }
 
 export default App;
