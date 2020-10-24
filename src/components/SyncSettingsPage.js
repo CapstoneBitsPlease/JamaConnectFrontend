@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
+import {login} from '../utils.js'; // necessary to get token for calls
 import axios from 'axios';
 import Button from '@atlaskit/button';
 import '../styles/components/SyncSettings.style.sass';
@@ -10,27 +11,9 @@ const SettingsPage = () => {
   const [timeUnit, setTimeUnit] = useState("");
   const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // only kept here during development
-  const token = process.env.REACT_APP_TOKEN;
-  const user = process.env.REACT_APP_USERNAME;
-  const pass = process.env.REACT_APP_PASSWORD;
-  const org = process.env.REACT_APP_ORG;
-  
-  // Post creds to retrieve jwt to make other calls 
-  const login = () => {
-    var url = 'http://127.0.0.1:5000/login/jama/basic?username=user&password=pass&organization=org';
-
-    axios
-      .post(url)
-      .then(response => {
-        console.log("success");
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-        // add it to the log on server
-      });
-  }
+  const token = "";
 
   // makes request to backend and changes prevSync data if successful, otherwise returns and logs an error
   const getPrevSyncTime = () => {
@@ -55,7 +38,7 @@ const SettingsPage = () => {
 
   // makes request to backend and changes numFieldsToSync data if successful, otherwise returns and logs an error
   const getFieldsToSync = () => {
-    var url = "http://127.0.0.1:5000/fields_ready_to_sync";
+    var url = "http://127.0.0.1:5000/fields_to_sync";
 
     axios
       .get(url, {
@@ -65,7 +48,7 @@ const SettingsPage = () => {
       })
       .then(response => {
         console.log(response.data);
-        setNumFieldsToSync(response.data);
+        setNumFieldsToSync(response.data["num_fields"]);
       })
       .catch(error => {
         console.log(error);
