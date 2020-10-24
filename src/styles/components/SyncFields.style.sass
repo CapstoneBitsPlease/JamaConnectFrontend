@@ -2,29 +2,40 @@
     &_page_title
         @apply text-3xl text-left
         @apply pl-4 mt-4 mb-4
+    
+    &_page_subtitle
+        @apply text-xl
+        @apply mt-4 mb-4 ml-10
+
+    &_button    
+        @apply ml-24
+    
+.sync_button, .go_back_button
+    @apply mt-64 ml-4
+
 
 .linked_items
-        &_title
-            @apply text-2xl 
-            @apply mt-4
+    &_title
+        @apply text-2xl 
+        @apply mt-4
 
-        &_table
-            @apply table-auto
-            @apply bg-white
-            @apply inline-block
-            @apply ml-10
+    &_table
+        @apply table-auto
+        @apply bg-white
+        @apply inline-block
+        @apply ml-10
 
-        &_headers
-            @apply px-4 py-4
-            @apply border px-4 py-2 bg-gray-200
+    &_headers
+        @apply px-4 py-4
+        @apply border px-4 py-2 bg-gray-200
 
 
-        &_row:hover
-            @apply bg-gray-200
-    
-        &_data
-            @apply border px-4 py-2
-            @apply text-center
+    &_row:hover
+        @apply bg-gray-200
+
+    &_data
+        @apply border px-4 py-2
+        @apply text-center
 
 .linked_fields
     &_title
@@ -50,12 +61,6 @@
 
     &_checkbox
         @apply ml-2
-
-.sync_button, .go_back_button
-    @apply mt-64 ml-4
-
-.sync_button    
-    @apply ml-24
 
 
     

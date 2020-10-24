@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Button from '@atlaskit/button';
 import {Checkbox} from '@atlaskit/checkbox';
+import {login} from '../utils.js'; // necessary to get token for calls
 import LinkedItemsTable from 'components/LinkedItemsTable.js'
 import '../styles/components/SyncFields.style.sass';
 
@@ -12,23 +13,8 @@ const SyncFieldsPage = (props) => {
     const [linkedData, setLinkedData] = useState([]);
     const [tableData, setTableData] = useState([]);
     const [responseLength, setResponseLength] = useState(0);
-    const token = process.env.token;
-
-    // post creds to retrieve jwt to make other calls 
-    const login = () => {
-        var url = 'http://127.0.0.1:5000/login/jama/basic?username=user&password=pass&organization=org';
-
-        axios
-        .post(url)
-        .then(response => {
-            console.log("success");
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-            // add it to the log on server
-        });
-    }
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDM1NzExNTEsIm5iZiI6MTYwMzU3MTE1MSwianRpIjoiZWQ0NTI1ZmYtZGU2Mi00MTBkLThmOTItYjgwMTdlMjMyZDM1IiwiZXhwIjoxNjAzNTcyMDUxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNGYwOTYzYjAtMGY2OC00ZDI3LWEwNmYtNDkwOGUyNDQ4MGIxIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.8HwMDjmvwqO3pvs8DFdwQ5k1F3DkCYhkQCBzCE8cYB8";
 
     // GET request to sqlite database, returns fields ready to sync if successful and an error otherwise
     const getLinkedFields = () => {
@@ -52,7 +38,7 @@ const SyncFieldsPage = (props) => {
         });
     }
 
-    // strip from the response only the data we need for the fields table
+    // retrieve from the response only the data we need for the fields table
     const formatDataForTable = () => {
         var newJamaNames = [];
         var newJiraNames = [];
@@ -93,6 +79,7 @@ const SyncFieldsPage = (props) => {
                                 onChange={handleCheckbox}
                                 value={id}
                                 name="controlled-checkbox"
+                                type="checkbox"
                             />
                         </div>
                     </td>
@@ -101,29 +88,40 @@ const SyncFieldsPage = (props) => {
         })
     }
     
-    // handles the checkbox input
+    // handles the checkbox input, adds each ID to an array if it is checked
     const handleCheckbox = (event) => {   
-        var data = tableData;
-        data.forEach(row => {
-            if(data["id"] === event.target.value) {
-                data.checked = event.target.checked;
-                console.log("data.checked", data.checked)
+        const { type } = event.target;
+        var checked = [];
+        var checked_value = 0;
+
+        if(type === 'checkbox') {
+            const checked_values = document.getElementsByName('controlled-checkbox');
+            for(let i = 0; i < checked_values.length; i++) {
+                if(checked_values[i].checked)
+                    checked.push(checked_values[i].value);
             }
-        })
-        setTableData(data);
+            checked_value = checked;
+            setCheckedIDs(checked_value);
+        }
+    }
+
+    const sync_fields = () => {
+        // check that the IDs of the fields ready to sync are completely loaded
+        console.log(checkedIDs);
     }
 
     // handles the sync button. syncs all checked linked fields 
     const handleSync = (event) => {
         event.preventDefault();
         console.log("syncing");
-        login(); // only here during development
+        sync_fields();
     }
 
     // handles the cancel button
     const handleGoBack = (event) => {
         event.preventDefault();
         console.log("cancelling");
+        login(); // only here during development
     }
 
     // get linked fields from sqlite database
@@ -134,7 +132,8 @@ const SyncFieldsPage = (props) => {
     // render the component
     return (
         <div>
-            <h1 className="sync_page_title">Jama-Jira link information</h1>
+            <h1 className="sync_page_title">Select fields to sync</h1>
+                <h2 className="sync_page_subtitle">You are currently viewing these linked items:</h2>
                 <div className="linked_items_container">
                     <LinkedItemsTable 
                         title="Jama Project"
