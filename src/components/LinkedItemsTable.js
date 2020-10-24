@@ -1,11 +1,11 @@
 import React from 'react';
-import '../styles/components/LinkedItemsTable.style.sass';
+import '../styles/components/SyncFields.style.sass';
 
 /* Table of the linked items we are currently viewing fields for - shows project ID, project name, item ID, and item name */ 
 const LinkedItemsTable = (props) => {
                
     return (
-        <table className="linked_items_jira_table">
+        <table className="linked_items_table">
             <tbody>
                 <tr>
                     <th className="linked_items_title">{props.title}</th>
