@@ -7,7 +7,7 @@ import './styles/main/theme.sass';
 
 function App() {
   // insert better conditional rendering of pages here soon 
-    var toggle = 'SyncSettingsPage';
+    var toggle = 'SyncFieldsPage';
 
     return (
       <div className="App">

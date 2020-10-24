@@ -13,4 +13,7 @@ module.exports = {
   },
   corePlugins: {},
   plugins: [require("tailwindcss"), require("autoprefixer")],
+  variants: {
+    backgroundColor: ['hover']
+  },
 };
