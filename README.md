@@ -1,13 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+C2TB
+====
 
-# Duc's section:
+This repo contains the frontend components for our team's capstone project.
 
-## How did I initialize this?
+To run:
+-------
 
-Mostly follow: 
-  1. https://itnext.io/how-to-use-tailwind-css-with-react-16e9d478b8b1
-  2. https://medium.com/@harryhedger/quick-how-to-setup-tailwind-with-create-react-app-6e7af96ad32c
+`npm install`
 
+`npm start` to run in development mode (if this doesn't work, `npm install` additional libraries needed, then `npm start` again). Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
+
+See more available npm scripts below in React's default section.
 
 # React's default section:
 ## Available Scripts
@@ -50,33 +53,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Sources:
+--------
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and generated from a React-Tailwind-Sass template created by [ptmdmusique](https://github.com/ptmdmusique/react-tailwind-sass-template).
