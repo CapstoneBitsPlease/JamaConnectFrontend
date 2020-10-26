@@ -3,56 +3,125 @@ import axios from 'axios'
 import "../styles/Page/select_item.sass";
 import { useEffect, useState } from 'react';
 import { data } from 'autoprefixer';
-import type from './item_type.json';
-import project from './all_project';
+import item from './all_item';
 import Select from 'react-select'
+
+//authorization function with bearer
+axios.interceptors.request.use(
+	config => {
+		config.headers.Authorization = `Bearer `;
+		return config;
+	},
+	error => {
+		return Promise.reject(error);
+	}
+);
 
 const Select_item = () => {
 
-	// const [projects, setproject] = useState([])
+	//token : authorization token projects : get all project to display in select box
+	//types : get all item type to display in select box
 
-	// useEffect(() => {
-	// 	axios.get('https://capstone2020.jamacloud.com/rest/v1/projects',
+	// const [token, setToken] = useState(0);
+	const [projects, setproject] = useState([])
+	const [types, settypes] = useState([])
+
+
+	//Tried to use login fucntion to get token and set token for authorization but failed with
+	//422 (unbprocessable entities)
+
+	// const log_in = () => {
+	// 	axios.post('',
 	// 		{
 	// 			headers: {
-	// 				'Access-Control-Allow-Origin' : '*',
-	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS' ,
+	// 				'Access-Control-Allow-Origin': '*',
+	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
 	// 			}
 	// 		})
 	// 		.then(res => {
 	// 			console.log(res)
+	// 			setToken(res.data.access_token);
 	// 		})
 	// 		.catch(err => {
-	// 			console.log(err)
+	// 			console.log(err);
 	// 		})
 
-	// }, [])
+	// }
 
 
-
-	const resulttype = () => {
-		const tempArray = [];
-		type.data.map((element) => {
-			tempArray.push({ label: `${element.display}`, value: element.id });
-		});
-		return tempArray;
+	//Getting all the project with API call
+	const get_prog = () => {
+		axios.get('http://127.0.0.1:5000/jama/projects',
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+				}
+			})
+			.then(res => {
+				console.log(res);
+				setproject(res.data);
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}
 
+	//Getting all the item type with API call
+	const get_type = () => {
+		axios.get('http://127.0.0.1:5000/jama/item_types',
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+				}
+			})
+			.then(res => {
+				console.log(res);
+				settypes(res.data);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
+
+
+	//Create an array with label and value for the use of dropdown for select project
 	const resultproject = () => {
 		const tempArray = [];
-		project.map((element) => {
-			tempArray.push({ label: `${element.fields.name}`, value: element.id });
+		projects.map((element) => {
+			tempArray.push({ label: `${element.name}`, value: element.id });
 		});
 		return tempArray;
 	}
-  
+
+	//Create an array with label and value for the use of dropdown for select item type
+	const resulttype = () => {
+		const tempArray = [];
+		types.map((element) => {
+			tempArray.push({ label: `${element.name}`, value: element.id });
+		});
+		return tempArray;
+	}
+
+	//simulated with json file
 	const temp = () => {
 		const tempArray = [];
-		type.data.map((element) => {
-			tempArray.push(element.display);
+		item.data.map((element) => {
+			tempArray.push('ID: '+ element.id + ' ' + element.documentKey);
 		});
 		return tempArray;
 	}
+
+	//Useeffect hook function
+	useEffect(() => {
+		get_prog();
+		get_type();
+	}, [])
+
+	useEffect(() => {
+	}, [])
+
 
 
 
@@ -93,7 +162,7 @@ const Select_item = () => {
 						</ul>
 					</div>
 
-					<br/>
+					<br />
 
 
 					<div className="btn">
