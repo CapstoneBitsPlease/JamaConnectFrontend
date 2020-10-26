@@ -1,13 +1,12 @@
 .select_item
     &-selecting
-        @apply absolute top-1/4 left-1/4 mb-32
-        @apply max-w-screen-md
-        @apply w-1/2 h-auto
+        @apply absolute left-1/6 right-1/6 my-10
+        @apply max-w-screen-xl
+        @apply w-2/3 h-auto
         @apply border border-blue-500
     &-item
         @apply mx-auto mt-2 mb-4
         @apply w-2/4 h-auto
-        // @apply overflow-x-auto overflow-y-auto
         .list1 , .list2 , .field
             @apply w-full border border-blue-500
             @apply mt-6
@@ -19,8 +18,11 @@
         .but
             @apply bg-blue-500 text-white
             @apply w-full rounded-md outline-none
-        .item_display
-            @apply text-center
+    &-list
+        @apply w-full h-64
+        @apply list-none
+        @apply text-center 
+        @apply overflow-y-auto
 
         
 
