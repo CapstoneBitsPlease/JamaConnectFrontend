@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Button from '@atlaskit/button';
 import {Checkbox} from '@atlaskit/checkbox';
-import {login} from '../utils.js'; // necessary to get token for calls
 import LinkedItemsTable from 'components/LinkedItemsTable.js'
 import '../styles/components/SyncFields.style.sass';
 
@@ -14,18 +13,13 @@ const SyncFieldsPage = (props) => {
     const [tableData, setTableData] = useState([]);
     const [responseLength, setResponseLength] = useState(0);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const token = "";
 
     // GET request to sqlite database, returns fields ready to sync if successful and an error otherwise
-    const getLinkedFields = () => {
+    const getFieldsToSync = () => {
         var url = "http://127.0.0.1:5000/fields_to_sync"
 
         axios
-        .get(url, {
-            headers: {
-              "Authorization": `Bearer ${token}`
-            }
-          })
+        .get(url)
         .then(response => {
             console.log("success");
             console.log(response.data);
@@ -65,7 +59,7 @@ const SyncFieldsPage = (props) => {
     // format data and add it to the DOM
     const renderTableData = () => {
         var data = formatDataForTable();
-        return data.map((row, index) => {
+        return data.map((row) => {
             const { id, jamaName, jiraName, checked } = row;
             return (    
                 <tr className="linked_fields_row" key={id}>
@@ -93,7 +87,6 @@ const SyncFieldsPage = (props) => {
         const { type } = event.target;
         var checked = [];
         var checked_value = 0;
-
         if(type === 'checkbox') {
             const checked_values = document.getElementsByName('controlled-checkbox');
             for(let i = 0; i < checked_values.length; i++) {
@@ -121,17 +114,16 @@ const SyncFieldsPage = (props) => {
     const handleGoBack = (event) => {
         event.preventDefault();
         console.log("cancelling");
-        login(); // only here during development
     }
 
     // get linked fields from sqlite database
     useEffect(() => {
-        getLinkedFields();
+        getFieldsToSync();
     },[])
     
     // render the component
     return (
-        <div>
+        <div className="sync_page_container">
             <h1 className="sync_page_title">Select fields to sync</h1>
                 <h2 className="sync_page_subtitle">You are currently viewing these linked items:</h2>
                 <div className="linked_items_container">
@@ -167,9 +159,11 @@ const SyncFieldsPage = (props) => {
                             {renderTableData()}
                         </tbody>
                     </table>
+                </div>
+                <span className="button_container">
                     <Button appearance="primary" className="sync_button" onClick={handleSync}>Sync selected</Button>
                     <Button appearance="subtle" className="go_back_button" onClick={handleGoBack}>Go back</Button>
-                </div>
+                </span>
         </div>
 );
 

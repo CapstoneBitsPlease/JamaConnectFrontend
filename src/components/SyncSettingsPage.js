@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {login} from '../utils.js'; // necessary to get token for calls
 import axios from 'axios';
 import Button from '@atlaskit/button';
 import '../styles/components/SyncSettings.style.sass';
@@ -12,19 +11,13 @@ const SettingsPage = () => {
   const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // only kept here during development
-  const token = "";
 
   // makes request to backend and changes prevSync data if successful, otherwise returns and logs an error
   const getPrevSyncTime = () => {
     var url = "http://127.0.0.1:5000/last_sync_time";
     
     axios
-      .get(url, {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
+      .get(url)
       .then(response => {
         console.log(response.data);
         setPrevSyncTime(response.data[0]);
@@ -41,11 +34,7 @@ const SettingsPage = () => {
     var url = "http://127.0.0.1:5000/fields_to_sync";
 
     axios
-      .get(url, {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
+      .get(url)
       .then(response => {
         console.log(response.data);
         setNumFieldsToSync(response.data["num_fields"]);
@@ -66,8 +55,7 @@ const SettingsPage = () => {
 }
 
 // calls to backend made when component mounts
-  useEffect(() => {
-    login(); // won't be necessary once our components are connected
+  useEffect(() => { 
     getPrevSyncTime();
     getFieldsToSync();
     // eslint-disable-next-line

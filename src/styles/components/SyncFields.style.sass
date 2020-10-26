@@ -1,4 +1,6 @@
 .sync
+    &_page_container
+        
     &_page_title
         @apply text-3xl text-left
         @apply pl-4 mt-4 mb-4
@@ -7,12 +9,16 @@
         @apply text-xl
         @apply mt-4 mb-4 ml-10
 
-    &_button    
-        @apply ml-24
-    
-.sync_button, .go_back_button
-    @apply mt-64 ml-4
+.button_container
+    @apply flex 
+    @apply justify-center
+    @apply mt-12
 
+.sync_button
+    @apply ml-64 
+
+.go_back_button
+    @apply ml-6 
 
 .linked_items
     &_title
@@ -28,7 +34,6 @@
     &_headers
         @apply px-4 py-4
         @apply border px-4 py-2 bg-gray-200
-
 
     &_row:hover
         @apply bg-gray-200
