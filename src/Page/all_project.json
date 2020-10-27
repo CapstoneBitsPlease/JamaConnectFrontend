@@ -1,0 +1,360 @@
+[
+  {
+    "id": 44,
+    "projectKey": "UAV",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2016-09-21T19:26:49.000+0000",
+    "modifiedDate": "2016-09-21T20:19:47.000+0000",
+    "createdBy": 6,
+    "modifiedBy": 6,
+    "fields": {
+      "projectKey": "UAV",
+      "statusId": 298,
+      "text1": "",
+      "name": "Achiever UAV Sample Set",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 35,
+    "projectKey": "AIS2",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:25:16.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "AIS2",
+      "statusId": 298,
+      "text1": "",
+      "name": "Automotive Integrated System Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 27,
+    "projectKey": "AIS",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:23:04.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "AIS",
+      "statusId": 298,
+      "text1": "",
+      "name": "Automotive Integrated System Sample Set",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 43,
+    "projectKey": "AVI",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2016-09-21T19:26:49.000+0000",
+    "modifiedDate": "2016-09-21T19:26:49.000+0000",
+    "createdBy": 6,
+    "modifiedBy": 6,
+    "fields": {
+      "projectKey": "AVI",
+      "statusId": 298,
+      "text1": "",
+      "name": "Avionics Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 42,
+    "projectKey": "DEFV2",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2016-04-19T11:14:09.000+0000",
+    "modifiedDate": "2016-04-19T11:14:09.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "DEFV2",
+      "statusId": 298,
+      "text1": "",
+      "name": "Defense System V Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 36,
+    "projectKey": "BABK2",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-06-02T10:01:00.000+0000",
+    "modifiedDate": "2016-04-19T09:25:23.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "BABK2",
+      "statusId": 298,
+      "text1": "",
+      "name": "IIBA BABOK Framework",
+      "description": "Configuration based on:\nBABOK® v3\nA GUIDE TO THE BUSINESS ANALYSIS BODY OF KNOWLEDGE® published 2015.\nInternational Institute of Business Analysis, Toronto, Ontario, Canada.",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 24,
+    "projectKey": "BABK",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-06-02T10:01:00.000+0000",
+    "modifiedDate": "2016-04-19T09:23:13.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "BABK",
+      "statusId": 298,
+      "text1": "",
+      "name": "IIBA BABOK Sample Set",
+      "description": "Configuration based on:\nBABOK® v3\nA GUIDE TO THE BUSINESS ANALYSIS BODY OF KNOWLEDGE® published 2015.\nInternational Institute of Business Analysis, Toronto, Ontario, Canada.",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 37,
+    "projectKey": "SYS",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:23:31.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SYS",
+      "statusId": 298,
+      "text1": "",
+      "name": "Integrated System Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 18,
+    "projectKey": "SYS_SOL",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:23:31.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SYS_SOL",
+      "statusId": 298,
+      "text1": "",
+      "name": "Integrated System Sample Set",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 38,
+    "projectKey": "CL3_2",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-08-19T16:35:09.000+0000",
+    "modifiedDate": "2016-04-19T09:23:41.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "CL3_2",
+      "statusId": 298,
+      "text1": "",
+      "name": "Medical Device Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 25,
+    "projectKey": "CL3",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-08-19T16:35:09.000+0000",
+    "modifiedDate": "2016-04-19T09:23:41.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "CL3",
+      "statusId": 298,
+      "text1": "",
+      "name": "Medical Device Sample Set",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 45,
+    "projectKey": "NPBS",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2017-10-30T15:54:02.000+0000",
+    "modifiedDate": "2017-10-30T15:54:02.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "NPBS",
+      "statusId": 298,
+      "text1": "",
+      "name": "NASA Handbook PBS",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 46,
+    "projectKey": "DEMO",
+    "isFolder": false,
+    "createdDate": "2020-08-06T22:51:07.000+0000",
+    "modifiedDate": "2020-08-06T22:51:07.000+0000",
+    "createdBy": 14,
+    "modifiedBy": 14,
+    "fields": {
+      "projectKey": "DEMO",
+      "statusId": 298,
+      "text1": "",
+      "name": "PSU demo project",
+      "description": "hello world",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 39,
+    "projectKey": "SAFE2",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-05-06T10:07:26.000+0000",
+    "modifiedDate": "2016-08-12T08:15:15.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SAFE2",
+      "statusId": 298,
+      "text1": "",
+      "name": "Scaled Agile",
+      "description": "",
+      "date2": "2015-12-30",
+      "projectGroup": 296,
+      "date1": "2015-08-31"
+    },
+    "type": "projects"
+  },
+  {
+    "id": 26,
+    "projectKey": "SAFE",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-05-06T10:07:26.000+0000",
+    "modifiedDate": "2016-08-12T08:15:38.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SAFE",
+      "statusId": 298,
+      "text1": "",
+      "name": "Scaled Agile Sample Set",
+      "description": "",
+      "date2": "2015-12-30",
+      "projectGroup": 296,
+      "date1": "2015-08-31"
+    },
+    "type": "projects"
+  },
+  {
+    "id": 40,
+    "projectKey": "SI",
+    "parent": 28,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:23:57.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SI",
+      "statusId": 298,
+      "text1": "",
+      "name": "Semiconductor Framework",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 15,
+    "projectKey": "SI_SOL",
+    "parent": 10,
+    "isFolder": false,
+    "createdDate": "2015-05-20T11:40:06.000+0000",
+    "modifiedDate": "2016-04-19T09:23:57.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "projectKey": "SI_SOL",
+      "statusId": 298,
+      "text1": "",
+      "name": "Semiconductor Sample Set",
+      "description": "",
+      "projectGroup": 296
+    },
+    "type": "projects"
+  },
+  {
+    "id": 28,
+    "isFolder": true,
+    "createdDate": "2016-04-19T09:20:32.000+0000",
+    "modifiedDate": "2016-04-19T09:20:32.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "name": "Standard Frameworks",
+      "description": "",
+      "projectGroup": 296,
+      "statusId": 298,
+      "text1": ""
+    },
+    "type": "projects"
+  },
+  {
+    "id": 10,
+    "isFolder": true,
+    "createdDate": "2015-04-29T05:10:06.000+0000",
+    "modifiedDate": "2016-04-19T09:20:11.000+0000",
+    "createdBy": 5,
+    "modifiedBy": 5,
+    "fields": {
+      "name": "Standard Sample Sets",
+      "description": "",
+      "projectGroup": 296,
+      "statusId": 298,
+      "text1": ""
+    },
+    "type": "projects"
+  }
+]
