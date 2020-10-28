@@ -14,7 +14,7 @@
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "sweetalert2": "^10.5.1"
+    "sweetalert2": "^10.8.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
