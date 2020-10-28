@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '@atlaskit/button';
-import SyncSettingsTable from 'components/SyncSettings/SyncSettingsTable.js'
+import SyncSettingsTable from 'components/Syncing/SyncSettingsTable.js'
 import '../../styles/components/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
 const SettingsPage = (props) => {
+  
   // on click of the button, prints updated sync interval to console and updates sync process 
   const handleApply = (e) => {
     e.preventDefault();

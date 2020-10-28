@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@atlaskit/button';
-import LinkedItemsTable from 'components/SyncFields/LinkedItemsTable.js'
-import LinkedFieldsTable from 'components/SyncFields/LinkedFieldsTable.js'
+import LinkedItemsTable from 'components/Syncing/LinkedItemsTable.js'
+import LinkedFieldsTable from 'components/Syncing/LinkedFieldsTable.js'
 import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */

@@ -27,9 +27,9 @@ return (
                         ></TextField>
                         <div className="dropdown_container">
                             <select className="dropdown_list">
-                            <option className="dropdown_list_item" value={props.timeUnit} >seconds</option>
-                            <option className="dropdown_list_item" value={props.timeUnit}>minutes</option>
-                            <option className="dropdown_list_item" value={props.timeUnit}>hours</option>
+                            <option className="dropdown_list_item">seconds</option>
+                            <option className="dropdown_list_item">minutes</option>
+                            <option className="dropdown_list_item">hours</option>
                             </select>
                         </div>  
                     </span>
