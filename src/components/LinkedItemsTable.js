@@ -3,7 +3,6 @@ import '../styles/components/SyncFields.style.sass';
 
 /* Table of the linked items we are currently viewing fields for - shows project ID, project name, item ID, and item name */ 
 const LinkedItemsTable = (props) => {
-
     
     const renderItemOrIssue = () => {
         if(props.title === "Jama Project"){
@@ -45,7 +44,6 @@ const LinkedItemsTable = (props) => {
                 </tr>
             </tbody>
         </table>
-
     );
 }
 

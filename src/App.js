@@ -1,6 +1,7 @@
 import React from 'react';
 import SyncSettingsPage from 'components/SyncSettingsPage.js';
 import SyncFieldsPage from 'components/SyncFieldsPage.js';
+import SyncFieldsOnCreateIssuePage from 'components/SyncFieldsOnCreateIssuePage.js'
 import './App.css';
 import './styles/main/App.sass';
 import './styles/main/theme.sass';
@@ -14,7 +15,8 @@ function App() {
         {
           {
             'SyncFieldsPage': <SyncFieldsPage />,
-            'SyncSettingsPage': <SyncSettingsPage />
+            'SyncSettingsPage': <SyncSettingsPage />,
+            'SyncFieldsOnCreateIssue': <SyncFieldsOnCreateIssuePage />
           }[toggle]
         }
       </div>

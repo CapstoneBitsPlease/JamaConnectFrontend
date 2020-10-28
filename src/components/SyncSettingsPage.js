@@ -1,6 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Button from '@atlaskit/button';
+import SyncSettingsTable from 'components/SyncSettingsTable.js'
 import '../styles/components/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
@@ -8,9 +9,7 @@ const SettingsPage = () => {
   const [prevSyncTime, setPrevSyncTime] = useState(0); 
   const [numFieldsToSync, setNumFieldsToSync] = useState(0);
   const [timeUnit, setTimeUnit] = useState("");
-  const refInput = useRef(null);
   const [syncInterval, setSyncInterval] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // makes request to backend and changes prevSync data if successful, otherwise returns and logs an error
   const getPrevSyncTime = () => {
@@ -43,65 +42,33 @@ const SettingsPage = () => {
         console.log(error);
         // add it to the log on server
       });
-
   }
 
   // on click of the button, prints updated sync interval to console and updates sync process 
-  const handleSubmit = (e) => {
+  const handleApply = (e) => {
     e.preventDefault();
     console.log(syncInterval);
-
     // make request to update sync process 
-}
+  }
 
-// calls to backend made when component mounts
+  // calls to backend made when component mounts
   useEffect(() => { 
     getPrevSyncTime();
     getFieldsToSync();
     // eslint-disable-next-line
-}, [])
+  }, [])
 
-
-  // render the sync settings container and form component
   return (
     <div className="sync_settings_page_container">
       <form>
-          <table className="sync_settings_page_table">
-            <tbody>
-            <tr>
-              <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Previous sync time:</th>
-              <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">{prevSyncTime} {timeUnit}</td>
-            </tr>
-            <tr>
-              <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Fields to sync:</th>
-              <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">{numFieldsToSync}</td>
-            </tr>
-            <tr>
-              <th className="sync_settings_page_table_label" aria-label="sync_settings_page_table_label">Sync interval:</th>
-              <td className="sync_settings_page_table_data" aria-label="sync_settings_page_table_data">
-                <input 
-                  ref={refInput}
-                  type="text"
-                  className="sync_interval_input" 
-                  aria-label="sync_interval_input"
-                  value={syncInterval}
-                  onChange={e => setSyncInterval(e.target.value)}
-                ></input>
-                <div className="dropdown_container">
-                  <select aria-label="units_menu" className="dropdown_list">
-                    <option className="dropdown_list_item" aria-label="units_menu_item">seconds</option>
-                    <option className="dropdown_list_item" aria-label="units_menu_item">minutes</option>
-                    <option className="dropdown_list_item" aria-label="units_menu_item">hours</option>
-                  </select>
-                </div>  
-              </td>
-            </tr>
-            </tbody>
-          </table>
-    
-        <Button className="apply_button" type="submit" onClick={handleSubmit}>Apply</Button>
-       
-   
+          <SyncSettingsTable 
+            prevSyncTime={prevSyncTime}
+            timeUnit={timeUnit}
+            numFieldsToSync={numFieldsToSync}
+            syncInterval={syncInterval}
+            setSyncInterval={setSyncInterval}
+          />
+        <Button className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
       </form>
   </div>
     

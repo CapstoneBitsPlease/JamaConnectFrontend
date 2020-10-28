@@ -21,10 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# included when generated from template for React-tailwind-SCSS
-*config.json 
-*config.js
-config-overrides.js
-serviceWorker.js
-setupTests.js
