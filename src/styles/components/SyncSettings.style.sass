@@ -1,4 +1,8 @@
 .sync_settings_page
+    &_title
+        @apply text-xl text-left
+        @apply mt-4 mb-4
+
     &_container 
         @apply bg-white
         @apply text-black
@@ -12,29 +16,30 @@
 
     &_table 
         @apply self-center
-        @apply mt-12
+        @apply mt-12 
         
-        &_label, &_data
+        &_label
+            @apply h-16 w-56
+            @apply pl-8 pr-12
+            @apply text-left text-sm text-gray-700
+        
+        &_data
             @apply h-16 w-48
-            @apply pl-12
-            @apply text-left text-xs text-gray-700
-
-        .sync_interval_input
-            @apply border border-gray-300
-            @apply w-8 h-6 
+            @apply pl-24 pr-12
+            @apply text-left text-sm text-gray-700
 
 .dropdown
-    &_container
-        @apply w-16 
-        @apply inline-block
-    
     &_list
-        @apply h-6
+        @apply h-10
         @apply bg-gray-200
-
-        &_item
+        @apply border rounded
             
 .apply_button 
-    @apply my-8 ml-40
+    @apply my-8 ml-56
+
+.select_input
+    @apply inline-block
+    @apply w-32
+    @apply flex
 
         

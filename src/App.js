@@ -1,21 +1,21 @@
 import React from 'react';
-import SyncSettingsPage from 'components/SyncSettingsPage.js';
-import SyncFieldsPage from 'components/SyncFieldsPage.js';
-import SyncFieldsOnCreateIssuePage from 'components/SyncFieldsOnCreateIssuePage.js'
+import SyncSettings from 'components/SyncSettings/SyncSettingsAPI.js'
+import SyncFields from 'components/SyncFields/SyncFieldsAPI.js';
+import SyncFieldsOnCreateIssuePage from 'components/SyncFieldsOnCreateIssue/SyncFieldsOnCreateIssuePage.js'
 import './App.css';
 import './styles/main/App.sass';
 import './styles/main/theme.sass';
 
 function App() {
   // insert better conditional rendering of pages here soon 
-    var toggle = 'SyncFieldsPage'
+    var toggle = 'SyncFields'
 
     return (
       <div className="App">
         {
           {
-            'SyncFieldsPage': <SyncFieldsPage />,
-            'SyncSettingsPage': <SyncSettingsPage />,
+            'SyncSettings': <SyncSettings />,
+            'SyncFields': <SyncFields />,
             'SyncFieldsOnCreateIssue': <SyncFieldsOnCreateIssuePage />
           }[toggle]
         }

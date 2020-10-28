@@ -5,7 +5,9 @@
   "dependencies": {
     "@atlaskit/button": "^15.1.0",
     "@atlaskit/checkbox": "^11.0.7",
+    "@atlaskit/dropdown-menu": "^10.1.1",
     "@atlaskit/select": "^13.0.5",
+    "@atlaskit/textfield": "^4.0.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
