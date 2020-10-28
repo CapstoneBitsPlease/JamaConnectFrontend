@@ -1,12 +1,15 @@
 import React from 'react';
+import SettingsPage from 'components/SettingsPage.js';
 import './App.css';
+import './styles/main/App.sass';
 import './styles/main/theme.sass';
-import Select_item  from './components/select_item';
 
 function App() {
+  // insert conditional rendering of pages here
+
   return (
-    <div>
-      <Select_item></Select_item>
+    <div className="App">
+      <SettingsPage />
     </div>
 
   );
