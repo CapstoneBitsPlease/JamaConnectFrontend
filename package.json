@@ -12,13 +12,14 @@
     "easy-peasy": "^3.3.1",
     "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
-    "sweetalert2": "^10.8.1",
     "react": "^16.14.0",
     "react-app-rewired": "^2.1.6",
     "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-select": "^2.4.4",
-    "react-select-async-paginate": "^0.4.1"
+    "react-select-async-paginate": "^0.4.1",
+    "sweetalert2": "^10.8.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
