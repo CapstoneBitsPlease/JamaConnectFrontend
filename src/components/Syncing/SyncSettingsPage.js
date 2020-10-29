@@ -1,16 +1,17 @@
 import React from 'react';
 import Button from '@atlaskit/button';
-import SyncSettingsTable from 'components/Syncing/SyncSettingsTable.js'
+import SyncSettingsTable from './SyncSettingsTable.js'
 import '../../styles/components/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
 const SettingsPage = (props) => {
   
-  // on click of the button, prints updated sync interval to console and updates sync process 
+  // on click of the button, prints updated sync interval, will update sync process 
   const handleApply = (e) => {
     e.preventDefault();
-    console.log(props.syncInterval);
-    // make request to update sync process 
+    var selected_time_unit = document.getElementById("dropdown_list_selection").value
+    console.log(props.syncInterval, selected_time_unit);
+    // update backend sync process to occur this often
   }
 
   return (
@@ -24,7 +25,7 @@ const SettingsPage = (props) => {
             syncInterval={props.syncInterval}
             setSyncInterval={props.setSyncInterval}
           />
-        <Button className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
+        <Button id="apply_button" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
       </form>
   </div>
     

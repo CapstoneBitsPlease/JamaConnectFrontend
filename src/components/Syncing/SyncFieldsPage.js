@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@atlaskit/button';
-import LinkedItemsTable from 'components/Syncing/LinkedItemsTable.js'
-import LinkedFieldsTable from 'components/Syncing/LinkedFieldsTable.js'
+import LinkedItemsTable from './LinkedItemsTable'
+import LinkedFieldsTable from './LinkedFieldsTable'
 import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
@@ -48,6 +48,7 @@ const SyncFieldsPage = (props) => {
             <h1 className="sync_page_title">Select fields to sync</h1>
                 <h2 className="sync_page_subtitle">You are currently viewing these linked items:</h2>
                 <div className="linked_items_container">
+                    {/* this data needs to be obtained from shared state */}
                     <LinkedItemsTable 
                         title="Jama Project"
                         projectID={"selectedProject"}
@@ -71,8 +72,8 @@ const SyncFieldsPage = (props) => {
                     />
                 </div>
                 <span className="button_container">
-                    <Button appearance="primary" className="sync_button" onClick={handleSync}>Sync selected</Button>
-                    <Button appearance="subtle" className="go_back_button" onClick={handleGoBack}>Go back</Button>
+                    <Button id="sync_button" appearance="primary" className="sync_button" onClick={handleSync}>Sync selected</Button>
+                    <Button id="go_back_button" appearance="subtle" className="go_back_button" onClick={handleGoBack}>Go back</Button>
                 </span>
         </div>
 );

@@ -20,16 +20,17 @@ return (
                 <td className="sync_settings_page_table_data">
                     <span className="select_input">
                         <TextField 
+                            id="select_input_text_field"
                             name="basic"
                             className="sync_interval_input"
                             value={props.syncInterval}
                             onChange={e => props.setSyncInterval(e.target.value)}
                         ></TextField>
                         <div className="dropdown_container">
-                            <select className="dropdown_list">
-                            <option className="dropdown_list_item">seconds</option>
-                            <option className="dropdown_list_item">minutes</option>
-                            <option className="dropdown_list_item">hours</option>
+                            <select id="dropdown_list_selection" className="dropdown_list">
+                                <option id="dropdown_list_seconds" className="dropdown_list_item">seconds</option>
+                                <option id="dropdown_list_minutes" className="dropdown_list_item">minutes</option>
+                                <option id="dropdown_list_hours" className="dropdown_list_item">hours</option>
                             </select>
                         </div>  
                     </span>

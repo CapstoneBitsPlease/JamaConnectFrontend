@@ -7,11 +7,13 @@ const SyncFieldsTableOnCreateIssue = (props) => {
         "Reporter", "Sprint", "Story point estimate", "Summary"
     ]);
 
+    // format table data 
     const formatDataForTable = () => {
         let data = [];
         for(let i=0; i < issueFields.length; i++){
             data.push({
-                "id": i+1, 
+                "id": i+1,
+                "checkboxID": `${issueFields[i]}_field_checkbox`, 
                 "name": issueFields[i],
                 "isChecked": false
             })
@@ -23,13 +25,14 @@ const SyncFieldsTableOnCreateIssue = (props) => {
     const renderTableData = () => {
         var data = formatDataForTable();
         return data.map((row) => {
-            const { id, name, checked } = row;
+            const { id, checkboxID, name, checked } = row;
             return (    
                 <tr key={id}>
-                    <td className="linked_fields_data">{name}</td>
-                    <td className="linked_fields_data">
-                        <div className="linked_fields_checkbox">
+                    <td className="sync_fields_data">{name}</td>
+                    <td className="sync_fields_data">
+                        <div>
                             <Checkbox
+                                id={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
                                 value={name}

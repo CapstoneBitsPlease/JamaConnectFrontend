@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Button from '@atlaskit/button';
-import SyncFieldsOnCreateIssueTable from 'components/Syncing/SyncFieldsOnCreateIssueTable.js';
+import SyncFieldsOnCreateIssueTable from './SyncFieldsOnCreateIssueTable';
 import '../../styles/components/SyncFieldsOnCreateIssue.style.sass'; 
 
 // Button and table that are added to the "Create Issue" view. Allows the user to select which fields to sync
@@ -42,6 +42,7 @@ const SyncFieldsOnCreateIssuePage = () => {
     return (
         <div className="page_container">
             <Button 
+                id="select_fields_to_sync_button"
                 className="select_fields_to_sync_button"
                 isSelected={isSelected}
                 onClick = {handleChange}

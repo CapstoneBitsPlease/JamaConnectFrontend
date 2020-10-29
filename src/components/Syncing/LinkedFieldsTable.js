@@ -20,6 +20,7 @@ const LinkedFieldsTable = (props) => {
         for(let i=0; i < props.responseLength; i++){
             data.push({
                 "id": i+1, 
+                "checkboxID": `checkbox_${i+1}`,
                 "jamaName": newJamaNames[i], 
                 "jiraName": newJiraNames[i],
                 "isChecked": false
@@ -32,7 +33,7 @@ const LinkedFieldsTable = (props) => {
     const renderTableData = () => {
         var data = formatDataForTable();
         return data.map((row) => {
-            const { id, jamaName, jiraName, checked } = row;
+            const { id, checkboxID, jamaName, jiraName, checked } = row;
             return (    
                 <tr className="linked_fields_row" key={id}>
                     <td className="linked_fields_data">{id}</td>
@@ -41,6 +42,7 @@ const LinkedFieldsTable = (props) => {
                     <td className="linked_fields_data">
                         <div className="linked_fields_checkbox">
                             <Checkbox
+                                id={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
                                 value={id}

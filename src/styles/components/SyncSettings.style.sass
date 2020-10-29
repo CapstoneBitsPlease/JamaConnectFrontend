@@ -1,15 +1,11 @@
 .sync_settings_page
     &_title
-        @apply text-xl text-left
-        @apply mt-4 mb-4
+        @apply text-xl text-left font-normal
+        @apply pl-4 mt-4 mb-4
 
     &_container 
-        @apply bg-white
-        @apply text-black
-        @apply w-2/5
-        @apply border border-gray-400
+        @screen md
         @apply flex
-        @apply justify-center
         
     &_name
         @apply text-3xl
@@ -32,7 +28,7 @@
     &_list
         @apply h-10
         @apply bg-gray-200
-        @apply border rounded
+        @apply border-gray-200 rounded
             
 .apply_button 
     @apply my-8 ml-56

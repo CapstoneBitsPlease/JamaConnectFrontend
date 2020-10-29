@@ -4,12 +4,11 @@ import SyncFields from 'components/Syncing/SyncFieldsAPI.js';
 import SyncFieldsOnCreateIssue from 'components/Syncing/SyncFieldsOnCreateIssuePage.js'
 import SelectItemByID from 'components/select_item.js'
 import './App.css';
-import './styles/main/App.sass';
-import './styles/main/theme.sass';
 
 function App() {
-  // insert better conditional rendering of pages here soon 
-    var toggle = 'SyncSettings'
+  /*** insert better conditional rendering of pages here soon ***/
+  // for now, set toggle to the page you want to view
+    var toggle = 'SelectItemByID'
 
     return (
       <div className="App">
