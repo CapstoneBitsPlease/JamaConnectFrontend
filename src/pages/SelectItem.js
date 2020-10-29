@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import "../styles/Page/select_item.sass";
+import "../styles/Page/SelectItem.sass";
 import { useEffect, useState } from 'react';
 import { data } from 'autoprefixer';
 import item from './all_item';

@@ -1,1 +1,0 @@
-export { default as Select_item } from './select_item'
