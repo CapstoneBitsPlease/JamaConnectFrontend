@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from '@atlaskit/button';
 import LinkedItemsTable from './LinkedItemsTable'
 import LinkedFieldsTable from './LinkedFieldsTable'
+import {useStoreActions, useStoreState} from "easy-peasy";
 import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
-const SyncFieldsContainer = (props) => {
+const SyncFieldsContainer = () => {
+
+    const { linkedData, responseLength, checkedIDs } = useStoreState(
+        state => ({
+            linkedData: state.syncStore.linkedData,
+            responseLength: state.syncStore.responseLength,
+            checkedIDs: state.syncStore.checkedIDs
+        })
+    )
+  
+    const { getFieldsToSync, setCheckedIDs } = useStoreActions(
+        actions => ({
+            getFieldsToSync: actions.syncStore.getFieldsToSync,
+            setCheckedIDs: actions.syncStore.setCheckedIDs
+        })
+    )
+
+    // get fields ready to sync from capstone database
+    useEffect(() => {
+        getFieldsToSync();
+    },[])
     
     // handles the checkbox input, adds each ID to an array if it is checked
     const handleCheckbox = (event) => {   
@@ -19,14 +40,14 @@ const SyncFieldsContainer = (props) => {
                     checked.push(checked_values[i].value);
             }
             checked_value = checked;
-            props.setCheckedIDs(checked_value);
+            setCheckedIDs(checked_value);
         }
     }
 
     // request to handle the synced fields
     const sync_fields = () => {
         // check that the IDs of the fields ready to sync are completely loaded
-        console.log(props.checkedIDs);
+        console.log(checkedIDs);
     }
 
     // handles the sync button. syncs all checked linked fields 
@@ -51,23 +72,23 @@ const SyncFieldsContainer = (props) => {
                     {/* this data needs to be obtained from shared state */}
                     <LinkedItemsTable 
                         title="Jama Project"
-                        projectID={"selectedProject"}
-                        projectName={"selectedProject"}
-                        itemID={"selectedItem"}
-                        itemName={"selectedItem"}
+                        projectID={"selectedJamaProject"}
+                        projectName={"selectedJamaProject"}
+                        itemID={"selectedJamaItem"}
+                        itemName={"selectedJamaItem"}
                     />
                     <LinkedItemsTable 
                         title="Jira Project"
-                        projectID={"selectedProject"}
-                        projectName={"selectedProject"}
-                        itemID={"selectedItem"}
-                        itemName={"selectedItem"}
+                        projectID={"selectedJiraProject"}
+                        projectName={"selectedJiraProject"}
+                        itemID={"selectedJiraItem"}
+                        itemName={"selectedJiraItem"}
                     />
                 </div>
                 <div className="linked_fields_container">
                     <LinkedFieldsTable
-                        responseLength={props.responseLength}
-                        linkedData={props.linkedData}
+                        responseLength={responseLength}
+                        linkedData={linkedData}
                         handleCheckbox={handleCheckbox}
                     />
                 </div>
