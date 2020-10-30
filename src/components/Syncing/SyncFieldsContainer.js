@@ -29,19 +29,14 @@ const SyncFieldsContainer = () => {
     },[])
     
     // handles the checkbox input, adds each ID to an array if it is checked
-    const handleCheckbox = (event) => {   
-        const { type } = event.target;
+    const handleCheckbox = () => {   
         var checked = [];
-        var checked_value = 0;
-        if(type === 'checkbox') {
-            const checked_values = document.getElementsByName('controlled-checkbox');
-            for(let i = 0; i < checked_values.length; i++) {
-                if(checked_values[i].checked)
-                    checked.push(checked_values[i].value);
-            }
-            checked_value = checked;
-            setCheckedIDs(checked_value);
+        const checked_values = document.getElementsByName('controlled-checkbox');
+        for(let i = 0; i < checked_values.length; i++) {
+            if(checked_values[i].checked)
+                checked.push(checked_values[i].value);
         }
+        setCheckedIDs(checked);
     }
 
     // request to handle the synced fields
