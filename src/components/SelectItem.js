@@ -17,7 +17,7 @@ axios.interceptors.request.use(
 	}
 );
 
-const Select_item = () => {
+const SelectItem = () => {
 
 	//token : authorization token 
 	//projects : get all project to display in select box
@@ -202,4 +202,4 @@ const Select_item = () => {
 	);
 }
 
-export default Select_item;
+export default SelectItem;

@@ -12,7 +12,6 @@ import SettingsPage from 'components/SettingsPage.js';
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-    
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -29,5 +28,4 @@ function App() {
 
   )
 }
-
 export default App;

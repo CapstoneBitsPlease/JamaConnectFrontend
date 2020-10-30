@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@atlaskit/button": "^15.1.0",
+    "@atlaskit/button": "^15.1.1",
     "@atlaskit/select": "^13.0.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -20,6 +20,7 @@
     "react-scripts": "3.4.1",
     "react-select": "^2.4.4",
     "react-select-async-paginate": "^0.4.1",
+    "styled-components": "^5.2.0",
     "sweetalert2": "^10.8.1"
   },
   "scripts": {
