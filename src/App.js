@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue } from "./components";
+import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./components";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
@@ -23,6 +23,7 @@ function App() {
           <Route path ="/syncSettings" component={SyncSettings} exact />
           <Route path ="/syncFields" component={SyncFields} exact />
           <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
+          <Route path ="/linkFields" component={LinkFields} exact />
         </Switch>
       </Router>
   )

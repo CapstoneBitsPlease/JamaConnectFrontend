@@ -1,7 +1,8 @@
 import React, {useState} from 'react';     
 import {Checkbox} from '@atlaskit/checkbox';    
 
-const SyncFieldsTableOnCreateIssue = (props) => {
+const SyncFieldsOnCreateIssueTable = (props) => {
+    // default fields to choose from when creating issue in Jira
     const [issueFields] = useState([
         "Assignee", "Attachment", "Description", "Fix versions", "Flagged", "Labels", "Linked issues",
         "Reporter", "Sprint", "Story point estimate", "Summary"
@@ -35,7 +36,7 @@ const SyncFieldsTableOnCreateIssue = (props) => {
                                 id={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
-                                value={[name]}
+                                value={name}
                                 name="controlled-checkbox"
                                 type="checkbox"
                             />
@@ -55,4 +56,4 @@ const SyncFieldsTableOnCreateIssue = (props) => {
     )
 }
 
-export default SyncFieldsTableOnCreateIssue;
+export default SyncFieldsOnCreateIssueTable;

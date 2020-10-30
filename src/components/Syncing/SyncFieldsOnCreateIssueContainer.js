@@ -9,20 +9,20 @@ const SyncFieldsOnCreateIssueContainer = () => {
     const [renderSelected, setRenderSelected] = useState(false);
     const [checkedFields, setCheckedFields] = useState([]);
 
-    // change button to "selected" and display the table of fields and checkboxes
+    // display or hide the table of fields and checkboxes
     const handleChange = (e) => {
         e.preventDefault()
         if(renderSelected === false) {
             setIsSelected("isSelected");
             setRenderSelected(true);
         }
-        else if (renderSelected === true) {
+        else {
             setIsSelected("");
             setRenderSelected(false);
         }
     }
 
-    // handle checkboxes
+    // handle field checkboxes and save them
     const handleCheckbox = () => {   
         var checked = [];
         const checked_values = document.getElementsByName('controlled-checkbox');
