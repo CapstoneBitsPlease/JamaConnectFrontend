@@ -10,7 +10,7 @@ const SyncSettingsAPI = () => {
 
     // makes request to backend and changes prevSync data if successful, otherwise returns and logs an error
     const getPrevSyncTime = () => {
-        var url = "http://127.0.0.1:5000/last_sync_time";
+        var url = "http://127.0.0.1:5000/capstone/last_sync_time";
         
         axios
         .get(url)
@@ -27,7 +27,7 @@ const SyncSettingsAPI = () => {
 
     // makes request to backend and changes numFieldsToSync data if successful, otherwise returns and logs an error
     const getFieldsToSync = () => {
-        var url = "http://127.0.0.1:5000/fields_to_sync";
+        var url = "http://127.0.0.1:5000/capstone/fields_to_sync";
 
         axios
         .get(url)

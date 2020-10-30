@@ -7,11 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem } from "./components";
-import { SyncSettings, SyncFields, SyncFieldsOnCreateIssue } from './components/Syncing'
-//import SettingsPage from 'components/SettingsPage.js';
-//import SyncFields from 'components/Syncing/SyncFieldsAPI.js';
-//import SyncFieldsOnCreateIssue from 'components/Syncing/SyncFieldsOnCreateIssueContainer.js';
+import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue } from "./components";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
@@ -24,7 +20,7 @@ function App() {
           <Route path="/selectItem" exact>
             {!loginState ? <Redirect to="/" /> : <SelectItem />}
           </Route>
-          <Route path ="/settingsPage" component={SyncSettings} exact />
+          <Route path ="/syncSettings" component={SyncSettings} exact />
           <Route path ="/syncFields" component={SyncFields} exact />
           <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
         </Switch>

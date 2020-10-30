@@ -9,7 +9,7 @@ const SyncFieldsAPI = () => {
 
     // GET request to sqlite database, returns fields ready to sync if successful and an error otherwise
     const getFieldsToSync = () => {
-        var url = "http://127.0.0.1:5000/fields_to_sync"
+        var url = "http://127.0.0.1:5000/capstone/fields_to_sync"
 
         axios
         .get(url)
