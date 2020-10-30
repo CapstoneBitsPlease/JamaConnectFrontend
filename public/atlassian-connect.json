@@ -1,33 +1,37 @@
 {
-    "name": "Hello World",
-    "description": "Atlassian Connect app",
-    "key": "com.example.myapp",
-    "baseUrl": "https://5d99977bdf20.ngrok.io",
+    "key": "jama_jira_key",
+    "name": "Jama-Jira Plugin Name",
+    "description": "Sync your Jira and Jama projects",
     "vendor": {
-        "name": "My name",
-        "url": "www.example.com"
+        "name": "capstone2020"
     },
-    "links": {
-        "config": "undefined/atlassian-connect.json"
-    },
+    "baseUrl": "",
     "authentication": {
         "type": "none"
     },
-    "scopes": [
-        "READ",
-        "WRITE"
-    ],
+    "enableLicensing": false,
+    "apiVersion": 1,
     "modules": {
-        "generalPages": [{
-            "key": "my-addon-page-name",
-            "location": "system.top.navigation.bar",
-            "name": {
-                "value": "My cún addon"
-            },
-            "url": "/",
-            "conditions": [{
-                "condition": "user_is_logged_in"
-            }]
-        }]
+        "webSections": [
+            {
+              "location": "admin_plugins_menu",
+              "weight": 50,
+              "name": {
+                "value": "Jama-Jira Plugin Admin"
+              },
+              "key": "plugin_admin_header"
+            }
+          ],
+        "webItems": [
+            {
+              "key": "example-section-link",
+              "location": "admin_plugins_menu/my-web-section",
+              "name": {
+                "value": "Sync settings"
+              },
+              "url": "/SettingPage"
+          }
+        ]
+        
     }
 }

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { Login } from "./pages";
 import { SelectItem } from "./components";
-
+import SettingsPage from 'components/SettingsPage.js';
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
@@ -21,10 +21,13 @@ function App() {
           <Route path="/selectItem" exact>
             {!loginState ? <Redirect to="/" /> : <SelectItem />}
           </Route>
+          <Route path ="/settingPage" component={SettingsPage} exact />
         </Switch>
       </Router>
     
-  );
+
+
+  )
 }
 
 export default App;

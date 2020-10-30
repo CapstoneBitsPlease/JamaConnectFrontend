@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@opuscapita/react-async-select": "^3.0.0",
+    "@atlaskit/button": "^15.1.0",
+    "@atlaskit/select": "^13.0.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "customize-cra": "^0.9.1",
-    "easy-peasy": "^3.3.1",
+    "http-server": "^0.12.3",
     "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
     "react": "^16.14.0",
@@ -43,9 +44,8 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
-    "postcss-cli": "^7.1.2",
-    "tailwindcss": "^1.9.2"
-  },
-  "proxy": "http://localhost:4200"
+    "autoprefixer": "^9.7.4",
+    "postcss-cli": "^7.1.0",
+    "tailwindcss": "^1.2.0"
+  }
 }
