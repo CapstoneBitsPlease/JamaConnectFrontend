@@ -1,28 +1,34 @@
-import React from 'react';
-import SyncSettings from 'components/Syncing/SyncSettingsAPI.js'
-import SyncFields from 'components/Syncing/SyncFieldsAPI.js';
-import SyncFieldsOnCreateIssue from 'components/Syncing/SyncFieldsOnCreateIssuePage.js'
-import SelectItemByID from 'components/select_item.js'
-import './App.css';
+import React from "react";
+import { useStoreState } from "easy-peasy";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Login } from "./pages";
+import { SelectItem } from "./components";
+import { SyncSettings, SyncFields, SyncFieldsOnCreateIssue } from './components/Syncing'
+//import SettingsPage from 'components/SettingsPage.js';
+//import SyncFields from 'components/Syncing/SyncFieldsAPI.js';
+//import SyncFieldsOnCreateIssue from 'components/Syncing/SyncFieldsOnCreateIssueContainer.js';
 
 function App() {
-  /*** insert better conditional rendering of pages here soon ***/
-  // for now, set toggle to the page you want to view
-    var toggle = 'SelectItemByID'
-
-    return (
-      <div className="App">
-        {
-          {
-            'SyncSettings': <SyncSettings />,
-            'SyncFields': <SyncFields />,
-            'SyncFieldsOnCreateIssue': <SyncFieldsOnCreateIssue />,
-            'SelectItemByID': <SelectItemByID />
-          }[toggle]
-        }
-      </div>
-    );
-  
+  const loginState = useStoreState((state) => state.accountStore.loggedIn);
+  return (
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            {loginState ? <Redirect to="/selectItem" /> : <Login />}
+          </Route>
+          <Route path="/selectItem" exact>
+            {!loginState ? <Redirect to="/" /> : <SelectItem />}
+          </Route>
+          <Route path ="/settingsPage" component={SyncSettings} exact />
+          <Route path ="/syncFields" component={SyncFields} exact />
+          <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
+        </Switch>
+      </Router>
+  )
 }
-
 export default App;

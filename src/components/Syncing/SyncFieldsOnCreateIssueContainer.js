@@ -4,7 +4,7 @@ import SyncFieldsOnCreateIssueTable from './SyncFieldsOnCreateIssueTable';
 import '../../styles/components/SyncFieldsOnCreateIssue.style.sass'; 
 
 // Button and table that are added to the "Create Issue" view. Allows the user to select which fields to sync
-const SyncFieldsOnCreateIssuePage = () => {
+const SyncFieldsOnCreateIssueContainer = () => {
     const [isSelected, setIsSelected] = useState("");
     const [renderSelected, setRenderSelected] = useState(false);
     const [checkedIDs, setCheckedIDs] = useState(false);
@@ -61,4 +61,4 @@ const SyncFieldsOnCreateIssuePage = () => {
     )
 }
 
-export default SyncFieldsOnCreateIssuePage;
+export default SyncFieldsOnCreateIssueContainer;

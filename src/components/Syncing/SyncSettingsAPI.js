@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import SyncSettingsPage from './SyncSettingsPage.js';
+import SyncSettingsContainer from './SyncSettingsContainer.js';
 
 const SyncSettingsAPI = () => {
     const [prevSyncTime, setPrevSyncTime] = useState(0); 
@@ -49,7 +49,7 @@ const SyncSettingsAPI = () => {
     }, [])
 
     return(
-        <SyncSettingsPage
+        <SyncSettingsContainer
             prevSyncTime={prevSyncTime}
             timeUnit={timeUnit}
             numFieldsToSync={numFieldsToSync}

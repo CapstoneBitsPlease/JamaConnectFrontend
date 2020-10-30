@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import SyncFieldsPage from './SyncFieldsPage';
+import SyncFieldsContainer from './SyncFieldsContainer';
 
 const SyncFieldsAPI = () => {
     const [checkedIDs, setCheckedIDs] = useState([]);
@@ -31,7 +31,7 @@ const SyncFieldsAPI = () => {
     },[])
 
     return(
-        <SyncFieldsPage
+        <SyncFieldsContainer
             responseLength={responseLength}
             linkedData={linkedData}
             checkedIDs={checkedIDs}

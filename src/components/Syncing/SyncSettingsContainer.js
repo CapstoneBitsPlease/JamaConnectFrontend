@@ -4,7 +4,7 @@ import SyncSettingsTable from './SyncSettingsTable.js'
 import '../../styles/components/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
-const SettingsPage = (props) => {
+const SyncSettingsContainer = (props) => {
   
   // on click of the button, prints updated sync interval, will update sync process 
   const handleApply = (e) => {
@@ -32,4 +32,4 @@ const SettingsPage = (props) => {
   );
 }
 
-export default SettingsPage;
+export default SyncSettingsContainer;

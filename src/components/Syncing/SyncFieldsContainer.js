@@ -5,7 +5,7 @@ import LinkedFieldsTable from './LinkedFieldsTable'
 import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
-const SyncFieldsPage = (props) => {
+const SyncFieldsContainer = (props) => {
     
     // handles the checkbox input, adds each ID to an array if it is checked
     const handleCheckbox = (event) => {   
@@ -80,4 +80,4 @@ const SyncFieldsPage = (props) => {
 
 }
 
-export default SyncFieldsPage;
+export default SyncFieldsContainer;
