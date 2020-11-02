@@ -4,22 +4,29 @@ const LinkFieldsTable = (props) => {
 
     // retrieve from the response data what we need for the table
     const formatData = () => {
-        var itemFields = []
         var data = [];
         for(let i=0; i < props.responseLength; i++) {
-            // get the id and name
+            // get the id and name from response data
 
-            data.push({
-                "id": i+1, 
-                "name": ""
-            })
-            return data;
         }
+
+        // add data to new array 
+
+        return data;
     }
 
-    // add the table of fields to the DOM
+    // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
-
+        var data = formatData();
+        return data.map((row) => {
+            const { id, name } = row;
+            return (    
+                <tr className="fields_row" key={id}>
+                    <td className="fields_data">{id}</td>
+                    <td className="fields_data">{name}</td>
+                </tr>
+            )
+        })
     }
 
 
@@ -34,6 +41,7 @@ const LinkFieldsTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
+                    {renderTable()}
                 </tbody>
             </table>
         </div>
