@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./components";
+import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./domains";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
