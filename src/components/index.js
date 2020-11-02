@@ -1,8 +1,0 @@
-export { default as SelectItem } from './SelectItem'
-export { default as LinkedFieldsTable } from './Syncing/LinkedFieldsTable'
-export { default as LinkedItemsTable } from './Syncing/LinkedItemsTable'
-export { default as SyncFields } from './Syncing/SyncFieldsContainer'
-export { default as SyncSettingsTable } from './Syncing/SyncSettingsTable'
-export { default as SyncSettings } from './Syncing/SyncSettingsContainer'
-export { default as SyncFieldsOnCreateIssueTable } from './Syncing/SyncFieldsOnCreateIssueTable'
-export { default as SyncFieldsOnCreateIssue } from './Syncing/SyncFieldsOnCreateIssueContainer'

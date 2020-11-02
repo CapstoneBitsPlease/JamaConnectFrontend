@@ -1,5 +1,3 @@
-@tailwind base
-
 .sync
     &_page_container
         
@@ -29,19 +27,15 @@
 
     &_table
         @apply table-auto
-        @apply bg-white
         @apply inline-block
         @apply ml-10
 
     &_headers
         @apply px-4 py-4
-        @apply border px-4 py-2 bg-gray-200
-
-    &_row:hover
-        @apply bg-gray-200
+        @apply border-solid border-2 border-gray-300 px-4 py-2 bg-gray-200
 
     &_data
-        @apply border px-4 py-2
+        @apply border-solid border-2 border-gray-300 px-4 py-2
         @apply text-center
 
 .linked_fields
@@ -57,13 +51,10 @@
 
     &_headers
         @apply px-4 py-4
-        @apply border px-4 py-2 bg-gray-200
-    
-    &_row:hover
-        @apply bg-gray-200
+        @apply border-solid border-2 border-gray-300 px-4 py-2 bg-gray-200
     
     &_data
-        @apply border px-4 py-2
+        @apply border-solid border-2 border-gray-300 px-4 py-2
         @apply text-center
 
     &_checkbox

@@ -7,36 +7,31 @@ import '../../styles/components/SyncFieldsOnCreateIssue.style.sass';
 const SyncFieldsOnCreateIssueContainer = () => {
     const [isSelected, setIsSelected] = useState("");
     const [renderSelected, setRenderSelected] = useState(false);
-    const [checkedIDs, setCheckedIDs] = useState(false);
+    const [checkedFields, setCheckedFields] = useState([]);
 
-    // change button to "selected" and display the table of fields and checkboxes
+    // display or hide the table of fields and checkboxes
     const handleChange = (e) => {
         e.preventDefault()
         if(renderSelected === false) {
             setIsSelected("isSelected");
             setRenderSelected(true);
         }
-        else if (renderSelected === true) {
+        else {
             setIsSelected("");
             setRenderSelected(false);
         }
     }
 
-    // handle checkboxes
-    const handleCheckbox = (event) => {   
-        const { type } = event.target;
+    // handle field checkboxes and save them
+    const handleCheckbox = () => {   
         var checked = [];
-        var checked_value = 0;
-        if(type === 'checkbox') {
-            const checked_values = document.getElementsByName('controlled-checkbox');
-            for(let i = 0; i < checked_values.length; i++) {
-                if(checked_values[i].checked)
-                    checked.push(checked_values[i].value);
-            }
-            checked_value = checked;
-            setCheckedIDs(checked_value);
-            console.log(checked_value)
+        const checked_values = document.getElementsByName('controlled-checkbox');
+        for(let i = 0; i < checked_values.length; i++) {
+            if(checked_values[i].checked)
+                checked.push(checked_values[i].value);
         }
+        console.log(checked);
+        setCheckedFields(checked);
     }
 
     return (
@@ -52,7 +47,6 @@ const SyncFieldsOnCreateIssueContainer = () => {
             <div className="sync_fields_table_container">
                 { renderSelected && 
                     <SyncFieldsOnCreateIssueTable
-                        checkedIDs={checkedIDs}
                         handleCheckbox={handleCheckbox}
                     />
                 }

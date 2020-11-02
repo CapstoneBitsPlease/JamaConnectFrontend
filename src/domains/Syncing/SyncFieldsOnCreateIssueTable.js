@@ -1,14 +1,15 @@
 import React, {useState} from 'react';     
 import {Checkbox} from '@atlaskit/checkbox';    
 
-const SyncFieldsTableOnCreateIssue = (props) => {
+const SyncFieldsOnCreateIssueTable = (props) => {
+    // default fields to choose from when creating issue in Jira
     const [issueFields] = useState([
         "Assignee", "Attachment", "Description", "Fix versions", "Flagged", "Labels", "Linked issues",
         "Reporter", "Sprint", "Story point estimate", "Summary"
     ]);
 
     // format table data 
-    const formatDataForTable = () => {
+    const formatData = () => {
         let data = [];
         for(let i=0; i < issueFields.length; i++){
             data.push({
@@ -23,7 +24,7 @@ const SyncFieldsTableOnCreateIssue = (props) => {
 
     // format table data and add it to the DOM
     const renderTableData = () => {
-        var data = formatDataForTable();
+        var data = formatData();
         return data.map((row) => {
             const { id, checkboxID, name, checked } = row;
             return (    
@@ -55,4 +56,4 @@ const SyncFieldsTableOnCreateIssue = (props) => {
     )
 }
 
-export default SyncFieldsTableOnCreateIssue;
+export default SyncFieldsOnCreateIssueTable;
