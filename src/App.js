@@ -1,5 +1,5 @@
 import React from "react";
-import {useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,12 +7,11 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem } from "./components";
+import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue } from "./components";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-    
       <Router>
         <Switch>
           <Route path="/" exact>
@@ -21,10 +20,11 @@ function App() {
           <Route path="/selectItem" exact>
             {!loginState ? <Redirect to="/" /> : <SelectItem />}
           </Route>
+          <Route path ="/syncSettings" component={SyncSettings} exact />
+          <Route path ="/syncFields" component={SyncFields} exact />
+          <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
         </Switch>
       </Router>
-    
-  );
+  )
 }
-
 export default App;

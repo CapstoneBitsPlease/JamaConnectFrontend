@@ -1,0 +1,73 @@
+@tailwind base
+
+.sync
+    &_page_container
+        
+    &_page_title
+        @apply text-2xl text-left font-normal
+        @apply pl-4 mt-4 mb-8
+    
+    &_page_subtitle
+        @apply text-lg font-normal
+        @apply mt-4 mb-8 ml-10
+
+.button_container
+    @apply flex 
+    @apply justify-center
+    @apply mt-12
+
+.sync_button
+    @apply ml-64 
+
+.go_back_button
+    @apply ml-6 
+
+.linked_items
+    &_title
+        @apply text-xl 
+        @apply mt-4
+
+    &_table
+        @apply table-auto
+        @apply bg-white
+        @apply inline-block
+        @apply ml-10
+
+    &_headers
+        @apply px-4 py-4
+        @apply border px-4 py-2 bg-gray-200
+
+    &_row:hover
+        @apply bg-gray-200
+
+    &_data
+        @apply border px-4 py-2
+        @apply text-center
+
+.linked_fields
+    &_title
+        @apply text-xl 
+        @apply text-left
+
+    &_table
+        @apply table-auto
+        @apply bg-white
+        @apply inline-block
+        @apply ml-10 mt-6
+
+    &_headers
+        @apply px-4 py-4
+        @apply border px-4 py-2 bg-gray-200
+    
+    &_row:hover
+        @apply bg-gray-200
+    
+    &_data
+        @apply border px-4 py-2
+        @apply text-center
+
+    &_checkbox
+        @apply ml-2
+
+
+    

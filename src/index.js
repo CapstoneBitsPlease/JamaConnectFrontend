@@ -5,10 +5,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, StoreProvider } from "easy-peasy";
 import { accountStore } from "./stores";
+import syncStore from "stores/SyncStore";
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={createStore({
         accountStore: accountStore,
+        syncStore: syncStore,
       })}>
       <App />
     </StoreProvider>
