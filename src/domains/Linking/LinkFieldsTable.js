@@ -7,15 +7,14 @@ const LinkFieldsTable = (props) => {
         var itemFields = []
         var data = [];
         for(let i=0; i < props.responseLength; i++) {
-            
-        }
-        for(let i=0; i < props.responseLength; i++){
+            // get the id and name
+
             data.push({
                 "id": i+1, 
                 "name": ""
             })
+            return data;
         }
-        return data;
     }
 
     // add the table of fields to the DOM
