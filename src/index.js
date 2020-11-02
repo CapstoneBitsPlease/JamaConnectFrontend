@@ -4,13 +4,12 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, StoreProvider } from "easy-peasy";
-import { accountStore } from "./stores";
-import { jamaitem } from "./stores/itemID"
+import { accountStore, jamaitem } from "./stores"
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={createStore({
         accountStore: accountStore,
-        jamalinkingid : jamaitem,
+        jamaitem : jamaitem,
       })}>
       <App />
     </StoreProvider>

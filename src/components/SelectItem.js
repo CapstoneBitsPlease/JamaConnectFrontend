@@ -9,7 +9,7 @@ import { useStoreActions } from 'easy-peasy';
 //authorization function with bearer
 axios.interceptors.request.use(
 	config => {
-		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQyOTc3MDcsIm5iZiI6MTYwNDI5NzcwNywianRpIjoiMWI5ZjE1ZTAtNTRhMS00YTc3LThiNGMtYjRiNjVlZGFjYjBlIiwiZXhwIjoxNjA0Mjk4NjA3LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYjg2NjkyNWUtOWYxNy00NzU1LTkzZGEtZjdjYTljZjAwODM2In0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.CmmMA_yB8rpGVMfPpla2JKpORFFHvOPj0QkHrMqMjv0`;
+		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQzNTMzODYsIm5iZiI6MTYwNDM1MzM4NiwianRpIjoiNmM3MmJkZTctNTg3NC00NGI0LWEyOWYtZmQxN2VhOTUwYTJlIiwiZXhwIjoxNjA0MzU0Mjg2LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWRjNjhjZmMtN2FlZC00MDcwLTg0YjEtYWQ4MWM4NTg3MDIxIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.0fF71lbOfbym4hdmxfm18aFXZfbJVnrH1_qfCtNNYaU`;
 		return config;
 	},
 	error => {
@@ -29,8 +29,8 @@ const SelectItem = () => {
 	const [list, setlist] = useState([])
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
-	const [item_id , setitem_id] = useState(0)
-	const item = useStoreActions(actions => actions.jamaitem.setitem_id)
+	const [item_id, setitem_id] = useState(0)
+	const item = useStoreActions(actions => actions.jamaitem.setitemID)
 
 
 	//Tried to use login fucntion to get token and set token for authorization but failed with
@@ -137,11 +137,6 @@ const SelectItem = () => {
 		return tempArray;
 	}
 
-	//Changed gloababl enviroment
-	const setid = () => {
-		item(item_id);
-	}
-
 
 
 	//Useeffect hook function
@@ -162,7 +157,7 @@ const SelectItem = () => {
 	return (
 		<div className="select_item-container">
 			<form className="select_item-selecting" >
-				<legend className="mx-auto border-separate font-bold italic text-xl">Item Selection</legend>
+				<legend className="select_item-title">Item Selection</legend>
 				<div className="select_item-item">
 
 
@@ -189,12 +184,12 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the item ID here"
-							onChange = {e => { setitem_id(e.value) }}
+							onChange={e => { setitem_id(e.target.value)}}
 						/>
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but' onClick={setid()} >Link</button>
+						<button type='button' className='but' onClick={() =>{ console.log(item_id); item(item_id)}} >Link</button>
 					</div>
 
 				</div>
