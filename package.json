@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "customize-cra": "^0.9.1",
+    "easy-peasy": "^4.0.1",
     "http-server": "^0.12.3",
     "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
@@ -21,7 +22,7 @@
     "react-select": "^2.4.4",
     "react-select-async-paginate": "^0.4.1",
     "styled-components": "^5.2.0",
-    "sweetalert2": "^10.8.1"
+    "sweetalert2": "^10.9.0"
   },
   "atlassian-connect-dev-instance-host": "capstone2020psu.atlassian.net",
   "atlassian-connect-prod-instance-host": "example.atlassian.net",
