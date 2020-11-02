@@ -11,14 +11,16 @@ import { SelectItem } from "./components";
 import SettingsPage from 'components/SettingsPage.js';
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
+  // const id = useStoreState((state) => state.jamaitem.itemID)
   return (
       <Router>
         <Switch>
-          <Route path="/" exact>
+          {/* <Route path="/" exact>
             {loginState ? <Redirect to="/selectItem" /> : <Login />}
-          </Route>
-          <Route path="/selectItem" exact>
-            {!loginState ? <Redirect to="/" /> : <SelectItem />}
+          </Route> */}
+          <Route path="/" exact>
+            {/* {!loginState ? <Redirect to="/" /> : <SelectItem />} */}
+            <SelectItem />
           </Route>
           <Route path ="/settingPage" component={SettingsPage} exact />
         </Switch>

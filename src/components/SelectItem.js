@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios'
-// import "../styles/Page/select_item.sass";
-import "../styles/components/select_item.sass"
+import "../styles/components/select_item.sass";
 import { useEffect, useState } from 'react';
 import { data } from 'autoprefixer';
-// import item from './all_item';
-import Select from 'react-select'
+import Select from 'react-select';
+import { useStoreActions } from 'easy-peasy';
 
 //authorization function with bearer
 axios.interceptors.request.use(
 	config => {
-		config.headers.Authorization = `Bearer `;
+		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQyOTc3MDcsIm5iZiI6MTYwNDI5NzcwNywianRpIjoiMWI5ZjE1ZTAtNTRhMS00YTc3LThiNGMtYjRiNjVlZGFjYjBlIiwiZXhwIjoxNjA0Mjk4NjA3LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYjg2NjkyNWUtOWYxNy00NzU1LTkzZGEtZjdjYTljZjAwODM2In0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.CmmMA_yB8rpGVMfPpla2JKpORFFHvOPj0QkHrMqMjv0`;
 		return config;
 	},
 	error => {
@@ -30,6 +29,8 @@ const SelectItem = () => {
 	const [list, setlist] = useState([])
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
+	const [item_id , setitem_id] = useState(0)
+	const item = useStoreActions(actions => actions.jamaitem.setitem_id)
 
 
 	//Tried to use login fucntion to get token and set token for authorization but failed with
@@ -136,6 +137,13 @@ const SelectItem = () => {
 		return tempArray;
 	}
 
+	//Changed gloababl enviroment
+	const setid = () => {
+		item(item_id);
+	}
+
+
+
 	//Useeffect hook function
 	useEffect(() => {
 		get_prog();
@@ -181,11 +189,12 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the item ID here"
+							onChange = {e => { setitem_id(e.value) }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but'>Link</button>
+						<button type='button' className='but' onClick={setid()} >Link</button>
 					</div>
 
 				</div>
