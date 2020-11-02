@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './styles/theme.sass'
+import React from "react";
+import {useStoreState } from "easy-peasy";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Login } from "./pages";
+import { SelectItem } from "./components";
 
 function App() {
+  const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="test">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            {loginState ? <Redirect to="/selectItem" /> : <Login />}
+          </Route>
+          <Route path="/selectItem" exact>
+            {!loginState ? <Redirect to="/" /> : <SelectItem />}
+          </Route>
+        </Switch>
+      </Router>
+    
   );
 }
 

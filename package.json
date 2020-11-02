@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@opuscapita/react-async-select": "^3.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
     "customize-cra": "^0.9.1",
-    "node-sass": "^4.13.1",
+    "easy-peasy": "^3.3.1",
+    "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
-    "react": "^16.13.1",
-    "react-app-rewired": "^2.1.5",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react": "^16.14.0",
+    "react-app-rewired": "^2.1.6",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-select": "^2.4.4",
+    "react-select-async-paginate": "^0.4.1",
+    "sweetalert2": "^10.8.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -36,8 +43,9 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "postcss-cli": "^7.1.0",
-    "tailwindcss": "^1.2.0"
-  }
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^7.1.2",
+    "tailwindcss": "^1.9.2"
+  },
+  "proxy": "http://localhost:4200"
 }

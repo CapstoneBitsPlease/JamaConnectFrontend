@@ -1,0 +1,33 @@
+{
+    "name": "Hello World",
+    "description": "Atlassian Connect app",
+    "key": "com.example.myapp",
+    "baseUrl": "https://5d99977bdf20.ngrok.io",
+    "vendor": {
+        "name": "My name",
+        "url": "www.example.com"
+    },
+    "links": {
+        "config": "undefined/atlassian-connect.json"
+    },
+    "authentication": {
+        "type": "none"
+    },
+    "scopes": [
+        "READ",
+        "WRITE"
+    ],
+    "modules": {
+        "generalPages": [{
+            "key": "my-addon-page-name",
+            "location": "system.top.navigation.bar",
+            "name": {
+                "value": "My cún addon"
+            },
+            "url": "/",
+            "conditions": [{
+                "condition": "user_is_logged_in"
+            }]
+        }]
+    }
+}
