@@ -1,11 +1,11 @@
 import React from 'react';
 import {Checkbox} from '@atlaskit/checkbox';
 
-/* Component to format and render the fields table */
-const LinkedFieldsTable = (props) => {
+/* Component to format and render the table to choose fields to sync */
+const SyncFieldsTable = (props) => {
 
-    //  grab from the response only the data we need for the fields table
-    const formatDataForTable = () => {
+    //  grab from the response only the data we need 
+    const formatData = () => {
         var newJamaNames = [];
         var newJiraNames = [];
         var data = [];
@@ -31,7 +31,7 @@ const LinkedFieldsTable = (props) => {
 
     // format data and add it to the DOM
     const renderTableData = () => {
-        var data = formatDataForTable();
+        var data = formatData();
         return data.map((row) => {
             const { id, checkboxID, jamaName, jiraName, checked } = row;
             return (    
@@ -76,4 +76,4 @@ const LinkedFieldsTable = (props) => {
     )
 }
 
-export default LinkedFieldsTable;
+export default SyncFieldsTable;
