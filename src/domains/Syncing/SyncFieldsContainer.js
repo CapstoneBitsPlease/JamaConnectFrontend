@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
+import {useStoreActions, useStoreState} from "easy-peasy";
 import Button from '@atlaskit/button';
 import LinkedItemsTable from '../../components/LinkedItemsTable'
 import LinkedFieldsTable from './SyncFieldsTable'
-import {useStoreActions, useStoreState} from "easy-peasy";
 import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
 const SyncFieldsContainer = () => {
 
+    // retrieve state and actions from SyncStore.js
     const { linkedData, responseLength, checkedIDs } = useStoreState(
         state => ({
             linkedData: state.syncStore.linkedData,
@@ -26,6 +27,7 @@ const SyncFieldsContainer = () => {
     // get fields ready to sync from capstone database
     useEffect(() => {
         getFieldsToSync();
+        // eslint-disable-next-line
     },[])
     
     // handles the checkbox input, adds each ID to an array if it is checked

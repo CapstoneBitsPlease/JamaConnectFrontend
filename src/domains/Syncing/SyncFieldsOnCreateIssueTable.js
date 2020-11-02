@@ -9,7 +9,7 @@ const SyncFieldsOnCreateIssueTable = (props) => {
     ]);
 
     // format table data 
-    const formatDataForTable = () => {
+    const formatData = () => {
         let data = [];
         for(let i=0; i < issueFields.length; i++){
             data.push({
@@ -24,7 +24,7 @@ const SyncFieldsOnCreateIssueTable = (props) => {
 
     // format table data and add it to the DOM
     const renderTableData = () => {
-        var data = formatDataForTable();
+        var data = formatData();
         return data.map((row) => {
             const { id, checkboxID, name, checked } = row;
             return (    

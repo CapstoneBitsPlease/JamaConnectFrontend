@@ -5,7 +5,7 @@ import {Checkbox} from '@atlaskit/checkbox';
 const SyncFieldsTable = (props) => {
 
     //  grab from the response only the data we need 
-    const formatDataForTable = () => {
+    const formatData = () => {
         var newJamaNames = [];
         var newJiraNames = [];
         var data = [];
@@ -31,7 +31,7 @@ const SyncFieldsTable = (props) => {
 
     // format data and add it to the DOM
     const renderTableData = () => {
-        var data = formatDataForTable();
+        var data = formatData();
         return data.map((row) => {
             const { id, checkboxID, jamaName, jiraName, checked } = row;
             return (    
