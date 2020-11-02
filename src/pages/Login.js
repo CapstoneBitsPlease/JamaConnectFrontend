@@ -1,28 +1,23 @@
 import React from "react";
-import axios from "axios";
-import makeToast from "../Toaster";
+import {useStoreActions} from "easy-peasy";
 import "../styles/pages/Login.style.sass";
 
 const Login = () => {
   const userNameRef = React.createRef();
   const passwordRef = React.createRef();
   const organizationRef = React.createRef();
+  const login = useStoreActions(actions => actions.accountStore.login);
 
   const loginUser = () => {
-    const userName = userNameRef.current.value;
-    const password = passwordRef.current.value;
-    const organization = organizationRef.current.value;
+    
+    const loginInfo = {
+      userName : userNameRef.current.value,
+      password : passwordRef.current.value,
+      organization : organizationRef.current.value
+    }
 
-    axios
-      .post(
-        `http://127.0.0.1:5000/login/basic?username=${userName}&password=${password}&organization=${organization}`
-      )
-      .then(() => {
-        makeToast("success", "User has been authenticated");
-      })
-      .catch(() => {
-        makeToast("error", "Invalid login");
-      });
+    login(loginInfo);
+   
   };
   const handleForm = (event) => {
     event.preventDefault();
@@ -57,15 +52,15 @@ const Login = () => {
           ref={organizationRef}
         />
         <div className="login-forgot">
-          <p>Forgot your password?</p>
-          <button onClick={loginUser} type="submit">
+          <button id ="forgot">Forgot your password?</button>
+          <button id ="signin" onClick={loginUser} type="submit">
             Sign in
           </button>
         </div>
         <div className="login-line">
           <hr /> OR <hr />
         </div>
-        <button>Sign in with OAuth</button>
+        <button id="OAuth">Sign in with OAuth</button>
       </form>
     </div>
   );
