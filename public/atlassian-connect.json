@@ -7,7 +7,7 @@
     },
     "baseUrl": "",
     "authentication": {
-        "type": "none"
+        "type": "jwt"
     },
     "enableLicensing": false,
     "apiVersion": 1,
@@ -29,7 +29,7 @@
               "name": {
                 "value": "Sync settings"
               },
-              "url": "/SettingPage"
+              "url": "../src/components/Syncing/SyncSettingsContainer"
           }
         ]
         
