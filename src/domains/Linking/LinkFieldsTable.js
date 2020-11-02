@@ -7,7 +7,7 @@ const LinkFieldsTable = (props) => {
         var data = [];
         for(let i=0; i < props.responseLength; i++) {
             // get the id and name from response data
-
+            
         }
 
         // add data to new array 

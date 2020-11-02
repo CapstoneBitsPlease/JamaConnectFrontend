@@ -1,19 +1,19 @@
-import React, {useEffect, createRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {useStoreActions, useStoreState} from "easy-peasy";
 import Button from '@atlaskit/button';
-import TextField from '@atlaskit/textfield';
 import LinkedItemsTable from '../../components/LinkedItemsTable';
 import LinkFieldsTable from './LinkFieldsTable';
 import '../../styles/components/LinkFields.style.sass';
 
 const LinkFieldsContainer = () => {
     // references to hold user input 
-    const jamaFieldRef = createRef();
-    const jiraFieldRef = createRef();
+    const jamaFieldRef = useRef();
+    const jiraFieldRef = useRef();
     // need to get project id/name, item id/name, and issue id from store
     const projectID = 100; 
     const itemID = 486; 
     const issueID = 46;
+    var fieldsToLink = [];
 
     // retrieve state and actions from LinkStore.js
     const { itemData, responseLength } = useStoreState(
@@ -39,7 +39,9 @@ const LinkFieldsContainer = () => {
     // handles the link button. prints to console and sends to the backend array of IDs to link
     const handleLink = (event) => {
         event.preventDefault();
-        console.log("fields to link: ", jamaFieldRef.current.value, jiraFieldRef.current.value);
+        fieldsToLink.push(jamaFieldRef.current.value);
+        fieldsToLink.push(jiraFieldRef.current.value);
+        console.log("fields to link: ", fieldsToLink);
         // post to backend
     }
 
@@ -84,21 +86,21 @@ const LinkFieldsContainer = () => {
                 <div className="user_input_container">
                     <span className="input_fields">
                         <label htmlFor="input_fields" className="input_label">Jama field ID</label>
-                        <TextField 
+                        <input 
                             id="input_Jama_field"
                             name="basic"
                             className="fields_to_link_input"
-                            onChange={(e => console.log(e.target.value))}
+                           // onChange={(e => console.log(e.target.value))}
                             ref={jamaFieldRef}
-                        ></TextField>
+                        ></input>
                         <label htmlFor="input_fields" className="input_label">Jira field ID</label>
-                        <TextField 
+                        <input 
                             id="input_Jira_field"
                             name="basic"
                             className="fields_to_link_input"
-                            onChange={(e => console.log(e.target.value))}
+                            //onChange={(e => console.log(e.target.value))}
                             ref={jiraFieldRef}
-                        ></TextField>
+                        ></input>
                     </span>
                     <span className="link_buttons_container">
                         <Button id="link_button" appearance="primary" className="link_button" onClick={handleLink}>Link</Button>
