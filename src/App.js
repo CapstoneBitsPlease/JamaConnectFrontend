@@ -1,5 +1,6 @@
 import React from 'react';
-import SettingsPage from 'components/SettingsPage.js';
+// import SettingsPage from 'components/SettingsPage.js';
+import Select_item from './components/select_item'
 import './App.css';
 import './styles/main/App.sass';
 import './styles/main/theme.sass';
@@ -9,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <SettingsPage />
+      <Select_item></Select_item>
     </div>
 
   );

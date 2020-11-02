@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios'
-import "../styles/Page/select_item.sass";
+// import "../styles/Page/select_item.sass";
+import "../styles/components/select_item.sass"
 import { useEffect, useState } from 'react';
 import { data } from 'autoprefixer';
-import item from './all_item';
+// import item from './all_item';
 import Select from 'react-select'
 
 //authorization function with bearer

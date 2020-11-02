@@ -20,6 +20,9 @@
     "react-select": "^3.1.0",
     "styled-components": "^3.4.10"
   },
+  "atlassian-connect-dev-instance-host": "capstone2020psu.atlassian.net",
+  "atlassian-connect-prod-instance-host": "example.atlassian.net",
+  "atlassian-connect-addon-home": "https://example.com/",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
