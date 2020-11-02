@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios'
 import "../styles/components/select_item.sass";
 import { useEffect, useState } from 'react';
-import { data } from 'autoprefixer';
 import Select from 'react-select';
 import { useStoreActions } from 'easy-peasy';
 
@@ -191,14 +190,16 @@ const SelectItem = () => {
 					<div className="btn">
 						<button type='button' className='but' onClick={() =>{ console.log(item_id); item(item_id)}} >Link</button>
 					</div>
+				
 
 				</div>
 
 				<div className="select_item-list">
-					<ul>
-						{temp().map(s => (<li>{s}</li>))}
+					<ul >
+						{temp().map(s => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
+
 
 
 			</form>

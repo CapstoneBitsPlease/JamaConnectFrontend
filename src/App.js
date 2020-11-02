@@ -7,8 +7,13 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem } from "./components";
+// import { SelectItem } from "./components";
+import { SelectItem , Buttons } from "./components";
 import SettingsPage from 'components/SettingsPage.js';
+// import { buttons } from './components';
+
+
+
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
   // const id = useStoreState((state) => state.jamaitem.itemID)
@@ -20,7 +25,8 @@ function App() {
           </Route> */}
           <Route path="/" exact>
             {/* {!loginState ? <Redirect to="/" /> : <SelectItem />} */}
-            <SelectItem />
+            {/* <SelectItem /> */}
+            <Buttons />
           </Route>
           <Route path ="/settingPage" component={SettingsPage} exact />
         </Switch>
