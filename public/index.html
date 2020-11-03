@@ -24,11 +24,23 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script src="https://connect-cdn.atl-paas.net/all.js" async></script>
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <web-item key="release-page" i18n-name-key="version.release" section="jira.project.sidebar.plugins.navigation" weight="300">
+      <label key="project.page.release.title"></label>
+      <link>/projects/EX?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page</link>
+      <param name="iconClass" value="aui-icon-large icon-sidebar-release"/>
+      <condition class="com.atlassian.jira.projects.page.release.VersionsDefinedAndVisibleCondition"/>
+  </web-item>
+  <web-panel key="release-page-key" location="com.atlassian.jira.jira-projects-plugin:release-page">
+    <resource name="view" type="soy" location=":project-subpages-soy/JIRA.Projects.Release.Templates.page"/>
+    <context-provider class="com.atlassian.jira.projects.page.release.ReleasePageContextProvider"/>
+    <condition class="com.atlassian.jira.projects.page.release.VersionsDefinedAndVisibleCondition"/>
+</web-panel>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
