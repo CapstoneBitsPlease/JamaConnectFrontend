@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import "../styles/components/select_item.sass";
+import "../../styles/components/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions } from 'easy-peasy';
