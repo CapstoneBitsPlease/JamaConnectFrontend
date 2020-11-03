@@ -4,12 +4,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, StoreProvider } from "easy-peasy";
+import { jamaitem } from "./stores"
 import { accountStore, syncStore, linkStore } from "./stores";
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={createStore({
         accountStore: accountStore,
+        jamaitem : jamaitem,
         syncStore: syncStore,
         linkStore: linkStore
       })}>

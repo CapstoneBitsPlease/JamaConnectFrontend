@@ -1,9 +1,11 @@
 .select_item
+    &-title
+        @apply text-center italic font-bold
     &-selecting
         @apply absolute left-1/6 right-1/6 my-10
         @apply max-w-screen-xl max-h-screen 
         @apply w-2/3 h-auto
-        @apply border border-blue-500
+        @apply border border-blue-500 bg-blue-200
     &-item
         @apply mx-auto mt-2 mb-4
         @apply w-2/4 h-auto
@@ -11,7 +13,7 @@
             @apply w-full border border-blue-500
             @apply mt-6
         .field
-            @apply mb-5 
+            @apply mb-5 h-6
             @apply border rounded-md outline-none
         .btn
             @apply w-1/2 mx-auto
@@ -23,19 +25,5 @@
         @apply list-none
         @apply text-center 
         @apply overflow-y-auto
-
-@screen sm
-    .select_item-selecting
-        @apply bg-black
-
-@screen md
-    .select_item-selecting
-        @apply bg-red-800
-
-@screen lg
-    .select_item-selecting
-        @apply bg-orange-400
-
-@screen xl
-    .select_item-selecting
-        @apply bg-green-400
+        .test
+            @apply list-none
