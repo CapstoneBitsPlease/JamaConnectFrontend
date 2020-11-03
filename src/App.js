@@ -1,5 +1,5 @@
 import React from "react";
-import {useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,7 @@ import SettingsPage from 'components/SettingsPage.js';
 // import { buttons } from './components';
 
 
+import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./domains";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
@@ -28,12 +29,12 @@ function App() {
             {/* <SelectItem /> */}
             <Buttons />
           </Route>
-          <Route path ="/settingPage" component={SettingsPage} exact />
+          <Route path ="/syncSettings" component={SyncSettings} exact />
+          <Route path ="/syncFields" component={SyncFields} exact />
+          <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
+          <Route path ="/linkFields" component={LinkFields} exact />
         </Switch>
       </Router>
-    
-
-
   )
 }
 export default App;

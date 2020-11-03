@@ -1,12 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+C2TB
+====
 
-# Duc's section:
+This repo contains the frontend components for our team's capstone project.
 
-## How did I initialize this?
+To run:
+-------
 
-Mostly follow: 
-  1. https://itnext.io/how-to-use-tailwind-css-with-react-16e9d478b8b1
-  2. https://medium.com/@harryhedger/quick-how-to-setup-tailwind-with-create-react-app-6e7af96ad32c
+`npm install`
+
+In the project directory, use `npm start` to run in development mode (if this doesn't work, `npm install` any additional libraries needed, then `npm start` again). Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
+
+See additional available npm scripts below in React's default section.
 
 
 # React's default section:
@@ -80,3 +84,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
+
+Sources:
+--------
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and generated from a React-Tailwind-Sass template created by [ptmdmusique](https://github.com/ptmdmusique/react-tailwind-sass-template).
