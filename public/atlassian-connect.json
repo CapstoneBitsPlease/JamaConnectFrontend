@@ -2,7 +2,7 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://04634061d59b.ngrok.io",
+  "baseUrl": "https://c15493f2f95f.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -18,7 +18,7 @@
       "url": "/projects/EX?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
       "context": "product",
       "name": {
-        "value": "My Web Item"
+        "value": "Jama Plugin"
       }
     }],
     "webPanels": [{
