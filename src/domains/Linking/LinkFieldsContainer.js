@@ -90,7 +90,6 @@ const LinkFieldsContainer = () => {
                             id="input_Jama_field"
                             name="basic"
                             className="fields_to_link_input"
-                           // onChange={(e => console.log(e.target.value))}
                             ref={jamaFieldRef}
                         ></input>
                         <label htmlFor="input_fields" className="input_label">Jira field ID</label>
@@ -98,7 +97,6 @@ const LinkFieldsContainer = () => {
                             id="input_Jira_field"
                             name="basic"
                             className="fields_to_link_input"
-                            //onChange={(e => console.log(e.target.value))}
                             ref={jiraFieldRef}
                         ></input>
                     </span>
