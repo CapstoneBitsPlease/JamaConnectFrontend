@@ -4,10 +4,7 @@
   "private": true,
   "dependencies": {
     "@atlaskit/button": "^15.1.1",
-    "@atlaskit/checkbox": "^11.0.7",
-    "@atlaskit/dropdown-menu": "^10.1.1",
-    "@atlaskit/select": "^13.0.5",
-    "@atlaskit/textfield": "^4.0.9",
+    "@atlaskit/select": "^13.0.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -25,8 +22,11 @@
     "react-select": "^2.4.4",
     "react-select-async-paginate": "^0.4.1",
     "styled-components": "^5.2.0",
-    "sweetalert2": "^10.8.1"
+    "sweetalert2": "^10.9.0"
   },
+  "atlassian-connect-dev-instance-host": "capstone2020psu.atlassian.net",
+  "atlassian-connect-prod-instance-host": "example.atlassian.net",
+  "atlassian-connect-addon-home": "https://example.com/",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
