@@ -14,7 +14,6 @@ const linkStore = {
           )
           .then(response => {
             console.log("success");
-            console.log(response.data.items);
             actions.setItemData(response.data.items);
             var length = Object.keys(response.data.items).length;
             actions.setResponseLength(length);

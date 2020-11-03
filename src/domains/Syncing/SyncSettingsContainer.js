@@ -36,6 +36,7 @@ const SyncSettingsContainer = () => {
     e.preventDefault();
     var selected_time_unit = document.getElementById("dropdown_list_selection").value
     console.log(syncInterval, selected_time_unit);
+    prompt(syncInterval + " " + selected_time_unit);
     // update backend sync process to occur this often
   }
 

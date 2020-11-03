@@ -11,7 +11,7 @@ const LinkFieldsContainer = () => {
     const jiraFieldRef = useRef();
     // need to get project id/name, item id/name, and issue id from store
     const projectID = 100; 
-    const itemID = 486; 
+    const itemID = 455; 
     const issueID = 46;
     var fieldsToLink = [];
 

@@ -6,26 +6,18 @@ const SyncFieldsTable = (props) => {
 
     //  grab from the response only the data we need 
     const formatData = () => {
-        var newJamaNames = [];
-        var newJiraNames = [];
         var data = [];
+        
         for(let i=0; i < props.responseLength; i++) {
-            for(let j=0; j < 5; j++) {
-                if(j === 3)
-                    newJamaNames.push(props.linkedData[i][j]);
-                if(j === 4)
-                    newJiraNames.push(props.linkedData[i][j]);
-            }
-        }
-        for(let i=0; i < props.responseLength; i++){
             data.push({
                 "id": i+1, 
                 "checkboxID": `checkbox_${i+1}`,
-                "jamaName": newJamaNames[i], 
-                "jiraName": newJiraNames[i],
+                "jamaName": props.linkedData[i][3], 
+                "jiraName": props.linkedData[i][4],
                 "isChecked": false
             })
         }
+
         return data;
     }
 
