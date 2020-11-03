@@ -85,7 +85,7 @@ const syncStore = {
 
     // adds values of the checked checkboxes to an array
     setCheckedIDs: action((state, newCheckedIDs) => {
-        state.checkedIds = newCheckedIDs;
+        state.checkedIDs = newCheckedIDs;
     })
 
 }

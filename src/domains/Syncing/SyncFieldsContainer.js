@@ -42,7 +42,7 @@ const SyncFieldsContainer = () => {
     }
 
     // request to handle the synced fields
-    const sync_fields = () => {
+    const syncFields = () => {
         // check that the IDs of the fields ready to sync are completely loaded
         console.log(checkedIDs);
     }
@@ -51,7 +51,7 @@ const SyncFieldsContainer = () => {
     const handleSync = (event) => {
         event.preventDefault();
         console.log("syncing");
-        sync_fields();
+        syncFields();
     }
 
     // handles the cancel button
