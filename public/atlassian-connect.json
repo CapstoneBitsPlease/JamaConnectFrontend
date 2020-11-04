@@ -2,7 +2,7 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://c15493f2f95f.ngrok.io",
+  "baseUrl": "https://548781f83d49.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -36,7 +36,24 @@
       "name": {
         "value": "Greeting"
       }
+    }],
+    "jiraIssueContents": [{
+      "icon": {
+        "width": 24,
+        "height": 24,
+        "url": "/speech-bubble.svg"
+      },
+      "target": {
+        "type": "web_panel",
+        "url": "/selectItemNoNavigate"
+      },
+      "tooltip": {
+        "value": "This is a tooltip"
+      },
+      "name": {
+        "value": "TEST"
+      },
+      "key": "my-issue-content-panel"
     }]
   }
 }
-    

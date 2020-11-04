@@ -5,27 +5,48 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation,
 } from "react-router-dom";
 import { Login } from "./pages";
-import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./domains";
+import {
+  SelectItem,
+  SyncSettings,
+  SyncFields,
+  SyncFieldsOnCreateIssue,
+  LinkFields,
+} from "./domains";
+
+const Test = () => {
+  const loginState = useStoreState((state) => state.accountStore.loggedIn);
+  let location = useLocation();
+  console.log(location.pathname);
+
+  return (
+    <Switch>
+      <Route path="/login" component={Login} />
+      {loginState ? (
+        <React.Fragment>
+          <Route path="/selectItem" component={SelectItem} />
+          <Route path="/syncSettings" component={SyncSettings} />
+          <Route path="/syncFields" component={SyncFields} />
+          <Route
+            path="/syncFieldsOnCreateIssue"
+            component={SyncFieldsOnCreateIssue}
+          />
+          <Route path="/linkFields" component={LinkFields} />
+        </React.Fragment>
+      ) : (
+        <Redirect to="/login" />
+      )}
+    </Switch>
+  );
+};
 
 function App() {
-  const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            {loginState ? <Redirect to="/selectItem" /> : <Login />}
-          </Route>
-          <Route path="/selectItem" exact>
-            {!loginState ? <Redirect to="/" /> : <SelectItem />}
-          </Route>
-          <Route path ="/syncSettings" component={SyncSettings} exact />
-          <Route path ="/syncFields" component={SyncFields} exact />
-          <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
-          <Route path ="/linkFields" component={LinkFields} exact />
-        </Switch>
-      </Router>
-  )
+    <Router>
+      <Test />
+    </Router>
+  );
 }
 export default App;
