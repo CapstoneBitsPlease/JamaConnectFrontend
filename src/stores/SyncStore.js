@@ -2,7 +2,6 @@ import { action, thunk } from "easy-peasy";
 import axios from "axios";
 
 const syncStore = {
-    // state across syncing components
     prevSyncTime: 0,
     numFieldsToSync: 0,
     timeUnit: "",
@@ -43,7 +42,6 @@ const syncStore = {
         axios
         .get("http://127.0.0.1:5000/capstone/fields_to_sync")
         .then(response => {
-            console.log(response.data);
             actions.setNumFieldsToSync(response.data["num_fields"]);
             actions.setLinkedData(response.data["fields_to_sync"]);
             actions.setResponseLength(response.data["num_fields"]);

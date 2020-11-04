@@ -12,35 +12,33 @@ const LinkFieldsContainer = () => {
     // need to get project ids and issue id from store
     const jamaProjectID = 100;
     const jiraProjectID = 101;  
-    const issueID = 46;
-     const itemID = 455; 
-    
-    var fieldsToLink = [];
+    const issueID = 100001;
+    const itemID = 455; 
 
-    // retrieve state and actions from LinkStore.js
-    const { itemData, responseLength } = useStoreState(
+    // retrieve state and actions from LinkStore
+    const { itemData, issueData } = useStoreState(
         state => ({
            // itemID: state.jamaitem.itemID,
             itemData: state.linkStore.itemData,
-            responseLength: state.linkStore.responseLength
+            issueData: state.linkStore.issueData
         })
     )
-  
     const { getFieldsOfItem } = useStoreActions(
         actions => ({
             getFieldsOfItem: actions.linkStore.getFieldsOfItem
         })
     )
         
-    // retrieve all fields for item id from the capstone database 
+    // retrieve all fields for Jama item id from the capstone database 
     useEffect(() => {
         getFieldsOfItem(itemID);
-        //getFieldsOfItem(issueID);
+        getFieldsOfItem(issueID);
         // eslint-disable-next-line
     },[])
 
     // handles the link button. prints to console and sends to the backend array of IDs to link
     const handleLink = (event) => {
+        var fieldsToLink = []
         event.preventDefault();
         fieldsToLink.push(jamaFieldRef.current.value);
         fieldsToLink.push(jiraFieldRef.current.value);
@@ -69,32 +67,31 @@ const LinkFieldsContainer = () => {
             <h1 className="link_page_title">Select fields to link</h1>
                 <h2 className="link_page_subtitle">You are currently viewing these items:</h2>
                 <div className="linked_items_container">
-                    {/* this data needs to be obtained from shared state */}
                     <LinkedItemsTable 
                         title="Jama Project"
                         projectID={jamaProjectID}
-                        projectName={"selectedJamaProject"}
+                        projectName={"JamaProjectName"}
                         itemID={itemID}
-                        itemName={"selectedJamaItem"}
+                        itemName={"JamaItemName"}
                     />
                     <LinkedItemsTable 
                         title="Jira Project"
                         projectID={jiraProjectID}
-                        projectName={"selectedJiraProject"}
+                        projectName={"JiraProjectName"}
                         itemID={issueID}
-                        itemName={"selectedJiraItem"}
+                        itemName={"JiraIssueName"}
                     />
                 </div>
-                <div className="fields_table_container">
-                    <LinkFieldsTable 
-                        service="Jama" 
-                        itemData={itemData}
-                        responseLength={responseLength}
-                    />
-                    <LinkFieldsTable 
-                        service="Jira" 
-                    />
-                </div>
+                
+                <LinkFieldsTable 
+                    service="Jama" 
+                    itemData={itemData} 
+                />
+                <LinkFieldsTable 
+                    service="Jira" 
+                    itemData={issueData}
+                />
+                
                 <div className="user_input_container">
                     <span className="input_fields">
                         <label htmlFor="input_fields" className="input_label">Jama field ID</label>

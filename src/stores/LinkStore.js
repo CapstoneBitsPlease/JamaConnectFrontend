@@ -3,6 +3,7 @@ import axios from "axios";
 
 const linkStore = {
     itemData: [],
+    issueData: [],
     responseLength: 0,
     fieldsToLink: [],
 
@@ -14,9 +15,16 @@ const linkStore = {
           )
           .then(response => {
             console.log("success");
-            actions.setItemData(response.data.items);
-            var length = Object.keys(response.data.items).length;
-            actions.setResponseLength(length);
+
+            if(response.data.items[0][3] === "Jira") {
+              actions.setIssueData(response.data.items);
+              actions.setResponseLength(Object.keys(response.data.items).length);
+            }
+            else if(response.data.items[0][3] === "Jama") {
+              actions.setItemData(response.data.items);
+              actions.setResponseLength(Object.keys(response.data.items).length);
+            }
+
           })
           .catch(() => {
             console.log("error");
@@ -26,6 +34,10 @@ const linkStore = {
 
         setItemData: action((state, newItemData) => {
             state.itemData = newItemData;
+        }),
+
+        setIssueData: action((state, newIssueData) => {
+          state.issueData = newIssueData;
         }),
 
         setResponseLength: action((state, newResponseLength) => {

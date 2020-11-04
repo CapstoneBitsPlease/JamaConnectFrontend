@@ -7,6 +7,10 @@ import '../../styles/components/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
 const SyncFieldsContainer = () => {
+    const jamaProjectID = 100;
+    const jiraProjectID = 101;  
+    const issueID = 100001;
+    const itemID = 455; 
 
     // retrieve state and actions from SyncStore.js
     const { linkedData, responseLength, checkedIDs } = useStoreState(
@@ -75,20 +79,19 @@ const SyncFieldsContainer = () => {
             <h1 className="sync_page_title">Select fields to sync</h1>
                 <h2 className="sync_page_subtitle">You are currently viewing these linked items:</h2>
                 <div className="linked_items_container">
-                    {/* this data needs to be obtained from shared state */}
                     <LinkedItemsTable 
                         title="Jama Project"
-                        projectID={"selectedJamaProject"}
-                        projectName={"selectedJamaProject"}
-                        itemID={"selectedJamaItem"}
-                        itemName={"selectedJamaItem"}
+                        projectID={jamaProjectID}
+                        projectName={"JamaProjectName"}
+                        itemID={itemID}
+                        itemName={"JamaItemName"}
                     />
                     <LinkedItemsTable 
                         title="Jira Project"
-                        projectID={"selectedJiraProject"}
-                        projectName={"selectedJiraProject"}
-                        itemID={"selectedJiraItem"}
-                        itemName={"selectedJiraItem"}
+                        projectID={jiraProjectID}
+                        projectName={"JiraProjectName"}
+                        itemID={issueID}
+                        itemName={"JiraItemName"}
                     />
                 </div>
                 <div className="linked_fields_container">
