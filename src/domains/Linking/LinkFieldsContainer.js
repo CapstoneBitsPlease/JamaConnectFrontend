@@ -13,14 +13,14 @@ const LinkFieldsContainer = () => {
     const jamaProjectID = 100;
     const jiraProjectID = 101;  
     const issueID = 46;
-    // const itemID = 455; 
+     const itemID = 455; 
     
     var fieldsToLink = [];
 
     // retrieve state and actions from LinkStore.js
-    const { itemID, itemData, responseLength } = useStoreState(
+    const { itemData, responseLength } = useStoreState(
         state => ({
-            itemID: state.jamaitem.itemID,
+           // itemID: state.jamaitem.itemID,
             itemData: state.linkStore.itemData,
             responseLength: state.linkStore.responseLength
         })
@@ -44,6 +44,8 @@ const LinkFieldsContainer = () => {
         event.preventDefault();
         fieldsToLink.push(jamaFieldRef.current.value);
         fieldsToLink.push(jiraFieldRef.current.value);
+        if(fieldsToLink[0] === "" || fieldsToLink[1] === "") 
+            alert("Error: input is required to link fields.");
         console.log("fields to link: ", fieldsToLink);
 
         // append user input to the DOM for testing purposes

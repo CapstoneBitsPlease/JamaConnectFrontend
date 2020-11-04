@@ -20,6 +20,7 @@ const linkStore = {
           })
           .catch(() => {
             console.log("error");
+            alert("Error retrieving item fields from backend");
           });
         }),
 
