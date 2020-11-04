@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import { Login } from "./pages";
 // import { SelectItem } from "./components";
-import { SelectItem , Buttons } from "./components";
-import SettingsPage from 'components/SettingsPage.js';
+// import { SelectItem , Buttons } from "./components";
+// import SettingsPage from 'components/SettingsPage.js';
 // import { buttons } from './components';
 
 
@@ -26,13 +26,12 @@ function App() {
           </Route> */}
           <Route path="/" exact>
             {/* {!loginState ? <Redirect to="/" /> : <SelectItem />} */}
-            {/* <SelectItem /> */}
-            <Buttons />
+            <SelectItem />
           </Route>
-          <Route path ="/syncSettings" component={SyncSettings} exact />
+          {/* <Route path ="/syncSettings" component={SyncSettings} exact />
           <Route path ="/syncFields" component={SyncFields} exact />
           <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
-          <Route path ="/linkFields" component={LinkFields} exact />
+          <Route path ="/linkFields" component={LinkFields} exact /> */}
         </Switch>
       </Router>
   )

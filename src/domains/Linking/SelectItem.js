@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import "../styles/components/select_item.sass";
+import "../../styles/components/select_item.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions } from 'easy-peasy';
@@ -8,7 +8,7 @@ import { useStoreActions } from 'easy-peasy';
 //authorization function with bearer
 axios.interceptors.request.use(
 	config => {
-		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQzNTMzODYsIm5iZiI6MTYwNDM1MzM4NiwianRpIjoiNmM3MmJkZTctNTg3NC00NGI0LWEyOWYtZmQxN2VhOTUwYTJlIiwiZXhwIjoxNjA0MzU0Mjg2LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWRjNjhjZmMtN2FlZC00MDcwLTg0YjEtYWQ4MWM4NTg3MDIxIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.0fF71lbOfbym4hdmxfm18aFXZfbJVnrH1_qfCtNNYaU`;
+		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
 		return config;
 	},
 	error => {
@@ -30,6 +30,9 @@ const SelectItem = () => {
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
+	const [jira_id , setjira_id ] = useState(0)
+	const item1 = useStoreActions(action => action.jamaitem.setjiraID)
+
 
 
 	//Tried to use login fucntion to get token and set token for authorization but failed with
@@ -182,15 +185,22 @@ const SelectItem = () => {
 							className="field"
 							type="text"
 							id='itemid'
-							placeholder=" Enter the item ID here"
-							onChange={e => { setitem_id(e.target.value)}}
+							placeholder=" Enter the Jama item ID here"
+							onChange={e => { setitem_id(e.target.value) }}
+						/>
+						<input
+							className="field1"
+							type="text"
+							id="jiraid"
+							placeholder=" Enter the Jira item ID here"
+							onChange={e => { setjira_id(e.target.value) }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but' onClick={() =>{ console.log(item_id); item(item_id)}} >Link</button>
+						<button type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
 					</div>
-				
+
 
 				</div>
 
