@@ -5,12 +5,13 @@ const LinkFieldsTable = (props) => {
     // retrieve from the response data what we need for the table
     const formatData = () => {
         var data = [];
+ 
         for(let i=0; i < props.responseLength; i++) {
-            // get the id and name from response data
-            
+            data.push({
+                "id": props.itemData[i][0], 
+                "name": props.itemData[i][1]
+            })
         }
-
-        // add data to new array 
 
         return data;
     }
@@ -21,9 +22,9 @@ const LinkFieldsTable = (props) => {
         return data.map((row) => {
             const { id, name } = row;
             return (    
-                <tr className="fields_row" key={id}>
-                    <td className="fields_data">{id}</td>
-                    <td className="fields_data">{name}</td>
+                <tr className="linked_fields_row" key={id}>
+                    <td className="linked_fields_data">{id}</td>
+                    <td className="linked_fields_data">{name}</td>
                 </tr>
             )
         })
