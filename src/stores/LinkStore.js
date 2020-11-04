@@ -6,7 +6,7 @@ const linkStore = {
     responseLength: 0,
     fieldsToLink: [],
 
-    // API call to retrieve the length of time of last sync from the capstone database
+    // API call to retrieve the fields of an item from the capstone database given its ID
     getFieldsOfItem: thunk((actions, itemID) => {
         axios
           .get(

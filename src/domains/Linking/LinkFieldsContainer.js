@@ -9,15 +9,18 @@ const LinkFieldsContainer = () => {
     // references to hold user input 
     const jamaFieldRef = useRef();
     const jiraFieldRef = useRef();
-    // need to get project id/name, item id/name, and issue id from store
-    const projectID = 100; 
-    const itemID = 455; 
+    // need to get project ids and issue id from store
+    const jamaProjectID = 100;
+    const jiraProjectID = 101;  
     const issueID = 46;
+    // const itemID = 455; 
+    
     var fieldsToLink = [];
 
     // retrieve state and actions from LinkStore.js
-    const { itemData, responseLength } = useStoreState(
+    const { itemID, itemData, responseLength } = useStoreState(
         state => ({
+            itemID: state.jamaitem.itemID,
             itemData: state.linkStore.itemData,
             responseLength: state.linkStore.responseLength
         })
@@ -42,6 +45,13 @@ const LinkFieldsContainer = () => {
         fieldsToLink.push(jamaFieldRef.current.value);
         fieldsToLink.push(jiraFieldRef.current.value);
         console.log("fields to link: ", fieldsToLink);
+
+        // append user input to the DOM for testing purposes
+        var testDiv = document.createElement("div");
+        testDiv.id = "test_div";
+        testDiv.innerHTML = `<p>${fieldsToLink}<p>`
+        document.body.appendChild(testDiv);
+
         // post to backend
     }
 
@@ -60,16 +70,16 @@ const LinkFieldsContainer = () => {
                     {/* this data needs to be obtained from shared state */}
                     <LinkedItemsTable 
                         title="Jama Project"
-                        projectID={"selectedJamaProject"}
+                        projectID={jamaProjectID}
                         projectName={"selectedJamaProject"}
-                        itemID={"selectedJamaItem"}
+                        itemID={itemID}
                         itemName={"selectedJamaItem"}
                     />
                     <LinkedItemsTable 
                         title="Jira Project"
-                        projectID={"selectedJiraProject"}
+                        projectID={jiraProjectID}
                         projectName={"selectedJiraProject"}
-                        itemID={"selectedJiraItem"}
+                        itemID={issueID}
                         itemName={"selectedJiraItem"}
                     />
                 </div>
@@ -87,15 +97,17 @@ const LinkFieldsContainer = () => {
                     <span className="input_fields">
                         <label htmlFor="input_fields" className="input_label">Jama field ID</label>
                         <input 
+                            type="text"
+                            autoComplete="off"
                             id="input_Jama_field"
-                            name="basic"
                             className="fields_to_link_input"
                             ref={jamaFieldRef}
                         ></input>
                         <label htmlFor="input_fields" className="input_label">Jira field ID</label>
                         <input 
+                            type="text"
+                            autoComplete="off"
                             id="input_Jira_field"
-                            name="basic"
                             className="fields_to_link_input"
                             ref={jiraFieldRef}
                         ></input>
