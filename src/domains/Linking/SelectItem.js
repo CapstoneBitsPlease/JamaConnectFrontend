@@ -166,6 +166,7 @@ const SelectItem = () => {
 					<div className="dropdown">
 						<Select
 							options={resultproject()}
+							id="projectselection"
 							placeholder="Select project here"
 							onChange={e => { setprojects_id(e.value) }}
 						/>
@@ -174,6 +175,7 @@ const SelectItem = () => {
 
 						<Select
 							placeholder="Select item type"
+							id="typeselection"
 							options={resulttype()}
 							onChange={e => { settypes_id(e.value) }}
 						/>
@@ -198,7 +200,7 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
 					</div>
 
 
