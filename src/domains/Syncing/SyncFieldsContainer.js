@@ -42,22 +42,31 @@ const SyncFieldsContainer = () => {
     }
 
     // request to handle the synced fields
-    const sync_fields = () => {
+    const syncFields = () => {
         // check that the IDs of the fields ready to sync are completely loaded
         console.log(checkedIDs);
+
+        // append checked IDs to the DOM for testing purposes
+        var testDiv = document.createElement("div");
+        testDiv.id = "test_div";
+        testDiv.innerHTML = `<p>${checkedIDs}<p>`
+        document.body.appendChild(testDiv);
+
+        // send ids to backend to sync
     }
 
     // handles the sync button. syncs all checked linked fields 
     const handleSync = (event) => {
         event.preventDefault();
         console.log("syncing");
-        sync_fields();
+        syncFields();
     }
 
     // handles the cancel button
     const handleGoBack = (event) => {
         event.preventDefault();
         console.log("cancelling");
+        // return to issue page
     }
     
     // render the component
