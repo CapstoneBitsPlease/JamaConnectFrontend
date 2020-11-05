@@ -36,6 +36,7 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
             driver.FindElement(By.Id("select_input_text_field")).SendKeys("5");
             driver.FindElement(By.Id("apply_button")).Click();
             driver.FindElement(By.Id("select_input_text_field")).SendKeys(Keys.Backspace);
+            Assert.IsTrue(driver.FindElement(By.Id("test_div")).Text.Equals("5 seconds"));
         }
 
         [Test]
@@ -45,6 +46,7 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
             driver.FindElement(By.Id("select_input_text_field")).SendKeys("5");
             driver.FindElement(By.Id("apply_button")).Click();
             driver.FindElement(By.Id("select_input_text_field")).SendKeys(Keys.Backspace);
+            Assert.IsTrue(driver.FindElement(By.Id("test_div")).Text.Equals("5 minutes"));
         }
 
         [Test]
@@ -54,6 +56,7 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
             driver.FindElement(By.Id("select_input_text_field")).SendKeys("5");
             driver.FindElement(By.Id("apply_button")).Click();
             driver.FindElement(By.Id("select_input_text_field")).SendKeys(Keys.Backspace);
+            Assert.IsTrue(driver.FindElement(By.Id("test_div")).Text.Equals("5 hours"));
         }
 
         [Test]
@@ -94,6 +97,11 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
         {
             new SelectElement(driver.FindElement(By.Id("dropdown_list_selection"))).SelectByText("seconds");
             driver.FindElement(By.Id("apply_button")).Click();
+            Assert.IsNotNull(ExpectedConditions.AlertIsPresent());
+            var alert = driver.SwitchTo().Alert();
+            Assert.AreEqual(alert.Text, "Error: sync interval input is required.");
+            System.Threading.Thread.Sleep(1000);
+            alert.Accept();
         }
 
         [Test]
@@ -101,6 +109,11 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
         {
             new SelectElement(driver.FindElement(By.Id("dropdown_list_selection"))).SelectByText("minutes");
             driver.FindElement(By.Id("apply_button")).Click();
+            Assert.IsNotNull(ExpectedConditions.AlertIsPresent());
+            var alert = driver.SwitchTo().Alert();
+            Assert.AreEqual(alert.Text, "Error: sync interval input is required.");
+            System.Threading.Thread.Sleep(1000);
+            alert.Accept();
         }
 
         [Test]
@@ -108,6 +121,11 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
         {
             new SelectElement(driver.FindElement(By.Id("dropdown_list_selection"))).SelectByText("hours");
             driver.FindElement(By.Id("apply_button")).Click();
+            Assert.IsNotNull(ExpectedConditions.AlertIsPresent());
+            var alert = driver.SwitchTo().Alert();
+            Assert.AreEqual(alert.Text, "Error: sync interval input is required.");
+            System.Threading.Thread.Sleep(1000);
+            alert.Accept();
         }
     }
 }
