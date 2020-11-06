@@ -3,7 +3,7 @@ import axios from 'axios'
 import "../../styles/components/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 
 //authorization function with bearer
 axios.interceptors.request.use(
@@ -17,7 +17,6 @@ axios.interceptors.request.use(
 );
 
 const SelectItem = () => {
-
 	//token : authorization token 
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
