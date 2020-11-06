@@ -4,21 +4,25 @@
   "private": true,
   "dependencies": {
     "@atlaskit/button": "^15.1.0",
+    "@atlaskit/checkbox": "^11.0.7",
     "@atlaskit/select": "^13.0.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "customize-cra": "^0.9.1",
+    "easy-peasy": "^4.0.1",
     "http-server": "^0.12.3",
     "node-sass": "^4.14.1",
     "postcss-easy-import": "^3.0.0",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
-    "styled-components": "^3.4.10"
+    "styled-components": "^3.4.10",
+    "sweetalert2": "^10.9.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

@@ -1,17 +1,31 @@
-import React from 'react';
-import SettingsPage from 'components/SettingsPage.js';
-import './App.css';
-import './styles/main/App.sass';
-import './styles/main/theme.sass';
+import React from "react";
+import { useStoreState } from "easy-peasy";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Login } from "./pages";
+import { SelectItem, SyncSettings, SyncFields, LinkFields } from "./domains";
 
 function App() {
-  // insert conditional rendering of pages here
-
+  const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-    <div className="App">
-      <SettingsPage />
-    </div>
-  );
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            {loginState ? <Redirect to="/selectItem" /> : <Login />}
+          </Route>
+          <Route path="/selectItem" exact>
+            {!loginState ? <Redirect to="/" /> : <SelectItem />}
+          </Route>
+          <Route path ="/syncSettings" component={SyncSettings} exact />
+          <Route path ="/syncFields" component={SyncFields} exact />
+          <Route path ="/linkFields" component={LinkFields} exact />
+        </Switch>
+      </Router>
+  )
 }
 
 export default App;
