@@ -25,6 +25,8 @@ const syncStore = {
       })
       .catch(() => {
         console.log("error");
+        alert("Error retrieving length of last sync time from backend");
+        // add it to the error log
       });
     }),
 
@@ -48,6 +50,7 @@ const syncStore = {
         })
         .catch(error => {
             console.log(error);
+            alert("Error retrieving fields ready to sync from backend");
             // add it to the log on server
         });
     }),
@@ -71,6 +74,7 @@ const syncStore = {
         })
         .catch(error => {
             console.log(error);
+            alert("Error retrieving fields ready to sync from backend");
             // add it to the log on server
         });
     }),
@@ -85,7 +89,7 @@ const syncStore = {
 
     // adds values of the checked checkboxes to an array
     setCheckedIDs: action((state, newCheckedIDs) => {
-        state.checkedIds = newCheckedIDs;
+        state.checkedIDs = newCheckedIDs;
     })
 
 }
