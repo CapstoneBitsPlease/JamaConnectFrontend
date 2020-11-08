@@ -1,20 +1,20 @@
 import React from 'react';
 import axios from 'axios'
-import "../../styles/components/select_item.sass";
+import "../../styles/components/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-//authorization function with bearer
-axios.interceptors.request.use(
-	config => {
-		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
+// //authorization function with bearer
+// axios.interceptors.request.use(
+// 	config => {
+// 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
+// 		return config;
+// 	},
+// 	error => {
+// 		return Promise.reject(error);
+// 	}
+// );
 
 const SelectItem = () => {
 	//token : authorization token 
@@ -30,30 +30,9 @@ const SelectItem = () => {
 	const [item_id, setitem_id] = useState(0)
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
 	const [jira_id , setjira_id ] = useState(0)
-	const item1 = useStoreActions(action => action.jamaitem.setjiraID)
-
-
-
-	//Tried to use login fucntion to get token and set token for authorization but failed with
-	//422 (unbprocessable entities)
-
-	// const log_in = () => {
-	// 	axios.post('',
-	// 		{
-	// 			headers: {
-	// 				'Access-Control-Allow-Origin': '*',
-	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-	// 			}
-	// 		})
-	// 		.then(res => {
-	// 			console.log(res)
-	// 			setToken(res.data.access_token);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		})
-
-	// }
+	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
+	const token = useStoreState(state => state.accountStore.token)
+	console.log(token);
 
 
 	//Getting all the project with API call
@@ -63,6 +42,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -81,6 +61,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -100,6 +81,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -144,7 +126,7 @@ const SelectItem = () => {
 	useEffect(() => {
 		get_prog();
 		get_type();
-	}, [])
+	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
