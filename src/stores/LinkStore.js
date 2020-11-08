@@ -8,7 +8,7 @@ const linkStore = {
     itemData: [],
     issueData: [],
 
-    // API call to retrieve the columns of an item from the capstone database given its ID
+    // API call to retrieve the fields of an item from the Jama database given its ID
     getJamaFields: thunk((actions, itemID) => {
         axios
         .get(
@@ -32,7 +32,7 @@ const linkStore = {
       state.itemData = newItemData;
     }),
 
-    // API call to retrieve the columns of an item from the capstone database given its ID
+    // API call to retrieve the fields of an item from the Jira database given its ID
     getJiraFields: thunk((actions, issueID) => {
       axios
       .get(
@@ -57,6 +57,7 @@ const linkStore = {
         state.issueData = newIssueData;
     }),
 
+    // API call to link fields of a Jama item and a Jira issue - WIP
     linkItems: thunk((actions, params) => {
       axios({
         url: `${devURL}/link_items`,

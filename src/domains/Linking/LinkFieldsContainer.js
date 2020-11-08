@@ -24,12 +24,10 @@ const LinkFieldsContainer = () => {
             issueData: state.linkStore.issueData
         })
     )
-    const { getJamaFields, getJiraFields, setItemData, setIssueData } = useStoreActions(
+    const { getJamaFields, getJiraFields } = useStoreActions(
         actions => ({
             getJamaFields: actions.linkStore.getJamaFields,
-            getJiraFields: actions.linkStore.getJiraFields,
-            setItemData: actions.linkStore.setItemData,
-            setIssueData: actions.linkStore.setIssueData
+            getJiraFields: actions.linkStore.getJiraFields
         })
     )
         
