@@ -6,7 +6,7 @@ import Select from 'react-select';
 import { useStoreActions } from 'easy-peasy';
 
 //authorization function with bearer
-axios.interceptors.request.use(
+/*axios.interceptors.request.use(
 	config => {
 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQzNTMzODYsIm5iZiI6MTYwNDM1MzM4NiwianRpIjoiNmM3MmJkZTctNTg3NC00NGI0LWEyOWYtZmQxN2VhOTUwYTJlIiwiZXhwIjoxNjA0MzU0Mjg2LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWRjNjhjZmMtN2FlZC00MDcwLTg0YjEtYWQ4MWM4NTg3MDIxIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.0fF71lbOfbym4hdmxfm18aFXZfbJVnrH1_qfCtNNYaU`;
 		return config;
@@ -14,7 +14,7 @@ axios.interceptors.request.use(
 	error => {
 		return Promise.reject(error);
 	}
-);
+);*/
 
 const SelectItem = () => {
 

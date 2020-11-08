@@ -5,20 +5,24 @@ const LinkFieldsTable = (props) => {
     // retrieve from the response data what we need for the table
     const formatData = () => {
         var data = [];
-
-        for(let i=0; i < props.itemData.length; i++) {
-            data.push({
-                "id": props.itemData[i][0], 
-                "name": props.itemData[i][1]
-            })
-        }
-
+        var i = 1;
+        Object.keys(props.itemData).forEach(key => {
+            if(!key.startsWith("custom") && !key.startsWith("aggregate")) {
+                data.push({
+                    "id": i, 
+                    "name": key
+                })
+                i += 1;
+            }
+            
+        })
         return data;
     }
 
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
         var data = formatData();
+        console.log(data);
         return data.map((row) => {
             const { id, name } = row;
             return (    
@@ -41,7 +45,7 @@ const LinkFieldsTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {renderTable()}
+                   {renderTable()}
                 </tbody>
             </table>
         </div>

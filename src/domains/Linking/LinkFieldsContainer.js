@@ -5,6 +5,7 @@ import LinkedItemsTable from '../../components/LinkedItemsTable';
 import LinkFieldsTable from './LinkFieldsTable';
 import '../../styles/components/LinkFields.style.sass';
 
+
 const LinkFieldsContainer = () => {
     // references to hold user input 
     const jamaFieldRef = useRef();
@@ -12,29 +13,32 @@ const LinkFieldsContainer = () => {
     // need to get project ids and issue id from store
     const jamaProjectID = 100;
     const jiraProjectID = 101;  
-    const issueID = 100001;
-    const itemID = 455; 
+    const issueID = 10069;
+    const itemID = 7870; 
 
     // retrieve state and actions from LinkStore
     const { itemData, issueData } = useStoreState(
         state => ({
-           // itemID: state.jamaitem.itemID,
+            //itemID: state.jamaitem.itemID,
             itemData: state.linkStore.itemData,
             issueData: state.linkStore.issueData
         })
     )
-    const { getFieldsOfItem } = useStoreActions(
+    const { getJamaFields, getJiraFields, setItemData, setIssueData } = useStoreActions(
         actions => ({
-            getFieldsOfItem: actions.linkStore.getFieldsOfItem
+            getJamaFields: actions.linkStore.getJamaFields,
+            getJiraFields: actions.linkStore.getJiraFields,
+            setItemData: actions.linkStore.setItemData,
+            setIssueData: actions.linkStore.setIssueData
         })
     )
         
-    // retrieve all fields for Jama item id from the capstone database 
+    // retrieve all fields for item
     useEffect(() => {
-        getFieldsOfItem(itemID);
-        getFieldsOfItem(issueID);
+        getJamaFields(itemID);
+        getJiraFields(issueID);
         // eslint-disable-next-line
-    },[])
+    },[]) 
 
     // handles the link button. prints to console and sends to the backend array of IDs to link
     const handleLink = (event) => {
@@ -42,6 +46,7 @@ const LinkFieldsContainer = () => {
         event.preventDefault();
         fieldsToLink.push(jamaFieldRef.current.value);
         fieldsToLink.push(jiraFieldRef.current.value);
+
         if(fieldsToLink[0] === "" || fieldsToLink[1] === "") 
             alert("Error: input is required to link fields.");
         console.log("fields to link: ", fieldsToLink);
@@ -67,6 +72,7 @@ const LinkFieldsContainer = () => {
             <h1 className="link_page_title">Select fields to link</h1>
                 <h2 className="link_page_subtitle">You are currently viewing these items:</h2>
                 <div className="linked_items_container">
+        
                     <LinkedItemsTable 
                         title="Jama Project"
                         projectID={jamaProjectID}
@@ -82,19 +88,19 @@ const LinkFieldsContainer = () => {
                         itemName={"JiraIssueName"}
                     />
                 </div>
-                
+
                 <LinkFieldsTable 
-                    service="Jama" 
+                    service="Jama"
                     itemData={itemData} 
                 />
                 <LinkFieldsTable 
-                    service="Jira" 
+                    service="Jira"
                     itemData={issueData}
                 />
                 
                 <div className="user_input_container">
                     <span className="input_fields">
-                        <label htmlFor="input_fields" className="input_label">Jama field ID</label>
+                        <label htmlFor="input_fields" className="input_label">Jama field name</label>
                         <input 
                             type="text"
                             autoComplete="off"
@@ -102,7 +108,7 @@ const LinkFieldsContainer = () => {
                             className="fields_to_link_input"
                             ref={jamaFieldRef}
                         ></input>
-                        <label htmlFor="input_fields" className="input_label">Jira field ID</label>
+                        <label htmlFor="input_fields" className="input_label">Jira field name</label>
                         <input 
                             type="text"
                             autoComplete="off"

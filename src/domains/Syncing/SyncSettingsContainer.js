@@ -34,8 +34,10 @@ const SyncSettingsContainer = () => {
   // on click of the button, prints updated sync interval, will update sync process 
   const handleApply = (e) => {
     e.preventDefault();
-    if(syncInterval === "") 
+    if(syncInterval === "") {
       alert("Error: sync interval input is required.");
+      return;
+    }
 
     var selectedTimeUnit = document.getElementById("dropdown_list_selection").value
     console.log(syncInterval, selectedTimeUnit);
