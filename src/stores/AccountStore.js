@@ -4,14 +4,16 @@ import makeToast from "../Toaster";
 
 const accountStore = {
   loggedIn: false,
+  token: null,
   login: thunk((actions, userInfo) => {
     axios
       .post(
         `http://127.0.0.1:5000/login/jama/basic?username=${userInfo.userName}&password=${userInfo.password}&organization=${userInfo.organization}`
       )
-      .then(() => {
+      .then((reponse) => {
         makeToast("success", "User has been authenticated");
-        actions.setLoggedIn(true)
+        actions.setLoggedIn(true);
+        actions.setToken(reponse.data.access_token)
       })
       .catch(() => {
         makeToast("error", "Invalid login");
@@ -20,7 +22,11 @@ const accountStore = {
 
   setLoggedIn: action((state, newLoggedIn)=>{
     state.loggedIn = newLoggedIn;
+  }),
+  setToken: action((state,newToken )=>{
+    state.token = newToken;
   })
+  
 };
 
 export default accountStore;
