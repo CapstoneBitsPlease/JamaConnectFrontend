@@ -2,25 +2,41 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://9442c4edbeec.ngrok.io",
+  "baseUrl": "https://c15493f2f95f.ngrok.io",
   "vendor": {
-      "name": "Example, Inc.",
-      "url": "http://example.com"
+    "name": "Example, Inc.",
+    "url": "http://example.com"
   },
   "authentication": {
-      "type": "none"
+    "type": "none"
   },
   "apiVersion": 1,
   "modules": {
-      "generalPages": [
-          {
-              "url": "/index.html",
-              "key": "hello-world",
-              "location": "system.top.navigation.bar",
-              "name": {
-                  "value": "Greeting"
-              }
-          }
-      ]
+    "webItems": [{
+      "location": "jira.project.sidebar.plugins.navigation",
+      "key": "connect-provided-link-to-panel",
+      "url": "/projects/EX?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
+      "context": "product",
+      "name": {
+        "value": "Jama Plugin"
+      }
+    }],
+    "webPanels": [{
+      "key": "connect-provided-web-panel",
+      "url": "/index.html?pkey=EX",
+      "location": "com.example.myaddon:connect-provided-link-to-panel",
+      "name": {
+        "value": "My Web Panel"
+      }
+    }],
+    "generalPages": [{
+      "url": "/index.html",
+      "key": "hello-world",
+      "location": "system.top.navigation.bar",
+      "name": {
+        "value": "Greeting"
+      }
+    }]
   }
 }
+    
