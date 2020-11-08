@@ -12,8 +12,8 @@ const accountStore = {
       )
       .then((reponse) => {
         makeToast("success", "User has been authenticated");
-        actions.setLoggedIn(true);
         actions.setToken(reponse.data.access_token)
+        actions.setLoggedIn(true);
       })
       .catch(() => {
         makeToast("error", "Invalid login");
