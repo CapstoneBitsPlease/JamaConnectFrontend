@@ -2,7 +2,7 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://51d6dcd8ca6a.ngrok.io",
+  "baseUrl": "https://6b63220b0cb2.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -23,18 +23,10 @@
     }],
     "webPanels": [{
       "key": "connect-provided-web-panel",
-      "url": "/index.html?pkey=EX",
+      "url": "/login?pkey=EX",
       "location": "com.example.myaddon:connect-provided-link-to-panel",
       "name": {
         "value": "My Web Panel"
-      }
-    }],
-    "generalPages": [{
-      "url": "/index.html",
-      "key": "hello-world",
-      "location": "system.top.navigation.bar",
-      "name": {
-        "value": "Greeting"
       }
     }],
     "jiraIssueContents": [{
@@ -45,7 +37,7 @@
       },
       "target": {
         "type": "web_panel",
-        "url": "/selectItemNoNavigate"
+        "url": "/selectItemNoNav"
       },
       "tooltip": {
         "value": "This is a tooltip"

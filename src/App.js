@@ -6,8 +6,8 @@ import {
   Route,
   Redirect,
   useLocation,
+  Link,
 } from "react-router-dom";
-import { Login } from "./pages";
 import {
   SelectItem,
   SyncSettings,
@@ -15,30 +15,41 @@ import {
   SyncFieldsOnCreateIssue,
   LinkFields,
 } from "./domains";
+import { Login } from "./pages";
 
+import { Navigation } from "components";
 const Test = () => {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
   let location = useLocation();
   console.log(location.pathname);
 
   return (
-    <Switch>
-      <Route path="/login" component={Login} />
-      {loginState ? (
-        <React.Fragment>
-          <Route path="/selectItem" component={SelectItem} />
-          <Route path="/syncSettings" component={SyncSettings} />
-          <Route path="/syncFields" component={SyncFields} />
-          <Route
-            path="/syncFieldsOnCreateIssue"
-            component={SyncFieldsOnCreateIssue}
-          />
-          <Route path="/linkFields" component={LinkFields} />
-        </React.Fragment>
-      ) : (
-        <Redirect to="/login" />
-      )}
-    </Switch>
+    <Router>
+      {/* {loginState ? <Navigation /> : <Login />} */}
+      <Switch>
+        <Route path="/login">
+          {loginState ? <Redirect to="/selectItem" /> : <Login />}
+        </Route>
+        <Route path="/selectItem">
+          {!loginState ? <Redirect to="/login" /> : <SelectItem />}
+        </Route>
+        <Route path="/syncSettings">
+          {!loginState ? <Redirect to="/login" /> : <SyncSettings />}
+        </Route>
+        <Route path="/syncFields">
+          {!loginState ? <Redirect to="/login" /> : <SyncFields />}
+        </Route>
+        <Route path="/syncFieldsOnCreateIssue">
+          {!loginState ? <Redirect to="/login" /> : <SyncFieldsOnCreateIssue />}
+        </Route>
+        <Route path="/linkFields">
+          {!loginState ? <Redirect to="/login" /> : <LinkFields />}
+        </Route>
+        <Route path="/selectItemNoNav">
+          {!loginState ? <Redirect to="/login" /> : <SelectItem />}
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 

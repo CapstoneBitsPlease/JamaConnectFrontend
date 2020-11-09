@@ -21,6 +21,7 @@ const Login = () => {
   };
   const handleForm = (event) => {
     event.preventDefault();
+    loginUser();
   };
 
   return (
