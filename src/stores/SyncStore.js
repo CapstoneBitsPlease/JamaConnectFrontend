@@ -22,12 +22,9 @@ const syncStore = {
             console.log("success");
             actions.setPrevSyncTime(response.data[0]);
             actions.setTimeUnit(response.data[1]);
-        
         })
-        .catch(() => {
-            console.log("error");
-            alert("Error retrieving length of last sync time from backend");
-            // add it to the error log
+        .catch((error) => {
+            console.log("error:", error);
         });
     }),
 
@@ -49,9 +46,7 @@ const syncStore = {
             actions.setResponseLength(response.data["num_fields"]);
         })
         .catch(error => {
-            console.log(error);
-            alert("Error retrieving fields ready to sync from backend");
-            // add it to the log on server
+            console.log("error:", error);
         });
     }),
 
@@ -73,9 +68,7 @@ const syncStore = {
             actions.setResponseLength(response.data["num_fields"]);
         })
         .catch(error => {
-            console.log(error);
-            alert("Error retrieving fields ready to sync from backend");
-            // add it to the log on server
+            console.log("error:", error);
         });
     }),
 

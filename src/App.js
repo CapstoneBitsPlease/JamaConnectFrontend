@@ -17,9 +17,10 @@ function App() {
          <Route path="/" exact>
              {loginState ? <Redirect to="/selectItem" /> : <Login />}
           </Route>
-          <Route path="/selectItem" exact>
+          {/*<Route path="/selectItem" exact>
             {!loginState ? <Redirect to="/" /> : <SelectItem />}
-          </Route> 
+  </Route>  */}
+          <Route path="/selectItem" component={SelectItem} exact />
           <Route path ="/syncSettings" component={SyncSettings} exact />
           <Route path ="/syncFields" component={SyncFields} exact />
           <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />

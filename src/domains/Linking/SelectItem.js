@@ -4,6 +4,7 @@ import "../../styles/components/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Route, useHistory } from 'react-router-dom';
 
 //authorization function with bearer
 /*axios.interceptors.request.use(
@@ -29,6 +30,7 @@ const SelectItem = () => {
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
+	const history = useHistory();
 
 
 	//Tried to use login fucntion to get token and set token for authorization but failed with
@@ -187,7 +189,7 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but' onClick={() =>{ console.log(item_id); item(item_id)}} >Link</button>
+						<button type='button' className='but' onClick={() =>{console.log(item_id); item(item_id)}} >Link</button>
 					</div>
 				
 
@@ -200,7 +202,7 @@ const SelectItem = () => {
 				</div>
 
 
-
+			<button onClick={() => history.push('/linkFields')}>go to link fields page</button>
 			</form>
 
 		</div>
