@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-//authorization function with bearer
-axios.interceptors.request.use(
-	config => {
-		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQzNTMzODYsIm5iZiI6MTYwNDM1MzM4NiwianRpIjoiNmM3MmJkZTctNTg3NC00NGI0LWEyOWYtZmQxN2VhOTUwYTJlIiwiZXhwIjoxNjA0MzU0Mjg2LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWRjNjhjZmMtN2FlZC00MDcwLTg0YjEtYWQ4MWM4NTg3MDIxIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.0fF71lbOfbym4hdmxfm18aFXZfbJVnrH1_qfCtNNYaU`;
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
+// //authorization function with bearer
+// axios.interceptors.request.use(
+// 	config => {
+// 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
+// 		return config;
+// 	},
+// 	error => {
+// 		return Promise.reject(error);
+// 	}
+// );
 
 const SelectItem = () => {
 	//token : authorization token 
@@ -29,28 +29,10 @@ const SelectItem = () => {
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
-
-
-	//Tried to use login fucntion to get token and set token for authorization but failed with
-	//422 (unbprocessable entities)
-
-	// const log_in = () => {
-	// 	axios.post('',
-	// 		{
-	// 			headers: {
-	// 				'Access-Control-Allow-Origin': '*',
-	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-	// 			}
-	// 		})
-	// 		.then(res => {
-	// 			console.log(res)
-	// 			setToken(res.data.access_token);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		})
-
-	// }
+	const [jira_id , setjira_id ] = useState(0)
+	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
+	const token = useStoreState(state => state.accountStore.token)
+	console.log(token);
 
 
 	//Getting all the project with API call
@@ -60,6 +42,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -78,6 +61,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -97,6 +81,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -141,7 +126,7 @@ const SelectItem = () => {
 	useEffect(() => {
 		get_prog();
 		get_type();
-	}, [])
+	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
@@ -162,6 +147,7 @@ const SelectItem = () => {
 					<div className="dropdown">
 						<Select
 							options={resultproject()}
+							id="projectselection"
 							placeholder="Select project here"
 							onChange={e => { setprojects_id(e.value) }}
 						/>
@@ -170,6 +156,7 @@ const SelectItem = () => {
 
 						<Select
 							placeholder="Select item type"
+							id="typeselection"
 							options={resulttype()}
 							onChange={e => { settypes_id(e.value) }}
 						/>
@@ -181,15 +168,22 @@ const SelectItem = () => {
 							className="field"
 							type="text"
 							id='itemid'
-							placeholder=" Enter the item ID here"
-							onChange={e => { setitem_id(e.target.value)}}
+							placeholder=" Enter the Jama item ID here"
+							onChange={e => { setitem_id(e.target.value) }}
+						/>
+						<input
+							className="field1"
+							type="text"
+							id="jiraid"
+							placeholder=" Enter the Jira item ID here"
+							onChange={e => { setjira_id(e.target.value) }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but' onClick={() =>{ console.log(item_id); item(item_id)}} >Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
 					</div>
-				
+
 
 				</div>
 

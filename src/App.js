@@ -20,10 +20,10 @@ function App() {
           <Route path="/selectItem" exact>
             {!loginState ? <Redirect to="/" /> : <SelectItem />}
           </Route>
-          <Route path ="/syncSettings" component={SyncSettings} exact />
+          {/* <Route path ="/syncSettings" component={SyncSettings} exact />
           <Route path ="/syncFields" component={SyncFields} exact />
           <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
-          <Route path ="/linkFields" component={LinkFields} exact />
+          <Route path ="/linkFields" component={LinkFields} exact /> */}
         </Switch>
       </Router>
   )
