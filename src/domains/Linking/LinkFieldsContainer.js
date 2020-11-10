@@ -21,8 +21,8 @@ const LinkFieldsContainer = () => {
     const jiraTypeID = 27;
     const issueID = 10069;
     const itemID = 7870; 
-    const jamaToken = "";
-    const jiraToken = "";
+    const jamaToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ5NzAxODUsIm5iZiI6MTYwNDk3MDE4NSwianRpIjoiZDk4NTAyNGItZTljMS00MzM2LThmMGYtYmZkYWE1YjE4NDIzIiwiZXhwIjoxNjA0OTcxMDg1LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiODljMzg1MmMtODk0My00ZjM4LWJmMDEtOGE1ZGM2YmVmMjFlIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.--cjmhtWtxBytWiHbVrss9VVdzgsMGnTI0Y9yp2_Aoc";
+    const jiraToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ5NzAyMDAsIm5iZiI6MTYwNDk3MDIwMCwianRpIjoiNmZkYTUzZGQtNDNkYi00NjZlLWI0NDQtZGU5ZWQ3YTg3ZGE2IiwiZXhwIjoxNjA0OTcxMTAwLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiODljMzg1MmMtODk0My00ZjM4LWJmMDEtOGE1ZGM2YmVmMjFlIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.iraZID8hE6bZWKYvc7uvFTTyVjSpWx29ilSh5zXYBjg";
     
     // initial component state 
     const [ jamaItemName, setJamaItemName ] = useState("");
@@ -89,7 +89,7 @@ const LinkFieldsContainer = () => {
         });
     }
 
-    // API call to link fields of a Jama item and a Jira issue - WIP
+    // API call to link fields of a Jama item and a Jira issue
     const linkItems = async (params) => {
         console.log(params);
         await axios({
@@ -118,7 +118,7 @@ const LinkFieldsContainer = () => {
 
     // add data to DOM for testing whenever new fields are added 
     useEffect(() => {
-      if(jamaItemToLink.length !== 0 && jiraItemToLink.length !== 0) {
+      if(jamaFieldsToLink.length !== 0 && jiraFieldsToLink.length !== 0) {
         var testDiv = document.createElement("div");
         testDiv.id = "test_div";
         testDiv.innerHTML = `<p>Jama item to link: ${jamaItemToLink}<br> 
@@ -130,7 +130,7 @@ const LinkFieldsContainer = () => {
     }, [jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink])
 
 
-    /* Utility functions to transform the data */
+    /* Data transformation functions */
 
     // convert to form data
     const convertToForm = () => {
@@ -149,11 +149,11 @@ const LinkFieldsContainer = () => {
         // add field arrays 
         for(let i = 0; i < jiraFieldsToLink.length; i++) {
           console.log("appending to form:", jiraFieldsToLink[i]);
-          formData.append("jira_fields[]", jiraFieldsToLink[i]);
+          formData.append(`jira_fields[${i}]`, jiraFieldsToLink[i]);
         }
         for(let i = 0; i < jamaFieldsToLink.length; i++) {
           console.log("appending to form:", jamaFieldsToLink[i]);
-          formData.append("jama_fields[]", jamaFieldsToLink[i]);
+          formData.append(`jama_fields[${i}]`, jamaFieldsToLink[i]);
         }
 
         // add the number of fields
@@ -183,6 +183,7 @@ const LinkFieldsContainer = () => {
             return;
         }
 
+        // add new fields to the array
         setJamaFieldsToLink(jamaFieldsToLink => [...jamaFieldsToLink, newJamaFieldsToLink]);
         setJiraFieldsToLink(jiraFieldsToLink => [...jiraFieldsToLink, newJiraFieldsToLink]);
 
@@ -191,7 +192,7 @@ const LinkFieldsContainer = () => {
         document.getElementById("input_jira_field").value = "";
     }
 
-    // handles the link button. converts data to form and sends to the backend array of items to link - WIP
+    // handles the link button. converts data to form and sends to the backend array of items to link
     const handleLink = (event) => {
         event.preventDefault();
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0]) {
@@ -256,7 +257,7 @@ const LinkFieldsContainer = () => {
                         ></input>
                     </span>
                     <span className="link_buttons_container">
-                        <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button><br/>
+                        <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
                         <Button id="link_button" appearance="primary" className="link_button" onClick={handleLink}>Link fields</Button>
                         <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>

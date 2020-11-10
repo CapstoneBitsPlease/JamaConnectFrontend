@@ -195,8 +195,6 @@ const SelectItem = () => {
 					</ul>
 				</div>
 
-
-			<button onClick={() => history.push('/linkFields')}>go to link fields page</button>
 			</form>
 
 		</div>

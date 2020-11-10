@@ -2,7 +2,7 @@ import React from "react";
 
 const LinkFieldsTable = (props) => {
 
-    /* Utility functions to transform the data */
+    /* Data transformation functions */
 
     // retrieve from the response data what we need for the table - WIP to add field_service_id
     const formatData = () => {
