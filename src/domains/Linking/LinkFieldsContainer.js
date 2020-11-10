@@ -16,7 +16,7 @@ const LinkFieldsContainer = () => {
 
     // these are temporary - will be using project id, type id, and item/issue id from Yi's store and tokens from Thy's
     const jamaProjectID = 46;
-    const jiraProjectID = 101;  
+    const jiraProjectID = 101; 
     const jamaTypeID = 29;
     const jiraTypeID = 27;
     const issueID = 10069;
@@ -184,7 +184,7 @@ const LinkFieldsContainer = () => {
         document.getElementById("input_jira_field").value = "";
     }
 
-    // handles the link button. converts data to form and sends to the backend array of items to link
+    // handles the "link" button. converts data to form and sends to the backend array of items to link
     const handleLink = (event) => {
         event.preventDefault();
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0]) {
@@ -193,7 +193,7 @@ const LinkFieldsContainer = () => {
         }
     }
 
-    // handles the done button. returns user to the previous page
+    // handles the "done linking" button. returns user to the previous page
     const handleDone = (event) => {
         event.preventDefault();
         history.goBack();

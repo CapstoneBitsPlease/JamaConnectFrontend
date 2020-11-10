@@ -4,26 +4,6 @@ const LinkFieldsTable = (props) => {
 
     /* Data transformation functions */
 
-    // retrieve from the response data what we need for the table - WIP to add field_service_id
-    const formatData = () => {
-        var itemData = flatten(props.itemData);        
-        var data = [];
-        var i = 0;
-        // all data that is not null
-        Object.keys(itemData).forEach(() => {
-            data.push({
-                "index": i+1, 
-                "name": itemData[i]
-            })
-            i += 1;
-
-            // custom data case
-            // aggregate data case
-            
-        })
-        return data;
-    }
-
     // build each key recursively, add to the array, return the array 
     const buildItemKey = (keyArray, data, path = '') => {
         Object.entries(data).forEach(([key, value]) => {
@@ -42,11 +22,25 @@ const LinkFieldsTable = (props) => {
         return keyArray;
     }
 
-    // flatten data and convert object to array of keys in dot notation 
-    const flatten = (data) => {
+    // flatten data and convert object to array of indexes and keys in dot notation 
+    const formatData = () => {
         var keyArray = [];
-        buildItemKey(keyArray, data, '');
-        return keyArray;
+        var data = [];
+        var i = 0;
+
+        // flatten nested objects and build field names
+        buildItemKey(keyArray, props.itemData, '');
+
+        // append all data that is not null
+        Object.keys(keyArray).forEach(() => {
+            data.push({
+                "index": i+1, 
+                "name": keyArray[i]
+            })
+            i += 1;
+        })
+
+        return data;
     }
 
     /* DOM manipulation functions */

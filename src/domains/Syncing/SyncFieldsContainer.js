@@ -48,7 +48,7 @@ const SyncFieldsContainer = () => {
         setCheckedIDs(checked);
     }
 
-    // request to handle the synced fields - WIP
+    // request to post fields to sync - WIP
     const syncFields = () => {
         // check that the IDs of the fields ready to sync are completely loaded
         console.log(checkedIDs);
@@ -62,13 +62,13 @@ const SyncFieldsContainer = () => {
         // send ids to backend to sync
     }
 
-    // handles the sync button. syncs all checked linked fields 
+    // handles the "sync" button. syncs all checked linked fields 
     const handleSync = (event) => {
         event.preventDefault();
         syncFields();
     }
 
-    // handles the cancel button, routes user to previous page
+    // handles the "cancel" button. routes user to previous page
     const handleGoBack = (event) => {
         event.preventDefault();
         history.goBack();

@@ -31,7 +31,7 @@ const SyncSettingsContainer = () => {
       // eslint-disable-next-line
   }, [])
   
-  // on click of the button, prints updated sync interval, will update sync process 
+  // handles the "apply" button. prints updated sync interval, will update sync process 
   const handleApply = (e) => {
     e.preventDefault();
     if(syncInterval === "") {
