@@ -21,8 +21,8 @@ const LinkFieldsContainer = () => {
     const jiraTypeID = 27;
     const issueID = 10069;
     const itemID = 7870; 
-    const jamaToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ5NzAxODUsIm5iZiI6MTYwNDk3MDE4NSwianRpIjoiZDk4NTAyNGItZTljMS00MzM2LThmMGYtYmZkYWE1YjE4NDIzIiwiZXhwIjoxNjA0OTcxMDg1LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiODljMzg1MmMtODk0My00ZjM4LWJmMDEtOGE1ZGM2YmVmMjFlIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.--cjmhtWtxBytWiHbVrss9VVdzgsMGnTI0Y9yp2_Aoc";
-    const jiraToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ5NzAyMDAsIm5iZiI6MTYwNDk3MDIwMCwianRpIjoiNmZkYTUzZGQtNDNkYi00NjZlLWI0NDQtZGU5ZWQ3YTg3ZGE2IiwiZXhwIjoxNjA0OTcxMTAwLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiODljMzg1MmMtODk0My00ZjM4LWJmMDEtOGE1ZGM2YmVmMjFlIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.iraZID8hE6bZWKYvc7uvFTTyVjSpWx29ilSh5zXYBjg";
+    const jamaToken = "";
+    const jiraToken = "";
     
     // initial component state 
     const [ jamaItemName, setJamaItemName ] = useState("");
@@ -34,17 +34,19 @@ const LinkFieldsContainer = () => {
     const [ jamaItemToLink, setJamaItemToLink ] = useState([]);
     const [ jiraItemToLink, setJiraItemToLink ] = useState([]);
 
-    // retrieve Jama/Jira item info from store
-    /*const { itemID, issueID, jamaItemType, jiraItemType, jamaProjectID, jiraProjectID } = useStoreState(
+    // retrieve Jama/Jira item info and token from store
+    /*const { itemID, issueID, jamaItemType, jiraItemType, jamaProjectID, jiraProjectID, jamaToken } = useStoreState(
         state => ({
             itemID: state.jamaitem.itemID,
+            jamaToken: state.accountStore.token
         })
     )*/
 
     
     /* API Calls */
 
-    // API call to retrieve the fields of an item from the Jama database given its ID
+    // retrieves the fields of an item from the Jama database given its ID
+    // sets Jama item data to link, item name, and field data
     const getJamaFields = async(itemID) => {
         await axios
         .get(
@@ -55,7 +57,7 @@ const LinkFieldsContainer = () => {
         })
         .then(response => {
           console.log("jama/item_by_id success");
-          console.log(response.data.fields);
+          console.log(response.data);
           setJamaItemName(response.data.fields.name);
           setItemData(response.data.fields);
           var jamaItemData = [itemID, response.data.fields.name, jamaTypeID, jamaProjectID];
@@ -66,7 +68,8 @@ const LinkFieldsContainer = () => {
         });
     }
 
-    // API call to retrieve the fields of an item from the Jira database given its ID
+    // retrieves the fields of an item from the Jira database given its ID
+    // sets Jira item data to link, item name, and field data
     const getJiraFields = async(issueID) => {
         await axios
         .get(
@@ -78,7 +81,7 @@ const LinkFieldsContainer = () => {
         )
         .then(response => {
           console.log("jira/item_of_id success");
-          console.log(response.data.fields);
+          console.log(response.data);
           setJiraIssueName(response.data.fields.summary);
           setIssueData(response.data.fields);
           var jiraIssueData = [issueID, response.data.fields.summary, jiraTypeID, jiraProjectID];
@@ -89,7 +92,7 @@ const LinkFieldsContainer = () => {
         });
     }
 
-    // API call to link fields of a Jama item and a Jira issue
+    // posts link data for Jama and Jira items and fields
     const linkItems = async (params) => {
         console.log(params);
         await axios({
@@ -101,22 +104,20 @@ const LinkFieldsContainer = () => {
           console.log(response);
         })
         .catch(error => {
-          console.log("error: ", error);
+          console.log("error:", error);
         })
     }
 
 
     /* useEffect hooks */
         
-    // retrieve all fields for item
+    // retrieves all fields for selected item and renders the table when component mounts
     useEffect(() => {
-      if(jamaToken) {
-        getJamaFields(itemID);
-        getJiraFields(issueID);
-      }
-    },[jamaToken]) 
+      getJamaFields(itemID);
+      getJiraFields(issueID);
+    },[]) 
 
-    // add data to DOM for testing whenever new fields are added 
+    // add data to DOM for testing whenever new fields are added or item data is changed
     useEffect(() => {
       if(jamaFieldsToLink.length !== 0 && jiraFieldsToLink.length !== 0) {
         var testDiv = document.createElement("div");
@@ -137,29 +138,20 @@ const LinkFieldsContainer = () => {
         var formData = new FormData();
 
         // add item arrays to form data
-        for(let i = 0; i < jiraItemToLink[0].length; i++) {
-          console.log("appending to form:", jiraItemToLink[0][i]);
+        for(let i = 0; i < jiraItemToLink[0].length; i++) 
           formData.append("jira_item[]", jiraItemToLink[0][i]);
-        }
-        for(let i = 0; i < jamaItemToLink[0].length; i++) {
-          console.log("appending to form:", jamaItemToLink[0][i]);
+        for(let i = 0; i < jamaItemToLink[0].length; i++) 
           formData.append("jama_item[]", jamaItemToLink[0][i]);
-        }
-
+        
         // add field arrays 
-        for(let i = 0; i < jiraFieldsToLink.length; i++) {
-          console.log("appending to form:", jiraFieldsToLink[i]);
+        for(let i = 0; i < jiraFieldsToLink.length; i++) 
           formData.append(`jira_fields[${i}]`, jiraFieldsToLink[i]);
-        }
-        for(let i = 0; i < jamaFieldsToLink.length; i++) {
-          console.log("appending to form:", jamaFieldsToLink[i]);
+        for(let i = 0; i < jamaFieldsToLink.length; i++) 
           formData.append(`jama_fields[${i}]`, jamaFieldsToLink[i]);
-        }
-
+        
         // add the number of fields
         formData.append("num_fields", jiraFieldsToLink.length + jamaFieldsToLink.length);
         
-        // check out the form data 
         for(var pair of formData.entries()) 
           console.log(pair[0], pair[1]);
 
