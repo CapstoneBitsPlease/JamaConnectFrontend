@@ -1,5 +1,4 @@
 import React from 'react';
-import {Checkbox} from '@atlaskit/checkbox';
 
 /* Component to format and render the table to choose fields to sync */
 const SyncFieldsTable = (props) => {
@@ -7,7 +6,6 @@ const SyncFieldsTable = (props) => {
     //  grab from the response only the data we need 
     const formatData = () => {
         var data = [];
-        
         for(let i=0; i < props.responseLength; i++) {
             data.push({
                 "id": i+1, 
@@ -25,41 +23,38 @@ const SyncFieldsTable = (props) => {
     // format data and add it to the DOM
     const renderTableData = () => {
         var data = formatData();
-        return data.map((row) => {
-            const { id, checkboxID, jamaName, jiraName, checked } = row;
-            return (    
-                <tr className="linked_fields_row" key={id}>
-                    <td className="linked_fields_data">{id}</td>
-                    <td className="linked_fields_data">{jamaName}</td>
-                    <td className="linked_fields_data">{jiraName}</td>
-                    <td className="linked_fields_data">
-                        <div className="linked_fields_checkbox">
-                            {/*<Checkbox
-                                testId={checkboxID}
-                                isChecked={checked}
-                                onChange={props.handleCheckbox}
-                                value={id}
-                                name="controlled-checkbox"
-                                type="checkbox"
-                            />*/}
-                            <input
-                                type="checkbox"
-                                id={checkboxID}
-                                onChange={props.handleCheckbox}
-                                value={id}
-                                name="controlled-checkbox"
-                                checked={checked}
-                            ></input>
-                        </div>
-                    </td>
-                </tr>
-            )
-        })
+        if(props.linkedData !== "No fields ready.") {
+            return data.map((row) => {
+                const { id, checkboxID, jamaName, jiraName, checked } = row;
+                return (    
+                    <tr className="linked_fields_row" key={id}>
+                        <td className="linked_fields_data">{id}</td>
+                        <td className="linked_fields_data">{jamaName}</td>
+                        <td className="linked_fields_data">{jiraName}</td>
+                        <td className="linked_fields_data">
+                            <div className="linked_fields_checkbox">
+                                <input
+                                    type="checkbox"
+                                    id={checkboxID}
+                                    onChange={props.handleCheckbox}
+                                    value={id}
+                                    name="controlled-checkbox"
+                                    checked={checked}
+                                ></input>
+                            </div>
+                        </td>
+                    </tr>
+                )
+            })
+        } 
+        else {
+            return <td><p>{props.linkedData}</p></td>
+        }
     }
 
     return (
         <div>
-            <h3 className="fields_table_title">Linked fields</h3>
+            <h3 className="fields_table_title">Fields ready to sync</h3>
             <table className="linked_fields_table">
                 <thead>
                     <tr className="linked_fields_row">

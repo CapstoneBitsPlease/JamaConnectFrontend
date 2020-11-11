@@ -21,8 +21,13 @@ const syncStore = {
         )
         .then(response => {
             console.log("success");
-            actions.setPrevSyncTime(response.data[0]);
-            actions.setTimeUnit(response.data[1]);
+            console.log(response.data);
+            if(response.data === "No successful syncs yet.")
+                actions.setPrevSyncTime(response.data)
+            else {
+                actions.setPrevSyncTime(response.data[0]);
+                actions.setTimeUnit(response.data[1]);
+            }
         })
         .catch((error) => {
             console.log("error:", error);
@@ -44,8 +49,6 @@ const syncStore = {
         .get(`${devURL}/capstone/fields_to_sync`)
         .then(response => {
             actions.setNumFieldsToSync(response.data["num_fields"]);
-            actions.setLinkedData(response.data["fields_to_sync"]);
-            actions.setResponseLength(response.data["num_fields"]);
         })
         .catch(error => {
             console.log("error:", error);

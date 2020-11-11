@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useStoreActions, useStoreState} from "easy-peasy";
 import Button from '@atlaskit/button';
 import LinkedItemsTable from '../../components/LinkedItemsTable'
-import LinkedFieldsTable from './SyncFieldsTable'
+import SyncFieldsTable from './SyncFieldsTable'
 import {useHistory} from 'react-router-dom';
 import makeToast from '../../components/Toaster';
 import '../../styles/pages/SyncFields.style.sass';
@@ -105,7 +105,7 @@ const SyncFieldsContainer = () => {
                     />
                 </div>
                 <div className="linked_fields_container">
-                    <LinkedFieldsTable
+                    <SyncFieldsTable
                         responseLength={responseLength}
                         linkedData={linkedData}
                         handleCheckbox={handleCheckbox}
