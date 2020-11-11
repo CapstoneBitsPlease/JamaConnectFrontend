@@ -108,6 +108,7 @@ const LinkFieldsContainer = () => {
         })
         .then(response => {
           console.log(response);
+          makeToast("success", "Linking was successful!");
         })
         .catch(error => {
           console.log("error:", error);
