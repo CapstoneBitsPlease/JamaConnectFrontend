@@ -54,9 +54,13 @@ const SyncFieldsContainer = () => {
         // check that the IDs of the fields ready to sync are completely loaded
         console.log(checkedIDs);
 
-        // append checked IDs to the DOM for testing purposes
-        var testDiv = document.createElement("div");
-        testDiv.id = "test_div";
+        // append array of checked IDs to the DOM
+        if(document.getElementById("test_div")) {
+            var testDiv = document.getElementById("test_div");
+            testDiv.remove()
+        }
+        testDiv = document.createElement("div");
+        testDiv.id = `test_div`;
         testDiv.innerHTML = `<p>${checkedIDs}<p>`
         document.body.appendChild(testDiv);
 

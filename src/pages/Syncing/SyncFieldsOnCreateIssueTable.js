@@ -32,14 +32,15 @@ const SyncFieldsOnCreateIssueTable = (props) => {
                     <td className="sync_fields_data">{name}</td>
                     <td className="sync_fields_data">
                         <div>
-                            <Checkbox
-                                testId={checkboxID}
-                                isChecked={checked}
+                            <input
+                                type="checkbox"
+                                id={checkboxID}
                                 onChange={props.handleCheckbox}
                                 value={name}
                                 name="controlled-checkbox"
-                                type="checkbox"
-                            />
+                                checked={checked}
+                            >
+                            </input>
                         </div>
                     </td>
                 </tr>

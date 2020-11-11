@@ -23,7 +23,7 @@ const LinkFieldsContainer = () => {
     const jamaTypeID = 29;
     const jiraTypeID = 27;
     const issueID = 10070;
-    const itemID = 7870; 
+    const itemID = 7861; 
     const jamaToken = "";
     const jiraToken = "";
     
@@ -69,7 +69,7 @@ const LinkFieldsContainer = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          makeToast("error", "Error retrieving Jama item by ID. Please see the error logs located in the admin settings"); 
+          makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings"); 
         });
     }
 
@@ -94,7 +94,7 @@ const LinkFieldsContainer = () => {
         })
         .catch(error => {
           console.log("error:", error);
-          makeToast("error", "Error retrieving Jira item by ID. Please see the error logs located in the admin settings"); 
+          makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings"); 
         });
     }
 
@@ -127,7 +127,11 @@ const LinkFieldsContainer = () => {
     // add data to DOM for testing whenever new fields are added or item data is changed
     useEffect(() => {
       if(jamaFieldsToLink.length !== 0 && jiraFieldsToLink.length !== 0) {
-        var testDiv = document.createElement("div");
+        if(document.getElementById("test_div")) {
+          var testDiv = document.getElementById("test_div");
+          testDiv.remove()
+        }
+        testDiv = document.createElement("div");
         testDiv.id = "test_div";
         testDiv.innerHTML = `<p>Jama item to link: ${jamaItemToLink}<br> 
           Jira item to link: ${jiraItemToLink}<br>
