@@ -42,7 +42,6 @@ const SyncFieldsOnCreateIssueContainer = () => {
         testDiv.id = `test_div`;
         testDiv.innerHTML = `<p>${checked}<p>`
         document.body.appendChild(testDiv);
-        
     }
 
     return (
