@@ -146,19 +146,15 @@ const LinkFieldsContainer = () => {
 
         // add item arrays to form data
         for(let i = 0; i < jiraItemToLink[0].length && i < jamaItemToLink[0].length; i++) {
-          console.log("jiraItemToLink[0][i]", jiraItemToLink[0][i])
           formData.append("jira_item[]", jiraItemToLink[0][i]);
           formData.append("jama_item[]", jamaItemToLink[0][i]);
-          console.log("jamaItemToLink[0][i]", jamaItemToLink[0][i])
         }
 
+        
         // add field arrays 
         for(let i = 0; i < jamaFieldsToLink.length; i++) {
-          for (let j = 0; j < jamaFieldsToLink[i].length; j++) {  
-            console.log(jamaFieldsToLink[i].length);
-            console.log(`jiraFieldsToLink[${i}][${j}]`, jiraFieldsToLink[i][j]);
+          for (let j = 0; j < jamaFieldsToLink[i].length; j++) {  // this will always be 2
             formData.append(`jira_fields[${i}]`, jiraFieldsToLink[i][j]);
-            console.log(`jamaFieldsToLink[${i}][${j}]`, jamaFieldsToLink[i][j]);
             formData.append(`jama_fields[${i}]`, jamaFieldsToLink[i][j]);
           }
         }
@@ -166,8 +162,8 @@ const LinkFieldsContainer = () => {
         // add the number of fields
         formData.append("num_fields", jamaFieldsToLink.length);
         
-        for(var pair of formData.entries()) 
-          console.log(pair[0], pair[1]);
+        /*for(var pair of formData.entries()) 
+          console.log(pair[0], pair[1]);*/
 
         return formData;
     }
@@ -185,7 +181,7 @@ const LinkFieldsContainer = () => {
         var newJiraFieldName = jiraFieldNameRef.current.value;;
         
         if(newJamaFieldID === "" || newJamaFieldName === "" || newJiraFieldID === "" || newJiraFieldName === "") {
-            alert("Error: input is required to link fields.");
+            makeToast("error", "Input is required to link fields. Please enter a service ID and name."); 
             return;
         }
 
@@ -206,6 +202,9 @@ const LinkFieldsContainer = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0]) {
           var data = convertToForm(); // convert data to formData 
           linkItems(data);
+        }
+        else {
+          makeToast("error", "Input is required to link fields. Please enter a service ID and name.");
         }
     }
 
