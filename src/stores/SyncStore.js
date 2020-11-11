@@ -17,7 +17,7 @@ const syncStore = {
     getPrevSyncTime: thunk((actions) => {
         axios
         .get(
-            `${devURL}/capstone/last_sync_time`
+            `${devURL}/capstone/last_successful_sync_time`
         )
         .then(response => {
             console.log("success");
