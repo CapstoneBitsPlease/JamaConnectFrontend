@@ -1,5 +1,5 @@
-import React from "react";
-import { useStoreState } from "easy-peasy";
+import React, { useState } from "react";
+import { useStoreState, useStoreRehydrated } from "easy-peasy";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,46 +18,46 @@ import {
 import { Login } from "./pages";
 
 import { Navigation } from "components";
+
 const Test = () => {
-  const loginState = useStoreState((state) => state.accountStore.loggedIn);
-  let location = useLocation();
-  console.log(location.pathname);
+  const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
+  const location = useLocation();
+  const noNav = location.pathname.includes("NoNav");
 
   return (
-    <Router>
-      {/* {loginState ? <Navigation /> : <Login />} */}
+    <>
+      {!noNav && loggedIn && <Navigation />}
+
       <Switch>
         <Route path="/login">
-          {loginState ? <Redirect to="/selectItem" /> : <Login />}
+          {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          {!loginState ? <Redirect to="/login" /> : <SelectItem />}
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
         </Route>
         <Route path="/syncSettings">
-          {!loginState ? <Redirect to="/login" /> : <SyncSettings />}
+          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
         </Route>
         <Route path="/syncFields">
-          {!loginState ? <Redirect to="/login" /> : <SyncFields />}
+          {!loggedIn ? <Redirect to="/login" /> : <SyncFields />}
         </Route>
         <Route path="/syncFieldsOnCreateIssue">
-          {!loginState ? <Redirect to="/login" /> : <SyncFieldsOnCreateIssue />}
+          {!loggedIn ? <Redirect to="/login" /> : <SyncFieldsOnCreateIssue />}
         </Route>
         <Route path="/linkFields">
-          {!loginState ? <Redirect to="/login" /> : <LinkFields />}
+          {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
         </Route>
         <Route path="/selectItemNoNav">
-          {!loginState ? <Redirect to="/login" /> : <SelectItem />}
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
         </Route>
       </Switch>
-    </Router>
+    </>
   );
 };
 
-function App() {
-  return (
-    <Router>
-      <Test />
-    </Router>
-  );
-}
+const App = () => {
+  const isRehydrated = useStoreRehydrated();
+
+  return <Router>{isRehydrated ? <Test /> : "Loading"}</Router>;
+};
 export default App;
