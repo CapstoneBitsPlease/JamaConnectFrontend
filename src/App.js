@@ -6,19 +6,16 @@ import {
   Route,
   Redirect,
   useLocation,
-  Link,
 } from "react-router-dom";
 import {
   SelectItem,
   SyncSettings,
   SyncFields,
-  SyncFieldsOnCreateIssue,
   LinkFields,
 } from "./domains";
 import { Login } from "./pages";
-
 import { Navigation } from "components";
-
+import {JiraIssueContent} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const location = useLocation();
@@ -41,14 +38,11 @@ const Test = () => {
         <Route path="/syncFields">
           {!loggedIn ? <Redirect to="/login" /> : <SyncFields />}
         </Route>
-        <Route path="/syncFieldsOnCreateIssue">
-          {!loggedIn ? <Redirect to="/login" /> : <SyncFieldsOnCreateIssue />}
-        </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
         </Route>
         <Route path="/selectItemNoNav">
-          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
+          {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
         </Route>
       </Switch>
     </>

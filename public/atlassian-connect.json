@@ -2,7 +2,7 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://23c794ddfcaa.ngrok.io",
+  "baseUrl": "https://047d58e0e2de.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -21,14 +21,7 @@
         "value": "Jama Plugin"
       }
     }],
-    "webPanels": [{
-      "key": "connect-provided-web-panel",
-      "url": "/login?pkey=EX",
-      "location": "com.example.myaddon:connect-provided-link-to-panel",
-      "name": {
-        "value": "My Web Panel"
-      }
-    }],
+
     "jiraIssueContents": [{
       "icon": {
         "width": 24,
