@@ -35,7 +35,7 @@ const SyncFieldsTable = (props) => {
                     <td className="linked_fields_data">
                         <div className="linked_fields_checkbox">
                             <Checkbox
-                                id={checkboxID}
+                                testId={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
                                 value={id}
