@@ -2,13 +2,13 @@ import React from "react";
 
 const LinkFieldsTable = (props) => {
 
-    // format data for UI. **excludes nested subfields   
+    // format data for UI. excludes nested subfields 
     const formatData = () => {
         var data = [];
         var i = 0;
 
         // adding data we need for field service ID and name  
-        Object.entries(props.itemData).forEach((key, value) => {
+        Object.entries(props.itemData).forEach((key) => {
             if(typeof key[1] !== 'object' && key[1] !== "{}" && key[1] !== null && !key[0].includes("customfield_10019")) {
                 if(!key[0].includes("$29") && !key[0].includes("_")) {
                     data.push({
@@ -21,7 +21,7 @@ const LinkFieldsTable = (props) => {
                     data.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
-                        "fieldName": key[0].replace("customfield_10016", "story points").replace("customfield_10019")
+                        "fieldName": key[0].replace("customfield_10016", "story points")
                     })
                 }
                 else {

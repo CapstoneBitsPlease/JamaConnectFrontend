@@ -4,6 +4,7 @@ import Button from '@atlaskit/button';
 import LinkedItemsTable from '../../components/LinkedItemsTable'
 import LinkedFieldsTable from './SyncFieldsTable'
 import {useHistory} from 'react-router-dom';
+import makeToast from '../../components/Toaster';
 import '../../styles/pages/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
@@ -65,6 +66,10 @@ const SyncFieldsContainer = () => {
     // handles the "sync" button. syncs all checked linked fields 
     const handleSync = (event) => {
         event.preventDefault();
+        if(checkedIDs === []) {
+            makeToast("error", "Input is required to sync fields. Please check at least one field to sync or click 'Go back'."); 
+            return;
+        }
         syncFields();
     }
 

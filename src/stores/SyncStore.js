@@ -67,6 +67,7 @@ const syncStore = {
         .get(`${devURL}/capstone/fields_to_sync`)
         .then(response => {
             console.log("success");
+            console.log(response.data["fields_to_sync"]);
             actions.setLinkedData(response.data["fields_to_sync"]);
             actions.setResponseLength(response.data["num_fields"]);
         })
