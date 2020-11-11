@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Button from '@atlaskit/button';
 import SyncSettingsTable from './SyncSettingsTable.js'
 import {useStoreActions, useStoreState} from "easy-peasy";
-import '../../styles/components/SyncSettings.style.sass';
+import '../../styles/pages/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
 const SyncSettingsContainer = () => {

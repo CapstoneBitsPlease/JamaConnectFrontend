@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@atlaskit/button';
 import SyncFieldsOnCreateIssueTable from './SyncFieldsOnCreateIssueTable';
-import '../../styles/components/SyncFieldsOnCreateIssue.style.sass'; 
+import '../../styles/pages/SyncFieldsOnCreateIssue.style.sass'; 
 
 // Button and table that are added to the "Create Issue" view. Allows the user to select which fields to sync
 const SyncFieldsOnCreateIssueContainer = () => {

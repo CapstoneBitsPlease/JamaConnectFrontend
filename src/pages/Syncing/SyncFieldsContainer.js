@@ -4,7 +4,7 @@ import Button from '@atlaskit/button';
 import LinkedItemsTable from '../../components/LinkedItemsTable'
 import LinkedFieldsTable from './SyncFieldsTable'
 import {useHistory} from 'react-router-dom';
-import '../../styles/components/SyncFields.style.sass';
+import '../../styles/pages/SyncFields.style.sass';
 
 /* Component to render page where user can select which fields to sync from the fields currently linked  */
 const SyncFieldsContainer = () => {

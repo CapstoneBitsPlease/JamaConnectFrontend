@@ -1,6 +1,6 @@
 import { action, thunk } from "easy-peasy";
 import axios from "axios";
-import makeToast from "../Toaster";
+import makeToast from "../components/Toaster";
 
 const accountStore = {
   loggedIn: false,

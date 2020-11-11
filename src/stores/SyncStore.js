@@ -1,5 +1,6 @@
 import { action, thunk } from "easy-peasy";
 import axios from "axios";
+import makeToast from '../components/Toaster';
 
 const devURL = "http://127.0.0.1:5000"; // will be changed once we use a prod server
 
@@ -25,6 +26,7 @@ const syncStore = {
         })
         .catch((error) => {
             console.log("error:", error);
+            makeToast("error", "Error retrieving last sync time. Please see the error logs located in the admin settings"); 
         });
     }),
 
@@ -47,6 +49,7 @@ const syncStore = {
         })
         .catch(error => {
             console.log("error:", error);
+            makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
         });
     }),
 
@@ -69,6 +72,7 @@ const syncStore = {
         })
         .catch(error => {
             console.log("error:", error);
+            makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
         });
     }),
 
