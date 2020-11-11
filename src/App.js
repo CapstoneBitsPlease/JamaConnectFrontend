@@ -6,8 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Login } from "./pages";
-import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./domains";
+import { Login, SelectItem, LinkFields, SyncFields, SyncFieldsOnCreateIssue, SyncSettings } from "./pages";
 
 function App() {
   const loginState = useStoreState((state) => state.accountStore.loggedIn);
