@@ -28,7 +28,8 @@ const LinkFieldsTable = (props) => {
                     data.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
-                        "fieldName": key[0].replace("$", "").replace("_", " ")
+                       // "fieldName": key[0].replace("$", "").replace("_", " ")
+                        "fieldName": key[0].split('$')[0].replaceAll("_", " ")
                     })
                 }
                 i += 1;

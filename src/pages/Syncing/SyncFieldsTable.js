@@ -34,14 +34,22 @@ const SyncFieldsTable = (props) => {
                     <td className="linked_fields_data">{jiraName}</td>
                     <td className="linked_fields_data">
                         <div className="linked_fields_checkbox">
-                            <Checkbox
+                            {/*<Checkbox
                                 testId={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
                                 value={id}
                                 name="controlled-checkbox"
                                 type="checkbox"
-                            />
+                            />*/}
+                            <input
+                                type="checkbox"
+                                id={checkboxID}
+                                onChange={props.handleCheckbox}
+                                value={id}
+                                name="controlled-checkbox"
+                                checked={checked}
+                            ></input>
                         </div>
                     </td>
                 </tr>
