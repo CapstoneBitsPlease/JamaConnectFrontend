@@ -99,7 +99,7 @@ const LinkFieldsContainer = () => {
     }
 
     // posts link data for Jama and Jira items and fields
-    const linkItems = async (params) => {
+    const linkItems = async(params) => {
         console.log(params);
         await axios({
           url: `${devURL}/link_items`,
@@ -150,7 +150,6 @@ const LinkFieldsContainer = () => {
           formData.append("jama_item[]", jamaItemToLink[0][i]);
         }
 
-        
         // add field arrays 
         for(let i = 0; i < jamaFieldsToLink.length; i++) {
           for (let j = 0; j < jamaFieldsToLink[i].length; j++) {  // this will always be 2
@@ -161,9 +160,6 @@ const LinkFieldsContainer = () => {
         
         // add the number of fields
         formData.append("num_fields", jamaFieldsToLink.length);
-        
-        /*for(var pair of formData.entries()) 
-          console.log(pair[0], pair[1]);*/
 
         return formData;
     }
