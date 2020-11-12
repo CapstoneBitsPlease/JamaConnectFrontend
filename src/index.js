@@ -1,25 +1,22 @@
+  
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, StoreProvider } from "easy-peasy";
-import { jamaitem } from "./stores";
-import { accountStore, syncStore, linkStore } from "./stores";
-
-const store = createStore({
-  accountStore: accountStore,
-  jamaitem: jamaitem,
-  syncStore: syncStore,
-  linkStore: linkStore,
-});
+import { accountStore, jamaitem, syncStore } from "./stores";
 
 ReactDOM.render(
-  <StoreProvider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <StoreProvider store={createStore({
+        accountStore: accountStore,
+        jamaitem : jamaitem,
+        syncStore: syncStore
+      })}>
       <App />
-    </React.StrictMode>
-  </StoreProvider>,
+    </StoreProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

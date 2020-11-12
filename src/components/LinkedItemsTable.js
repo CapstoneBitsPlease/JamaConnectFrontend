@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/components/SyncFields.style.sass';
+import '../styles/pages/SyncFields.style.sass';
 
 /* Table of the linked items we are currently viewing fields for - shows project ID, project name, item ID, and item name */ 
 const LinkedItemsTable = (props) => {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@atlaskit/button';
 import SyncFieldsOnCreateIssueTable from './SyncFieldsOnCreateIssueTable';
-import '../../styles/components/SyncFieldsOnCreateIssue.style.sass'; 
+import '../../styles/pages/SyncFieldsOnCreateIssue.style.sass'; 
 
 // Button and table that are added to the "Create Issue" view. Allows the user to select which fields to sync
 const SyncFieldsOnCreateIssueContainer = () => {
@@ -32,6 +32,16 @@ const SyncFieldsOnCreateIssueContainer = () => {
         }
         console.log(checked);
         setCheckedFields(checked);
+
+        // append array of checked IDs to the DOM as they are checked/unchecked for testing purposes
+        if(document.getElementById("test_div")) {
+            var testDiv = document.getElementById("test_div");
+            testDiv.remove()
+        }
+        testDiv = document.createElement("div");
+        testDiv.id = `test_div`;
+        testDiv.innerHTML = `<p>${checked}<p>`
+        document.body.appendChild(testDiv);
     }
 
     return (

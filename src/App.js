@@ -12,7 +12,7 @@ import {
   SyncSettings,
   SyncFields,
   LinkFields,
-} from "./domains";
+} from "./pages";
 import { Login } from "./pages";
 import { Navigation } from "components";
 import {JiraIssueContent} from "../src/components"
