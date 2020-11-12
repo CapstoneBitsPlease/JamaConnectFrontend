@@ -241,11 +241,7 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-<<<<<<< HEAD
 						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_error(); }} >Link</button>
-=======
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id);}} >Link</button>
->>>>>>> 3fa2bcf93244c1a4c7405e96b5644391dc45a455
 					</div>
 
 
