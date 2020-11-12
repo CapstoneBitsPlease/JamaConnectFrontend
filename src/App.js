@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import {
   SelectItem,
+  SelectItemunlink,
   SyncSettings,
   LinkFields,
 } from "./pages";
@@ -17,6 +18,10 @@ import { Navigation } from "components";
 import {JiraIssueContent} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
+  const checkjamaid = useStoreState((state => state.jamaitem.checkjamaID))
+  const checkjiraid = useStoreState((state => state.jamaitem.checkjamaID))
+  const checkjamaidlink = useStoreState((state => state.jamaitem.checkjiraIDlink))
+  const checkjiraidlink = useStoreState((state => state.jamaitem.checkjiraIDlink))
   const location = useLocation();
   const noNav = location.pathname.includes("NoNav");
 
@@ -29,7 +34,7 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
+          { checkjamaidlink && checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItem />}
         </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
