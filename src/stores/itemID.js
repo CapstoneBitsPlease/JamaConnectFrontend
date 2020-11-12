@@ -7,6 +7,10 @@ const jamaitem = {
   progID: 0,
   itemname : '',
   itemtype: '',
+  checkjamaID : false,
+  checkjiraID : false,
+  checkjamaIDlink : false,
+  checkjiraIDlink : false,
   setitemID: action((state, newID)=>{
     state.itemID = newID;
   }),
@@ -25,6 +29,18 @@ const jamaitem = {
   setitemtype: action((state, newitemtype) => {
     state.itemtype = newitemtype;
   }),
+  checkjamaID: action(( state , newID) => {
+    state.checkjamaID = newID;
+  }),
+  checkjiraID: action(( state , newID1) => {
+    state.checkjiraID = newID1;
+  }),
+  checkjamaIDlink: action(( state , newID3) => {
+    state.checkjamaIDlink = newID3;
+  }),
+  checkjiraIDlink: action(( state , newID4) => {
+    state.checkjiraIDlink = newID4;
+  })
 };
 
 export default jamaitem;

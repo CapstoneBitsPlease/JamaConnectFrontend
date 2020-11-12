@@ -34,11 +34,14 @@ const SelectItem = () => {
 	const progID = useStoreActions(actions => actions.jamaitem.setprogID)
 	const itemname = useStoreActions(actions => actions.jamaitem.setitemname)
 	const itemtype = useStoreActions(actions => actions.jamaitem.setitemtype)
+	
+	const checkjamalink = useStoreActions(actions => actions.jamaitem.checkjamaIDlink)
+	const checkjiralink = useStoreActions(actions => actions.jamaitem.checkjiraIDlink)
 
 
 	//use information from store
-	// const token = useStoreState(state => state.accountStore.token)
-	const token = "1"
+	const token = useStoreState(state => state.accountStore.token)
+	// const token = "1"
 
 
 	//Getting all the project with API call
@@ -60,6 +63,7 @@ const SelectItem = () => {
 				makeToast("error","Having trouble getting project information")
 				
 			})
+			console.log(token);
 	}
 
 	//Getting all the item type with API call
@@ -103,7 +107,7 @@ const SelectItem = () => {
 			})
 	}
 
-	//Get the list of item with specific item type id and specific project id
+	//Check if the input ID for jama and jira are actually valid
 	const check_error = () => {
 		axios.get(`http://127.0.0.1:5000/jama/item_by_id?item_id=${item_id}`,
 			{
@@ -114,26 +118,34 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				console.log(res);
+				if(res.request.status ==  200 )
+				{
+					checkjamalink(true);
+				}
+				console.log(res.request.status);
 			})
 			.catch(err => {
 				console.log(err.data);
 				makeToast("error","There is something wrong with your Jama ID")
 			})
 
-		axios.get(`http://127.0.0.1:5000/jira/item_by_id?${jira_id}`,
+		axios.get(`http://127.0.0.1:5000/jira/item_by_id?id=${jira_id}`,
 			{
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization': `Bearer ${token}`,
+					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjA5MjEsIm5iZiI6MTYwNTIyMDkyMSwianRpIjoiNDRhYzM2ZTYtYTBjZS00OWQzLTlkYTQtM2I3OGRlZGFiYjJiIiwiZXhwIjoxNjA1MzA3MzIxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.df4oDeaLpdbKcPAvV8ilr_nNG0pAElKw0UBVEhMlZnk`,
 				}
 			})
 			.then(res => {
-				console.log(res);
+				if(res.request.status == 200)
+				{
+					checkjiralink(true);
+				}
+				console.log(res.request.status);
 			})
 			.catch(err => {
-				console.log(err.data);
+				console.log(err);
 				makeToast("error","There is something wrong with your Jira ID")
 			})
 	}
