@@ -5,24 +5,15 @@ import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Route, useHistory } from 'react-router-dom';
+import makeToast from '../../components/Toaster';
 
-// //authorization function with bearer
-// axios.interceptors.request.use(
-// 	config => {
-// 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
-// 		return config;
-// 	},
-// 	error => {
-// 		return Promise.reject(error);
-// 	}
-// );
 
 const SelectItem = () => {
+
 	//token : authorization token 
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
 
-	// const [token, setToken] = useState(0);
 	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
@@ -31,6 +22,9 @@ const SelectItem = () => {
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
 	const [jira_id, setjira_id] = useState(0)
+
+	const [testjamaid , settestjamaid ] = useState(0)
+	const [testjiraid , settestjiraid ] = useState(0)
 
 	//store information using easy peasy
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
@@ -43,7 +37,8 @@ const SelectItem = () => {
 
 
 	//use information from store
-	const token = useStoreState(state => state.accountStore.token)
+	// const token = useStoreState(state => state.accountStore.token)
+	const token = "1"
 
 
 	//Getting all the project with API call
@@ -62,6 +57,8 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting project information")
+				
 			})
 	}
 
@@ -81,6 +78,7 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting item type information")
 			})
 	}
 
@@ -101,6 +99,42 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting jama item information")
+			})
+	}
+
+	//Get the list of item with specific item type id and specific project id
+	const check_error = () => {
+		axios.get(`http://127.0.0.1:5000/jama/item_by_id?item_id=${item_id}`,
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization': `Bearer ${token}`,
+				}
+			})
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err.data);
+				makeToast("error","There is something wrong with your Jama ID")
+			})
+
+		axios.get(`http://127.0.0.1:5000/jira/item_by_id?${jira_id}`,
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization': `Bearer ${token}`,
+				}
+			})
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err.data);
+				makeToast("error","There is something wrong with your Jira ID")
 			})
 	}
 
@@ -151,7 +185,6 @@ const SelectItem = () => {
 
 
 
-
 	return (
 		<div className="select_item-container">
 			<form className="select_item-selecting" >
@@ -184,19 +217,19 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the Jama item ID here"
-							onChange={e => { setitem_id(e.target.value); }}
+							onChange={e => { setitem_id(e.target.value); settestjamaid(e.target.value); }}
 						/>
 						<input
 							className="field1"
 							type="text"
 							id="jiraid"
 							placeholder=" Enter the Jira item ID here"
-							onChange={e => { setjira_id(e.target.value) }}
+							onChange={e => { setjira_id(e.target.value); settestjiraid(e.target.value); }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_error(); }} >Link</button>
 					</div>
 
 

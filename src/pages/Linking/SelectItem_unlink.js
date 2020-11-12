@@ -1,35 +1,27 @@
 import React from 'react';
-import axios from 'axios'
-import "../../styles/components/SelectItems.sass";
+import axios from 'axios';
+import "../../styles/pages/SelectItemsunlink.sass";
 import { useEffect, useState } from 'react';
-import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 
 
-const SelectItem = () => {
+const SelectItemunlink = () => {
 	//token : authorization token 
-	//projects : get all project to display in select box
-	//types : get all item type to display in select box
 
 	// const [token, setToken] = useState(0);
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
 	const [jira_id, setjira_id] = useState(0)
 
-	//store information using easy peasy
-	const item = useStoreActions(actions => actions.jamaitem.setitemID)
-	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
-
 
 	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
 
 
-
 	//Get the list of item with specific item type id and specific project id
 	const get_list = () => {
-		axios.get(`http://127.0.0.1:5000/jama/items_by_type?type_id=${types_id}&project_id=${projects_id}`,
+		axios.get(`http://127.0.0.1:5000/jama/projects`,
 			{
 				headers: {
 					'Access-Control-Allow-Origin': '*',
@@ -72,10 +64,10 @@ const SelectItem = () => {
 
 
 	return (
-		<div className="select_item-container">
-			<form className="select_item-selecting" >
-				<legend className="select_item-title">Item Selection</legend>
-				<div className="select_item-item">
+		<div className="select_item_unlink-container">
+			<form className="select_item_unlink-selecting" >
+				<legend className="select_item_unlink-title">Item Selection</legend>
+				<div className="select_item_unlink-item">
 
 
 					<div className="textfield">
@@ -96,18 +88,17 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Unlink</button>
+						<button id="linkbutton" type='button' className='but' >Unlink</button>
 					</div>
 
 
 				</div>
 
-				<div className="select_item-list">
+				<div className="select_item_unlink-list">
 					<ul >
 						{temp().map(s => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
-
 
 
 			</form>
@@ -116,4 +107,4 @@ const SelectItem = () => {
 	);
 }
 
-export default SelectItem;
+export default SelectItemunlink;

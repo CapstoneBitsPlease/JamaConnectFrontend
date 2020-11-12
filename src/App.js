@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import {
   SelectItem,
+  SelectItemunlink,
   SyncSettings,
   SyncFields,
   LinkFields,
@@ -30,7 +31,7 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}
         </Route>
         <Route path="/syncSettings">
           {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
