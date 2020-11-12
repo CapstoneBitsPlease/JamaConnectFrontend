@@ -16,9 +16,6 @@ const Navigation = () => {
           <li>
             <Link to="/syncSettings">Sync Settings</Link>
           </li>
-          <li>
-            <Link to="/syncFields">Sync Fields</Link>
-          </li>
         </ul>
       </nav>
     </div>

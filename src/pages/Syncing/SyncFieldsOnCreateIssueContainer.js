@@ -39,7 +39,7 @@ const SyncFieldsOnCreateIssueContainer = () => {
             testDiv.remove()
         }
         testDiv = document.createElement("div");
-        testDiv.id = `test_div`;
+        testDiv.id = "test_div";
         testDiv.innerHTML = `<p>${checked}<p>`
         document.body.appendChild(testDiv);
     }
@@ -51,9 +51,7 @@ const SyncFieldsOnCreateIssueContainer = () => {
                 className="select_fields_to_sync_button"
                 isSelected={isSelected}
                 onClick = {handleChange}
-            >
-                    Fields to sync with Jama
-            </Button>
+            >Fields to sync with Jama</Button>
             <div className="sync_fields_table_container">
                 { renderSelected && 
                     <SyncFieldsOnCreateIssueTable

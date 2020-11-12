@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStoreState, useStoreRehydrated } from "easy-peasy";
 import {
   BrowserRouter as Router,
@@ -11,7 +11,6 @@ import {
   SelectItem,
   SelectItemunlink,
   SyncSettings,
-  SyncFields,
   LinkFields,
 } from "./pages";
 import { Login } from "./pages";
@@ -37,14 +36,11 @@ const Test = () => {
         <Route path="/selectItem">
           { checkjamaidlink && checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItem />}
         </Route>
-        <Route path="/syncSettings">
-          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
-        </Route>
-        <Route path="/syncFields">
-          {!loggedIn ? <Redirect to="/login" /> : <SyncFields />}
-        </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
+        </Route>
+        <Route path="/syncSettings">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
         </Route>
         <Route path="/selectItemNoNav">
           {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
