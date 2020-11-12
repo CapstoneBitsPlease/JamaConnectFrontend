@@ -4,24 +4,44 @@ const LinkFieldsTable = (props) => {
 
     // handles the checkbox input. adds each service ID and name to an array if it is checked
     const handleCheckbox = () => {   
-        var checked = [];
-        const checked_values = document.getElementsByName('controlled-checkbox');
+        var jamaRawData = [];
+        var jiraRawData = [];
+        var jamaFields = [];
+        var jiraFields = [];
+        
+        const jamaCheckboxValues = document.getElementsByName('jama_checkbox');
         // add the checked value (fieldServiceID,fieldName) to the new array if it gets checked
-        for(let i = 0; i < checked_values.length; i++) {
-            if(checked_values[i].checked) {
-                checked.push(checked_values[i].value);
+        for(let i = 0; i < jamaCheckboxValues.length; i++) {
+            if(jamaCheckboxValues[i].checked) {
+                jamaRawData.push(jamaCheckboxValues[i].value);
             }
         }
-        // split the data
-        for(let i = 0; i < checked.length; i++) {
-          var fieldServiceID = checked[i].split(",")[0];
-          var fieldName = checked[i].split(",")[1];
+        const jiraCheckboxValues = document.getElementsByName('jira_checkbox');
+        // add the checked value (fieldServiceID,fieldName) to the new array if it gets checked
+        for(let i = 0; i < jiraCheckboxValues.length; i++) {
+            if(jiraCheckboxValues[i].checked) {
+                jiraRawData.push(jiraCheckboxValues[i].value);
+            }
         }
-        // add it to the correct array of fields 
-        if(props.service === "Jama")
-            props.setJamaFieldsToLink(jamaFieldsToLink => [...jamaFieldsToLink, [fieldServiceID, fieldName]]);
-        if(props.service === "Jira")
-            props.setJiraFieldsToLink(jiraFieldsToLink => [...jiraFieldsToLink, [fieldServiceID, fieldName]]);
+
+        // format Jama data, add to field array
+        for(let i = 0; i < jamaRawData.length; i++) {
+            // split the data 
+            let fieldServiceID = jamaRawData[i].split(",")[0];
+            let fieldName = jamaRawData[i].split(",")[1];
+            // add it to the correct array of fields 
+            jamaFields.push([fieldServiceID, fieldName]);
+        }
+
+        // do the same for the Jira data 
+        for(let i = 0; i < jiraRawData.length; i++) {
+            let fieldServiceID = jiraRawData[i].split(",")[0];
+            let fieldName = jiraRawData[i].split(",")[1];
+            jiraFields.push([fieldServiceID, fieldName]);
+        }
+        
+        props.setJamaFieldsToLink(jamaFields);
+        props.setJiraFieldsToLink(jiraFields);
     }
 
     // format data for UI. excludes any nested subfields 
@@ -64,6 +84,7 @@ const LinkFieldsTable = (props) => {
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
         var data = formatData();
+        var checkboxNameRender = (props.service === "Jama") ? "jama_checkbox" : "jira_checkbox";
         return data.map((row) => {
             const { index, fieldServiceID, fieldName, checked } = row;
             var fieldData = [fieldServiceID, fieldName];
@@ -76,10 +97,10 @@ const LinkFieldsTable = (props) => {
                     <div className="linked_fields_checkbox">
                         <input
                             type="checkbox"
-                            id={`checkbox_${index}`}
+                            id={`${checkboxNameRender}_${index}`}
                             onChange={handleCheckbox}
                             value={fieldData}
-                            name="controlled-checkbox"
+                            name={checkboxNameRender}
                             checked={checked}
                             className="link_checkbox"
                         ></input>

@@ -121,7 +121,7 @@ const LinkFieldsContainer = () => {
 
     // add data to DOM for testing whenever new fields are added or item data is changed
     useEffect(() => {
-      if(jamaFieldsToLink.length !== 0 && jiraFieldsToLink.length !== 0) {
+      if(jamaFieldsToLink.length !== 0 || jiraFieldsToLink.length !== 0) {
         if(document.getElementById("test_div")) {
           var testDiv = document.getElementById("test_div");
           testDiv.remove();
@@ -169,31 +169,38 @@ const LinkFieldsContainer = () => {
     // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = (event) => {
         event.preventDefault();
-        if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0]) {
+        if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
+          && jiraFieldsToLink.length === jamaFieldsToLink.length) {
+          console.log(jamaFieldsToLink, jiraFieldsToLink)
           // convert to formData for request
           var data = convertToForm();   
+
           // POST to capstone database
           linkItems(data);
+
+          // uncheck checkboxes
+          const jiraChecked = document.getElementsByName('jira_checkbox');
+          const jamaChecked = document.getElementsByName('jama_checkbox');
+          for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
+              jiraChecked[i].checked = false;
+              jamaChecked[i].checked = false;
+          }
+              
+          // remove test divs
+          if(document.getElementById("test_div")) {
+            var testDiv = document.getElementById("test_div");
+            testDiv.remove();
+          }
         }
         else {
-          makeToast("error", "Input is required to link fields. Please select at least one field from each table.");
-        }
-
-        // remove checks
-        const checked = document.getElementsByName('controlled-checkbox');
-        for(let i = 0; i < checked.length; i++) 
-            checked[i].checked = false;
-            
-        // remove test divs
-        if(document.getElementById("test_div")) {
-          var testDiv = document.getElementById("test_div");
-          testDiv.remove();
+          makeToast("error", "Input is required to link fields. Please select an equal number of fields from each table.");
         }
     }
 
     // handles the "done linking" button. returns user to the previous page
     const handleDone = (event) => {
         event.preventDefault();
+        //console.log(jamaToken)
         history.goBack();
     }
 
