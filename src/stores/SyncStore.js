@@ -9,9 +9,6 @@ const syncStore = {
     numFieldsToSync: 0,
     timeUnit: "",
     syncInterval: "",
-    linkedData: [],
-    responseLength: 0,
-    checkedIDs: [],
 
     // API call to retrieve the length of time of last sync from the capstone database
     getPrevSyncTime: thunk((actions) => {
@@ -62,36 +59,7 @@ const syncStore = {
 
     setSyncInterval: action((state, newSyncInterval) => {
         state.syncInterval = newSyncInterval
-    }),
-
-    // API call to retrieve the content of the fields ready to sync from the capstone db
-    getFieldsToSync: thunk((actions) => {
-        axios
-        .get(`${devURL}/capstone/fields_to_sync`)
-        .then(response => {
-            console.log("success");
-            console.log(response.data["fields_to_sync"]);
-            actions.setLinkedData(response.data["fields_to_sync"]);
-            actions.setResponseLength(response.data["num_fields"]);
-        })
-        .catch(error => {
-            console.log("error:", error);
-            makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
-        });
-    }),
-
-    setLinkedData: action((state, newLinkedData) => {
-        state.linkedData = newLinkedData;
-    }),
-
-    setResponseLength: action((state, newResponseLength) => {
-        state.responseLength = newResponseLength;
-    }),
-
-    setCheckedIDs: action((state, newCheckedIDs) => {
-        state.checkedIDs = newCheckedIDs;
     })
-
 }
 
 export default syncStore;

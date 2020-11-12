@@ -196,7 +196,7 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id);}} >Link</button>
 					</div>
 
 

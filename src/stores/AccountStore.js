@@ -13,6 +13,7 @@ const accountStore = persist(
         )
         .then((reponse) => {
           makeToast("success", "User has been authenticated");
+          console.log(reponse.data)
           actions.setToken(reponse.data.access_token);
           actions.setLoggedIn(true);
         })

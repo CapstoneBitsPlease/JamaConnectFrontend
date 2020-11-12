@@ -1,9 +1,9 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import Button from '@atlaskit/button';
 import axios from 'axios';
 import {useStoreState} from 'easy-peasy';
 import {useHistory} from 'react-router-dom';
-import LinkedItemsTable from '../../components/LinkedItemsTable';
+import ItemsTable from '../../components/ItemsTable';
 import LinkFieldsTable from './LinkFieldsTable';
 import makeToast from '../../components/Toaster';
 import '../../styles/pages/LinkFields.style.sass';
@@ -11,25 +11,14 @@ import '../../styles/pages/LinkFields.style.sass';
 const LinkFieldsContainer = () => {
     const devURL = "http://127.0.0.1:5000"
     const history = useHistory();
-    // references to hold user input 
-    const jamaFieldIDRef = useRef();
-    const jiraFieldIDRef = useRef();
-    const jamaFieldNameRef = useRef();
-    const jiraFieldNameRef = useRef();
-
-    // these are temporary - will be using project id, type id, and item/issue id from Yi's store and tokens from Thy's
-    const jamaProjectID = 46;
-    const jiraProjectID = 101; 
-    const jamaTypeID = 29;
-    const jiraTypeID = 27;
-    const issueID = 10070;
-    const itemID = 7861; 
-    const jamaToken = "";
     const jiraToken = "";
     
     // initial component state 
     const [ jamaItemName, setJamaItemName ] = useState("");
     const [ jiraIssueName, setJiraIssueName ] = useState("");
+    const [ jiraProjectID, setJiraProjectID ] = useState(0);
+    const [ jiraTypeID, setJiraTypeID ] = useState(0);
+    const [ jiraProjectName, setJiraProjectName ] = useState("");
     const [ itemData, setItemData ] = useState([]);
     const [ issueData, setIssueData ] = useState([]);
     const [ jamaFieldsToLink, setJamaFieldsToLink ] = useState([]);
@@ -38,15 +27,18 @@ const LinkFieldsContainer = () => {
     const [ jiraItemToLink, setJiraItemToLink ] = useState([]);
 
     // retrieve Jama/Jira item info and token from store
-    /*const { itemID, issueID, jamaItemType, jiraItemType, jamaProjectID, jiraProjectID, jamaToken } = useStoreState(
+    const { itemID, jamaItemType, jamaProjectID, jamaProjectName, issueID, jamaToken } = useStoreState(
         state => ({
             itemID: state.jamaitem.itemID,
+            jamaItemType: state.jamaitem.itemtype,
+            jamaProjectID: state.jamaitem.progID,
+            jamaProjectName: state.jamaitem.progname,
             issueID: state.jamaitem.jiraID,
             jamaToken: state.accountStore.token
         })
-    )*/
+    )
 
-    
+  
     /* API Calls */
 
     // retrieves the fields of an item from the Jama database given its ID
@@ -64,12 +56,12 @@ const LinkFieldsContainer = () => {
           console.log(response.data);
           setJamaItemName(response.data.fields.name);
           setItemData(response.data.fields);
-          var jamaItemData = [itemID, response.data.fields.name, jamaTypeID, jamaProjectID];
+          var jamaItemData = [itemID, response.data.fields.name, jamaItemType, jamaProjectID];
           setJamaItemToLink(jamaItemToLink => [...jamaItemToLink, jamaItemData]);
         })
         .catch((error) => {
           console.log(error.response);
-          makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings"); 
+          makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
@@ -88,13 +80,16 @@ const LinkFieldsContainer = () => {
           console.log("jira/item_of_id success");
           console.log(response.data);
           setJiraIssueName(response.data.fields.summary);
+          setJiraTypeID(response.data.fields.issuetype.id);
+          setJiraProjectID(response.data.fields.project.id);
+          setJiraProjectName(response.data.fields.project.name);
           setIssueData(response.data.fields);
-          var jiraIssueData = [issueID, response.data.fields.summary, jiraTypeID, jiraProjectID];
+          var jiraIssueData = [issueID, response.data.fields.summary, response.data.fields.issuetype.id, response.data.fields.project.id];
           setJiraItemToLink(jiraItemToLink => [...jiraItemToLink, jiraIssueData]);
         })
         .catch(error => {
           console.log("error:", error);
-          makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings"); 
+          makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
@@ -112,7 +107,7 @@ const LinkFieldsContainer = () => {
         })
         .catch(error => {
           console.log("error:", error);
-          makeToast("error", "Error when linking. Please see the error logs located in the admin settings"); 
+          makeToast("error", "Error when linking. You may be trying to add a duplicate item to the database. Please see the error logs located in the admin settings."); 
         })
     }
 
@@ -171,40 +166,28 @@ const LinkFieldsContainer = () => {
 
     /* Input and button functionality */ 
 
-    const validateInput = () => {} // WIP - plan is to check that the fields supplied by user are in the retrieved data
-
-    // handles the "add to batch" button. adds the user input to the fields array 
-    const handleAdd = () => {
-        var newJamaFieldID = jamaFieldIDRef.current.value;
-        var newJamaFieldName = jamaFieldNameRef.current.value;;
-        var newJiraFieldID = jiraFieldIDRef.current.value;;
-        var newJiraFieldName = jiraFieldNameRef.current.value;;
-        
-        if(newJamaFieldID === "" || newJamaFieldName === "" || newJiraFieldID === "" || newJiraFieldName === "") {
-            makeToast("error", "Input is required to link fields. Please enter a service ID and name."); 
-            return;
-        }
-
-        // add new fields to the array
-        setJamaFieldsToLink(jamaFieldsToLink => [...jamaFieldsToLink, [newJamaFieldID, newJamaFieldName]]);
-        setJiraFieldsToLink(jiraFieldsToLink => [...jiraFieldsToLink, [newJiraFieldID, newJiraFieldName]]);
-        
-        // clear form input
-        document.getElementById("input_jama_field_id").value = ""; 
-        document.getElementById("input_jama_field_name").value = ""; 
-        document.getElementById("input_jira_field_id").value = "";
-        document.getElementById("input_jira_field_name").value = ""; 
-    }
-
-    // handles the "link" button. converts data to form and sends to the backend array of items to link
+    // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = (event) => {
         event.preventDefault();
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0]) {
-          var data = convertToForm(); // convert data to formData 
+          // convert to formData for request
+          var data = convertToForm();   
+          // POST to capstone database
           linkItems(data);
         }
         else {
-          makeToast("error", "Input is required to link fields. Please enter a service ID and name.");
+          makeToast("error", "Input is required to link fields. Please select at least one field from each table.");
+        }
+
+        // remove checks
+        const checked = document.getElementsByName('controlled-checkbox');
+        for(let i = 0; i < checked.length; i++) 
+            checked[i].checked = false;
+            
+        // remove test divs
+        if(document.getElementById("test_div")) {
+          var testDiv = document.getElementById("test_div");
+          testDiv.remove()
         }
     }
 
@@ -219,72 +202,35 @@ const LinkFieldsContainer = () => {
             <h1 className="link_page_title">Select fields to link</h1>
                 <h2 className="link_page_subtitle">You are currently viewing these items:</h2>
                 <div className="linked_items_container">
-                    <LinkedItemsTable 
+                    <ItemsTable 
                         title="Jama Project"
                         projectID={jamaProjectID}
-                        projectName={"JamaProjectName"}
+                        projectName={jamaProjectName}
                         itemID={itemID}
                         itemName={jamaItemName}
                     />
-                    <LinkedItemsTable 
+                    <ItemsTable 
                         title="Jira Project"
                         projectID={jiraProjectID}
-                        projectName={"JiraProjectName"}
+                        projectName={jiraProjectName}
                         itemID={issueID}
                         itemName={jiraIssueName}
                     />
                 </div>
-
                 <LinkFieldsTable 
                     service="Jama"
                     itemData={itemData} 
+                    setJamaFieldsToLink={setJamaFieldsToLink}
+                    setJiraFieldsToLink={setJiraFieldsToLink}
                 />
                 <LinkFieldsTable 
                     service="Jira"
                     itemData={issueData}
+                    setJamaFieldsToLink={setJamaFieldsToLink}
+                    setJiraFieldsToLink={setJiraFieldsToLink}
                 />
-                
                 <div className="user_input_container">
-                    <span className="input_fields_container">
-                      <span className="input_jama_fields">
-                        <label htmlFor="input_fields" className="input_label">Jama field service ID</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jama_field_id"
-                            className="fields_to_link_input"
-                            ref={jamaFieldIDRef}
-                        ></input>
-                        <label htmlFor="input_fields" className="input_label">Jama field name</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jama_field_name"
-                            className="fields_to_link_input"
-                            ref={jamaFieldNameRef}
-                        ></input>
-                      </span>
-                      <span className="input_jira_fields">
-                        <label htmlFor="input_fields" className="input_label">Jira field service ID</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jira_field_id"
-                            className="fields_to_link_input"
-                            ref={jiraFieldIDRef}
-                        ></input>
-                        <label htmlFor="input_fields" className="input_label">Jira field name</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jira_field_name"
-                            className="fields_to_link_input"
-                            ref={jiraFieldNameRef}
-                        ></input>
-                      </span>
-                    </span>
                     <span className="link_buttons_container">
-                        <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
                         <Button id="link_button" appearance="primary" className="link_button" onClick={handleLink}>Link fields</Button>
                         <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>
