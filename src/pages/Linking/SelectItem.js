@@ -30,11 +30,20 @@ const SelectItem = () => {
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
+	const [jira_id, setjira_id] = useState(0)
+
+	//store information using easy peasy
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
-	const [jira_id , setjira_id ] = useState(0)
 	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
+
+	const progname = useStoreActions(actions => actions.jamaitem.setprogname)
+	const progID = useStoreActions(actions => actions.jamaitem.setprogID)
+	const itemname = useStoreActions(actions => actions.jamaitem.setitemname)
+	const itemtype = useStoreActions(actions => actions.jamaitem.setitemtype)
+
+
+	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
-	console.log(token);
 
 
 	//Getting all the project with API call
@@ -44,7 +53,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -63,7 +72,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -83,7 +92,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -126,14 +135,18 @@ const SelectItem = () => {
 
 	//Useeffect hook function
 	useEffect(() => {
-		get_prog();
-		get_type();
+		if (token) {
+			get_prog();
+			get_type();
+		}
 	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
 	useEffect(() => {
-		get_list();
+		if (token) {
+			get_list();
+		}
 	}, [types_id, projects_id])
 
 
@@ -151,7 +164,7 @@ const SelectItem = () => {
 							options={resultproject()}
 							id="projectselection"
 							placeholder="Select project here"
-							onChange={e => { setprojects_id(e.value) }}
+							onChange={e => { setprojects_id(e.value); progID(e.value); progname(e.label); }}
 						/>
 
 						<br />
@@ -160,7 +173,7 @@ const SelectItem = () => {
 							placeholder="Select item type"
 							id="typeselection"
 							options={resulttype()}
-							onChange={e => { settypes_id(e.value) }}
+							onChange={e => { settypes_id(e.value); itemtype(e.label); }}
 						/>
 
 					</div>
@@ -171,7 +184,7 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the Jama item ID here"
-							onChange={e => { setitem_id(e.target.value) }}
+							onChange={e => { setitem_id(e.target.value); }}
 						/>
 						<input
 							className="field1"
