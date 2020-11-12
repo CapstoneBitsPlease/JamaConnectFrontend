@@ -1,37 +1,51 @@
 {
-    "key": "jama_jira_key",
-    "name": "Jama-Jira Plugin Name",
-    "description": "Sync your Jira and Jama projects",
-    "vendor": {
-        "name": "capstone2020"
-    },
-    "baseUrl": "",
-    "authentication": {
-        "type": "jwt"
-    },
-    "enableLicensing": false,
-    "apiVersion": 1,
-    "modules": {
-        "webSections": [
-            {
-              "location": "admin_plugins_menu",
-              "weight": 50,
-              "name": {
-                "value": "Jama-Jira Plugin Admin"
-              },
-              "key": "plugin_admin_header"
-            }
-          ],
-        "webItems": [
-            {
-              "key": "example-section-link",
-              "location": "admin_plugins_menu/my-web-section",
-              "name": {
-                "value": "Sync settings"
-              },
-              "url": "../src/components/Syncing/SyncSettingsContainer"
-          }
-        ]
-        
-    }
+  "name": "Hello World",
+  "description": "Atlassian Connect app",
+  "key": "com.example.myapp",
+  "baseUrl": "https://047d58e0e2de.ngrok.io",
+  "vendor": {
+    "name": "Example, Inc.",
+    "url": "http://example.com"
+  },
+  "authentication": {
+    "type": "none"
+  },
+  "apiVersion": 1,
+  "modules": {
+    "webItems": [{
+      "location": "jira.project.sidebar.plugins.navigation",
+      "key": "connect-provided-link-to-panel",
+      "url": "/projects/EX?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
+      "context": "product",
+      "name": {
+        "value": "Jama Plugin"
+      }
+    }],
+    "webPanels": [{
+      "key": "connect-provided-web-panel",
+      "url": "/login?pkey=EX",
+      "location": "com.example.myaddon:connect-provided-link-to-panel",
+      "name": {
+        "value": "My Web Panel"
+      }
+    }],
+    "jiraIssueContents": [{
+      "icon": {
+        "width": 24,
+        "height": 24,
+        "url": "/speech-bubble.svg"
+      },
+      "target": {
+        "type": "web_panel",
+        "url": "/selectItemNoNav"
+      },
+      "tooltip": {
+        "value": "This is a tooltip"
+      },
+      "name": {
+        "value": "TEST"
+      },
+      "key": "my-issue-content-panel"
+    }]
+  }
 }

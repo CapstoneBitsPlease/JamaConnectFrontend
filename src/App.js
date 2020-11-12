@@ -1,31 +1,57 @@
-import React from "react";
-import { useStoreState } from "easy-peasy";
+import React, { useState } from "react";
+import { useStoreState, useStoreRehydrated } from "easy-peasy";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
+  useLocation,
 } from "react-router-dom";
+import {
+  SelectItem,
+  SyncSettings,
+  SyncFields,
+  LinkFields,
+} from "./pages";
 import { Login } from "./pages";
-import { SelectItem, SyncSettings, SyncFields, SyncFieldsOnCreateIssue, LinkFields } from "./domains";
+import { Navigation } from "components";
+import {JiraIssueContent} from "../src/components"
+const Test = () => {
+  const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
+  const location = useLocation();
+  const noNav = location.pathname.includes("NoNav");
 
-function App() {
-  const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            {loginState ? <Redirect to="/selectItem" /> : <Login />}
-          </Route>
-          <Route path="/selectItem" exact>
-            {!loginState ? <Redirect to="/" /> : <SelectItem />}
-          </Route>
-          <Route path ="/syncSettings" component={SyncSettings} exact />
-          <Route path ="/syncFields" component={SyncFields} exact />
-          <Route path ="/syncFieldsOnCreateIssue" component={SyncFieldsOnCreateIssue} exact />
-          <Route path ="/linkFields" component={LinkFields} exact />
-        </Switch>
-      </Router>
-  )
-}
+    <>
+      {!noNav && loggedIn && <Navigation />}
+
+      <Switch>
+        <Route path="/login">
+          {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
+        </Route>
+        <Route path="/selectItem">
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
+        </Route>
+        <Route path="/syncSettings">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
+        </Route>
+        <Route path="/syncFields">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncFields />}
+        </Route>
+        <Route path="/linkFields">
+          {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
+        </Route>
+        <Route path="/selectItemNoNav">
+          {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
+        </Route>
+      </Switch>
+    </>
+  );
+};
+
+const App = () => {
+  const isRehydrated = useStoreRehydrated();
+
+  return <Router>{isRehydrated ? <Test /> : "Loading"}</Router>;
+};
 export default App;

@@ -1,56 +1,40 @@
 import React from 'react';
 import axios from 'axios'
-import "../../styles/components/SelectItem.style.sass";
+import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
-import { data } from 'autoprefixer';
-import item from '../../data/AllItem';
-import Select from 'react-select'
+import Select from 'react-select';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Route, useHistory } from 'react-router-dom';
 
-//authorization function with bearer
-axios.interceptors.request.use(
-	config => {
-		config.headers.Authorization = `Bearer `;
-		return config;
-	},
-	error => {
-		return Promise.reject(error);
-	}
-);
+// //authorization function with bearer
+// axios.interceptors.request.use(
+// 	config => {
+// 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
+// 		return config;
+// 	},
+// 	error => {
+// 		return Promise.reject(error);
+// 	}
+// );
 
 const SelectItem = () => {
-
 	//token : authorization token 
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
 
 	// const [token, setToken] = useState(0);
+	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
 	const [list, setlist] = useState([])
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
-
-
-	//Tried to use login fucntion to get token and set token for authorization but failed with
-	//422 (unbprocessable entities)
-
-	// const log_in = () => {
-	// 	axios.post('',
-	// 		{
-	// 			headers: {
-	// 				'Access-Control-Allow-Origin': '*',
-	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-	// 			}
-	// 		})
-	// 		.then(res => {
-	// 			console.log(res)
-	// 			setToken(res.data.access_token);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		})
-
-	// }
+	const [item_id, setitem_id] = useState(0)
+	const item = useStoreActions(actions => actions.jamaitem.setitemID)
+	const [jira_id , setjira_id ] = useState(0)
+	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
+	const token = useStoreState(state => state.accountStore.token)
+	console.log(token);
 
 
 	//Getting all the project with API call
@@ -60,6 +44,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -78,6 +63,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -97,6 +83,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization' : `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -135,11 +122,13 @@ const SelectItem = () => {
 		return tempArray;
 	}
 
+
+
 	//Useeffect hook function
 	useEffect(() => {
 		get_prog();
 		get_type();
-	}, [])
+	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
@@ -153,13 +142,14 @@ const SelectItem = () => {
 	return (
 		<div className="select_item-container">
 			<form className="select_item-selecting" >
-				<legend className="mx-auto border-separate font-bold italic text-xl">Item Selection</legend>
+				<legend className="select_item-title">Item Selection</legend>
 				<div className="select_item-item">
 
 
 					<div className="dropdown">
 						<Select
 							options={resultproject()}
+							id="projectselection"
 							placeholder="Select project here"
 							onChange={e => { setprojects_id(e.value) }}
 						/>
@@ -168,6 +158,7 @@ const SelectItem = () => {
 
 						<Select
 							placeholder="Select item type"
+							id="typeselection"
 							options={resulttype()}
 							onChange={e => { settypes_id(e.value) }}
 						/>
@@ -179,22 +170,30 @@ const SelectItem = () => {
 							className="field"
 							type="text"
 							id='itemid'
-							placeholder=" Enter the item ID here"
+							placeholder=" Enter the Jama item ID here"
+							onChange={e => { setitem_id(e.target.value) }}
+						/>
+						<input
+							className="field1"
+							type="text"
+							id="jiraid"
+							placeholder=" Enter the Jira item ID here"
+							onChange={e => { setjira_id(e.target.value) }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button type='button' className='but'>Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
 					</div>
+
 
 				</div>
 
 				<div className="select_item-list">
-					<ul>
-						{temp().map(s => (<li>{s}</li>))}
+					<ul >
+						{temp().map(s => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
-
 
 			</form>
 
