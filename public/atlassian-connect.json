@@ -21,7 +21,14 @@
         "value": "Jama Plugin"
       }
     }],
-
+    "webPanels": [{
+      "key": "connect-provided-web-panel",
+      "url": "/login?pkey=EX",
+      "location": "com.example.myaddon:connect-provided-link-to-panel",
+      "name": {
+        "value": "My Web Panel"
+      }
+    }],
     "jiraIssueContents": [{
       "icon": {
         "width": 24,
