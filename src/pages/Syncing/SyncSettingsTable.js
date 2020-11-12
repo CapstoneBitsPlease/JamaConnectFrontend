@@ -15,7 +15,7 @@ return (
                 <td className="sync_settings_page_table_data">{props.numFieldsToSync}</td>
             </tr>
             <tr>
-                <th className="sync_settings_page_table_label">Sync interval:</th>
+                <th className="sync_settings_page_table_label">Set new sync interval:</th>
                 <td className="sync_settings_page_table_data">
                     <span className="select_input">
                         <input 

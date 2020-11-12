@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios'
-import "../../styles/components/SelectItems.sass";
+import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Route, useHistory } from 'react-router-dom';
 
 // //authorization function with bearer
 // axios.interceptors.request.use(
@@ -22,6 +23,7 @@ const SelectItem = () => {
 	//types : get all item type to display in select box
 
 	// const [token, setToken] = useState(0);
+	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
 	const [list, setlist] = useState([])
@@ -205,8 +207,6 @@ const SelectItem = () => {
 						{temp().map(s => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
-
-
 
 			</form>
 

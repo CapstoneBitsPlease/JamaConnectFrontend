@@ -14,6 +14,7 @@ const SyncFieldsTable = (props) => {
                 "checkboxID": `checkbox_${i+1}`,
                 "jamaName": props.linkedData[i][3], 
                 "jiraName": props.linkedData[i][4],
+                "fieldServiceID": "fieldServiceID",
                 "isChecked": false
             })
         }
@@ -34,7 +35,7 @@ const SyncFieldsTable = (props) => {
                     <td className="linked_fields_data">
                         <div className="linked_fields_checkbox">
                             <Checkbox
-                                id={checkboxID}
+                                testId={checkboxID}
                                 isChecked={checked}
                                 onChange={props.handleCheckbox}
                                 value={id}
@@ -49,22 +50,22 @@ const SyncFieldsTable = (props) => {
     }
 
     return (
-        <table className="linked_fields_table">
-            <thead>
-                <tr>
-                    <th className="linked_fields_title">Linked fields</th>
-                </tr>
-                <tr className="linked_fields_row">
-                    <th className="linked_fields_headers">ID</th>
-                    <th className="linked_fields_headers">Jama Name</th>
-                    <th className="linked_fields_headers">Jira Name</th>
-                    <th className="linked_fields_headers">Sync</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderTableData()}
-            </tbody>
-        </table>
+        <div>
+            <h3 className="fields_table_title">Linked fields</h3>
+            <table className="linked_fields_table">
+                <thead>
+                    <tr className="linked_fields_row">
+                        <th className="linked_fields_headers">ID</th>
+                        <th className="linked_fields_headers">Jama Name</th>
+                        <th className="linked_fields_headers">Jira Name</th>
+                        <th className="linked_fields_headers">Sync</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderTableData()}
+                </tbody>
+            </table>
+        </div>
     )
 }
 

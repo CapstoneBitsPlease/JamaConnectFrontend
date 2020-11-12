@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import Button from '@atlaskit/button';
 import SyncSettingsTable from './SyncSettingsTable.js'
 import {useStoreActions, useStoreState} from "easy-peasy";
-import '../../styles/components/SyncSettings.style.sass';
+import makeToast from '../../components/Toaster';
+import '../../styles/pages/SyncSettings.style.sass';
 
 /* Component to render sync settings page */
 const SyncSettingsContainer = () => {
@@ -31,11 +32,13 @@ const SyncSettingsContainer = () => {
       // eslint-disable-next-line
   }, [])
   
-  // on click of the button, prints updated sync interval, will update sync process 
+  // handles the "apply" button. prints updated sync interval, will update sync process 
   const handleApply = (e) => {
     e.preventDefault();
-    if(syncInterval === "") 
-      alert("Error: sync interval input is required.");
+    if(syncInterval === "") {
+      makeToast("error", "Input is required to update the sync process. Please enter a time interval.");
+      return;
+    }
 
     var selectedTimeUnit = document.getElementById("dropdown_list_selection").value
     console.log(syncInterval, selectedTimeUnit);
