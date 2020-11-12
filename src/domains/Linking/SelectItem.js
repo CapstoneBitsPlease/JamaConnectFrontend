@@ -28,7 +28,7 @@ const SelectItem = () => {
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
-	const [jira_id , setjira_id ] = useState(0)
+	const [jira_id, setjira_id] = useState(0)
 
 	//store information using easy peasy
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
@@ -38,7 +38,7 @@ const SelectItem = () => {
 	const progID = useStoreActions(actions => actions.jamaitem.setprogID)
 	const itemname = useStoreActions(actions => actions.jamaitem.setitemname)
 	const itemtype = useStoreActions(actions => actions.jamaitem.setitemtype)
-	
+
 
 	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
@@ -51,7 +51,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -70,7 +70,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -90,7 +90,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -133,14 +133,18 @@ const SelectItem = () => {
 
 	//Useeffect hook function
 	useEffect(() => {
-		get_prog();
-		get_type();
+		if (token) {
+			get_prog();
+			get_type();
+		}
 	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
 	useEffect(() => {
-		get_list();
+		if (token) {
+			get_list();
+		}
 	}, [types_id, projects_id])
 
 
