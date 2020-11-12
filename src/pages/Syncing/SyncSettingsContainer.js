@@ -49,7 +49,7 @@ const SyncSettingsContainer = () => {
     testDiv.innerHTML = `<p>${syncInterval} ${selectedTimeUnit}<p>`
     document.body.appendChild(testDiv);
 
-    // update backend sync process to occur this often
+    // POST sync interval
   }
 
   return (

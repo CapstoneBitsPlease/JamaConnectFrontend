@@ -124,7 +124,7 @@ const LinkFieldsContainer = () => {
       if(jamaFieldsToLink.length !== 0 && jiraFieldsToLink.length !== 0) {
         if(document.getElementById("test_div")) {
           var testDiv = document.getElementById("test_div");
-          testDiv.remove()
+          testDiv.remove();
         }
         testDiv = document.createElement("div");
         testDiv.id = "test_div";
@@ -187,7 +187,7 @@ const LinkFieldsContainer = () => {
         // remove test divs
         if(document.getElementById("test_div")) {
           var testDiv = document.getElementById("test_div");
-          testDiv.remove()
+          testDiv.remove();
         }
     }
 
