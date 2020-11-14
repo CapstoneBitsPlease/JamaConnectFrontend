@@ -36,12 +36,13 @@ const SelectItemunlink = () => {
 			})
 			.catch(err => {
 				console.log(err);
-				makeToast("error","There is something wrong when getting item list")
+				makeToast("error", "There is something wrong when getting item list")
 			})
+		console.log(token);
 	}
 
 
-	
+
 	//Check if the input ID for jama and jira are actually valid
 	const check_error = () => {
 		axios.get(`http://127.0.0.1:5000/jama/item_by_id?item_id=${item_id}`,
@@ -53,31 +54,74 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				checkjama(true);
+				if (res.request.status == 200) {
+					checkjama(true);
+				}
 				console.log(res);
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error","There is something wrong with your Jama ID")
+				makeToast("error", "There is something wrong with your Jama ID")
 			})
 
-		axios.get(`http://127.0.0.1:5000/jira/item_by_id?${jira_id}`,
+		axios.get(`http://127.0.0.1:5000/jira/item_by_id?id=${jira_id}`,
 			{
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMTkzNDksIm5iZiI6MTYwNTIxOTM0OSwianRpIjoiNmZiMjZlNzEtZDU0Zi00ZDMwLWI1YjgtZjk5YmM1ODE1NDQ3IiwiZXhwIjoxNjA1MzA1NzQ5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiOTRhNmU4NDktNWE0Zi00YTE4LTg3ZmEtNTIyYTZhNGE5Y2U2In0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.pT74AJqu0i8gNHtR4sFai_WoeW_4UWqEmDCiHczPPSs`,
+					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
 				}
 			})
 			.then(res => {
-				checkjira(true);
+				if (res.request.status == 200) {
+					checkjira(true);
+				}
 				console.log(res);
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error","There is something wrong with your Jira ID")
+				makeToast("error", "There is something wrong with your Jira ID")
 			})
 
+	}
+
+	const unlink_items = () => {
+		if (item_id == 0) {
+			axios.get(`http://127.0.0.1:5000//capstone/unlink_with_id?id=${jira_id}`,
+				{
+					headers: {
+						'Access-Control-Allow-Origin': '*',
+						'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+						'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
+					}
+				})
+				.then(res => {
+					console.log(res);
+
+				})
+				.catch(err => {
+					console.log(err.data);
+					makeToast("error", "There is something wrong while unlinking")
+				})
+		}
+		else {
+			axios.get(`http://127.0.0.1:5000//capstone/unlink_with_id?id=${item_id}`,
+				{
+					headers: {
+						'Access-Control-Allow-Origin': '*',
+						'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+						'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
+					}
+				})
+				.then(res => {
+					console.log(res);
+
+				})
+				.catch(err => {
+					console.log(err.data);
+					makeToast("error", "There is something wrong while unlinking")
+				})
+		}
 	}
 
 
@@ -132,7 +176,7 @@ const SelectItemunlink = () => {
 						/>
 
 						<div className="btn">
-							<button id="linkbutton" type='button' className='but'  onClick={ () => {check_error();} } >Unlink</button>
+							<button id="linkbutton" type='button' className='but' onClick={() => { check_error(); unlink_items();}} >Unlink</button>
 						</div>
 
 

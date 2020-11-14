@@ -134,7 +134,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjA5MjEsIm5iZiI6MTYwNTIyMDkyMSwianRpIjoiNDRhYzM2ZTYtYTBjZS00OWQzLTlkYTQtM2I3OGRlZGFiYjJiIiwiZXhwIjoxNjA1MzA3MzIxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.df4oDeaLpdbKcPAvV8ilr_nNG0pAElKw0UBVEhMlZnk`,
+					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUzMDQ4MjUsIm5iZiI6MTYwNTMwNDgyNSwianRpIjoiZGNmMzQyMDEtNjE0ZS00ODk0LThhNTctZGE3ZjZmMWRiYzVjIiwiZXhwIjoxNjA1MzkxMjI1LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiOWQ5M2MwNGEtY2QyMi00MzMzLTlhZDMtYzk0MjQzZDJlY2YyIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.ZWXSFnnDAPrs2x7XI73zRPRv25RzfzCjPVGtjZFJbhk`,
 				}
 			})
 			.then(res => {
