@@ -11,8 +11,8 @@ const syncStore = {
     syncInterval: "",
 
     // API call to retrieve the length of time of last sync from the capstone database
-    getPrevSyncTime: thunk((actions) => {
-        axios
+    getPrevSyncTime: thunk(async(actions) => {
+        await axios
         .get(
             `${devURL}/capstone/last_successful_sync_time`
         )
@@ -41,8 +41,8 @@ const syncStore = {
     }),
 
     // API call to retrieve the number of fields ready to sync from the capstone database
-    getNumFieldsToSync: thunk((actions) => {
-        axios
+    getNumFieldsToSync: thunk(async(actions) => {
+        await axios
         .get(`${devURL}/capstone/fields_to_sync`)
         .then(response => {
             actions.setNumFieldsToSync(response.data["num_fields"]);

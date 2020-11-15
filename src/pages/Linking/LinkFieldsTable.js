@@ -3,46 +3,37 @@ import React from "react";
 const LinkFieldsTable = (props) => {
 
     // handles the checkbox input. adds each service ID and name to an array if it is checked
-    const handleCheckbox = () => {   
-        var jamaRawData = [];
-        var jiraRawData = [];
-        var jamaFields = [];
-        var jiraFields = [];
+    const handleCheckbox = () => {
+        var checkboxValues = [];
+        var checkboxData = [];
+        var fieldData = [];
         
-        const jamaCheckboxValues = document.getElementsByName('jama_checkbox');
-        // add the checked value (fieldServiceID,fieldName) to the new array if it gets checked
-        for(let i = 0; i < jamaCheckboxValues.length; i++) {
-            if(jamaCheckboxValues[i].checked) {
-                jamaRawData.push(jamaCheckboxValues[i].value);
-            }
-        }
-        const jiraCheckboxValues = document.getElementsByName('jira_checkbox');
-        // add the checked value (fieldServiceID,fieldName) to the new array if it gets checked
-        for(let i = 0; i < jiraCheckboxValues.length; i++) {
-            if(jiraCheckboxValues[i].checked) {
-                jiraRawData.push(jiraCheckboxValues[i].value);
+        if(props.service === "Jama") 
+            checkboxValues = document.getElementsByName('jama_checkbox');
+        if(props.service === "Jira") 
+            checkboxValues = document.getElementsByName('jira_checkbox');
+
+        for(let i = 0; i < checkboxValues.length; i++) {
+            if(checkboxValues[i].checked) {
+                checkboxData.push(checkboxValues[i].value);
             }
         }
 
-        // format Jama data, add to field array
-        for(let i = 0; i < jamaRawData.length; i++) {
+        for(let i = 0; i < checkboxData.length; i++) {
             // split the data 
-            let fieldServiceID = jamaRawData[i].split(",")[0];
-            let fieldName = jamaRawData[i].split(",")[1];
+            let fieldServiceID = checkboxData[i].split(",")[0];
+            let fieldName = checkboxData[i].split(",")[1];
             // add it to the correct array of fields 
-            jamaFields.push([fieldServiceID, fieldName]);
+            fieldData.push([fieldServiceID, fieldName]);
         }
 
-        // do the same for the Jira data 
-        for(let i = 0; i < jiraRawData.length; i++) {
-            let fieldServiceID = jiraRawData[i].split(",")[0];
-            let fieldName = jiraRawData[i].split(",")[1];
-            jiraFields.push([fieldServiceID, fieldName]);
-        }
+        if(props.service === "Jama")
+            props.setJamaFieldsToLink(fieldData);
+        else if(props.service === "Jira")
+            props.setJiraFieldsToLink(fieldData);
         
-        props.setJamaFieldsToLink(jamaFields);
-        props.setJiraFieldsToLink(jiraFields);
     }
+    
 
     // format data for UI. excludes any nested subfields 
     const formatData = () => {
@@ -80,6 +71,8 @@ const LinkFieldsTable = (props) => {
         })
         return data;
     }
+
+    
 
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
