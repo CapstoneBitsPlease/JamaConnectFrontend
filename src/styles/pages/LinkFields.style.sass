@@ -2,25 +2,31 @@
     &_page_title
         @apply text-2xl text-left font-normal
         @apply pl-4 mt-4 mb-8
-    
+
     &_page_subtitle
         @apply text-lg font-normal
         @apply mt-4 mb-8 ml-10
 
-.input_fields
-    @apply w-32 ml-10 
+.input_fields_container
+    @apply w-40 ml-10 
     @apply inline-block
 
 .fields_to_link_input
     @apply border-gray-200 rounded
-    @apply h-8
-
+    @apply h-8 mb-4
 
 .link_buttons_container
     @apply ml-16
 
-.fields_table_container
-    @apply mb-8 
+.link_button
+    @apply ml-10
+
+.link_fields_table_container
+    @apply mb-8 mt-8 inline-block 
+    @apply align-top
 
 .fields_table_title
-    @apply pl-10 h-0
+    @apply pl-10 h-0 text-xl
+
+.linked_fields_checkbox
+    @apply pr-2

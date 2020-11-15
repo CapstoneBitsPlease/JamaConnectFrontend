@@ -23,20 +23,29 @@
     }],
     "webPanels": [{
       "key": "connect-provided-web-panel",
-      "url": "/index.html?pkey=EX",
+      "url": "/login?pkey=EX",
       "location": "com.example.myaddon:connect-provided-link-to-panel",
       "name": {
         "value": "My Web Panel"
       }
     }],
-    "generalPages": [{
-      "url": "/index.html",
-      "key": "hello-world",
-      "location": "system.top.navigation.bar",
+    "jiraIssueContents": [{
+      "icon": {
+        "width": 24,
+        "height": 24,
+        "url": "/speech-bubble.svg"
+      },
+      "target": {
+        "type": "web_panel",
+        "url": "/selectItemNoNav"
+      },
+      "tooltip": {
+        "value": "This is a tooltip"
+      },
       "name": {
-        "value": "Greeting"
-      }
+        "value": "TEST"
+      },
+      "key": "my-issue-content-panel"
     }]
   }
 }
-    

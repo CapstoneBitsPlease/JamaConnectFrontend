@@ -1,38 +1,47 @@
 import React from 'react';
 import axios from 'axios'
-import "../../styles/components/SelectItems.sass";
+import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { Route, useHistory } from 'react-router-dom';
+import makeToast from '../../components/Toaster';
 
-// //authorization function with bearer
-// axios.interceptors.request.use(
-// 	config => {
-// 		config.headers.Authorization = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ0NDkxOTEsIm5iZiI6MTYwNDQ0OTE5MSwianRpIjoiOGY3YzQxY2EtMjg0MC00OWVhLWJjNDMtN2JkZTUwZjQwYzdlIiwiZXhwIjoxNjA0NDUwMDkxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNWEyYmMyN2ItYjY2MS00MDhmLTkzZjAtYTY3NzgwZDFhYjRiIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.6ZRxe_ayg6RshsieJEFUPtWUL79pRPR31L0lB9UQsX8`;
-// 		return config;
-// 	},
-// 	error => {
-// 		return Promise.reject(error);
-// 	}
-// );
 
 const SelectItem = () => {
+
 	//token : authorization token 
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
 
-	// const [token, setToken] = useState(0);
+	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
 	const [list, setlist] = useState([])
 	const [types_id, settypes_id] = useState(0)
 	const [projects_id, setprojects_id] = useState(0)
 	const [item_id, setitem_id] = useState(0)
+	const [jira_id, setjira_id] = useState(0)
+
+	const [testjamaid , settestjamaid ] = useState(0)
+	const [testjiraid , settestjiraid ] = useState(0)
+
+	//store information using easy peasy
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
-	const [jira_id , setjira_id ] = useState(0)
 	const item1 = useStoreActions(actions => actions.jamaitem.setjiraID)
+
+	const progname = useStoreActions(actions => actions.jamaitem.setprogname)
+	const progID = useStoreActions(actions => actions.jamaitem.setprogID)
+	const itemname = useStoreActions(actions => actions.jamaitem.setitemname)
+	const itemtype = useStoreActions(actions => actions.jamaitem.setitemtype)
+	
+	const checkjamalink = useStoreActions(actions => actions.jamaitem.checkjamaIDlink)
+	const checkjiralink = useStoreActions(actions => actions.jamaitem.checkjiraIDlink)
+
+
+	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
-	console.log(token);
+	// const token = "1"
 
 
 	//Getting all the project with API call
@@ -42,7 +51,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -51,7 +60,10 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting project information")
+				
 			})
+			console.log(token);
 	}
 
 	//Getting all the item type with API call
@@ -61,7 +73,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -70,6 +82,7 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting item type information")
 			})
 	}
 
@@ -81,7 +94,7 @@ const SelectItem = () => {
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization' : `Bearer ${token}`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
@@ -90,6 +103,50 @@ const SelectItem = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				makeToast("error","Having trouble getting jama item information")
+			})
+	}
+
+	//Check if the input ID for jama and jira are actually valid
+	const check_error = () => {
+		axios.get(`http://127.0.0.1:5000/jama/item_by_id?item_id=${item_id}`,
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization': `Bearer ${token}`,
+				}
+			})
+			.then(res => {
+				if(res.request.status ==  200 )
+				{
+					checkjamalink(true);
+				}
+				console.log(res.request.status);
+			})
+			.catch(err => {
+				console.log(err.data);
+				makeToast("error","There is something wrong with your Jama ID")
+			})
+
+		axios.get(`http://127.0.0.1:5000/jira/item_by_id?id=${jira_id}`,
+			{
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
+					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjA5MjEsIm5iZiI6MTYwNTIyMDkyMSwianRpIjoiNDRhYzM2ZTYtYTBjZS00OWQzLTlkYTQtM2I3OGRlZGFiYjJiIiwiZXhwIjoxNjA1MzA3MzIxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.df4oDeaLpdbKcPAvV8ilr_nNG0pAElKw0UBVEhMlZnk`,
+				}
+			})
+			.then(res => {
+				if(res.request.status == 200)
+				{
+					checkjiralink(true);
+				}
+				console.log(res.request.status);
+			})
+			.catch(err => {
+				console.log(err);
+				makeToast("error","There is something wrong with your Jira ID")
 			})
 	}
 
@@ -124,16 +181,19 @@ const SelectItem = () => {
 
 	//Useeffect hook function
 	useEffect(() => {
-		get_prog();
-		get_type();
+		if (token) {
+			get_prog();
+			get_type();
+		}
 	}, [token])
 
 
 	//Everytime types_id or projects_id change get_list() will be called
 	useEffect(() => {
-		get_list();
+		if (token) {
+			get_list();
+		}
 	}, [types_id, projects_id])
-
 
 
 
@@ -149,7 +209,7 @@ const SelectItem = () => {
 							options={resultproject()}
 							id="projectselection"
 							placeholder="Select project here"
-							onChange={e => { setprojects_id(e.value) }}
+							onChange={e => { setprojects_id(e.value); progID(e.value); progname(e.label); }}
 						/>
 
 						<br />
@@ -158,7 +218,7 @@ const SelectItem = () => {
 							placeholder="Select item type"
 							id="typeselection"
 							options={resulttype()}
-							onChange={e => { settypes_id(e.value) }}
+							onChange={e => { settypes_id(e.value); itemtype(e.label); }}
 						/>
 
 					</div>
@@ -169,19 +229,19 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the Jama item ID here"
-							onChange={e => { setitem_id(e.target.value) }}
+							onChange={e => { setitem_id(e.target.value); settestjamaid(e.target.value); }}
 						/>
 						<input
 							className="field1"
 							type="text"
 							id="jiraid"
 							placeholder=" Enter the Jira item ID here"
-							onChange={e => { setjira_id(e.target.value) }}
+							onChange={e => { setjira_id(e.target.value); settestjiraid(e.target.value); }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); }} >Link</button>
+						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_error(); }} >Link</button>
 					</div>
 
 
@@ -192,8 +252,6 @@ const SelectItem = () => {
 						{temp().map(s => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
-
-
 
 			</form>
 
