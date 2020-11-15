@@ -18,8 +18,7 @@ import { Navigation } from "components";
 import {JiraIssueContent} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
-  const checkjamaid = useStoreState((state => state.jamaitem.checkjamaID))
-  const checkjiraid = useStoreState((state => state.jamaitem.checkjamaID))
+  const checkunlink = useStoreState((state => state.jamaitem.checkjamaID))
   const check = useStoreState((state => state.jamaitem.checklinking))
   const location = useLocation();
   const noNav = location.pathname.includes("NoNav");

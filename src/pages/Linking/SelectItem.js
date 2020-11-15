@@ -43,7 +43,6 @@ const SelectItem = () => {
 
 	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
-	// const token = "1"
 
 
 	//Getting all the project with API call
@@ -120,7 +119,6 @@ const SelectItem = () => {
 	// 			headers: {
 	// 				'Access-Control-Allow-Origin': '*',
 	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-	// 				'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUzODM2MDksIm5iZiI6MTYwNTM4MzYwOSwianRpIjoiYWNjYzQxNzItZmViMC00OTllLTlhMTMtNmJhMmNhYzMzZWJkIiwiZXhwIjoxNjA1NDcwMDA5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiNzU2YTM3OTAtZWRhNi00NmJiLTk4NWYtMGEwZDNjYTVjODg5In0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.ydKRkK2aNxh_j93gKry7Lam-8She_o2OrVDME3GCLbM`,
 	// 			}
 	// 		})
 	// 		.then(res => {
@@ -145,11 +143,9 @@ const SelectItem = () => {
 			.then(res => {
 				if (res.data == "Item ID not found.") {
 					console.log("The item is found!!!!!")
-					makeToast("error", "Sorry, we can't find that Jama ID")
 					settestjamaid(false);
 				}
 				else {
-					console.log("where are we!!!!!!!!!!!??????????")
 					settestjamaid(true)
 				}
 				console.log(res);
@@ -174,7 +170,6 @@ const SelectItem = () => {
 			.then(res => {
 				if (res.data == "Item key not found.") {
 					console.log("We can't find Jira ID!!!!!!!!!!!!!")
-					makeToast("error", "Sorry, we can't find that Jira ID")
 					settestjiraid(false);
 				}
 				else {
@@ -196,14 +191,16 @@ const SelectItem = () => {
 		console.log(testjiraid)
 
 		if (testjamaid && testjiraid && testtoken) {
-			checklinked(true);
 			makeToast("success", "Both IDs are valided, sucessfully redirect to link field");
+			checklinked(true);
 		}
 		else if (!testjamaid) {
 			settestjamaid(false);
+					makeToast("error", "Sorry, we can't find that Jama ID")
 		}
 		else if (!testjiraid) {
 			settestjiraid(false);
+					makeToast("error", "Sorry, we can't find that Jira ID")
 		}
 	}
 
