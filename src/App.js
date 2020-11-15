@@ -33,7 +33,7 @@ const Test = () => {
         </Route>
         <Route path="/selectItem">
           {/* { checkjamaidlink && checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItemunlink />} */}
-          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
+          { checkunlink ? <Redirect to="/linkFields" /> : <SelectItemunlink />}
         </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}

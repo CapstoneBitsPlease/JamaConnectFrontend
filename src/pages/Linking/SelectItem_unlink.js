@@ -11,14 +11,14 @@ const SelectItemunlink = () => {
 	// const [token, setToken] = useState(0);
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
-	const [jira_id, setjira_id] = useState(0)
 
+	//test if the jama id is valid
+	const [testjama, settestjama] = useState(false)
 
 	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
 
-	const checkjama = useStoreActions(actions => actions.jamaitem.checkjamaID)
-	const checkjira = useStoreActions(actions => actions.jamaitem.checkjiraID)
+	const check = useStoreActions(actions => actions.jamaitem.checkunlinkingpage)
 
 	//Get the list of item with specific item type id and specific project id
 	const get_list = () => {
@@ -42,8 +42,7 @@ const SelectItemunlink = () => {
 	}
 
 
-
-	//Check if the input ID for jama and jira are actually valid
+	//Check if the input ID for jama are actually valid
 	const check_error = () => {
 		axios.get(`http://127.0.0.1:5000/jama/item_by_id?item_id=${item_id}`,
 			{
@@ -54,8 +53,12 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if (res.request.status == 200) {
-					checkjama(true);
+				if (res.data == "Item ID not found.") {
+					console.log("The item is found!!!!!")
+					settestjama(false);
+				}
+				else {
+					settestjama(true)
 				}
 				console.log(res);
 			})
@@ -64,64 +67,45 @@ const SelectItemunlink = () => {
 				makeToast("error", "There is something wrong with your Jama ID")
 			})
 
-		axios.get(`http://127.0.0.1:5000/jira/item_by_id?id=${jira_id}`,
+	}
+
+
+	//unlink item with jama item id
+	const unlink_items = () => {
+
+		axios.get(`http://127.0.0.1:5000//capstone/unlink_with_id?id=${item_id}`,
 			{
 				headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
-				if (res.request.status == 200) {
-					checkjira(true);
-				}
 				console.log(res);
+
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jira ID")
+				makeToast("error", "There is something wrong while unlinking")
 			})
-
 	}
 
-	const unlink_items = () => {
-		if (item_id == 0) {
-			axios.get(`http://127.0.0.1:5000//capstone/unlink_with_id?id=${jira_id}`,
-				{
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-						'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
-					}
-				})
-				.then(res => {
-					console.log(res);
+	const check_again = () => {
 
-				})
-				.catch(err => {
-					console.log(err.data);
-					makeToast("error", "There is something wrong while unlinking")
-				})
+		if (item_id == 0) {
+			makeToast("error", "You have to enter an jama ID!")
 		}
 		else {
-			axios.get(`http://127.0.0.1:5000//capstone/unlink_with_id?id=${item_id}`,
-				{
-					headers: {
-						'Access-Control-Allow-Origin': '*',
-						'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-						'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjEzMTksIm5iZiI6MTYwNTIyMTMxOSwianRpIjoiMjZlNzlkZDktNGUxOC00ZDMwLTkxY2UtZTUxMjY4YTFjMmRjIiwiZXhwIjoxNjA1MzA3NzE5LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.7BOMAd-fr6tlhGayRO_d77yLniArLbYKlueaLXVGy88`,
-					}
-				})
-				.then(res => {
-					console.log(res);
-
-				})
-				.catch(err => {
-					console.log(err.data);
-					makeToast("error", "There is something wrong while unlinking")
-				})
+			if (testjama) {
+				unlink_items();
+				check(true);
+			}
+			else {
+				makeToast("error", "This is not a valid jama ID!")
+			}
 		}
+
 	}
 
 
@@ -144,8 +128,14 @@ const SelectItemunlink = () => {
 		if (token) {
 			get_list();
 		}
-	}, [item_id, jira_id])
+	}, [token])
 
+
+	useEffect(() => {
+		if(token){
+			check_error();
+		}
+	},[item_id])
 
 
 
@@ -167,16 +157,9 @@ const SelectItemunlink = () => {
 
 						<br></br>
 
-						<input
-							className="field1"
-							type="text"
-							id="jiraid"
-							placeholder=" Enter the Jira item ID here"
-							onChange={e => { setjira_id(e.target.value) }}
-						/>
 
 						<div className="btn">
-							<button id="linkbutton" type='button' className='but' onClick={() => { check_error(); unlink_items();}} >Unlink</button>
+							<button id="linkbutton" type='button' className='but' onClick={() => { check_again(); }} >Unlink</button>
 						</div>
 
 
