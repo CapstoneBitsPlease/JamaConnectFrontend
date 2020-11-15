@@ -111,24 +111,7 @@ const SelectItem = () => {
 			})
 	}
 
-	//check if there is item being sync at this time so that we are not supposed to manually sync 
-	//item at this time
-	// const check_sync = () => {
-	// 	axios.get(`http://127.0.0.1:5000/capstone/last_sync_time`,
-	// 		{
-	// 			headers: {
-	// 				'Access-Control-Allow-Origin': '*',
-	// 				'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-	// 			}
-	// 		})
-	// 		.then(res => {
-	// 			console.log(res);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 			makeToast("error","There is something wrong with your Jira ID")
-	// 		})
-	// }
+
 
 	//Check if the input ID for jama and jira are actually valid
 	const check_error = () => {
