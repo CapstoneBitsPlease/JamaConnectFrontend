@@ -8,7 +8,7 @@ import '../../styles/pages/SyncSettings.style.sass';
 
 // Container for sync settings page elements 
 const SyncSettingsContainer = () => {
-  const devURL = "http://127.0.0.1:5000"
+  const devURL = "http://127.0.0.1:5000";
   
   const { prevSyncTime, timeUnit, numFieldsToSync, syncInterval, token } = useStoreState(
       state => ({
@@ -62,7 +62,7 @@ const SyncSettingsContainer = () => {
     }
 
     else {
-      var selectedTimeUnit = document.getElementById("dropdown_list_selection").value
+      var selectedTimeUnit = document.getElementById("dropdown_list_selection").value;
       console.log(syncInterval, selectedTimeUnit);
 
       // append user input to the DOM for testing purposes

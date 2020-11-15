@@ -9,7 +9,7 @@ import makeToast from '../../components/Toaster';
 import '../../styles/pages/LinkFields.style.sass';
 
 const LinkFieldsContainer = () => {
-    const devURL = "http://127.0.0.1:5000"
+    const devURL = "http://127.0.0.1:5000";
     const history = useHistory();
 
     // references to input fields
