@@ -20,8 +20,7 @@ const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const checkjamaid = useStoreState((state => state.jamaitem.checkjamaID))
   const checkjiraid = useStoreState((state => state.jamaitem.checkjamaID))
-  const checkjamaidlink = useStoreState((state => state.jamaitem.checkjiraIDlink))
-  const checkjiraidlink = useStoreState((state => state.jamaitem.checkjiraIDlink))
+  const check = useStoreState((state => state.jamaitem.checklinking))
   const location = useLocation();
   const noNav = location.pathname.includes("NoNav");
 
@@ -35,7 +34,7 @@ const Test = () => {
         </Route>
         <Route path="/selectItem">
           {/* { checkjamaidlink && checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItemunlink />} */}
-          { checkjamaidlink&&checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItemunlink />}
+          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
         </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}

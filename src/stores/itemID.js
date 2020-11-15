@@ -9,8 +9,7 @@ const jamaitem = {
   itemtype: '',
   checkjamaID : false,
   checkjiraID : false,
-  checkjamaIDlink : false,
-  checkjiraIDlink : false,
+  checklinking : false,
   setitemID: action((state, newID)=>{
     state.itemID = newID;
   }),
@@ -35,11 +34,8 @@ const jamaitem = {
   checkjiraID: action(( state , newID1) => {
     state.checkjiraID = newID1;
   }),
-  checkjamaIDlink: action(( state , newID3) => {
-    state.checkjamaIDlink = newID3;
-  }),
-  checkjiraIDlink: action(( state , newID4) => {
-    state.checkjiraIDlink = newID4;
+  checklinkingpage: action(( state , newID4) => {
+    state.checklinking = newID4;
   })
 };
 
