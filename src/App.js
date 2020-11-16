@@ -14,7 +14,7 @@ import {
   LinkFields,
 } from "./pages";
 import { Login } from "./pages";
-import {JiraIssueContent, Navigation, ErrorLog } from "../src/components"
+import {JiraIssueContent, Navigation, ErrorLog,SyncManually } from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const checkunlink = useStoreState((state => state.jamaitem.checkjamaID))
@@ -31,7 +31,7 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
+          { check ? <Redirect to="/linkFields" /> : <SyncManually />}
         </Route>
         <Route path="/unlink">
           {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}

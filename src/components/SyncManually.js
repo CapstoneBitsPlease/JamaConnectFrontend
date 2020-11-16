@@ -13,7 +13,7 @@ const SyncManually = () => {
   //item at this time
 
   const check_sync = () => {
-    axios.get(http://127.0.0.1:5000/capstone/last_sync_time,
+    axios.get(`http://127.0.0.1:5000/capstone/last_sync_time`,
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
