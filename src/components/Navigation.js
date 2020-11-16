@@ -8,16 +8,16 @@ const Navigation = () => {
       <nav>
         <ul className="navigation-container">
           <li>
-            <Link to="/selectItem">Select Item</Link>
+            <Link to="/selectItem">Select Item to link</Link>
+          </li>
+          <li>
+            <Link to="/unlink">Unlink</Link>
           </li>
           <li>
             <Link to="/linkFields">Link Fields</Link>
           </li>
           <li>
             <Link to="/syncSettings">Sync Settings</Link>
-          </li>
-          <li>
-            <Link to="/syncFields">Sync Fields</Link>
           </li>
         </ul>
       </nav>

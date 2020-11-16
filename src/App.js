@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStoreState, useStoreRehydrated } from "easy-peasy";
 import {
   BrowserRouter as Router,
@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 import {
   SelectItem,
+  SelectItemunlink,
   SyncSettings,
-  SyncFields,
   LinkFields,
 } from "./pages";
 import { Login } from "./pages";
@@ -18,6 +18,8 @@ import { Navigation } from "components";
 import {JiraIssueContent} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
+  const checkunlink = useStoreState((state => state.jamaitem.checkjamaID))
+  const check = useStoreState((state => state.jamaitem.checklinking))
   const location = useLocation();
   const noNav = location.pathname.includes("NoNav");
 
@@ -30,16 +32,16 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          {!loggedIn ? <Redirect to="/login" /> : <SelectItem />}
+          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
         </Route>
-        <Route path="/syncSettings">
-          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
-        </Route>
-        <Route path="/syncFields">
-          {!loggedIn ? <Redirect to="/login" /> : <SyncFields />}
+        <Route path="/unlink">
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}
         </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
+        </Route>
+        <Route path="/syncSettings">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
         </Route>
         <Route path="/selectItemNoNav">
           {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}

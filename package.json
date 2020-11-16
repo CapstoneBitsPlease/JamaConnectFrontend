@@ -24,7 +24,7 @@
     "react-select": "^2.4.4",
     "react-select-async-paginate": "^0.4.1",
     "styled-components": "^5.2.0",
-    "sweetalert2": "^10.9.0"
+    "sweetalert2": "^10.10.0"
   },
   "atlassian-connect-dev-instance-host": "capstone2020psu.atlassian.net",
   "atlassian-connect-prod-instance-host": "example.atlassian.net",
