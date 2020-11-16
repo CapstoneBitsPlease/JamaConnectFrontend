@@ -1,14 +1,15 @@
-import React from 'react'
-import {SyncFieldsOnCreateIssue, SelectItem} from "../pages"
-import {SyncManually} from "./SyncManually"
-function JiraIssueContent() {
-  return (
-    <div>
-      {/* <SelectItem/> */}
-      <SyncManually/>
-      {/* <SyncFieldsOnCreateIssue/> */}
-    </div>
-  )
-}
+import React from "react";
+import { SelectItem } from "../pages";
+import { SyncManually } from "./index";
+import '../styles/components/JiraIssueContent.style.sass';
+const JiraIssueContent = () => {
 
-export default JiraIssueContent
+  return (
+    <div className="issue-container">
+      <SelectItem />
+      <SyncManually />
+    </div>
+  );
+};
+
+export default JiraIssueContent;
