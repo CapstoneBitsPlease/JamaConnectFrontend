@@ -31,7 +31,7 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          { check ? <Redirect to="/linkFields" /> : <SyncManually />}
+          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
         </Route>
         <Route path="/unlink">
           {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}
