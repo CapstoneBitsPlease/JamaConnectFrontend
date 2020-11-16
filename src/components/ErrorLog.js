@@ -4,7 +4,7 @@ import "../styles/components/SyncError.style.sass";
 import ErrorIcon from "@atlaskit/icon/glyph/error";
 import Banner from "@atlaskit/banner";
 
-const SyncError = () => {
+const ErrorLog = () => {
   axios
     .get(`http://127.0.0.1:5000/get_logs`)
     .then((res) => {
@@ -25,4 +25,4 @@ const SyncError = () => {
   );
 };
 
-export default SyncError;
+export default ErrorLog;

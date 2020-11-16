@@ -46,6 +46,9 @@ const Test = () => {
         <Route path="/selectItemNoNav">
           {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
         </Route>
+        {/* <Route path="/errorLog">
+          {!loggedIn ? <Redirect to="/login" /> : <ErrorLog/>}
+        </Route> */}
       </Switch>
     </>
   );
