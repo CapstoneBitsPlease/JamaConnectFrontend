@@ -14,8 +14,7 @@ import {
   LinkFields,
 } from "./pages";
 import { Login } from "./pages";
-import { Navigation } from "components";
-import {JiraIssueContent} from "../src/components"
+import {JiraIssueContent, Navigation, ErrorLog } from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const checkunlink = useStoreState((state => state.jamaitem.checkjamaID))
@@ -46,9 +45,9 @@ const Test = () => {
         <Route path="/selectItemNoNav">
           {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
         </Route>
-        {/* <Route path="/errorLog">
+        <Route path="/errorLog">
           {!loggedIn ? <Redirect to="/login" /> : <ErrorLog/>}
-        </Route> */}
+        </Route>
       </Switch>
     </>
   );

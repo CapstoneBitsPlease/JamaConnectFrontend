@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "../styles/components/SyncError.style.sass";
+import "../styles/components/ErrorLog.style.sass";
 import ErrorIcon from "@atlaskit/icon/glyph/error";
 import Banner from "@atlaskit/banner";
 
