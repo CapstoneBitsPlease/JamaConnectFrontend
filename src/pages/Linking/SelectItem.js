@@ -147,7 +147,8 @@ const SelectItem = () => {
 				headers: {
 					'access-control-allow-origin': '*',
 					'access-control-allow-method': 'get,put,post,delete,options',
-					'authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUzOTA3MTcsIm5iZiI6MTYwNTM5MDcxNywianRpIjoiYWI3ZTY4MzktZTljZS00Y2YyLThhOWUtMzRhOWIwOWZiZWYzIiwiZXhwIjoxNjA1NDc3MTE3LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiMDk4YzU3ZTQtOWE0YS00NmJhLWFjZWUtYmIxZWUwNWJmNjdjIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.OCYr3Hf5zNaH5KuAM2vYgmp585mT4hKrKXry_7Lp7P8`,
+					// 'authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUzOTA3MTcsIm5iZiI6MTYwNTM5MDcxNywianRpIjoiYWI3ZTY4MzktZTljZS00Y2YyLThhOWUtMzRhOWIwOWZiZWYzIiwiZXhwIjoxNjA1NDc3MTE3LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiMDk4YzU3ZTQtOWE0YS00NmJhLWFjZWUtYmIxZWUwNWJmNjdjIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.OCYr3Hf5zNaH5KuAM2vYgmp585mT4hKrKXry_7Lp7P8`,
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
