@@ -23,7 +23,7 @@ const SelectItemunlink = () => {
 
 	//Get the list of item with specific item type id and specific project id
 	const get_list = () => {
-		axios.get(`http://127.0.0.1:5000/capstone/get_linked_items`,
+		axios.get(`http://127.0.0.1:5000/capstone/get_linked_jama_items`,
 			{
 				headers: {
 					'Access-Control-Allow-Origin': '*',
@@ -109,6 +109,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
+				makeToast("info",res.data);
 				console.log(res);
 
 			})
