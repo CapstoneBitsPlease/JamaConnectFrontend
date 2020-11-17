@@ -16,7 +16,7 @@ const LinkFieldsContainer = () => {
     const [ jamaItemName, setJamaItemName ] = useState("");
     const [ jiraIssueName, setJiraIssueName ] = useState("");
     const [ jiraProjectID, setJiraProjectID ] = useState(0);
-    const [ jiraTypeID, setJiraTypeID ] = useState(0);
+    const [ jiraTypeName, setJiraTypeName ] = useState(0);
     const [ jiraProjectName, setJiraProjectName ] = useState("");
     const [ itemData, setItemData ] = useState([]);
     const [ issueData, setIssueData ] = useState([]);
@@ -36,7 +36,7 @@ const LinkFieldsContainer = () => {
             token: state.accountStore.token
         })
     )
-    const currentActivePage = useStoreActions(actions => actions.jamaitem.checklinkingpage);
+    const selectItemPageLocked = useStoreActions(actions => actions.jamaitem.checklinkingpage);
 
   
     /* API Calls */
@@ -80,11 +80,11 @@ const LinkFieldsContainer = () => {
           console.log("jira/item_of_id success");
           console.log(response.data);
           setJiraIssueName(response.data.fields.summary);
-          setJiraTypeID(response.data.fields.issuetype.id);
+          setJiraTypeName(response.data.fields.issuetype.name);
           setJiraProjectID(response.data.fields.project.id);
           setJiraProjectName(response.data.fields.project.name);
           setIssueData(response.data.fields);
-          var jiraIssueData = [issueID, response.data.fields.summary, response.data.fields.issuetype.id, response.data.fields.project.id];
+          var jiraIssueData = [issueID, response.data.fields.summary, response.data.fields.issuetype.name, response.data.fields.project.id];
           setJiraItemToLink(jiraItemToLink => [...jiraItemToLink, jiraIssueData]);
         })
         .catch(error => {
@@ -117,6 +117,7 @@ const LinkFieldsContainer = () => {
     useEffect(() => {
       getJamaFields(itemID);
       getJiraFields(issueID);
+      selectItemPageLocked(false);
     },[]) 
 
     // add data to DOM for testing whenever new fields are added or item data is changed
@@ -194,7 +195,6 @@ const LinkFieldsContainer = () => {
           }
 
           // go back to previous page so user isn't tempted to link fields from the same item
-          currentActivePage(false);
           history.push('/selectItem');
         }
         else {
@@ -210,7 +210,6 @@ const LinkFieldsContainer = () => {
       }
 
       // go back to previous page so user isn't tempted to link fields from the same item
-      currentActivePage(false);
       history.push('/selectItem');
     }
 

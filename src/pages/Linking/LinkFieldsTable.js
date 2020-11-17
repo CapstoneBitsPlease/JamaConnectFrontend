@@ -42,7 +42,7 @@ const LinkFieldsTable = (props) => {
 
         // parse/replace for a more readable field name. add index, service ID and name 
         Object.entries(props.itemData).forEach((key) => {
-            if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null && !key[0].includes("customfield_10019")) {  // customfield_10019 = i|:1009 and idk what that means 
+            if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null && !key[0].includes("customfield_10019")) {  // customfield_10019 = i|1009: and idk what that means 
                 if(!key[0].includes("$") && !key[0].includes("_")) {
                     data.push({
                         "index": i+1, 
