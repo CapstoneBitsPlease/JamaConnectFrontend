@@ -1,43 +1,36 @@
 .sync_settings_page
-    &_title
-        @apply text-xl text-left font-normal
-        @apply pl-4 mt-4 mb-4
-
     &_container 
-        @apply flex
-        
-    &_name
-        @apply text-3xl
+        @apply text-center mx-64
+        @apply bg-blue-200
+
+    &_title
+        @apply text-xl text-center font-bold
+        @apply mt-10 pt-6
 
     &_table 
-        @apply self-center
-        @apply mt-12 
+        @apply mt-12 mx-auto
         
         &_label
-            @apply h-16 w-56
-            @apply pl-8 pr-12
+            @apply h-16 w-56 pl-8 pr-12
             @apply text-left text-sm text-gray-700
         
         &_data
-            @apply h-16 w-48
-            @apply pl-24 pr-12
+            @apply h-16 w-48 pl-24 pr-12
             @apply text-left text-sm text-gray-700
 
 .dropdown
     &_list
         @apply h-10
-        @apply bg-gray-200
-        @apply border-gray-200 rounded
-            
-.apply_button 
-    @apply my-8 ml-56
+        @apply bg-gray-200 border-gray-200 rounded
 
 .select_input
     @apply inline-block
-    @apply w-32
-    @apply flex
+    @apply w-32 flex
 
 .sync_interval_input
     @apply w-16
     @apply border-gray-200 rounded
+
+.apply_button 
+    @apply my-8 
         

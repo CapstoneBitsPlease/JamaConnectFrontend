@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import Button from '@atlaskit/button';
 import axios from 'axios';
-import {useStoreState} from 'easy-peasy';
+import {useStoreState, useStoreActions} from 'easy-peasy';
 import {useHistory} from 'react-router-dom';
 import ItemsTable from '../../components/ItemsTable';
 import LinkFieldsTable from './LinkFieldsTable';
@@ -11,12 +11,6 @@ import '../../styles/pages/LinkFields.style.sass';
 const LinkFieldsContainer = () => {
     const devURL = "http://127.0.0.1:5000";
     const history = useHistory();
-
-    // references to input fields
-    const jamaFieldIDRef = useRef();
-    const jiraFieldIDRef = useRef();
-    const jamaFieldNameRef = useRef();
-    const jiraFieldNameRef = useRef();
     
     // initial component state 
     const [ jamaItemName, setJamaItemName ] = useState("");
@@ -42,6 +36,7 @@ const LinkFieldsContainer = () => {
             token: state.accountStore.token
         })
     )
+    const currentActivePage = useStoreActions(actions => actions.jamaitem.checklinkingpage);
 
   
     /* API Calls */
@@ -171,31 +166,6 @@ const LinkFieldsContainer = () => {
 
     /* Input and button functionality */
     
-    const validateInput = () => {} // WIP - plan is to check that the fields supplied by user are in the retrieved data
-
-    // handles the "add to batch" button. adds the user input to the fields array 
-    const handleAdd = () => {
-      var newJamaFieldID = jamaFieldIDRef.current.value;
-      var newJamaFieldName = jamaFieldNameRef.current.value;
-      var newJiraFieldID = jiraFieldIDRef.current.value;
-      var newJiraFieldName = jiraFieldNameRef.current.value;
-      
-      if(newJamaFieldID === "" || newJamaFieldName === "" || newJiraFieldID === "" || newJiraFieldName === "") {
-          makeToast("error", "Input is required to link fields. Please enter a service ID and name."); 
-          return;
-      }
-
-      // add new fields to the array
-      setJamaFieldsToLink(jamaFieldsToLink => [...jamaFieldsToLink, [newJamaFieldID, newJamaFieldName]]);
-      setJiraFieldsToLink(jiraFieldsToLink => [...jiraFieldsToLink, [newJiraFieldID, newJiraFieldName]]);
-      
-      // clear form input
-      document.getElementById("input_jama_field_id").value = ""; 
-      document.getElementById("input_jama_field_name").value = ""; 
-      document.getElementById("input_jira_field_id").value = "";
-      document.getElementById("input_jira_field_name").value = ""; 
-  }
-
 
     // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = (event) => {
@@ -224,16 +194,12 @@ const LinkFieldsContainer = () => {
           }
 
           // go back to previous page so user isn't tempted to link fields from the same item
-          history.goBack();
+          currentActivePage(false);
+          history.push('/selectItem');
         }
         else {
           makeToast("error", "Input is required to link fields. Please select an equal number of fields from each table.");
         }
-    }
-
-    // handles the "done linking" button. returns user to the previous page (probably don't need this)
-    const handleDone = () => {
-        history.goBack();
     }
 
     return (
@@ -269,48 +235,8 @@ const LinkFieldsContainer = () => {
                     setJiraFieldsToLink={setJiraFieldsToLink}
                 />
                 <div className="user_input_container">
-                <span className="input_fields_container">
-                      <span className="input_jama_fields">
-                        <label htmlFor="input_fields" className="input_label">Jama field service ID</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jama_field_id"
-                            className="fields_to_link_input"
-                            ref={jamaFieldIDRef}
-                        ></input>
-                        <label htmlFor="input_fields" className="input_label">Jama field name</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jama_field_name"
-                            className="fields_to_link_input"
-                            ref={jamaFieldNameRef}
-                        ></input>
-                      </span>
-                      <span className="input_jira_fields">
-                        <label htmlFor="input_fields" className="input_label">Jira field service ID</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jira_field_id"
-                            className="fields_to_link_input"
-                            ref={jiraFieldIDRef}
-                        ></input>
-                        <label htmlFor="input_fields" className="input_label">Jira field name</label>
-                        <input 
-                            type="text"
-                            autoComplete="off"
-                            id="input_jira_field_name"
-                            className="fields_to_link_input"
-                            ref={jiraFieldNameRef}
-                        ></input>
-                      </span>
-                    </span>
-                    <span className="link_buttons_container">
-                        <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
-                        <Button id="link_button" appearance="primary" className="link_button" onClick={handleLink}>Link fields</Button>
-                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
+                    <span className="button_container">
+                        <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
                     </span>
                 </div>
         </div>

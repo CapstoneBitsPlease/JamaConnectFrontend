@@ -72,28 +72,26 @@ const LinkFieldsTable = (props) => {
         return data;
     }
 
-    
-
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
         var data = formatData();
-        var checkboxNameRender = (props.service === "Jama") ? "jama_checkbox" : "jira_checkbox";
+        var checkboxName = (props.service === "Jama") ? "jama_checkbox" : "jira_checkbox";
         return data.map((row) => {
             const { index, fieldServiceID, fieldName, checked } = row;
             var fieldData = [fieldServiceID, fieldName];
             return (    
                 <tr className="linked_fields_row" key={index}>
-                    <td className="linked_fields_data">{index}</td>
-                    <td className="linked_fields_data">{fieldServiceID}</td>
-                    <td className="linked_fields_data">{fieldName}</td>
-                    <td className="linked_fields_data">
-                    <div className="linked_fields_checkbox">
+                    <td id="field_index" className="link_fields_data">{index}</td>
+                    <td id="field_service_id" className="link_fields_data">{fieldServiceID}</td>
+                    <td id="field_name" className="link_fields_data">{fieldName}</td>
+                    <td className="link_fields_data">
+                    <div className="link_fields_checkbox">
                         <input
                             type="checkbox"
-                            id={`${checkboxNameRender}_${index}`}
+                            id={`${checkboxName}_${index}`}
                             onChange={handleCheckbox}
                             value={fieldData}
-                            name={checkboxNameRender}
+                            name={checkboxName}
                             checked={checked}
                             className="link_checkbox"
                         ></input>
@@ -106,14 +104,14 @@ const LinkFieldsTable = (props) => {
 
     return (
         <div className="link_fields_table_container">
-            <h3 className="fields_table_title">{props.service} Fields</h3>
-            <table className="linked_fields_table">
+            <h3 className="link_fields_table_title">{props.service} Fields</h3>
+            <table className="link_fields_table">
                 <thead>
-                    <tr className="linked_fields_row">
-                        <th className="linked_fields_headers">No.</th>
-                        <th className="linked_fields_headers">Field Service ID</th>
-                        <th className="linked_fields_headers">Field Name</th>
-                        <th className="linked_fields_headers">Link</th>
+                    <tr className="link_fields_row">
+                        <th className="link_fields_headers">No.</th>
+                        <th className="link_fields_headers">Field Service ID</th>
+                        <th className="link_fields_headers">Field Name</th>
+                        <th className="link_fields_headers">Link</th>
                     </tr>
                 </thead>
                 <tbody>

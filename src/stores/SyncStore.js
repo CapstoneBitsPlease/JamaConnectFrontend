@@ -4,6 +4,8 @@ import makeToast from '../components/Toaster';
 
 const devURL = "http://127.0.0.1:5000"; // will be changed once we use a prod server
 
+
+// holds sync-related state and actions that don't require tokens
 const syncStore = {
     prevSyncTime: 0,
     numFieldsToSync: 0,

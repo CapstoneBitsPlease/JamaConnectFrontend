@@ -1,6 +1,5 @@
 import React, {useState} from 'react';        
 
-
 const SyncFieldsOnCreateIssueTable = (props) => {
     // default fields to choose from when creating issue in Jira
     const [issueFields] = useState([

@@ -4,8 +4,9 @@ import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Route, useHistory } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import makeToast from '../../components/Toaster';
+import Button from '@atlaskit/button';
 
 
 const SelectItem = () => {
@@ -14,7 +15,6 @@ const SelectItem = () => {
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
 
-	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
 	const [list, setlist] = useState([])
@@ -23,8 +23,11 @@ const SelectItem = () => {
 	const [item_id, setitem_id] = useState(0)
 	const [jira_id, setjira_id] = useState(0)
 
-	const [testjamaid , settestjamaid ] = useState(0)
-	const [testjiraid , settestjiraid ] = useState(0)
+	const [testjamaid, settestjamaid] = useState(false);
+	const [testjiraid, settestjiraid] = useState(false);
+	const [testtoken, settesttoken] = useState(true);
+
+	const [flag, setflag] = useState(true);
 
 	//store information using easy peasy
 	const item = useStoreActions(actions => actions.jamaitem.setitemID)
@@ -34,14 +37,12 @@ const SelectItem = () => {
 	const progID = useStoreActions(actions => actions.jamaitem.setprogID)
 	const itemname = useStoreActions(actions => actions.jamaitem.setitemname)
 	const itemtype = useStoreActions(actions => actions.jamaitem.setitemtype)
-	
-	const checkjamalink = useStoreActions(actions => actions.jamaitem.checkjamaIDlink)
-	const checkjiralink = useStoreActions(actions => actions.jamaitem.checkjiraIDlink)
+
+	const checklinked = useStoreActions(actions => actions.jamaitem.checklinkingpage)
 
 
 	//use information from store
 	const token = useStoreState(state => state.accountStore.token)
-	// const token = "1"
 
 
 	//Getting all the project with API call
@@ -59,11 +60,12 @@ const SelectItem = () => {
 				setproject(res.data);
 			})
 			.catch(err => {
+				settesttoken(false);
 				console.log(err);
-				makeToast("error","Having trouble getting project information")
-				
+				makeToast("error", "Having trouble getting project information")
+
 			})
-			console.log(token);
+		console.log(token);
 	}
 
 	//Getting all the item type with API call
@@ -81,8 +83,9 @@ const SelectItem = () => {
 				settypes(res.data);
 			})
 			.catch(err => {
+				settesttoken(false);
 				console.log(err);
-				makeToast("error","Having trouble getting item type information")
+				makeToast("error", "Having trouble getting item type information")
 			})
 	}
 
@@ -102,10 +105,13 @@ const SelectItem = () => {
 				setlist(res.data);
 			})
 			.catch(err => {
+				settesttoken(false);
 				console.log(err);
-				makeToast("error","Having trouble getting jama item information")
+				makeToast("error", "Having trouble getting jama item information")
 			})
 	}
+
+
 
 	//Check if the input ID for jama and jira are actually valid
 	const check_error = () => {
@@ -118,36 +124,67 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if(res.request.status ==  200 )
-				{
-					checkjamalink(true);
+				if (res.data == "Item ID not found.") {
+					console.log("The item is found!!!!!")
+					settestjamaid(false);
 				}
-				console.log(res.request.status);
+				else {
+					settestjamaid(true)
+				}
+				console.log(res);
 			})
 			.catch(err => {
+				settesttoken(false);
 				console.log(err.data);
-				makeToast("error","There is something wrong with your Jama ID")
+				makeToast("error", "There is something wrong with your Jama ID")
 			})
 
+	}
+
+	const check_error2 = () => {
 		axios.get(`http://127.0.0.1:5000/jira/item_by_id?id=${jira_id}`,
 			{
 				headers: {
-					'Access-Control-Allow-Origin': '*',
-					'Access-Control-Allow-Method': 'GET,PUT,POST,DELETE,OPTIONS',
-					'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUyMjA5MjEsIm5iZiI6MTYwNTIyMDkyMSwianRpIjoiNDRhYzM2ZTYtYTBjZS00OWQzLTlkYTQtM2I3OGRlZGFiYjJiIiwiZXhwIjoxNjA1MzA3MzIxLCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiYWNhNTQwYTktZDkyZi00MmU3LTg1MGYtODI3ODZhMjgwN2IwIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.df4oDeaLpdbKcPAvV8ilr_nNG0pAElKw0UBVEhMlZnk`,
+					'access-control-allow-origin': '*',
+					'access-control-allow-method': 'get,put,post,delete,options',
+					'Authorization': `Bearer ${token}`,
 				}
 			})
 			.then(res => {
-				if(res.request.status == 200)
-				{
-					checkjiralink(true);
+				if (res.data == "Item key not found.") {
+					console.log("We can't find Jira ID!!!!!!!!!!!!!")
+					settestjiraid(false);
 				}
-				console.log(res.request.status);
+				else {
+					settestjiraid(true);
+				}
+				console.log(res);
 			})
 			.catch(err => {
+				console.log("are we getting here?")
+				settesttoken(false);
 				console.log(err);
-				makeToast("error","There is something wrong with your Jira ID")
+				makeToast("error", "There is something wrong with your Jira ID")
 			})
+	}
+
+	const check_again = () => {
+		console.log(testtoken)
+		console.log(testjamaid)
+		console.log(testjiraid)
+
+		if (testjamaid && testjiraid && testtoken) {
+			makeToast("success", "Both IDs are valided, sucessfully redirect to link field");
+			checklinked(true);
+		}
+		else if (!testjamaid) {
+			settestjamaid(false);
+					makeToast("error", "Sorry, we can't find that Jama ID")
+		}
+		else if (!testjiraid) {
+			settestjiraid(false);
+					makeToast("error", "Sorry, we can't find that Jira ID")
+		}
 	}
 
 	//Create an array with label and value for the use of dropdown for select project
@@ -182,6 +219,7 @@ const SelectItem = () => {
 	//Useeffect hook function
 	useEffect(() => {
 		if (token) {
+			// check_sync();
 			get_prog();
 			get_type();
 		}
@@ -194,6 +232,20 @@ const SelectItem = () => {
 			get_list();
 		}
 	}, [types_id, projects_id])
+
+	useEffect(() => {
+		if (item_id != 0) {
+			check_error();
+			console.log(testjamaid)
+		}
+	}, [item_id])
+
+	useEffect(() => {
+		if (jira_id != 0) {
+			check_error2();
+			console.log(testjiraid)
+		}
+	}, [jira_id])
 
 
 
@@ -229,19 +281,19 @@ const SelectItem = () => {
 							type="text"
 							id='itemid'
 							placeholder=" Enter the Jama item ID here"
-							onChange={e => { setitem_id(e.target.value); settestjamaid(e.target.value); }}
+							onChange={e => { setitem_id(e.target.value); }}
 						/>
 						<input
 							className="field1"
 							type="text"
 							id="jiraid"
 							placeholder=" Enter the Jira item ID here"
-							onChange={e => { setjira_id(e.target.value); settestjiraid(e.target.value); }}
+							onChange={e => { setjira_id(e.target.value); }}
 						/>
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_error(); }} >Link</button>
+						<Button id="linkbutton" appearance="primary" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_again(); }} >Link</Button>
 					</div>
 
 

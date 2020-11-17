@@ -65,12 +65,6 @@ const SyncSettingsContainer = () => {
       var selectedTimeUnit = document.getElementById("dropdown_list_selection").value;
       console.log(syncInterval, selectedTimeUnit);
 
-      // append user input to the DOM for testing purposes
-      /*var testDiv = document.createElement("div");
-      testDiv.id = "test_div";
-      testDiv.innerHTML = `<p>${syncInterval} ${selectedTimeUnit}<p>`
-      document.body.appendChild(testDiv);*/
-
       // POST sync interval in seconds
       var intervalInSeconds = syncInterval;
       if(selectedTimeUnit === "minutes") 
@@ -78,23 +72,20 @@ const SyncSettingsContainer = () => {
       else if(selectedTimeUnit === "hours")
         intervalInSeconds *= 3600;
       postSyncInterval(intervalInSeconds);
-      
     }
   }  
 
   return (
     <div className="sync_settings_page_container">
-      <form>
-          <h1 className="sync_settings_page_title">Sync settings</h1>
-          <SyncSettingsTable 
-            prevSyncTime={prevSyncTime}
-            timeUnit={timeUnit}
-            numFieldsToSync={numFieldsToSync}
-            syncInterval={syncInterval}
-            setSyncInterval={setSyncInterval}
-          />
-        <Button id="apply_button" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
-      </form>
+      <h1 className="sync_settings_page_title">Sync settings</h1>
+      <SyncSettingsTable 
+        prevSyncTime={prevSyncTime}
+        timeUnit={timeUnit}
+        numFieldsToSync={numFieldsToSync}
+        syncInterval={syncInterval}
+        setSyncInterval={setSyncInterval}
+      />
+      <Button id="apply_button" appearance="primary" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
   </div>
     
   );

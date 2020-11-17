@@ -18,10 +18,7 @@ import { Navigation } from "components";
 import {JiraIssueContent} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
-  const checkjamaid = useStoreState((state => state.jamaitem.checkjamaID));
-  const checkjiraid = useStoreState((state => state.jamaitem.checkjamaID));
-  const checkjamaidlink = useStoreState((state => state.jamaitem.checkjiraIDlink));
-  const checkjiraidlink = useStoreState((state => state.jamaitem.checkjiraIDlink));
+  const check = useStoreState((state => state.jamaitem.checklinking))
   const location = useLocation();
   const noNav = location.pathname.includes("NoNav");
 
@@ -34,7 +31,10 @@ const Test = () => {
           {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
         </Route>
         <Route path="/selectItem">
-          { checkjamaidlink && checkjiraidlink ? <Redirect to="/linkFields" /> : <SelectItem />}
+          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
+        </Route>
+        <Route path="/unlink">
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}
         </Route>
         <Route path="/linkFields">
           {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
