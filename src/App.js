@@ -13,8 +13,8 @@ import {
   SyncSettings,
   LinkFields,
 } from "./pages";
-import { Login } from "./pages";
-import {JiraIssueContent, Navigation, ErrorLog } from "../src/components"
+import { Login, ErrorLog  } from "./pages";
+import {JiraIssueContent, Navigation} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const checkunlink = useStoreState((state => state.jamaitem.checkjamaID))
@@ -42,12 +42,13 @@ const Test = () => {
         <Route path="/syncSettings">
           {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
         </Route>
-        <Route path="/selectItemNoNav">
-          {!loggedIn ? <Redirect to="/login" /> : <JiraIssueContent/>}
-        </Route>
         <Route path="/errorLog">
           {!loggedIn ? <Redirect to="/login" /> : <ErrorLog/>}
         </Route>
+        <Route path="/selectItemNoNav">
+          {!loggedIn ? "Please login through jama plugin" : <JiraIssueContent/>}
+        </Route>
+       
       </Switch>
     </>
   );

@@ -2,7 +2,7 @@
   "name": "Hello World",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://09a825039950.ngrok.io",
+  "baseUrl": "https://715c60c93b40.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -12,6 +12,16 @@
   },
   "apiVersion": 1,
   "modules": {
+    "generalPages": [
+      {
+        "url": "/login",
+        "key": "hello-world",
+        "location": "system.top.navigation.bar",
+        "name": {
+            "value": "Jama Plugin"
+          }
+      }
+  ],
     "webItems": [{
       "location": "jira.project.sidebar.plugins.navigation",
       "key": "connect-provided-link-to-panel",
