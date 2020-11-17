@@ -1,0 +1,32 @@
+.select_item  
+    &-title
+        @apply text-center italic font-bold text-xl
+        @apply my-12
+    &-selecting
+        @apply absolute left-1/6 right-1/6 my-5
+        @apply max-w-screen-xl max-h-screen 
+        @apply w-2/3 h-auto text-center
+        @apply border border-blue-500 bg-blue-200
+    &-item
+        @apply mx-auto mt-2 mb-4
+        @apply w-2/4 h-auto
+        .list1 , .list2 , .field , .field1
+            @apply w-full border border-blue-500
+            @apply mt-6
+        .field , .field1
+            @apply h-6
+            @apply border rounded-md outline-none
+        .field1
+            @apply mb-5
+        .btn
+            @apply w-1/2 mx-auto
+        .but
+            @apply text-white
+            @apply w-full rounded-md outline-none
+    &-list
+        @apply w-full h-64
+        @apply list-none
+        @apply text-center 
+        @apply overflow-y-auto
+        .test
+            @apply list-none

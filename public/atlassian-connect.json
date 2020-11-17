@@ -1,33 +1,51 @@
 {
-    "name": "Hello World",
-    "description": "Atlassian Connect app",
-    "key": "com.example.myapp",
-    "baseUrl": "https://5d99977bdf20.ngrok.io",
-    "vendor": {
-        "name": "My name",
-        "url": "www.example.com"
-    },
-    "links": {
-        "config": "undefined/atlassian-connect.json"
-    },
-    "authentication": {
-        "type": "none"
-    },
-    "scopes": [
-        "READ",
-        "WRITE"
-    ],
-    "modules": {
-        "generalPages": [{
-            "key": "my-addon-page-name",
-            "location": "system.top.navigation.bar",
-            "name": {
-                "value": "My cún addon"
-            },
-            "url": "/",
-            "conditions": [{
-                "condition": "user_is_logged_in"
-            }]
-        }]
-    }
+  "name": "Jama Connect Plugin",
+  "description": "Atlassian Connect app",
+  "key": "com.example.myapp",
+  "baseUrl": "https://f7ba3f372158.ngrok.io",
+  "vendor": {
+    "name": "Example, Inc.",
+    "url": "http://example.com"
+  },
+  "authentication": {
+    "type": "none"
+  },
+  "apiVersion": 1,
+  "modules": {
+    "webItems": [{
+      "location": "jira.project.sidebar.plugins.navigation",
+      "key": "connect-provided-link-to-panel",
+      "url": "/projects/EX?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
+      "context": "product",
+      "name": {
+        "value": "Jama Plugin"
+      }
+    }],
+    "webPanels": [{
+      "key": "connect-provided-web-panel",
+      "url": "/login?pkey=EX",
+      "location": "com.example.myaddon:connect-provided-link-to-panel",
+      "name": {
+        "value": "My Web Panel"
+      }
+    }],
+    "jiraIssueContents": [{
+      "icon": {
+        "width": 24,
+        "height": 24,
+        "url": "/speech-bubble.svg"
+      },
+      "target": {
+        "type": "web_panel",
+        "url": "/selectItemNoNav"
+      },
+      "tooltip": {
+        "value": "This is a tooltip"
+      },
+      "name": {
+        "value": "TEST"
+      },
+      "key": "my-issue-content-panel"
+    }]
+  }
 }
