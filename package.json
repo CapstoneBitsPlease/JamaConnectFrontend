@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/banner": "^11.0.5",
     "@atlaskit/button": "^15.1.1",
     "@atlaskit/checkbox": "^11.0.7",
     "@atlaskit/select": "^13.0.6",
