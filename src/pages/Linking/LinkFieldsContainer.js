@@ -202,6 +202,18 @@ const LinkFieldsContainer = () => {
         }
     }
 
+    const handleDone = () => {
+      // remove test divs
+      if(document.getElementById("test_div")) {
+        var testDiv = document.getElementById("test_div");
+        testDiv.remove();
+      }
+
+      // go back to previous page so user isn't tempted to link fields from the same item
+      currentActivePage(false);
+      history.push('/selectItem');
+    }
+
     return (
         <div className="link_page_container">
             <h1 className="link_page_title">Select fields to link</h1>
@@ -237,6 +249,7 @@ const LinkFieldsContainer = () => {
                 <div className="user_input_container">
                     <span className="button_container">
                         <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
+                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>
                 </div>
         </div>
