@@ -2,18 +2,21 @@ import React, {useEffect} from 'react';
 import Button from '@atlaskit/button';
 import SyncSettingsTable from './SyncSettingsTable.js'
 import {useStoreActions, useStoreState} from "easy-peasy";
+import axios from "axios";
 import makeToast from '../../components/Toaster';
 import '../../styles/pages/SyncSettings.style.sass';
 
-/* Component to render sync settings page */
+// Container for sync settings page elements 
 const SyncSettingsContainer = () => {
+  const devURL = "http://127.0.0.1:5000";
   
-  const { prevSyncTime, timeUnit, numFieldsToSync, syncInterval } = useStoreState(
+  const { prevSyncTime, timeUnit, numFieldsToSync, syncInterval, token } = useStoreState(
       state => ({
           prevSyncTime: state.syncStore.prevSyncTime,
           timeUnit: state.syncStore.timeUnit,
           numFieldsToSync: state.syncStore.numFieldsToSync,
-          syncInterval: state.syncStore.syncInterval
+          syncInterval: state.syncStore.syncInterval,
+          token: state.accountStore.token
       })
   )
 
@@ -25,6 +28,25 @@ const SyncSettingsContainer = () => {
       })
   )
 
+  // API call to update the sync interval
+  const postSyncInterval = (syncInterval) => {
+    axios({
+        url: `${devURL}/sync/set_interval?interval=${syncInterval}`,
+        method: "post",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        console.log(response);
+        makeToast("success", "Sync interval set successfully.");
+      })
+      .catch(error => {
+        console.log("error:", error);
+        makeToast("error", "Error when updating sync interval. Please see the error logs located in the admin settings."); 
+      })
+    }
+
   // calls to backend made when component mounts
   useEffect(() => { 
       getPrevSyncTime();
@@ -33,38 +55,37 @@ const SyncSettingsContainer = () => {
   }, [])
   
   // handles the "apply" button. prints updated sync interval, will update sync process 
-  const handleApply = (e) => {
-    e.preventDefault();
+  const handleApply = (event) => {
+    event.preventDefault()
     if(syncInterval === "") {
       makeToast("error", "Input is required to update the sync process. Please enter a time interval.");
-      return;
     }
 
-    var selectedTimeUnit = document.getElementById("dropdown_list_selection").value
-    console.log(syncInterval, selectedTimeUnit);
+    else {
+      var selectedTimeUnit = document.getElementById("dropdown_list_selection").value;
+      console.log(syncInterval, selectedTimeUnit);
 
-    // append user input to the DOM for testing purposes
-    var testDiv = document.createElement("div");
-    testDiv.id = "test_div";
-    testDiv.innerHTML = `<p>${syncInterval} ${selectedTimeUnit}<p>`
-    document.body.appendChild(testDiv);
-
-    // POST sync interval
-  }
+      // POST sync interval in seconds
+      var intervalInSeconds = syncInterval;
+      if(selectedTimeUnit === "minutes") 
+        intervalInSeconds *= 60;
+      else if(selectedTimeUnit === "hours")
+        intervalInSeconds *= 3600;
+      postSyncInterval(intervalInSeconds);
+    }
+  }  
 
   return (
     <div className="sync_settings_page_container">
-      <form>
-          <h1 className="sync_settings_page_title">Sync settings</h1>
-          <SyncSettingsTable 
-            prevSyncTime={prevSyncTime}
-            timeUnit={timeUnit}
-            numFieldsToSync={numFieldsToSync}
-            syncInterval={syncInterval}
-            setSyncInterval={setSyncInterval}
-          />
-        <Button id="apply_button" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
-      </form>
+      <h1 className="sync_settings_page_title">Sync settings</h1>
+      <SyncSettingsTable 
+        prevSyncTime={prevSyncTime}
+        timeUnit={timeUnit}
+        numFieldsToSync={numFieldsToSync}
+        syncInterval={syncInterval}
+        setSyncInterval={setSyncInterval}
+      />
+      <Button id="apply_button" appearance="primary" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
   </div>
     
   );

@@ -4,6 +4,8 @@ import makeToast from '../components/Toaster';
 
 const devURL = "http://127.0.0.1:5000"; // will be changed once we use a prod server
 
+
+// holds sync-related state and actions that don't require tokens
 const syncStore = {
     prevSyncTime: 0,
     numFieldsToSync: 0,
@@ -11,8 +13,8 @@ const syncStore = {
     syncInterval: "",
 
     // API call to retrieve the length of time of last sync from the capstone database
-    getPrevSyncTime: thunk((actions) => {
-        axios
+    getPrevSyncTime: thunk(async(actions) => {
+        await axios
         .get(
             `${devURL}/capstone/last_successful_sync_time`
         )
@@ -41,8 +43,8 @@ const syncStore = {
     }),
 
     // API call to retrieve the number of fields ready to sync from the capstone database
-    getNumFieldsToSync: thunk((actions) => {
-        axios
+    getNumFieldsToSync: thunk(async(actions) => {
+        await axios
         .get(`${devURL}/capstone/fields_to_sync`)
         .then(response => {
             actions.setNumFieldsToSync(response.data["num_fields"]);

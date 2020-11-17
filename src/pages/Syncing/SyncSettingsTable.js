@@ -1,6 +1,6 @@
 import React from 'react';
 
-/* Component to display sync settings table info */
+// Displays sync settings table info 
 const SyncSettingsTable = (props) => {
 
 return (

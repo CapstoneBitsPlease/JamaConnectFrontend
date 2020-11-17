@@ -1,5 +1,5 @@
 {
-  "name": "Hello World",
+  "name": "Jama Connect Plugin",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
   "baseUrl": "https://9450a8444f7c.ngrok.io",

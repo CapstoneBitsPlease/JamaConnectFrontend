@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Button from '@atlaskit/button';
 import axios from 'axios';
-import {useStoreState} from 'easy-peasy';
+import {useStoreState, useStoreActions} from 'easy-peasy';
 import {useHistory} from 'react-router-dom';
 import ItemsTable from '../../components/ItemsTable';
 import LinkFieldsTable from './LinkFieldsTable';
@@ -9,9 +9,8 @@ import makeToast from '../../components/Toaster';
 import '../../styles/pages/LinkFields.style.sass';
 
 const LinkFieldsContainer = () => {
-    const devURL = "http://127.0.0.1:5000"
+    const devURL = "http://127.0.0.1:5000";
     const history = useHistory();
-    const jiraToken = "";
     
     // initial component state 
     const [ jamaItemName, setJamaItemName ] = useState("");
@@ -27,28 +26,29 @@ const LinkFieldsContainer = () => {
     const [ jiraItemToLink, setJiraItemToLink ] = useState([]);
 
     // retrieve Jama/Jira item info and token from store
-    const { itemID, jamaItemType, jamaProjectID, jamaProjectName, issueID, jamaToken } = useStoreState(
+    const { itemID, jamaItemType, jamaProjectID, jamaProjectName, issueID, token } = useStoreState(
         state => ({
             itemID: state.jamaitem.itemID,
             jamaItemType: state.jamaitem.itemtype,
             jamaProjectID: state.jamaitem.progID,
             jamaProjectName: state.jamaitem.progname,
             issueID: state.jamaitem.jiraID,
-            jamaToken: state.accountStore.token
+            token: state.accountStore.token
         })
     )
+    const currentActivePage = useStoreActions(actions => actions.jamaitem.checklinkingpage);
 
   
     /* API Calls */
 
     // retrieves the fields of an item from the Jama database given its ID
     // sets Jama item data to link, item name, and field data
-    const getJamaFields = async(itemID) => {
-        await axios
+    const getJamaFields = (itemID) => {
+        axios
         .get(
           `${devURL}/jama/item_by_id?item_id=${itemID}`, {
             headers: {
-              "Authorization": `Bearer ${jamaToken}`
+              "Authorization": `Bearer ${token}`
             }
         })
         .then(response => {
@@ -67,12 +67,12 @@ const LinkFieldsContainer = () => {
 
     // retrieves the fields of an item from the Jira database given its ID
     // sets Jira item data to link, item name, and field data
-    const getJiraFields = async(issueID) => {
-        await axios
+    const getJiraFields = (issueID) => {
+        axios
         .get(
           `${devURL}/jira/item_by_id?id=${issueID}`, {
             headers: {
-              "Authorization": `Bearer ${jiraToken}`
+              "Authorization": `Bearer ${token}`
             }
           }
         )
@@ -94,9 +94,9 @@ const LinkFieldsContainer = () => {
     }
 
     // posts link data for Jama and Jira items and fields
-    const linkItems = async(params) => {
+    const linkItems = (params) => {
         console.log(params);
-        await axios({
+        axios({
           url: `${devURL}/link_items`,
           method: "post",
           data: params
@@ -164,14 +164,15 @@ const LinkFieldsContainer = () => {
     }
 
 
-    /* Input and button functionality */ 
+    /* Input and button functionality */
+    
 
     // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = (event) => {
         event.preventDefault();
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
-          console.log(jamaFieldsToLink, jiraFieldsToLink)
+
           // convert to formData for request
           var data = convertToForm();   
 
@@ -191,17 +192,14 @@ const LinkFieldsContainer = () => {
             var testDiv = document.getElementById("test_div");
             testDiv.remove();
           }
+
+          // go back to previous page so user isn't tempted to link fields from the same item
+          currentActivePage(false);
+          history.push('/selectItem');
         }
         else {
           makeToast("error", "Input is required to link fields. Please select an equal number of fields from each table.");
         }
-    }
-
-    // handles the "done linking" button. returns user to the previous page
-    const handleDone = (event) => {
-        event.preventDefault();
-        //console.log(jamaToken)
-        history.goBack();
     }
 
     return (
@@ -237,9 +235,8 @@ const LinkFieldsContainer = () => {
                     setJiraFieldsToLink={setJiraFieldsToLink}
                 />
                 <div className="user_input_container">
-                    <span className="link_buttons_container">
-                        <Button id="link_button" appearance="primary" className="link_button" onClick={handleLink}>Link fields</Button>
-                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
+                    <span className="button_container">
+                        <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
                     </span>
                 </div>
         </div>
