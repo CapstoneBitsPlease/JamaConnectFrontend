@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/pages/LinkedItems.style.sass';
+import '../styles/components/ItemsTable.style.sass';
 
 // Table of the items we are currently viewing fields for - shows project ID, project name, item ID, and item name 
-const LinkedItemsTable = (props) => {
+const ItemsTable = (props) => {
     
     const renderItemOrIssue = () => {
         if(props.title === "Jama Project"){
@@ -47,4 +47,4 @@ const LinkedItemsTable = (props) => {
     );
 }
 
-export default LinkedItemsTable;
+export default ItemsTable;

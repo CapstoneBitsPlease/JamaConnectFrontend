@@ -1,32 +1,45 @@
 .link
+    &_page_container
+        @apply w-full text-center
+
     &_page_title
-        @apply text-2xl text-left font-normal
-        @apply pl-4 mt-4 mb-8
+        @apply text-xl font-bold
+        @apply mt-10 mb-8
 
     &_page_subtitle
         @apply text-lg font-normal
-        @apply mt-4 mb-8 ml-10
+        @apply mt-4 mb-8
 
-.input_fields_container
-    @apply w-40 ml-10 
-    @apply inline-block
+.link_fields
+    &_table_container
+        @apply mb-8 mt-8 mx-12 inline-block 
+        @apply align-top  
+    
+    &_table_title
+        @apply h-0 py-1 text-xl text-left
 
-.fields_to_link_input
-    @apply border-gray-200 rounded
-    @apply h-8 mb-4
+    &_table
+        @apply bg-white
+        @apply mx-0 
 
-.link_buttons_container
-    @apply ml-16
+    &_headers
+        @apply px-4 py-4
+        @apply border-solid border-2 border-blue-200 px-2 py-2 bg-blue-200
+    
+    &_data
+        @apply border-solid border-2 border-gray-300 px-2 py-2
+        @apply text-center
 
-.link_button
-    @apply ml-10
+    &_checkbox
+        @apply ml-2 pr-2
 
-.link_fields_table_container
-    @apply mb-8 mt-8 inline-block 
-    @apply align-top
+.button
+    &_container
+        @apply pb-24
 
-.fields_table_title
-    @apply pl-10 h-0 text-xl
+    &_link
+        @apply bg-blue-500
 
-.linked_fields_checkbox
-    @apply pr-2
+
+
+    
