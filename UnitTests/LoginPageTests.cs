@@ -21,11 +21,18 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
         public void Setup()
         {
             driver = new ChromeDriver("C:/Users/Brandon Danielski/Documents");
-            driver.Url = "http://localhost:3000/";
+            driver.Url = "http://localhost:3000/login";
             username_input = driver.FindElement(By.Id("username"));
             password_input = driver.FindElement(By.Id("password"));
             organization_input = driver.FindElement(By.Id("organization"));
             //login_button = driver.FindElement(By.Id(""));
+        }
+
+        [OneTimeTearDown]
+        public void teardown()
+        {
+            System.Threading.Thread.Sleep(5000); //wait 5 seconds to clear cookies.
+            driver.Manage().Cookies.DeleteAllCookies(); //delete all cookies
         }
 
         [Test]
