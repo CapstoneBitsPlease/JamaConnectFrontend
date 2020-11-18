@@ -14,9 +14,6 @@ const Navigation = () => {
             <Link to="/unlink">Unlink</Link>
           </li>
           <li>
-            <Link to="/linkFields">Link Fields</Link>
-          </li>
-          <li>
             <Link to="/syncSettings">Sync Settings</Link>
           </li>
           <li>
