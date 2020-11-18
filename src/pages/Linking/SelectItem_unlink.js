@@ -31,10 +31,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if(res.data.length == 0){
-					makeToast("error", "There is no linked item")
-				}
-				console.log(res.data.length);
+				console.log(res);
 				setlist(res.data);
 			})
 			.catch(err => {
