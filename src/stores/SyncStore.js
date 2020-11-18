@@ -30,7 +30,7 @@ const syncStore = {
         })
         .catch((error) => {
             console.log("error:", error);
-            makeToast("error", "Error retrieving last sync time. Please see the error logs located in the admin settings"); 
+         //   makeToast("error", "Error retrieving last sync time. Please see the error logs located in the admin settings"); 
         });
     }),
 
@@ -51,7 +51,7 @@ const syncStore = {
         })
         .catch(error => {
             console.log("error:", error);
-            makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
+          //  makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
         });
     }),
 

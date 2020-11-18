@@ -61,7 +61,7 @@ const LinkFieldsContainer = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings."); 
+       //   makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
@@ -89,7 +89,7 @@ const LinkFieldsContainer = () => {
         })
         .catch(error => {
           console.log("error:", error);
-          makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings."); 
+       //   makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
