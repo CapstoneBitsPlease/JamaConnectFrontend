@@ -1,5 +1,5 @@
-import React from 'react';
-import axios from 'axios'
+import React from "react";
+import axios from "axios";
 import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
