@@ -2,7 +2,7 @@ import { action, thunk } from "easy-peasy";
 import axios from "axios";
 import makeToast from '../components/Toaster';
 
-const devURL = "http://127.0.0.1:5000"; // will be changed once we use a prod server
+const devURL = "http://127.0.0.1:5000"; 
 
 
 // holds sync-related state and actions that don't require tokens

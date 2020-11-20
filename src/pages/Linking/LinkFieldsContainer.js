@@ -18,6 +18,7 @@ const LinkFieldsContainer = () => {
     const [ jiraProjectID, setJiraProjectID ] = useState(0);
     const [ jiraTypeName, setJiraTypeName ] = useState(0);
     const [ jiraProjectName, setJiraProjectName ] = useState("");
+    const [ jiraURL, setJiraURL ] = useState("");
     const [ itemData, setItemData ] = useState([]);
     const [ issueData, setIssueData ] = useState([]);
     const [ jamaFieldsToLink, setJamaFieldsToLink ] = useState([]);

@@ -27,10 +27,12 @@ const LinkFieldsTable = (props) => {
             fieldData.push([fieldServiceID, fieldName]);
         }
 
-        if(props.service === "Jama")
+        if(props.service === "Jama") {
             props.setJamaFieldsToLink(fieldData);
-        else if(props.service === "Jira")
+        }
+        else if(props.service === "Jira") {
             props.setJiraFieldsToLink(fieldData);
+        }
         
     }
     

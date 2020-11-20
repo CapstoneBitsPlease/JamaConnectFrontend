@@ -6,9 +6,13 @@ This repo contains the frontend components for our team's capstone project.
 To run locally:
 -------
 
-`npm install`
+1. Clone the repo and open the directory on your machine.
 
-In the project directory, use `npm start` to run in development mode (if this doesn't work, `npm install` any additional libraries needed, then `npm start` again). Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
+2. Run the script `npm install` to install all libraries specified in the package.json.
+
+3. Once everything is installed, use `npm start` to run in development mode. 
+
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
 
 See additional available npm scripts below in React's default section.
 
@@ -30,7 +34,7 @@ To install and test on Jira:
 
 7. Upload the app. Ensure the frontend and backend are both running. Navigate back to the **Manage your apps** page in Jira, and upload the app by clicking **Upload app** and pasting the full URL (should look something like this: `https://2fb042924b6d.ngrok.io/atlassian-connect.json`). Then click **Upload**.
 
-8. Navigate to the **Projects** tab and select the correct project. The plugin should then be visible on the sidebar underneath **Project pages**.
+8. Verify that the app (currently called Jama Connect Plugin) appears in the **User-installed apps** list. Then, navigate to the **Projects** tab and select the correct project. The plugin should then be visible on the sidebar underneath **Project pages**.
 
 
 
