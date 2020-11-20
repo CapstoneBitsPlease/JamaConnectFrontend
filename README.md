@@ -24,13 +24,13 @@ To install and test on Jira:
 
 2. In your instance, enable development mode by clicking **Apps** on the top toolbar, then **Manage apps**. Click **Settings** at the bottom of page, select **Enable development mode**, and click **Apply**.
 
-3. Change the project key in the `url` sections of each module in the atlassian-connect.json file to match your project key. Your key should look like uppercase letters and numbers (a project key for a project named test-jira-project might be TJP).
+3. Change the project key in the `url` section of each `module` in the `atlassian-connect.json` file (this is located in the public folder) to match your project key. Your key should look like uppercase letters and numbers (a project key for a project named test-jira-project might be TJP).
 
 4. Use ngrok to make the files available over the internet. Open a separate terminal and run `ngrok http <PORT>`. Change `<PORT>` to whichever port the frontend is using. This should open a status page with HTTP and HTTPS URLs. 
 
 5. Copy the HTTPS URL, append `/atlassian-connect.json`, and paste this in your browser to ensure it shows the correct JSON file. 
 
-6. If it looks correct, paste the HTTPS URL (without the appended JSON) into the `baseUrl` section near the top of the atlassian-connect.json file.
+6. If it looks correct, paste the HTTPS URL (without the appended JSON) into the `baseUrl` section near the top of the `atlassian-connect.json` file.
 
 7. Upload the app. Ensure the frontend and backend are both running. Navigate back to the **Manage your apps** page in Jira, and upload the app by clicking **Upload app** and pasting the full URL (should look something like this: `https://2fb042924b6d.ngrok.io/atlassian-connect.json`). Then click **Upload**.
 

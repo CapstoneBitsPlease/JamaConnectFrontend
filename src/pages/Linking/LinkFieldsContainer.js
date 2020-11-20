@@ -142,25 +142,29 @@ const LinkFieldsContainer = () => {
     /* Data transformation functions */
 
     // convert to form data
-    const convertToForm = () => {
+    const convertToForm = (jiraItem, jamaItem, jiraFields, jamaFields) => {
         var formData = new FormData();
 
         // add item arrays to form data
-        for(let i = 0; i < jiraItemToLink[0].length && i < jamaItemToLink[0].length; i++) {
-          formData.append("jira_item[]", jiraItemToLink[0][i]);
-          formData.append("jama_item[]", jamaItemToLink[0][i]);
+        for(let i = 0; i < jiraItem[0].length && i < jamaItem[0].length; i++) {
+          formData.append("jira_item[]", jiraItem[0][i]);
+          formData.append("jama_item[]", jamaItem[0][i]);
         }
 
         // add field arrays 
-        for(let i = 0; i < jamaFieldsToLink.length; i++) {
-          for (let j = 0; j < jamaFieldsToLink[i].length; j++) {  // this will always be 2
-            formData.append(`jira_fields[${i}]`, jiraFieldsToLink[i][j]);
-            formData.append(`jama_fields[${i}]`, jamaFieldsToLink[i][j]);
+        for(let i = 0; i < jamaFields.length; i++) {
+          for (let j = 0; j < jamaFields[i].length; j++) {  // this will always be 2
+            formData.append(`jira_fields[${i}]`, jiraFields[i][j]);
+            formData.append(`jama_fields[${i}]`, jiraFields[i][j]);
           }
         }
         
         // add the number of fields
-        formData.append("num_fields", jamaFieldsToLink.length);
+        formData.append("num_fields", jamaFields.length);
+
+        for(var pair of formData.entries()) {
+          console.log(pair[0]+ ', '+ pair[1]); 
+        }
 
         return formData;
     }
@@ -170,13 +174,12 @@ const LinkFieldsContainer = () => {
     
 
     // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
-    const handleLink = (event) => {
-        event.preventDefault();
+    const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
 
           // convert to formData for request
-          var data = convertToForm();   
+          var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink);   
 
           // POST to capstone database
           linkItems(data);
@@ -195,8 +198,8 @@ const LinkFieldsContainer = () => {
             testDiv.remove();
           }
 
-          // go back to previous page so user isn't tempted to link fields from the same item
-          history.push('/selectItem');
+          // go back to previous page after a couple seconds so user isn't tempted to link fields from the same item
+          setTimeout(function() {history.push('/selectItem')}, 2000)
         }
         else {
           makeToast("error", "Input is required to link fields. Please select an equal number of fields from each table.");
@@ -210,8 +213,9 @@ const LinkFieldsContainer = () => {
         testDiv.remove();
       }
 
-      // go back to previous page so user isn't tempted to link fields from the same item
+      // go back to previous page 
       history.push('/selectItem');
+      
     }
 
     return (
