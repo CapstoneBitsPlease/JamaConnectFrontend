@@ -80,3 +80,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
+### Deploy to Jira
+
+Run the `localhost:3000` port by using `npm`
+then run the `ngrok http 3000` in the terminal
+After that, get the second URL from the forwarding section (for example like `https://4176ee25.ngrok.io`)
+Then copy and paste the URL to the base URL from the `atlassian-connect.json` file under public folder ( ex: `"baseUrl": "https://4176ee25.ngrok.io"`)
+Remember to change the project key in the `atlassian-connect.json`also to match with your project key under `webItems` and `webPanels` 
+Then go to the `Manage apps` on Jira under `Apps` section and upload your application by gettingg the URL from the forwarding section and add `/atlassian-connect.json` next to it like this `https://4176ee25.ngrok.io/atlassian-connect.json` and upload
+The `Jama Plugin` should be on the sidebar or under the `Apps` section on Jira after uploaded it sucessfully 
+
