@@ -27,24 +27,26 @@ const LinkFieldsTable = (props) => {
             fieldData.push([fieldServiceID, fieldName]);
         }
 
-        if(props.service === "Jama")
+        if(props.service === "Jama") {
             props.setJamaFieldsToLink(fieldData);
-        else if(props.service === "Jira")
+        }
+        else if(props.service === "Jira") {
             props.setJiraFieldsToLink(fieldData);
+        }
         
     }
     
 
     // format data for UI. excludes any nested subfields 
-    const formatData = () => {
-        var data = [];
+    const formatData = (itemData) => {
+        var formattedData = [];
         var i = 0;
 
         // parse/replace for a more readable field name. add index, service ID and name 
-        Object.entries(props.itemData).forEach((key) => {
+        Object.entries(itemData).forEach((key) => {
             if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null && !key[0].includes("customfield_10019")) {  // customfield_10019 = i|1009: and idk what that means 
                 if(!key[0].includes("$") && !key[0].includes("_")) {
-                    data.push({
+                    formattedData.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
                         // adds a space before uppercase letters if in camelCase
@@ -53,14 +55,14 @@ const LinkFieldsTable = (props) => {
                 }
                 // we know this field is story points 
                 else if(key[0].includes("customfield_10016")) {
-                    data.push({
+                    formattedData.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
                         "fieldName": key[0].replace("customfield_10016", "story points")
                     })
                 }
                 else {
-                    data.push({
+                    formattedData.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
                         "fieldName": key[0].split('$')[0].replaceAll("_", " ")
@@ -69,12 +71,12 @@ const LinkFieldsTable = (props) => {
                 i += 1;
             }
         })
-        return data;
+        return formattedData;
     }
 
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
-        var data = formatData();
+        var data = formatData(props.itemData);
         var checkboxName = (props.service === "Jama") ? "jama_checkbox" : "jira_checkbox";
         return data.map((row) => {
             const { index, fieldServiceID, fieldName, checked } = row;
