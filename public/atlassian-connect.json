@@ -12,6 +12,16 @@
   },
   "apiVersion": 1,
   "modules": {
+    "generalPages": [
+      {
+        "url": "/login",
+        "key": "hello-world",
+        "location": "system.top.navigation.bar",
+        "name": {
+            "value": "Jama Plugin"
+          }
+      }
+  ],
     "webItems": [{
       "location": "jira.project.sidebar.plugins.navigation",
       "key": "connect-provided-link-to-panel",

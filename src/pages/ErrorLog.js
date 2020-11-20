@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/components/ErrorLog.style.sass";
-import ErrorIcon from "@atlaskit/icon/glyph/error";
-import Banner from "@atlaskit/banner";
+import "../styles/pages/ErrorLog.style.sass";
 
 const ErrorLog = () => {
   const [myData, setMyData] = useState([]);
@@ -19,11 +17,11 @@ const ErrorLog = () => {
   return (
     <div className="syncerror-container">
       {myData.map((data) => (
-        <div>
-          <p>{data.asctime}</p>
-          <p>{data.levelname}</p>
-          <p>{data.message}</p>
-          <p>{data.name}</p>
+        <div className="syncerror-wrapper">
+          <p>Asctime: {data.asctime}</p>
+          <p>Levelname: {data.levelname}</p>
+          <p>Message: {data.message}</p>
+          <p>Name: {data.name}</p>
         </div>
       ))}
     </div>
