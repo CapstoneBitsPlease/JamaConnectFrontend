@@ -155,7 +155,7 @@ const LinkFieldsContainer = () => {
         for(let i = 0; i < jamaFields.length; i++) {
           for (let j = 0; j < jamaFields[i].length; j++) {  // this will always be 2
             formData.append(`jira_fields[${i}]`, jiraFields[i][j]);
-            formData.append(`jama_fields[${i}]`, jiraFields[i][j]);
+            formData.append(`jama_fields[${i}]`, jamaFields[i][j]);
           }
         }
         
