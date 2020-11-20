@@ -101,9 +101,6 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if(res.data.length == 0){
-					makeToast("error", "There is no Jama item")
-				}
 				console.log(res);
 				setlist(res.data);
 			})
