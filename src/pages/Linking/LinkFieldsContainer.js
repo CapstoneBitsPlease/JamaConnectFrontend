@@ -98,9 +98,9 @@ const LinkFieldsContainer = () => {
           url: `${devURL}/link_items`,
           method: "post",
           data: params,
-          headers: {
+          /*headers: {
             "Authorization": `Bearer ${token}`
-          }
+          }*/
         })
         .then(response => {
           console.log(response);
@@ -161,10 +161,6 @@ const LinkFieldsContainer = () => {
         
         // add the number of fields
         formData.append("num_fields", jamaFields.length);
-
-        for(var pair of formData.entries()) {
-          console.log(pair[0]+ ', '+ pair[1]); 
-        }
 
         return formData;
     }
