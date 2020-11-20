@@ -22,7 +22,7 @@ To install and test on Jira:
 
 3. Change the project key in the `url` sections of each module in the atlassian-connect.json file to match your project key. Your key should look like uppercase letters and numbers (a project key for a project named test-jira-project might be TJP).
 
-4. Use ngrok to make the files available over the internet. Open a separate terminal and run `ngrok http 3000`. This should open a status page with HTTP and HTTPS URLs. 
+4. Use ngrok to make the files available over the internet. Open a separate terminal and run `ngrok http <PORT>`. Change `<PORT>` to whichever port the frontend is using. This should open a status page with HTTP and HTTPS URLs. 
 
 5. Copy the HTTPS URL, append `/atlassian-connect.json`, and paste this in your browser to ensure it shows the correct JSON file. 
 
