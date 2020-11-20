@@ -99,7 +99,10 @@ const LinkFieldsContainer = () => {
         axios({
           url: `${devURL}/link_items`,
           method: "post",
-          data: params
+          data: params,
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
         })
         .then(response => {
           console.log(response);

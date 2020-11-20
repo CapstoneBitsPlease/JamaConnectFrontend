@@ -3,7 +3,7 @@ C2TB
 
 This repo contains the frontend components for our team's capstone project.
 
-To run:
+To run locally:
 -------
 
 `npm install`
@@ -11,6 +11,27 @@ To run:
 In the project directory, use `npm start` to run in development mode (if this doesn't work, `npm install` any additional libraries needed, then `npm start` again). Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
 
 See additional available npm scripts below in React's default section.
+
+
+To install and test on Jira:
+-------
+
+1. Create an Atlassian instance and a project if you do not have one already. You can do this [here](http://go.atlassian.com/cloud-dev).
+
+2. In your instance, enable development mode by clicking **Apps** on the top toolbar, then **Manage apps**. Click **Settings** at the bottom of page, select **Enable development mode**, and click **Apply**.
+
+3. Change the project key in the `url` sections of each module in the atlassian-connect.json file to match your project key. Your key should look like uppercase letters and numbers (a project key for a project named test-jira-project might be TJP).
+
+4. Use ngrok to make the files available over the internet. Open a separate terminal and run `ngrok http 3000`. This should open a status page with HTTP and HTTPS URLs. 
+
+5. Copy the HTTPS URL, append `/atlassian-connect.json`, and paste this in your browser to ensure it shows the correct JSON file. 
+
+6. If it looks correct, paste the HTTPS URL (without the appended JSON) into the `baseUrl` section near the top of the atlassian-connect.json file.
+
+7. Upload the app. Ensure the frontend and backend are both running. Navigate back to the **Manage your apps** page in Jira, and upload the app by clicking **Upload app** and pasting the full URL (should look something like this: `https://2fb042924b6d.ngrok.io/atlassian-connect.json`). Then click **Upload**.
+
+8. Navigate to the **Projects** tab and select the correct project. The plugin should then be visible on the sidebar underneath **Project pages**.
+
 
 
 # React's default section:
