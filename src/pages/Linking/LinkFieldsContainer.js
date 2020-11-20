@@ -18,7 +18,6 @@ const LinkFieldsContainer = () => {
     const [ jiraProjectID, setJiraProjectID ] = useState(0);
     const [ jiraTypeName, setJiraTypeName ] = useState(0);
     const [ jiraProjectName, setJiraProjectName ] = useState("");
-    const [ jiraURL, setJiraURL ] = useState("");
     const [ itemData, setItemData ] = useState([]);
     const [ issueData, setIssueData ] = useState([]);
     const [ jamaFieldsToLink, setJamaFieldsToLink ] = useState([]);
@@ -62,7 +61,6 @@ const LinkFieldsContainer = () => {
         })
         .catch((error) => {
           console.log(error.response);
-       //   makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
@@ -90,7 +88,6 @@ const LinkFieldsContainer = () => {
         })
         .catch(error => {
           console.log("error:", error);
-       //   makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
