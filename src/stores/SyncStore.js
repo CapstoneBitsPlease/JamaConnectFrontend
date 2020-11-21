@@ -21,7 +21,7 @@ const syncStore = {
             console.log("success");
             console.log(response.data);
             if(response.data === "No successful syncs yet.")
-                actions.setPrevSyncTime(response.data)
+                actions.setPrevSyncTime(response.data);
             else {
                 actions.setPrevSyncTime(response.data[0]);
                 actions.setTimeUnit(response.data[1]);

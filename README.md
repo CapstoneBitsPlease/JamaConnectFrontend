@@ -34,7 +34,7 @@ To install and test on Jira:
 
 7. Finally, upload the app - Ensure the frontend and backend are both running. Navigate back to the **Manage your apps** page in Jira, and upload the app by clicking **Upload app** and pasting the full URL (should look something like this: `https://2fb042924b6d.ngrok.io/atlassian-connect.json`). Then click **Upload**.
 
-8. Verify that the app (currently called Jama Connect Plugin) appears in the **User-installed apps** list. Then, navigate to the **Projects** tab and select the correct project. The plugin should then be visible on the sidebar underneath **Project pages**.
+8. Verify that the app (currently called Jama Connect Plugin) appears in the **User-installed apps** list. A new button to the plugin should be visible under the **Apps** tab on the top toolbar. If you navigate to the **Projects** tab and select the correct project, the plugin should also be visible on the sidebar underneath **Project pages**.
 
 
 

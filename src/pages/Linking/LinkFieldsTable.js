@@ -2,28 +2,30 @@ import React from "react";
 
 const LinkFieldsTable = (props) => {
 
-    // handles the checkbox input. adds each service ID and name to an array if it is checked
-    const handleCheckbox = () => {
-        var checkboxValues = [];
-        var checkboxData = [];
-        var fieldData = [];
+    // handles the radio button input. adds formatted array of service ID and name to another array if it is checked
+    const handleRadio = () => {
+        var radioValues = [];
+        var radioData = [];
         
+        // determine which table we are handling 
         if(props.service === "Jama") 
-            checkboxValues = document.getElementsByName('jama_checkbox');
+            radioValues = document.getElementsByName('jama_radio');
         if(props.service === "Jira") 
-            checkboxValues = document.getElementsByName('jira_checkbox');
+            radioValues = document.getElementsByName('jira_radio');
 
-        for(let i = 0; i < checkboxValues.length; i++) {
-            if(checkboxValues[i].checked) {
-                checkboxData.push(checkboxValues[i].value);
+        // add the checked value to an array 
+        for(let i = 0; i < radioValues.length; i++) {
+            if(radioValues[i].checked) {
+                radioData.push(radioValues[i].value);
             }
         }
 
-        for(let i = 0; i < checkboxData.length; i++) {
-            // split the data 
-            let fieldServiceID = checkboxData[i].split(",")[0];
-            let fieldName = checkboxData[i].split(",")[1];
-            // add it to the correct array of fields 
+        var fieldData = [];
+
+        // format the data and add to new array for linking
+        for(let i = 0; i < radioData.length; i++) {
+            let fieldServiceID = radioData[i].split(",")[0];
+            let fieldName = radioData[i].split(",")[1];
             fieldData.push([fieldServiceID, fieldName]);
         }
 
@@ -32,19 +34,19 @@ const LinkFieldsTable = (props) => {
         }
         else if(props.service === "Jira") {
             props.setJiraFieldsToLink(fieldData);
-        }
-        
+        }   
     }
     
 
-    // format data for UI. excludes any nested subfields 
+    // format data for UI. **excludes any nested subfields 
     const formatData = (itemData) => {
         var formattedData = [];
         var i = 0;
 
         // parse/replace for a more readable field name. add index, service ID and name 
         Object.entries(itemData).forEach((key) => {
-            if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null && !key[0].includes("customfield_10019")) {  // customfield_10019 = i|1009: and idk what that means 
+            if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null 
+            && !key[0].includes("customfield_10019") && !key[0].includes("customfield_10025")) {  // customfield_10019 = "i|1009:"" and customfield_10025 = "10000_*:*_1_*:*_174049426_*|*_10002_*:*_1_*:*_0_*|*_10004_*:*_1_*:*_1640872045_*|*_10003_*:*_1_*:*_605197033" so ... ¯\_(ツ)_/¯
                 if(!key[0].includes("$") && !key[0].includes("_")) {
                     formattedData.push({
                         "index": i+1, 
@@ -59,6 +61,14 @@ const LinkFieldsTable = (props) => {
                         "index": i+1, 
                         "fieldServiceID": key[0],
                         "fieldName": key[0].replace("customfield_10016", "story points")
+                    })
+                }
+                // Spencer specifically set this field to be the Jama URL 
+                else if(key[0].includes("customfield_10029")) {
+                    formattedData.push({
+                        "index": i+1, 
+                        "fieldServiceID": key[0],
+                        "fieldName": key[0].replace("customfield_10029", "Jama URL")
                     })
                 }
                 else {
@@ -77,7 +87,8 @@ const LinkFieldsTable = (props) => {
     // add the table of fields from the formatted data to the DOM
     const renderTable = () => {
         var data = formatData(props.itemData);
-        var checkboxName = (props.service === "Jama") ? "jama_checkbox" : "jira_checkbox";
+        var radioName = (props.service === "Jama") ? "jama_radio" : "jira_radio";
+        // map each data point and a radio button to a new row in the table
         return data.map((row) => {
             const { index, fieldServiceID, fieldName, checked } = row;
             var fieldData = [fieldServiceID, fieldName];
@@ -87,15 +98,15 @@ const LinkFieldsTable = (props) => {
                     <td id="field_service_id" className="link_fields_data">{fieldServiceID}</td>
                     <td id="field_name" className="link_fields_data">{fieldName}</td>
                     <td className="link_fields_data">
-                    <div className="link_fields_checkbox">
+                    <div className="link_fields_radio">
                         <input
-                            type="checkbox"
-                            id={`${checkboxName}_${index}`}
-                            onChange={handleCheckbox}
+                            type="radio"
+                            id={`${radioName}_${index}`}
+                            onChange={handleRadio}
                             value={fieldData}
-                            name={checkboxName}
+                            name={radioName}
                             checked={checked}
-                            className="link_checkbox"
+                            className="link_radio"
                         ></input>
                     </div>
                     </td>

@@ -65,7 +65,6 @@ const SelectItem = () => {
 				makeToast("error", "Having trouble getting project information")
 
 			})
-		console.log(token);
 	}
 
 	//Getting all the item type with API call
