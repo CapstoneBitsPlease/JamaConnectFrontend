@@ -42,7 +42,6 @@ const SelectItemunlink = () => {
 				console.log(err);
 				makeToast("error", "There is something wrong when getting item list")
 			})
-		console.log(token);
 	}
 
 
