@@ -16,7 +16,7 @@ const LinkFieldsContainer = () => {
     const [jamaItemName, setJamaItemName] = useState("");
     const [jiraIssueName, setJiraIssueName] = useState("");
     const [jiraProjectID, setJiraProjectID] = useState(0);
-    const [setJiraTypeName] = useState(0);
+    const [jiraTypeName, setJiraTypeName] = useState(0);
     const [jiraProjectName, setJiraProjectName] = useState("");
     const [itemData, setItemData] = useState([]);
     const [issueData, setIssueData] = useState([]);
@@ -164,10 +164,6 @@ const LinkFieldsContainer = () => {
         // add the number of fields
         formData.append("num_fields", jamaFields.length);
 
-        for(var pair of formData.entries()) {
-          console.log(pair[0], pair[1]); 
-        }
-
         return formData;
     }
 
@@ -185,7 +181,6 @@ const LinkFieldsContainer = () => {
           makeToast("error", "Input is required to add fields to be linked. Please select one field from each table.");
         }
     }
-    
 
     // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = () => {
@@ -212,7 +207,7 @@ const LinkFieldsContainer = () => {
             testDiv.remove();
           }
 
-          // go back to previous page after a couple seconds so user isn't tempted to link fields from the same item
+          // go back to selectItem page after a couple seconds so user isn't tempted to link fields from the same item
           setTimeout(function() {history.push('/selectItem')}, 2000)
         }
         else {
@@ -220,6 +215,7 @@ const LinkFieldsContainer = () => {
         }
     }
 
+    // handles the "done linking" button. removes test divs, unchecks radios, and returns user to selectItem page 
     const handleDone = () => {
       // remove test divs
       if(document.getElementById("test_div")) {
@@ -227,7 +223,15 @@ const LinkFieldsContainer = () => {
         testDiv.remove();
       }
 
-      // go back to previous page 
+      // uncheck radios
+      const jiraChecked = document.getElementsByName('jira_radio');
+      const jamaChecked = document.getElementsByName('jama_radio');
+      for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
+          jiraChecked[i].checked = false;
+          jamaChecked[i].checked = false;
+      }
+
+      // go back to selectItem page 
       history.push('/selectItem');
     }
 
