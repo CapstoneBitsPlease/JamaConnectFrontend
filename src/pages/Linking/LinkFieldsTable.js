@@ -3,7 +3,7 @@ import React from "react";
 const LinkFieldsTable = (props) => {
 
     // handles the radio button input. adds formatted array of service ID and name to another array if it is checked
-    const handleRadio = () => {
+    const handleRadio = (event) => {
         var radioValues = [];
         var radioData = [];
         
@@ -28,6 +28,8 @@ const LinkFieldsTable = (props) => {
             let fieldName = radioData[i].split(",")[1];
             fieldData.push([fieldServiceID, fieldName]);
         }
+
+        //event.target.disabled = true;
 
         if(props.service === "Jama") {
             props.setJamaFieldsToLink(fieldData);
