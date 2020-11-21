@@ -143,7 +143,7 @@ const LinkFieldsContainer = () => {
 
     /* Data transformation functions */
 
-    // convert to form data
+    // generate FormData object from item data 
     const convertToForm = (jiraItem, jamaItem, jiraFields, jamaFields) => {
         var formData = new FormData();
 
@@ -155,7 +155,7 @@ const LinkFieldsContainer = () => {
 
         // add field arrays 
         for(let i = 0; i < jamaFields.length; i++) {
-          for (let j = 0; j < jamaFields[0][0].length; j++) {  // this will always be 2
+          for (let j = 0; j < jamaFields[0][0].length; j++) {  
             formData.append(`jira_fields[${i}]`, jiraFields[i][0][j]);
             formData.append(`jama_fields[${i}]`, jamaFields[i][0][j]);
           }
@@ -182,12 +182,12 @@ const LinkFieldsContainer = () => {
         }
     }
 
-    // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
+    // handles the "link fields" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
           && jiraBatch.length === jamaBatch.length) {
 
-          // convert to formData for request
+          // convert body to FormData for request
           var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraBatch, jamaBatch);   
 
           // POST to capstone database
@@ -271,7 +271,7 @@ const LinkFieldsContainer = () => {
                     <span className="button_container">
                         <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
                         <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
-                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
+                        <Button id="done_button" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>
                 </div>
         </div>

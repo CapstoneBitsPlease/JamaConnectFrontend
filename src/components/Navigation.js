@@ -19,6 +19,9 @@ const Navigation = () => {
           <li>
             <Link to="/errorLog">Error Log</Link>
           </li>
+          <li>
+            <Link to="/syncManually">Sync</Link>
+          </li>
         </ul>
       </nav>
     </div>

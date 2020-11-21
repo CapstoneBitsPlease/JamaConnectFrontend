@@ -7,7 +7,7 @@ import '../../styles/pages/SyncFieldsOnCreateIssue.style.sass';
 const SyncFieldsOnCreateIssueContainer = () => {
     const [isSelected, setIsSelected] = useState("");
     const [renderSelected, setRenderSelected] = useState(false);
-    const [setCheckedFields] = useState([]);
+    const [checkedFields, setCheckedFields] = useState([]);
 
     // display or hide the table of fields and checkboxes
     const handleChange = (e) => {

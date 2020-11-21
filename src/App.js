@@ -14,7 +14,7 @@ import {
   LinkFields,
 } from "./pages";
 import { Login, ErrorLog  } from "./pages";
-import {JiraIssueContent, Navigation} from "../src/components"
+import {JiraIssueContent, Navigation, SyncManually} from "../src/components"
 const Test = () => {
   const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
   const check = useStoreState((state => state.jamaitem.checklinking))
@@ -46,6 +46,9 @@ const Test = () => {
         </Route>
         <Route path="/selectItemNoNav">
           {!loggedIn ? "Please login through jama plugin" : <JiraIssueContent/>}
+        </Route>
+        <Route path="/syncManually">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncManually/>}
         </Route>
        
       </Switch>

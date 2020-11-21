@@ -5,20 +5,29 @@
   &-wrapper
     @apply flex flex-col 
     @apply items-center justify-center
-    @apply w-64
+    @apply w-full
     input, select
-      @apply p-2
+      @apply p-2 w-16
       @apply rounded-md border-solid
       @apply mb-4
     label
       @apply text-gray-500
-    button
-      @apply w-full
-      @apply text-white
-      @apply bg-blue-700
-      @apply p-2
-      @apply border-none 
-      @apply outline-none
-      @apply rounded-md h-10
-      &:hover
-        @apply bg-blue-600
+
+.sync-button, .show-items-button
+  @apply text-white
+  @apply mb-4 p-2
+  @apply border-none bg-blue-700
+  @apply outline-none
+  @apply rounded-md h-10
+
+.show-items-button
+  @apply invisible
+
+.linked
+  &-item
+    @apply mb-8 text-center mr-8
+    &-list
+      @apply list-none
+
+
+  
