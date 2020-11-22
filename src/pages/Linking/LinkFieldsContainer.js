@@ -170,12 +170,25 @@ const LinkFieldsContainer = () => {
 
     /* Input and button functionality */
 
-    // handles the "add to batch" button. adds each set of fields to the total fields
+    // handles the "add to batch" button. adds each set of fields to the total fields and disables the corresponding buttons
     const handleAdd = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
+            // add to total fields
             setJiraBatch(jiraBatch => [...jiraBatch, jiraFieldsToLink]);
             setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
+            
+            // disable the buttons that are checked
+            var jamaChecked = document.getElementsByName('jama_radio');
+            var jiraChecked = document.getElementsByName('jira_radio');
+            for(let i = 0; i < jamaChecked.length && i < jiraChecked.length; i++) {
+                if(jamaChecked[i].checked) {
+                  jamaChecked[i].disabled = true;
+                }
+                if(jiraChecked[i].checked) {
+                  jiraChecked[i].disabled = true;
+                }
+            }
         }
         else {
           makeToast("error", "Input is required to add fields to be linked. Please select one field from each table.");

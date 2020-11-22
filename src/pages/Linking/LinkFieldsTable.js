@@ -29,8 +29,6 @@ const LinkFieldsTable = (props) => {
             fieldData.push([fieldServiceID, fieldName]);
         }
 
-        event.target.disabled = true; // quick fix for removing from tables once checked but not great UX probably
-
         if(props.service === "Jama") {
             props.setJamaFieldsToLink(fieldData);
         }
