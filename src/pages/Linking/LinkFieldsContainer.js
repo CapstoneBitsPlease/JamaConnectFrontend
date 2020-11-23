@@ -99,9 +99,9 @@ const LinkFieldsContainer = () => {
           url: `${devURL}/link_items`,
           method: "post",
           data: params,
-          /*headers: {
+          headers: {
             "Authorization": `Bearer ${token}`
-          }*/
+          }
         })
         .then(() => {
           makeToast("success", "Linking was successful!");
