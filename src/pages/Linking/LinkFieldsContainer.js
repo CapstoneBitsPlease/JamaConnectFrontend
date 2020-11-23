@@ -177,7 +177,7 @@ const LinkFieldsContainer = () => {
             // add to total fields
             setJiraBatch(jiraBatch => [...jiraBatch, jiraFieldsToLink]);
             setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
-            
+
             // disable the buttons that are checked
             var jamaChecked = document.getElementsByName('jama_radio');
             var jiraChecked = document.getElementsByName('jira_radio');
@@ -206,12 +206,14 @@ const LinkFieldsContainer = () => {
           // POST to capstone database
           linkItems(data);
 
-          // uncheck radios
+          // uncheck and enable radios
           const jiraChecked = document.getElementsByName('jira_radio');
           const jamaChecked = document.getElementsByName('jama_radio');
           for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
               jiraChecked[i].checked = false;
               jamaChecked[i].checked = false;
+              jiraChecked[i].disabled = false;
+              jamaChecked[i].disabled = false;
           }
               
           // remove test divs
@@ -221,7 +223,7 @@ const LinkFieldsContainer = () => {
           }
 
           // go back to selectItem page after a couple seconds so user isn't tempted to link fields from the same item
-          setTimeout(function() {history.push('/selectItem')}, 2000)
+          setTimeout(function() {history.push('/selectItem')}, 2000);
         }
         else {
           makeToast("error", "Input is required to link fields. Please select one field from each table.");
@@ -230,22 +232,24 @@ const LinkFieldsContainer = () => {
 
     // handles the "done linking" button. removes test divs, unchecks radios, and returns user to selectItem page 
     const handleDone = () => {
-      // remove test divs
-      if(document.getElementById("test_div")) {
-        var testDiv = document.getElementById("test_div");
-        testDiv.remove();
-      }
+        // remove test divs
+        if(document.getElementById("test_div")) {
+          var testDiv = document.getElementById("test_div");
+          testDiv.remove();
+        }
 
-      // uncheck radios
-      const jiraChecked = document.getElementsByName('jira_radio');
-      const jamaChecked = document.getElementsByName('jama_radio');
-      for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-          jiraChecked[i].checked = false;
-          jamaChecked[i].checked = false;
-      }
+        // uncheck and enable radios
+        const jiraChecked = document.getElementsByName('jira_radio');
+        const jamaChecked = document.getElementsByName('jama_radio');
+        for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
+            jiraChecked[i].checked = false;
+            jamaChecked[i].checked = false;
+            jiraChecked[i].disabled = false;
+            jamaChecked[i].disabled = false;
+        }
 
-      // go back to selectItem page 
-      history.push('/selectItem');
+        // go back to selectItem page 
+        history.push('/selectItem');
     }
 
     return (

@@ -118,10 +118,7 @@ const SyncManually = () => {
         <button
           id="send"
           className="sync-button"
-          onClick={/*() => {
-            check_sync();
-            syncItem();
-          }*/handleSync}
+          onClick={handleSync}
         >
           Sync
         </button>
