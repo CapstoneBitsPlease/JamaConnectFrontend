@@ -1,11 +1,12 @@
-import React from 'react';
-import axios from 'axios'
+import React from "react";
+import axios from "axios";
 import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Route, useHistory } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import makeToast from '../../components/Toaster';
+import Button from '@atlaskit/button';
 
 
 const SelectItem = () => {
@@ -14,7 +15,6 @@ const SelectItem = () => {
 	//projects : get all project to display in select box
 	//types : get all item type to display in select box
 
-	const history = useHistory();
 	const [projects, setproject] = useState([])
 	const [types, settypes] = useState([])
 	const [list, setlist] = useState([])
@@ -147,7 +147,6 @@ const SelectItem = () => {
 				headers: {
 					'access-control-allow-origin': '*',
 					'access-control-allow-method': 'get,put,post,delete,options',
-					// 'authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUzOTA3MTcsIm5iZiI6MTYwNTM5MDcxNywianRpIjoiYWI3ZTY4MzktZTljZS00Y2YyLThhOWUtMzRhOWIwOWZiZWYzIiwiZXhwIjoxNjA1NDc3MTE3LCJpZGVudGl0eSI6eyJjb25uZWN0aW9uX2lkIjoiMDk4YzU3ZTQtOWE0YS00NmJhLWFjZWUtYmIxZWUwNWJmNjdjIn0sImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.OCYr3Hf5zNaH5KuAM2vYgmp585mT4hKrKXry_7Lp7P8`,
 					'Authorization': `Bearer ${token}`,
 				}
 			})
@@ -294,7 +293,7 @@ const SelectItem = () => {
 					</div>
 
 					<div className="btn">
-						<button id="linkbutton" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_again(); }} >Link</button>
+						<Button id="linkbutton" appearance="primary" type='button' className='but' onClick={() => { item1(jira_id); item(item_id); check_again(); }} >Link</Button>
 					</div>
 
 

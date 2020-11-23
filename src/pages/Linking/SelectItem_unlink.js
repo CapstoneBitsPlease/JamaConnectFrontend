@@ -4,6 +4,7 @@ import "../../styles/pages/SelectItemsunlink.sass";
 import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import makeToast from '../../components/Toaster';
+import Button from '@atlaskit/button';
 
 
 const SelectItemunlink = () => {
@@ -164,7 +165,7 @@ const SelectItemunlink = () => {
 
 
 						<div className="btn">
-							<button id="linkbutton" type='button' className='but' onClick={() => { check_again(); }} >Unlink</button>
+							<Button id="linkbutton" appearance="primary" type='button' className='but' onClick={() => { check_again(); }} >Unlink</Button>
 						</div>
 
 
