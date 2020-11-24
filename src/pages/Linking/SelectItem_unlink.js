@@ -32,6 +32,9 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
+				if(res.data.length === 0){
+					makeToast("error", "There is no Jama item")
+				}
 				console.log(res);
 				setlist(res.data);
 			})
@@ -39,7 +42,6 @@ const SelectItemunlink = () => {
 				console.log(err);
 				makeToast("error", "There is something wrong when getting item list")
 			})
-		console.log(token);
 	}
 
 
@@ -54,7 +56,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item ID not found.") {
+				if (res.data === "Item ID not found.") {
 					console.log("The item is found!!!!!")
 					settestjama(false);
 				}
@@ -96,7 +98,7 @@ const SelectItemunlink = () => {
 
 	const check_again = () => {
 
-		if (item_id == 0) {
+		if (item_id === 0) {
 			makeToast("error", "You have to enter an jama ID!")
 		}
 		else {

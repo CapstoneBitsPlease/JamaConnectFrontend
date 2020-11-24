@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import { useStoreState } from "easy-peasy";
 import makeToast from "../components/Toaster";
 import "../styles/components/SyncManually.style.sass";
+
 const SyncManually = () => {
   const token = useStoreState((state) => state.accountStore.token);
   const itemID = useStoreState((state) => state.jamaitem.itemID);
-  console.log(token);
+  const [linkedJamaItems, setLinkedJamaItems] = useState([]);
+  //console.log(token);
   console.log(itemID);
   const inputIDRef = React.createRef();
+
   const syncItem = () => {
+    var success = false;
+
     axios
       .post(
         `http://127.0.0.1:5000/sync/single?item_id=${inputIDRef.current.value}`,
@@ -22,15 +27,17 @@ const SyncManually = () => {
       )
       .then(() => {
         makeToast("success", "Sync successfully");
+        success = true;
       })
       .catch(() => {
-        makeToast("error", "Invalid input or you have not linked the items");
+        makeToast("error", "Invalid input or you have not linked the items"); 
       });
+
+      return success;
   };
 
   //check if there is item being sync at this time so that we are not supposed to manually sync
   //item at this time
-
   const check_sync = () => {
     axios
       .get(`http://127.0.0.1:5000/capstone/last_sync_time`, {
@@ -43,7 +50,7 @@ const SyncManually = () => {
         console.log(res);
         const temp = res.data["Completed on"];
         console.log(res.data["Completed on"]);
-        if (temp == " ") {
+        if (temp === " ") {
           makeToast("error", "There is item syncing being process");
           console.log("There is a space");
         }
@@ -53,20 +60,78 @@ const SyncManually = () => {
         makeToast("error", "There is something wrong with your Jama ID");
       });
   };
+
+  // API call to get all linked Jama items from capstone DB
+	const getLinkedJamaItems = () => {
+    axios
+      .get(`http://127.0.0.1:5000/capstone/get_linked_jama_items`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        setLinkedJamaItems(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  // handles "Show linked items" button. displays list of linked items 
+  const handleShowLinkedItems = () => {
+      var div = document.getElementById("linked-item-list");
+
+      if(linkedJamaItems.length !== 0) {
+        div.innerHTML = linkedJamaItems.map((item) => {
+          const [ jamaID, itemName ] = item;
+          // eslint-disable-next-line no-useless-concat
+          return "<li class=linked-item>" + "ID: " + jamaID + "<br>" + "Item Name: " + itemName + "</li>"
+        }).join('');
+      }
+      else {
+        makeToast("error", "No linked Jama items in the capstone database.")
+      }
+  }
+  
+
+  // handles "Sync" button
+  const handleSync = () => {
+      // check that a sync is not in progress, then try to sync the item
+      check_sync();
+      var success = syncItem();
+
+      // show option to view linked items if sync is not successful
+      if(success === false) {
+        getLinkedJamaItems();
+        document.getElementById("show-items-button").style.visibility = "visible";
+      }
+
+      // clear input
+      document.getElementById("inputID").value = '';
+  }
+
+
   return (
     <div className="sync-container">
-      <div className="sync-wrapper">
+      <div id="sync-wrapper" className="sync-wrapper">
         <h2>Please enter the Jama Item ID</h2>
         <input type="inputID" name="inputID" id="inputID" ref={inputIDRef} />
         <button
           id="send"
-          onClick={() => {
-            check_sync();
-            syncItem();
-          }}
+          className="sync-button"
+          onClick={handleSync}
         >
           Sync
         </button>
+        <button
+          id="show-items-button"
+          className="show-items-button"
+          onClick={handleShowLinkedItems}
+        >
+          Show linked items
+        </button>
+        <ul id="linked-item-list" className="linked-item-list"></ul>
       </div>
     </div>
   );

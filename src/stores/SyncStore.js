@@ -1,8 +1,7 @@
 import { action, thunk } from "easy-peasy";
 import axios from "axios";
-import makeToast from '../components/Toaster';
 
-const devURL = "http://127.0.0.1:5000"; // will be changed once we use a prod server
+const devURL = "http://127.0.0.1:5000"; 
 
 
 // holds sync-related state and actions that don't require tokens
@@ -22,15 +21,14 @@ const syncStore = {
             console.log("success");
             console.log(response.data);
             if(response.data === "No successful syncs yet.")
-                actions.setPrevSyncTime(response.data)
+                actions.setPrevSyncTime(response.data);
             else {
                 actions.setPrevSyncTime(response.data[0]);
                 actions.setTimeUnit(response.data[1]);
             }
         })
         .catch((error) => {
-            console.log("error:", error);
-            makeToast("error", "Error retrieving last sync time. Please see the error logs located in the admin settings"); 
+            console.log("error:", error); 
         });
     }),
 
@@ -51,7 +49,6 @@ const syncStore = {
         })
         .catch(error => {
             console.log("error:", error);
-            makeToast("error", "Error retrieving fields ready to sync. Please see the error logs located in the admin settings");
         });
     }),
 

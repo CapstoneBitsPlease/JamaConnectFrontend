@@ -65,7 +65,6 @@ const SelectItem = () => {
 				makeToast("error", "Having trouble getting project information")
 
 			})
-		console.log(token);
 	}
 
 	//Getting all the item type with API call
@@ -101,9 +100,6 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if(res.data.length == 0){
-					makeToast("error", "There is no Jama item")
-				}
 				console.log(res);
 				setlist(res.data);
 			})
@@ -127,7 +123,7 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item ID not found.") {
+				if (res.data === "Item ID not found.") {
 					console.log("The item is found!!!!!")
 					settestjamaid(false);
 				}
@@ -154,7 +150,7 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item key not found.") {
+				if (res.data === "Item key not found.") {
 					console.log("We can't find Jira ID!!!!!!!!!!!!!")
 					settestjiraid(false);
 				}
@@ -237,14 +233,14 @@ const SelectItem = () => {
 	}, [types_id, projects_id])
 
 	useEffect(() => {
-		if (item_id != 0) {
+		if (item_id !== 0) {
 			check_error();
 			console.log(testjamaid)
 		}
 	}, [item_id])
 
 	useEffect(() => {
-		if (jira_id != 0) {
+		if (jira_id !== 0) {
 			check_error2();
 			console.log(testjiraid)
 		}

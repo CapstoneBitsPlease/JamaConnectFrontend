@@ -13,17 +13,19 @@ const LinkFieldsContainer = () => {
     const history = useHistory();
     
     // initial component state 
-    const [ jamaItemName, setJamaItemName ] = useState("");
-    const [ jiraIssueName, setJiraIssueName ] = useState("");
-    const [ jiraProjectID, setJiraProjectID ] = useState(0);
-    const [ jiraTypeName, setJiraTypeName ] = useState(0);
-    const [ jiraProjectName, setJiraProjectName ] = useState("");
-    const [ itemData, setItemData ] = useState([]);
-    const [ issueData, setIssueData ] = useState([]);
-    const [ jamaFieldsToLink, setJamaFieldsToLink ] = useState([]);
-    const [ jiraFieldsToLink, setJiraFieldsToLink ] = useState([]);
-    const [ jamaItemToLink, setJamaItemToLink ] = useState([]);
-    const [ jiraItemToLink, setJiraItemToLink ] = useState([]);
+    const [jamaItemName, setJamaItemName] = useState("");
+    const [jiraIssueName, setJiraIssueName] = useState("");
+    const [jiraProjectID, setJiraProjectID] = useState(0);
+    const [jiraTypeName, setJiraTypeName] = useState(0);
+    const [jiraProjectName, setJiraProjectName] = useState("");
+    const [itemData, setItemData] = useState([]);
+    const [issueData, setIssueData] = useState([]);
+    const [jamaBatch, setJamaBatch] = useState([]);
+    const [jiraBatch, setJiraBatch] = useState([]);
+    const [jamaFieldsToLink, setJamaFieldsToLink] = useState([]);
+    const [jiraFieldsToLink, setJiraFieldsToLink] = useState([]);
+    const [jamaItemToLink, setJamaItemToLink] = useState([]);
+    const [jiraItemToLink, setJiraItemToLink] = useState([]);
 
     // retrieve Jama/Jira item info and token from store
     const { itemID, jamaItemType, jamaProjectID, jamaProjectName, issueID, token } = useStoreState(
@@ -61,7 +63,6 @@ const LinkFieldsContainer = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          makeToast("error", "Error retrieving Jama item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
@@ -89,25 +90,25 @@ const LinkFieldsContainer = () => {
         })
         .catch(error => {
           console.log("error:", error);
-          makeToast("error", "Error retrieving Jira item by that ID. Please see the error logs located in the admin settings."); 
         });
     }
 
     // posts link data for Jama and Jira items and fields
     const linkItems = (params) => {
-        console.log(params);
         axios({
           url: `${devURL}/link_items`,
           method: "post",
-          data: params
+          data: params,
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
         })
-        .then(response => {
-          console.log(response);
+        .then(() => {
           makeToast("success", "Linking was successful!");
         })
-        .catch(error => {
-          console.log("error:", error);
-          makeToast("error", "Error when linking. You may be trying to add a duplicate item to the database. Please see the error logs located in the admin settings."); 
+        .catch((error) => {
+          console.log(error.data);
+          makeToast("error", "Error when linking. Please see the error logs located in the admin settings."); 
         })
     }
 
@@ -118,6 +119,7 @@ const LinkFieldsContainer = () => {
       getJamaFields(itemID);
       getJiraFields(issueID);
       selectItemPageLocked(false);
+      // eslint-disable-next-line
     },[]) 
 
     // add data to DOM for testing whenever new fields are added or item data is changed
@@ -131,62 +133,79 @@ const LinkFieldsContainer = () => {
         testDiv.id = "test_div";
         testDiv.innerHTML = `<p>Jama item to link: ${jamaItemToLink}<br> 
           Jira item to link: ${jiraItemToLink}<br>
-          Jama fields to link: ${jamaFieldsToLink}<br>
-          Jira fields to link: ${jiraFieldsToLink}<p>`
+          New Jama fields to link: ${jamaFieldsToLink}<br>
+          New Jira fields to link: ${jiraFieldsToLink}<br>
+          Total Jama fields to link: ${jamaBatch}<br>
+          Total Jira fields to link: ${jiraBatch}<p>`
         document.body.appendChild(testDiv);
       }
-    }, [jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink])
+    }, [jamaBatch, jiraBatch, jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink])
 
 
     /* Data transformation functions */
 
-    // convert to form data
-    const convertToForm = () => {
+    // generate FormData object from item data 
+    const convertToForm = (jiraItem, jamaItem, jiraFields, jamaFields) => {
         var formData = new FormData();
 
         // add item arrays to form data
-        for(let i = 0; i < jiraItemToLink[0].length && i < jamaItemToLink[0].length; i++) {
-          formData.append("jira_item[]", jiraItemToLink[0][i]);
-          formData.append("jama_item[]", jamaItemToLink[0][i]);
+        for(let i = 0; i < jiraItem[0].length && i < jamaItem[0].length; i++) {
+          formData.append("jira_item[]", jiraItem[0][i]);
+          formData.append("jama_item[]", jamaItem[0][i]);
         }
 
         // add field arrays 
-        for(let i = 0; i < jamaFieldsToLink.length; i++) {
-          for (let j = 0; j < jamaFieldsToLink[i].length; j++) {  // this will always be 2
-            formData.append(`jira_fields[${i}]`, jiraFieldsToLink[i][j]);
-            formData.append(`jama_fields[${i}]`, jamaFieldsToLink[i][j]);
+        for(let i = 0; i < jamaFields.length; i++) {
+          for (let j = 0; j < jamaFields[0][0].length; j++) {  
+            formData.append(`jira_fields[${i}]`, jiraFields[i][0][j]);
+            formData.append(`jama_fields[${i}]`, jamaFields[i][0][j]);
           }
         }
         
         // add the number of fields
-        formData.append("num_fields", jamaFieldsToLink.length);
+        formData.append("num_fields", jamaFields.length);
 
         return formData;
     }
 
 
     /* Input and button functionality */
-    
 
-    // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
-    const handleLink = (event) => {
-        event.preventDefault();
+    // handles the "add to batch" button. adds each set of fields to the total fields and disables the corresponding buttons
+    const handleAdd = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
+            // add to total fields
+            setJiraBatch(jiraBatch => [...jiraBatch, jiraFieldsToLink]);
+            setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
 
-          // convert to formData for request
-          var data = convertToForm();   
+            // disable the buttons that are checked
+            var jamaChecked = document.getElementsByName('jama_radio');
+            var jiraChecked = document.getElementsByName('jira_radio');
+            for(let i = 0; i < jamaChecked.length && i < jiraChecked.length; i++) {
+                if(jamaChecked[i].checked) {
+                  jamaChecked[i].disabled = true;
+                }
+                if(jiraChecked[i].checked) {
+                  jiraChecked[i].disabled = true;
+                }
+            }
+        }
+        else {
+          makeToast("error", "Input is required to add fields to be linked. Please select one field from each table.");
+        }
+    }
+
+    // handles the "link fields" button. converts data to form and sends to the backend array of items and fields to link
+    const handleLink = () => {
+        if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
+          && jiraBatch.length === jamaBatch.length) {
+
+          // convert body to FormData for request
+          var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraBatch, jamaBatch);   
 
           // POST to capstone database
           linkItems(data);
-
-          // uncheck checkboxes
-          const jiraChecked = document.getElementsByName('jira_checkbox');
-          const jamaChecked = document.getElementsByName('jama_checkbox');
-          for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-              jiraChecked[i].checked = false;
-              jamaChecked[i].checked = false;
-          }
               
           // remove test divs
           if(document.getElementById("test_div")) {
@@ -194,23 +213,34 @@ const LinkFieldsContainer = () => {
             testDiv.remove();
           }
 
-          // go back to previous page so user isn't tempted to link fields from the same item
-          history.push('/selectItem');
+          // go back to selectItem page after a couple seconds so user isn't tempted to link fields from the same item
+          setTimeout(function() {history.push('/selectItem')}, 2000);
         }
         else {
-          makeToast("error", "Input is required to link fields. Please select an equal number of fields from each table.");
+          makeToast("error", "Input is required to link fields. Please select one field from each table.");
         }
     }
 
+    // handles the "done linking" button. removes test divs, unchecks radios, and returns user to selectItem page 
     const handleDone = () => {
-      // remove test divs
-      if(document.getElementById("test_div")) {
-        var testDiv = document.getElementById("test_div");
-        testDiv.remove();
-      }
+        // remove test divs
+        if(document.getElementById("test_div")) {
+          var testDiv = document.getElementById("test_div");
+          testDiv.remove();
+        }
 
-      // go back to previous page so user isn't tempted to link fields from the same item
-      history.push('/selectItem');
+        // uncheck and enable radios
+        const jiraChecked = document.getElementsByName('jira_radio');
+        const jamaChecked = document.getElementsByName('jama_radio');
+        for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
+            jiraChecked[i].checked = false;
+            jamaChecked[i].checked = false;
+            jiraChecked[i].disabled = false;
+            jamaChecked[i].disabled = false;
+        }
+
+        // go back to selectItem page 
+        history.push('/selectItem');
     }
 
     return (
@@ -247,8 +277,9 @@ const LinkFieldsContainer = () => {
                 />
                 <div className="user_input_container">
                     <span className="button_container">
+                        <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
                         <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
-                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
+                        <Button id="done_button" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>
                 </div>
         </div>
