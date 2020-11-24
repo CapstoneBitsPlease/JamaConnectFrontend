@@ -106,8 +106,9 @@ const LinkFieldsContainer = () => {
         .then(() => {
           makeToast("success", "Linking was successful!");
         })
-        .catch(() => {
-          makeToast("error", "Error when linking. You may be trying to add a duplicate item to the database. Please see the error logs located in the admin settings."); 
+        .catch((error) => {
+          console.log(error.data);
+          makeToast("error", "Error when linking. Please see the error logs located in the admin settings."); 
         })
     }
 
@@ -205,16 +206,6 @@ const LinkFieldsContainer = () => {
 
           // POST to capstone database
           linkItems(data);
-
-          // uncheck and enable radios
-          const jiraChecked = document.getElementsByName('jira_radio');
-          const jamaChecked = document.getElementsByName('jama_radio');
-          for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-              jiraChecked[i].checked = false;
-              jamaChecked[i].checked = false;
-              jiraChecked[i].disabled = false;
-              jamaChecked[i].disabled = false;
-          }
               
           // remove test divs
           if(document.getElementById("test_div")) {

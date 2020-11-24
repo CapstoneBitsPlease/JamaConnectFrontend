@@ -38,7 +38,6 @@ const SyncManually = () => {
 
   //check if there is item being sync at this time so that we are not supposed to manually sync
   //item at this time
-
   const check_sync = () => {
     axios
       .get(`http://127.0.0.1:5000/capstone/last_sync_time`, {
@@ -72,9 +71,6 @@ const SyncManually = () => {
         }
       })
       .then(response => {
-        if(response.data.length === 0){
-          makeToast("error", "No linked Jama items in the capstone database.")
-        }
         setLinkedJamaItems(response.data);
       })
       .catch(error => {
@@ -85,11 +81,17 @@ const SyncManually = () => {
   // handles "Show linked items" button. displays list of linked items 
   const handleShowLinkedItems = () => {
       var div = document.getElementById("linked-item-list");
-      div.innerHTML = linkedJamaItems.map((item) => {
-        const [ jamaID, itemName ] = item;
-        // eslint-disable-next-line no-useless-concat
-        return "<li class=linked-item>" + "ID: " + jamaID + "<br>" + "Item Name: " + itemName + "</li>"
-      }).join('');
+
+      if(linkedJamaItems.length !== 0) {
+        div.innerHTML = linkedJamaItems.map((item) => {
+          const [ jamaID, itemName ] = item;
+          // eslint-disable-next-line no-useless-concat
+          return "<li class=linked-item>" + "ID: " + jamaID + "<br>" + "Item Name: " + itemName + "</li>"
+        }).join('');
+      }
+      else {
+        makeToast("error", "No linked Jama items in the capstone database.")
+      }
   }
   
 
