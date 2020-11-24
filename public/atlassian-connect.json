@@ -2,7 +2,7 @@
   "name": "Jama Connect Plugin",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
-  "baseUrl": "https://2fb042924b6d.ngrok.io",
+  "baseUrl": "https://c2efaa30f4d7.ngrok.io",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
