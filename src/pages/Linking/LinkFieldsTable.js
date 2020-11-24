@@ -29,8 +29,6 @@ const LinkFieldsTable = (props) => {
             fieldData.push([fieldServiceID, fieldName]);
         }
 
-        //event.target.disabled = true;
-
         if(props.service === "Jama") {
             props.setJamaFieldsToLink(fieldData);
         }
@@ -48,7 +46,7 @@ const LinkFieldsTable = (props) => {
         // parse/replace for a more readable field name. add index, service ID and name 
         Object.entries(itemData).forEach((key) => {
             if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null 
-            && !key[0].includes("customfield_10019") && !key[0].includes("customfield_10025")) {  // customfield_10019 = "i|1009:"" and customfield_10025 = "10000_*:*_1_*:*_174049426_*|*_10002_*:*_1_*:*_0_*|*_10004_*:*_1_*:*_1640872045_*|*_10003_*:*_1_*:*_605197033" so ... ¯\_(ツ)_/¯
+            && !key[0].includes("customfield_10019") && !key[0].includes("customfield_10025")) {  // customfield_10019 = "i|1009:"" and customfield_10025 = "10000_*:*_1_*:*_174049426_*|*_10002_*:*..." so ¯\_(ツ)_/¯
                 if(!key[0].includes("$") && !key[0].includes("_")) {
                     formattedData.push({
                         "index": i+1, 

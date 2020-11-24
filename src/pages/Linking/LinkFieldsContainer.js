@@ -99,15 +99,16 @@ const LinkFieldsContainer = () => {
           url: `${devURL}/link_items`,
           method: "post",
           data: params,
-          /*headers: {
+          headers: {
             "Authorization": `Bearer ${token}`
-          }*/
+          }
         })
         .then(() => {
           makeToast("success", "Linking was successful!");
         })
-        .catch(() => {
-          makeToast("error", "Error when linking. You may be trying to add a duplicate item to the database. Please see the error logs located in the admin settings."); 
+        .catch((error) => {
+          console.log(error.data);
+          makeToast("error", "Error when linking. Please see the error logs located in the admin settings."); 
         })
     }
 
@@ -143,7 +144,7 @@ const LinkFieldsContainer = () => {
 
     /* Data transformation functions */
 
-    // convert to form data
+    // generate FormData object from item data 
     const convertToForm = (jiraItem, jamaItem, jiraFields, jamaFields) => {
         var formData = new FormData();
 
@@ -155,7 +156,7 @@ const LinkFieldsContainer = () => {
 
         // add field arrays 
         for(let i = 0; i < jamaFields.length; i++) {
-          for (let j = 0; j < jamaFields[0][0].length; j++) {  // this will always be 2
+          for (let j = 0; j < jamaFields[0][0].length; j++) {  
             formData.append(`jira_fields[${i}]`, jiraFields[i][0][j]);
             formData.append(`jama_fields[${i}]`, jamaFields[i][0][j]);
           }
@@ -170,36 +171,41 @@ const LinkFieldsContainer = () => {
 
     /* Input and button functionality */
 
-    // handles the "add to batch" button. adds each set of fields to the total fields
+    // handles the "add to batch" button. adds each set of fields to the total fields and disables the corresponding buttons
     const handleAdd = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
+            // add to total fields
             setJiraBatch(jiraBatch => [...jiraBatch, jiraFieldsToLink]);
             setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
+
+            // disable the buttons that are checked
+            var jamaChecked = document.getElementsByName('jama_radio');
+            var jiraChecked = document.getElementsByName('jira_radio');
+            for(let i = 0; i < jamaChecked.length && i < jiraChecked.length; i++) {
+                if(jamaChecked[i].checked) {
+                  jamaChecked[i].disabled = true;
+                }
+                if(jiraChecked[i].checked) {
+                  jiraChecked[i].disabled = true;
+                }
+            }
         }
         else {
           makeToast("error", "Input is required to add fields to be linked. Please select one field from each table.");
         }
     }
 
-    // handles the "link" button. converts data to form and sends to the backend array of items and fields to link
+    // handles the "link fields" button. converts data to form and sends to the backend array of items and fields to link
     const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
           && jiraBatch.length === jamaBatch.length) {
 
-          // convert to formData for request
+          // convert body to FormData for request
           var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraBatch, jamaBatch);   
 
           // POST to capstone database
           linkItems(data);
-
-          // uncheck radios
-          const jiraChecked = document.getElementsByName('jira_radio');
-          const jamaChecked = document.getElementsByName('jama_radio');
-          for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-              jiraChecked[i].checked = false;
-              jamaChecked[i].checked = false;
-          }
               
           // remove test divs
           if(document.getElementById("test_div")) {
@@ -208,7 +214,7 @@ const LinkFieldsContainer = () => {
           }
 
           // go back to selectItem page after a couple seconds so user isn't tempted to link fields from the same item
-          setTimeout(function() {history.push('/selectItem')}, 2000)
+          setTimeout(function() {history.push('/selectItem')}, 2000);
         }
         else {
           makeToast("error", "Input is required to link fields. Please select one field from each table.");
@@ -217,22 +223,24 @@ const LinkFieldsContainer = () => {
 
     // handles the "done linking" button. removes test divs, unchecks radios, and returns user to selectItem page 
     const handleDone = () => {
-      // remove test divs
-      if(document.getElementById("test_div")) {
-        var testDiv = document.getElementById("test_div");
-        testDiv.remove();
-      }
+        // remove test divs
+        if(document.getElementById("test_div")) {
+          var testDiv = document.getElementById("test_div");
+          testDiv.remove();
+        }
 
-      // uncheck radios
-      const jiraChecked = document.getElementsByName('jira_radio');
-      const jamaChecked = document.getElementsByName('jama_radio');
-      for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-          jiraChecked[i].checked = false;
-          jamaChecked[i].checked = false;
-      }
+        // uncheck and enable radios
+        const jiraChecked = document.getElementsByName('jira_radio');
+        const jamaChecked = document.getElementsByName('jama_radio');
+        for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
+            jiraChecked[i].checked = false;
+            jamaChecked[i].checked = false;
+            jiraChecked[i].disabled = false;
+            jamaChecked[i].disabled = false;
+        }
 
-      // go back to selectItem page 
-      history.push('/selectItem');
+        // go back to selectItem page 
+        history.push('/selectItem');
     }
 
     return (
@@ -271,7 +279,7 @@ const LinkFieldsContainer = () => {
                     <span className="button_container">
                         <Button id="add_button" className="add_button" onClick={handleAdd}>Add to batch</Button>
                         <Button id="button_link" appearance="primary" className="button_link" onClick={handleLink}>Link fields</Button>
-                        <Button id="done_button" appearance="subtle" className="done_button" onClick={handleDone}>Done linking</Button>
+                        <Button id="done_button" className="done_button" onClick={handleDone}>Done linking</Button>
                     </span>
                 </div>
         </div>
