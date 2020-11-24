@@ -62,7 +62,7 @@ const LinkFieldsContainer = () => {
           setJamaItemToLink(jamaItemToLink => [...jamaItemToLink, jamaItemData]);
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error);
         });
     }
 
@@ -89,13 +89,14 @@ const LinkFieldsContainer = () => {
           setJiraItemToLink(jiraItemToLink => [...jiraItemToLink, jiraIssueData]);
         })
         .catch(error => {
-          console.log("error:", error);
+          console.log(error);
         });
     }
 
     // posts link data for Jama and Jira items and fields
-    const linkItems = (params) => {
-        axios({
+    const linkItems = async(params) => {
+        var success = false;
+        await axios({
           url: `${devURL}/link_items`,
           method: "post",
           data: params,
@@ -104,11 +105,14 @@ const LinkFieldsContainer = () => {
           }
         })
         .then(() => {
+          success = true;
           makeToast("success", "Linking was successful!");
+          return success;
         })
         .catch((error) => {
-          console.log(error.data);
+          console.log(error);
           makeToast("error", "Error when linking. Please see the error logs located in the admin settings."); 
+          return success;
         })
     }
 
@@ -123,7 +127,7 @@ const LinkFieldsContainer = () => {
     },[]) 
 
     // add data to DOM for testing whenever new fields are added or item data is changed
-    useEffect(() => {
+    /*useEffect(() => {
       if(jamaFieldsToLink.length !== 0 || jiraFieldsToLink.length !== 0) {
         if(document.getElementById("test_div")) {
           var testDiv = document.getElementById("test_div");
@@ -139,7 +143,7 @@ const LinkFieldsContainer = () => {
           Total Jira fields to link: ${jiraBatch}<p>`
         document.body.appendChild(testDiv);
       }
-    }, [jamaBatch, jiraBatch, jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink])
+    }, [jamaBatch, jiraBatch, jiraItemToLink, jamaItemToLink, jiraFieldsToLink, jamaFieldsToLink])*/
 
 
     /* Data transformation functions */
@@ -200,21 +204,34 @@ const LinkFieldsContainer = () => {
     const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
           && jiraBatch.length === jamaBatch.length) {
+          
+          var success = false;
 
           // convert body to FormData for request
           var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraBatch, jamaBatch);   
 
           // POST to capstone database
-          linkItems(data);
-              
+          success = linkItems(data);
+
           // remove test divs
-          if(document.getElementById("test_div")) {
+          /*if(document.getElementById("test_div")) {
             var testDiv = document.getElementById("test_div");
             testDiv.remove();
-          }
+          }*/
 
           // go back to selectItem page after a couple seconds so user isn't tempted to link fields from the same item
           setTimeout(function() {history.push('/selectItem')}, 2000);
+          
+          // uncheck and enable radio buttons 
+          var jamaChecked = document.getElementsByName('jama_radio');
+          var jiraChecked = document.getElementsByName('jira_radio');
+          for(let i = 0; i < jamaChecked.length && i < jiraChecked.length; i++) {
+              jamaChecked[i].checked = false;
+              jamaChecked[i].disabled = false;
+              jiraChecked[i].checked = false;
+              jiraChecked[i].disabled = false;
+          }
+          
         }
         else {
           makeToast("error", "Input is required to link fields. Please select one field from each table.");
@@ -224,20 +241,10 @@ const LinkFieldsContainer = () => {
     // handles the "done linking" button. removes test divs, unchecks radios, and returns user to selectItem page 
     const handleDone = () => {
         // remove test divs
-        if(document.getElementById("test_div")) {
+        /*if(document.getElementById("test_div")) {
           var testDiv = document.getElementById("test_div");
           testDiv.remove();
-        }
-
-        // uncheck and enable radios
-        const jiraChecked = document.getElementsByName('jira_radio');
-        const jamaChecked = document.getElementsByName('jama_radio');
-        for(let i = 0; i < jiraChecked.length && i < jamaChecked.length; i++) {
-            jiraChecked[i].checked = false;
-            jamaChecked[i].checked = false;
-            jiraChecked[i].disabled = false;
-            jamaChecked[i].disabled = false;
-        }
+        }*/
 
         // go back to selectItem page 
         history.push('/selectItem');
