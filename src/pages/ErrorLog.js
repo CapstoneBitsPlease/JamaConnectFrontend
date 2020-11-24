@@ -41,6 +41,7 @@ const ErrorLog = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
     <div className="syncerror-container">
+      <h3>Error Logs</h3>
       <div className="syncerror-input">
         <label htmlFor="start-date">Start Date</label>
         <input
@@ -63,7 +64,6 @@ const ErrorLog = () => {
           appearance="primary"
           type="button"
           onClick={errorTime}
-          type="submit"
         >
           Submit
         </Button>

@@ -1,14 +1,14 @@
 import React, {useState} from "react";
-import axios from "axios";
 import { useStoreState } from "easy-peasy";
+import axios from "axios";
 import makeToast from "../components/Toaster";
+import Button from "@atlaskit/button";
 import "../styles/components/SyncManually.style.sass";
 
 const SyncManually = () => {
   const token = useStoreState((state) => state.accountStore.token);
   const itemID = useStoreState((state) => state.jamaitem.itemID);
   const [linkedJamaItems, setLinkedJamaItems] = useState([]);
-  //console.log(token);
   console.log(itemID);
   const inputIDRef = React.createRef();
 
@@ -124,13 +124,14 @@ const SyncManually = () => {
         >
           Sync
         </button>
-        <button
-          id="show-items-button"
-          className="show-items-button"
+        <Button
+          id="submit"
+          appearance="primary"
+          type="button"
           onClick={handleShowLinkedItems}
         >
           Show linked items
-        </button>
+        </Button>
         <ul id="linked-item-list" className="linked-item-list"></ul>
       </div>
     </div>

@@ -1,18 +1,25 @@
 .syncerror
   &-container
     @apply flex flex-col items-center justify-center
+    h3
+      @apply text-center font-bold text-xl
+      @apply my-10
   &-input
+    @apply flex flex-col
     @apply mb-4 
+    @screen md
+      @apply flex flex-row
     input, select
       @apply p-2
       @apply rounded-md border-solid
-      @apply mr-4
+      @apply mb-4
+      @screen md
+        @apply mr-4
       
     label
       @apply text-gray-900
   &-info
     @apply flex flex-col items-center justify-center
-    @apply w-11/12
     @apply mb-4
     @apply border-blue-400 border-solid
     
