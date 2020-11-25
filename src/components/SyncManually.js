@@ -117,15 +117,17 @@ const SyncManually = () => {
       <div id="sync-wrapper" className="sync-wrapper">
         <h2>Please enter the Jama Item ID</h2>
         <input type="inputID" name="inputID" id="inputID" ref={inputIDRef} />
-        <button
+        <Button
           id="send"
+          appearance="primary"
           className="sync-button"
           onClick={handleSync}
         >
           Sync
-        </button>
+        </Button>
         <Button
-          id="submit"
+          id="show-items-button"
+          className="show-items-button"
           appearance="primary"
           type="button"
           onClick={handleShowLinkedItems}

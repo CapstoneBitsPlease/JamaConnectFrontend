@@ -47,6 +47,9 @@ const Test = () => {
         <Route path="/selectItemNoNav">
           {!loggedIn ? "Please login through jama plugin" : <JiraIssueContent/>}
         </Route>
+        <Route path="/sync">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncManually/>}
+        </Route>
       </Switch>
     </>
   );
