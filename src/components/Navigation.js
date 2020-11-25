@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@atlaskit/button";
 import "../styles/components/Navigation.style.sass";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
@@ -7,18 +8,18 @@ const Navigation = () => {
     <div>
       <nav>
         <ul className="navigation-container">
-          <li>
+          <Button id="navigation" appearance="primary" type="button">
             <Link to="/selectItem">Select Item to link</Link>
-          </li>
-          <li>
+          </Button>
+          <Button id="navigation" appearance="primary" type="button">
             <Link to="/unlink">Unlink</Link>
-          </li>
-          <li>
+          </Button>
+          <Button id="navigation" appearance="primary" type="button">
             <Link to="/syncSettings">Sync Settings</Link>
-          </li>
-          <li>
+          </Button>
+          <Button id="navigation" appearance="primary" type="button">
             <Link to="/errorLog">Error Log</Link>
-          </li>
+          </Button>
         </ul>
       </nav>
     </div>
