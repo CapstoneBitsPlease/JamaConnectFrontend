@@ -124,22 +124,25 @@ const SyncManually = () => {
         <p>Please enter the Jama Item ID</p>
         <input type="inputID" name="inputID" id="inputID" ref={inputIDRef} />
         <Button
-          id="submit"
+          id="sync-button"
+          className="sync-button"
           appearance="primary"
           type="button"
           onClick={handleSync}
         >
           Sync
         </Button>
-      </div>
-      <Button
-        id="show-items-button"
-        appearance="primary"
-        type="button"
-        onClick={handleShowLinkedItems}
-      >
-        Show linked items
+        <Button
+          id="show-items-button"
+          className="show-items-button"
+          appearance="primary"
+          type="button"
+          onClick={handleShowLinkedItems}
+        >
+          Show linked items
       </Button>
+      </div>
+      
       <ul id="linked-item-list" className="linked-item-list"></ul>
     </div>
   );
