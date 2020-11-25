@@ -133,7 +133,7 @@ const SyncManually = () => {
         </Button>
       </div>
       <Button
-        id="submit"
+        id="show-items-button"
         appearance="primary"
         type="button"
         onClick={handleShowLinkedItems}
