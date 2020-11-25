@@ -72,6 +72,9 @@ const SyncSettingsContainer = () => {
       else if(selectedTimeUnit === "hours")
         intervalInSeconds *= 3600;
       postSyncInterval(intervalInSeconds);
+
+      // clear input
+      document.getElementById("select_input_text_field").value = '';
     }
   }  
 
