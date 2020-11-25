@@ -16,6 +16,7 @@ const ErrorLog = () => {
   const endDateRef = React.createRef();
 
   const errorTime = () => {
+    setLoading(true);
     axios
       .get(
         `http://127.0.0.1:5000/get_logs_range?start_date=${startDateRef.current.value}&end_date=${endDateRef.current.value}`,
@@ -27,7 +28,6 @@ const ErrorLog = () => {
         }
       )
       .then((res) => {
-        setLoading(true);
         setPosts(res.data);
         setLoading(false);
       })
