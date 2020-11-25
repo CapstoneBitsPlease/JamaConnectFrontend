@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useStoreState } from "easy-peasy";
 import axios from "axios";
 import Button from "@atlaskit/button";
-import Posts from "../components/Posts"
-import Pagination from "../components/Pagination"
+import Posts from "../components/Posts";
+import Pagination from "../components/Pagination";
 import "../styles/pages/ErrorLog.style.sass";
 
 const ErrorLog = () => {
   const [posts, setPosts] = useState([]);
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const token = useStoreState((state) => state.accountStore.token);
   const startDateRef = React.createRef();
   const endDateRef = React.createRef();
-
 
   const errorTime = () => {
     axios
@@ -28,7 +27,7 @@ const ErrorLog = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        setLoading(true);
         setPosts(res.data);
         setLoading(false);
       })
@@ -36,13 +35,13 @@ const ErrorLog = () => {
   };
 
   const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost- postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost,indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="syncerror-container">
-      <h3>Error Logs</h3>
       <div className="syncerror-input">
+        <h3>Error Logs</h3>
         <label htmlFor="start-date">Start Date</label>
         <input
           type="start-date"
@@ -68,8 +67,12 @@ const ErrorLog = () => {
           Submit
         </Button>
       </div>
-      <Posts posts={currentPosts} loading={loading}/>
-      <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+      <Posts posts={currentPosts} loading={loading} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
     </div>
   );
 };

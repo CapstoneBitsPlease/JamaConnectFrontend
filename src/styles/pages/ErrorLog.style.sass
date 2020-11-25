@@ -1,21 +1,18 @@
 .syncerror
   &-container
     @apply flex flex-col items-center justify-center
+    #paginate
+      @apply m-2
     h3
       @apply text-center font-bold text-xl
       @apply my-10
   &-input
     @apply flex flex-col
-    @apply mb-4 
-    @screen md
-      @apply flex flex-row
+    @apply mb-10
     input, select
       @apply p-2
       @apply rounded-md border-solid
       @apply mb-4
-      @screen md
-        @apply mr-4
-      
     label
       @apply text-gray-900
   &-info
