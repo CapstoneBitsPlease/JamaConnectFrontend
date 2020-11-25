@@ -12,6 +12,7 @@ const SelectItemunlink = () => {
 	// const [token, setToken] = useState(0);
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
+	const [flag , setflag ] =useState(true)
 
 	//test if the jama id is valid
 	const [testjama, settestjama] = useState(false)
@@ -94,6 +95,8 @@ const SelectItemunlink = () => {
 				console.log(err.data);
 				makeToast("error", "There is something wrong while unlinking")
 			})
+
+			setflag(!flag);
 	}
 
 	const check_again = () => {
@@ -112,7 +115,6 @@ const SelectItemunlink = () => {
 		}
 
 		document.getElementById("itemid").value = "";
-
 
 	}
 
