@@ -111,6 +111,9 @@ const SelectItemunlink = () => {
 			}
 		}
 
+		document.getElementById("itemid").value = "";
+
+
 	}
 
 
@@ -133,7 +136,7 @@ const SelectItemunlink = () => {
 		if (token) {
 			get_list();
 		}
-	}, [token])
+	}, [token, unlink_items])
 
 
 	useEffect(() => {
@@ -141,7 +144,6 @@ const SelectItemunlink = () => {
 			check_error();
 		}
 	}, [item_id])
-
 
 
 	return (
