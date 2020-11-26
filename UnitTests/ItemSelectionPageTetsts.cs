@@ -82,7 +82,7 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
             driver.FindElement(By.Id("linkbutton")).Click();
             driver.FindElement(By.Id("itemid")).Clear();
             driver.FindElement(By.Id("jiraid")).Clear();
-            Assert.IsTrue(driver.FindElement(By.Id("swal2-title")).Text.Equals("Sorry, we can't find that Jama ID));
+            Assert.IsTrue(driver.FindElement(By.Id("swal2-title")).Text.Equals("Sorry, we can't find that Jama ID"));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace PSUCapstoneTestingProject.Front_end.UnitTests
             driver.FindElement(By.Id("linkbutton")).Click();
             driver.FindElement(By.Id("itemid")).Clear();
             driver.FindElement(By.Id("jiraid")).Clear();
-            Assert.IsTrue(driver.FindElement(By.Id("swal2-title")).Text.Equals("Sorry, we can't find that Jama ID));
+            Assert.IsTrue(driver.FindElement(By.Id("swal2-title")).Text.Equals("Sorry, we can't find that Jama ID"));
         }
 
         [Test]
