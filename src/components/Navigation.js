@@ -8,16 +8,16 @@ const Navigation = () => {
     <div>
       <nav>
         <ul className="navigation-container">
-          <Button id="navigation" appearance="primary" type="button">
+          <Button id="navigation" appearance="subtle" type="button">
             <Link to="/selectItem">Select Item to link</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
+          <Button id="navigation" appearance="subtle" type="button">
             <Link to="/unlink">Unlink</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
+          <Button id="navigation" appearance="subtle" type="button">
             <Link to="/syncSettings">Sync Settings</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
+          <Button id="navigation" appearance="subtle" type="button">
             <Link to="/errorLog">Error Log</Link>
           </Button>
         </ul>
