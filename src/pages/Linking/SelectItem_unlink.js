@@ -13,6 +13,7 @@ const SelectItemunlink = () => {
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
 	const [flag , setflag ] =useState(true)
+	const [listLength, setListLength] = useState(0);
 
 	//test if the jama id is valid
 	const [testjama, settestjama] = useState(false)
@@ -34,10 +35,11 @@ const SelectItemunlink = () => {
 			})
 			.then(res => {
 				if(res.data.length === 0){
-					makeToast("error", "There is no Jama item")
+					makeToast("error", "There is no Jama item in our database.")
 				}
 				console.log(res);
 				setlist(res.data);
+				setListLength(res.data.length);
 			})
 			.catch(err => {
 				console.log(err);
@@ -87,7 +89,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				makeToast("info",res.data);
+				makeToast("success",res.data);
 				console.log(res);
 
 			})
@@ -108,6 +110,7 @@ const SelectItemunlink = () => {
 			if (testjama) {
 				unlink_items();
 				check(true);
+				setListLength(listLength-1);
 			}
 			else {
 				makeToast("error", "This is not a valid jama ID!")
@@ -137,8 +140,9 @@ const SelectItemunlink = () => {
 	useEffect(() => {
 		if (token) {
 			get_list();
+			console.log(listLength);
 		}
-	}, [token, unlink_items])
+	}, [token, listLength])
 
 
 	useEffect(() => {
