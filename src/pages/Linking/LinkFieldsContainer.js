@@ -200,7 +200,7 @@ const LinkFieldsContainer = () => {
         }
     }
 
-    // handles the "link fields" button. converts data to form and sends to the backend array of items and fields to link
+    // handles the "link fields" button. converts data to form and sends to the backend arrays of items and fields to link
     const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
           && jiraBatch.length === jamaBatch.length) {
@@ -242,7 +242,7 @@ const LinkFieldsContainer = () => {
                     jiraChecked[i].checked = false;
                     jiraChecked[i].disabled = false;
                 }
-                
+
                 // empty field arrays
                 setJamaBatch([]);
                 setJiraBatch([]);

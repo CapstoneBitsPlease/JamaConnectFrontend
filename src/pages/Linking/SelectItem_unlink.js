@@ -34,9 +34,9 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if(res.data.length === 0){
+				/*if(res.data.length === 0){
 					makeToast("error", "There is no Jama item in our database.")
-				}
+				}*/
 				console.log(res);
 				setlist(res.data);
 				setListLength(res.data.length);
@@ -126,9 +126,14 @@ const SelectItemunlink = () => {
 	//simulated with json file
 	const temp = () => {
 		const tempArray = [];
-		list.map((element) => {
-			tempArray.push('ID: ' + element[0]);
-		});
+		if(listLength === 0) {
+			tempArray.push("No Jama items currently in our database.");
+		}
+		else {
+			list.map((element) => {
+				tempArray.push('ID: ' + element[0]);
+			});
+		}
 		return tempArray;
 	}
 
