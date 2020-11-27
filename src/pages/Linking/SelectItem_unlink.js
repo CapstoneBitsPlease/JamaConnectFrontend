@@ -36,7 +36,7 @@ const SelectItemunlink = () => {
 			.then(res => {
 				/*if(res.data.length === 0){
 					makeToast("error", "There is no Jama item in our database.")
-				}*/
+				}*/ 
 				console.log(res);
 				setlist(res.data);
 				setListLength(res.data.length);
@@ -70,7 +70,7 @@ const SelectItemunlink = () => {
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jama ID")
+				//makeToast("error", "There is something wrong with your Jama ID")
 			})
 
 	}
@@ -145,7 +145,6 @@ const SelectItemunlink = () => {
 	useEffect(() => {
 		if (token) {
 			get_list();
-			console.log(listLength);
 		}
 	}, [token, listLength])
 
@@ -185,7 +184,7 @@ const SelectItemunlink = () => {
 
 					<div className="select_item_unlink-list">
 						<ul >
-							{temp().map(s => (<li className="test">{s}</li>))}
+							{temp().map((s, index) => (<li key={index} className="test">{s}</li>))}
 						</ul>
 					</div>
 				</div>
