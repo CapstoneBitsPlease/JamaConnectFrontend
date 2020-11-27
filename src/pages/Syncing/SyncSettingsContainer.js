@@ -43,7 +43,7 @@ const SyncSettingsContainer = () => {
       })
       .catch(error => {
         console.log("error:", error);
-        makeToast("error", "Error when updating sync interval. Please see the error logs located in the admin settings."); 
+        makeToast("error", "Error when updating sync interval. Please see the error logs."); 
       })
     }
 
@@ -55,8 +55,7 @@ const SyncSettingsContainer = () => {
   }, [])
   
   // handles the "apply" button. prints updated sync interval, will update sync process 
-  const handleApply = (event) => {
-    event.preventDefault()
+  const handleApply = () => {
     if(syncInterval === "") {
       makeToast("error", "Input is required to update the sync process. Please enter a time interval.");
     }
@@ -74,7 +73,7 @@ const SyncSettingsContainer = () => {
       postSyncInterval(intervalInSeconds);
 
       // clear input
-      document.getElementById("select_input_text_field").value = '';
+      document.getElementById("select_input_text_field").value = "";
     }
   }  
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import Button from '@atlaskit/button';
 import axios from 'axios';
 import {useStoreState, useStoreActions} from 'easy-peasy';
@@ -181,8 +181,8 @@ const LinkFieldsContainer = () => {
             setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
 
             // disable the buttons that are checked
-            var jamaChecked = document.getElementsByName('jama_radio');
-            var jiraChecked = document.getElementsByName('jira_radio');
+            var jamaChecked = document.getElementsByName("jama_radio");
+            var jiraChecked = document.getElementsByName("jira_radio");
             for(let i = 0; i < jamaChecked.length; i++) {
                 if(jamaChecked[i].checked) {
                   jamaChecked[i].disabled = true;
@@ -210,7 +210,7 @@ const LinkFieldsContainer = () => {
           // convert body to FormData for request
           var data = convertToForm(jiraItemToLink, jamaItemToLink, jiraBatch, jamaBatch);   
 
-          // POST to capstone database
+          // try to POST to capstone database
           var promise = linkItems(data);
 
           // resolve and evaluate promise 
@@ -219,14 +219,14 @@ const LinkFieldsContainer = () => {
               makeToast("success", "Linking was successful!");
 
               // go back to selectItem page so user isn't tempted to link fields from the same item
-              history.push('/selectItem');
+              history.push("/selectItem");
             }
             else if(result.status === 500) {
-              makeToast("error", "Error when linking. Please see the error logs located in the admin settings.");
+              makeToast("error", "Error when linking. Please see the error logs.");
               
               // uncheck and enable radio buttons 
-              var jamaChecked = document.getElementsByName('jama_radio');
-              var jiraChecked = document.getElementsByName('jira_radio');
+              var jamaChecked = document.getElementsByName("jama_radio");
+              var jiraChecked = document.getElementsByName("jira_radio");
               for(let i = 0; i < jamaChecked.length; i++) {
                   jamaChecked[i].checked = false;
                   jamaChecked[i].disabled = false;
