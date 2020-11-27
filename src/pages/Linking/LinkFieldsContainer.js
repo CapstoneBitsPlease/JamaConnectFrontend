@@ -223,7 +223,6 @@ const LinkFieldsContainer = () => {
               document.documentElement.scrollTop = 0;
 
               if(result.status === 200) {
-
                 makeToast("success", "Linking was successful!");
 
                 // go back to selectItem page so user isn't tempted to link fields from the same item
@@ -243,6 +242,10 @@ const LinkFieldsContainer = () => {
                     jiraChecked[i].checked = false;
                     jiraChecked[i].disabled = false;
                 }
+                
+                // empty field arrays
+                setJamaBatch([]);
+                setJiraBatch([]);
               }
           })
         }

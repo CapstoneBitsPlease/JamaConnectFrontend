@@ -10,9 +10,12 @@ const Navigation = () => {
   const setToken = useStoreActions(actions => actions.accountStore.setToken);
 
   const handleSignOut = () => {
-    setLoggedIn(false);
-    setToken(null);
-    history.push("/login");
+    var answer = window.confirm("Are you sure you want to sign out?")
+    if(answer) {
+      setLoggedIn(false);
+      setToken(null);
+      history.push("/login");
+    }
   }
 
   return (
