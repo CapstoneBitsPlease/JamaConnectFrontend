@@ -300,7 +300,7 @@ const SelectItem = () => {
 
 				<div className="select_item-list">
 					<ul >
-						{temp().map((s, index) => (<li key={index} className="test">{s}</li>))}
+						{temp().map((s) => (<li className="test">{s}</li>))}
 					</ul>
 				</div>
 
