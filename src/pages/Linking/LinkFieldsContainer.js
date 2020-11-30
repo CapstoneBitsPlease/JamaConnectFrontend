@@ -177,7 +177,7 @@ const LinkFieldsContainer = () => {
     const handleAdd = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraFieldsToLink[0] && jamaFieldsToLink[0] 
           && jiraFieldsToLink.length === jamaFieldsToLink.length) {
-            // add to total fields
+            // add checked fields to total fields
             setJiraBatch(jiraBatch => [...jiraBatch, jiraFieldsToLink]);
             setJamaBatch(jamaBatch => [...jamaBatch, jamaFieldsToLink]);
 
@@ -200,7 +200,7 @@ const LinkFieldsContainer = () => {
         }
     }
 
-    // handles the "link fields" button. converts data to form and sends to the backend array of items and fields to link
+    // handles the "link fields" button. converts data to form and sends to the backend arrays of items and fields to link
     const handleLink = () => {
         if(jiraItemToLink[0] && jamaItemToLink[0] && jiraBatch[0] && jamaBatch[0] 
           && jiraBatch.length === jamaBatch.length) {
@@ -222,13 +222,16 @@ const LinkFieldsContainer = () => {
               // go back to top of page so user can see toaster 
               document.documentElement.scrollTop = 0;
 
+              // successful link
               if(result.status === 200) {
                 makeToast("success", "Linking was successful!");
 
                 // go back to selectItem page so user isn't tempted to link fields from the same item
                 history.push("/selectItem");
               }
-              else if(result.status === 500) {
+              
+              // unsuccessful link
+              else {
                 makeToast("error", "Error when linking. Please see the error logs.");
                 
                 // uncheck and enable radio buttons 
@@ -242,11 +245,11 @@ const LinkFieldsContainer = () => {
                     jiraChecked[i].checked = false;
                     jiraChecked[i].disabled = false;
                 }
-                
-                // empty field arrays
-                setJamaBatch([]);
-                setJiraBatch([]);
               }
+
+              // empty field arrays
+              setJamaBatch([]);
+              setJiraBatch([]);
           })
         }
         else {

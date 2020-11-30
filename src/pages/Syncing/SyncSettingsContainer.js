@@ -9,28 +9,30 @@ import '../../styles/pages/SyncSettings.style.sass';
 // Container for sync settings page elements 
 const SyncSettingsContainer = () => {
   const devURL = "http://127.0.0.1:5000";
-  
-  const { prevSyncTime, timeUnit, numFieldsToSync, syncInterval, token } = useStoreState(
+
+  // state and actions from sync and account store
+  const { prevSyncTime, timeUnit, numFieldsToSync, syncInterval, selectedTimeUnit, token } = useStoreState(
       state => ({
           prevSyncTime: state.syncStore.prevSyncTime,
           timeUnit: state.syncStore.timeUnit,
           numFieldsToSync: state.syncStore.numFieldsToSync,
           syncInterval: state.syncStore.syncInterval,
+          selectedTimeUnit: state.syncStore.selectedTimeUnit,
           token: state.accountStore.token
       })
   )
-
-  const { getPrevSyncTime, getNumFieldsToSync, setSyncInterval } = useStoreActions(
+  const { getPrevSyncTime, getNumFieldsToSync, setSyncInterval, setSelectedTimeUnit } = useStoreActions(
       actions => ({
           getPrevSyncTime: actions.syncStore.getPrevSyncTime,
           getNumFieldsToSync: actions.syncStore.getNumFieldsToSync,
-          setSyncInterval: actions.syncStore.setSyncInterval
+          setSyncInterval: actions.syncStore.setSyncInterval,
+          setSelectedTimeUnit: actions.syncStore.setSelectedTimeUnit
       })
   )
 
-  // API call to update the sync interval
-  const postSyncInterval = (syncInterval) => {
-    axios({
+  // API call - updates the sync interval
+  const postSyncInterval = async(syncInterval) => {
+    return await axios({
         url: `${devURL}/sync/set_interval?interval=${syncInterval}`,
         method: "post",
         headers: {
@@ -38,42 +40,56 @@ const SyncSettingsContainer = () => {
         }
       })
       .then(response => {
-        console.log(response);
-        makeToast("success", "Sync interval set successfully.");
+        return response;
       })
       .catch(error => {
         console.log("error:", error);
-        makeToast("error", "Error when updating sync interval. Please see the error logs."); 
       })
     }
 
-  // calls to backend made when component mounts
+  // request info once component mounts
   useEffect(() => { 
       getPrevSyncTime();
       getNumFieldsToSync();
       // eslint-disable-next-line
   }, [])
   
-  // handles the "apply" button. prints updated sync interval, will update sync process 
+  // handles the "apply" button. updates sync interval
   const handleApply = () => {
     if(syncInterval === "") {
       makeToast("error", "Input is required to update the sync process. Please enter a time interval.");
     }
 
     else {
-      var selectedTimeUnit = document.getElementById("dropdown_list_selection").value;
-      console.log(syncInterval, selectedTimeUnit);
+      // set time unit and interval with user input 
+      var chosenTimeUnit = document.getElementById("dropdown_list_selection").value;
+      var interval = document.getElementById("select_input_text_field").value;
+      setSelectedTimeUnit(chosenTimeUnit);
+      setSyncInterval(interval);
 
-      // POST sync interval in seconds
-      var intervalInSeconds = syncInterval;
-      if(selectedTimeUnit === "minutes") 
+      // convert sync interval to seconds
+      var intervalInSeconds = interval;
+      if(chosenTimeUnit === "minutes") 
         intervalInSeconds *= 60;
-      else if(selectedTimeUnit === "hours")
+      else if(chosenTimeUnit === "hours")
         intervalInSeconds *= 3600;
-      postSyncInterval(intervalInSeconds);
 
-      // clear input
-      document.getElementById("select_input_text_field").value = "";
+      // try to POST sync interval
+      var promise = postSyncInterval(intervalInSeconds);
+
+      // resolve and evaluate promise 
+      promise.then(response => {
+        // successful
+        if(response.status === 200) {
+          makeToast("success", "Sync interval set successfully.");
+          // clear input
+          document.getElementById("select_input_text_field").value = "";
+        }
+        // unsuccessful
+        else {
+          makeToast("error", "Error when updating sync interval. Please see the error logs."); 
+        }
+      }) 
     }
   }  
 
@@ -85,11 +101,11 @@ const SyncSettingsContainer = () => {
         timeUnit={timeUnit}
         numFieldsToSync={numFieldsToSync}
         syncInterval={syncInterval}
+        selectedTimeUnit={selectedTimeUnit}
         setSyncInterval={setSyncInterval}
       />
       <Button id="apply_button" appearance="primary" className="apply_button" type="submit" onClick={handleApply}>Apply</Button>
-  </div>
-    
+    </div>  
   );
 }
 

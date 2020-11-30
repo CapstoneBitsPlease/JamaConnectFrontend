@@ -9,6 +9,7 @@ const Navigation = () => {
   const setLoggedIn = useStoreActions(actions => actions.accountStore.setLoggedIn);
   const setToken = useStoreActions(actions => actions.accountStore.setToken);
 
+  // handles the "sign out" button. asks user to confirm, erases token and moves back to login page if they do
   const handleSignOut = () => {
     var answer = window.confirm("Are you sure you want to sign out?")
     if(answer) {

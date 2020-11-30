@@ -49,7 +49,7 @@ const LinkFieldsTable = (props) => {
             if(typeof key[1] !== 'object' 
             // making sure it's not empty 
             && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null 
-            // customfield_10019 = "i|1009:"" and customfield_10025 = "10000_*:*_1_*:*_174049426_*|*_10002_*:*..." so ¯\_(ツ)_/¯
+            // not sure how to name the kind of data these fields are holding 
             && !key[0].includes("customfield_10019") 
             && !key[0].includes("customfield_10025") 
             // these are read-only fields and cannot be linked
