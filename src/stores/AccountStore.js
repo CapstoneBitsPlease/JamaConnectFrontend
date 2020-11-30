@@ -20,7 +20,10 @@ const accountStore = persist(
           makeToast("error", "Invalid login");
         });
     }),
-
+    logout: action((state) => {
+      state.token = null;
+      state.loggedIn = false;
+    }),
     setLoggedIn: action((state, newLoggedIn) => {
       state.loggedIn = newLoggedIn;
     }),

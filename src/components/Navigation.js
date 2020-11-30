@@ -1,9 +1,17 @@
 import React from "react";
 import Button from "@atlaskit/button";
+import { useStoreActions} from "easy-peasy";
 import "../styles/components/Navigation.style.sass";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
 const Navigation = () => {
+  const logout = useStoreActions((actions) => actions.accountStore.logout);
+  const history = useHistory();
+  const logoutUser = () =>{
+    logout();
+    history.push("/login")
+    
+  }
   return (
     <div>
       <nav>
@@ -19,6 +27,14 @@ const Navigation = () => {
           </Button>
           <Button id="navigation" appearance="primary" type="button">
             <Link to="/errorLog">Error Log</Link>
+          </Button>
+          <Button
+            id="navigation"
+            appearance="primary"
+            type="button"
+            onClick={logoutUser}
+          >
+            Logout
           </Button>
         </ul>
       </nav>
