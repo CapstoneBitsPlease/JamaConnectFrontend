@@ -28,9 +28,6 @@ const Navigation = () => {
           <Button id="navigation" appearance="subtle" type="button">
             <Link to="/errorLog">Error log</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button" onClick={handleSignOut}>
-            Sign out
-          </Button>
           <Button
             id="navigation"
             appearance="primary"
