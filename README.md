@@ -1,12 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+C2TB
+====
 
-# Duc's section:
+This repo contains the frontend components for our team's capstone project.
 
-## How did I initialize this?
+To run locally:
+-------
 
-Mostly follow: 
-  1. https://itnext.io/how-to-use-tailwind-css-with-react-16e9d478b8b1
-  2. https://medium.com/@harryhedger/quick-how-to-setup-tailwind-with-create-react-app-6e7af96ad32c
+1. Clone the repo and open the directory on your machine.
+
+2. Run the script `npm install` to install all libraries specified in the package.json.
+
+3. Once everything is installed, use `npm start` to run in development mode. 
+
+4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser if it doesn't open automatically.
+
+See additional available npm scripts below in React's default section.
+
+
+To install and test on Jira:
+-------
+
+1. Create an Atlassian instance and a project if you do not have one already. You can do this [here](http://go.atlassian.com/cloud-dev).
+
+2. In your instance, enable development mode by clicking **Apps** on the top toolbar, then **Manage apps**. Click **Settings** at the bottom of page, select **Enable development mode**, and click **Apply**.
+
+3. Change the project key in the `url` section of each `module` in the `atlassian-connect.json` file (this is located in the public folder) to match your project key. Your key should look like uppercase letters and numbers (a project key for a project named test-jira-project might be TJP).
+
+4. If not using this for production -> Use ngrok to make the files available over the internet - open a separate terminal and run `ngrok http <PORT>`. Change `<PORT>` to whichever port the frontend is using. This should open a status page with HTTP and HTTPS URLs. 
+
+5. Copy the HTTPS URL, append `/atlassian-connect.json`, and paste this in your browser to ensure it shows the correct JSON file. 
+
+6. If it looks correct, paste the HTTPS URL (without the appended JSON) into the `baseUrl` section near the top of the `atlassian-connect.json` file.
+
+7. Finally, upload the app - Ensure the frontend and backend are both running. Navigate back to the **Manage your apps** page in Jira, and upload the app by clicking **Upload app** and pasting the full URL (should look something like this: `https://2fb042924b6d.ngrok.io/atlassian-connect.json`). Then click **Upload**.
+
+8. Verify that the app (currently called Jama Connect Plugin) appears in the **User-installed apps** list. A new button to the plugin should be visible under the **Apps** tab on the top toolbar. If you navigate to the **Projects** tab and select the correct project, the plugin should also be visible on the sidebar underneath **Project pages**.
+
 
 
 # React's default section:
@@ -80,7 +109,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### Deploy to Jira
+Sources:
+--------
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and generated from a React-Tailwind-Sass template created by [ptmdmusique](https://github.com/ptmdmusique/react-tailwind-sass-template).
 
 Run the `localhost:3000` port by using `npm`
 then run the `ngrok http 3000` in the terminal
@@ -89,4 +121,3 @@ Then copy and paste the URL to the base URL from the `atlassian-connect.json` fi
 Remember to change the project key in the `atlassian-connect.json`also to match with your project key under `webItems` and `webPanels` 
 Then go to the `Manage apps` on Jira under `Apps` section and upload your application by gettingg the URL from the forwarding section and add `/atlassian-connect.json` next to it like this `https://4176ee25.ngrok.io/atlassian-connect.json` and upload
 The `Jama Plugin` should be on the sidebar or under the `Apps` section on Jira after uploaded it sucessfully 
-

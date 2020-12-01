@@ -7,13 +7,13 @@ const Login = () => {
   const passwordRef = React.createRef();
   const organizationRef = React.createRef();
   const login = useStoreActions(actions => actions.accountStore.login);
-
+ 
   const loginUser = () => {
     
     const loginInfo = {
       userName : userNameRef.current.value,
       password : passwordRef.current.value,
-      organization : organizationRef.current.value
+      organization : organizationRef.current.value,
     }
 
     login(loginInfo);
@@ -21,8 +21,9 @@ const Login = () => {
   };
   const handleForm = (event) => {
     event.preventDefault();
+    loginUser();
   };
-
+  
   return (
     <div className="login-container">
       <form className="login-wrapper" onSubmit={handleForm}>

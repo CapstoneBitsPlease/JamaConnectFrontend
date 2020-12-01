@@ -1,30 +1,60 @@
 import React from "react";
-import {useStoreState } from "easy-peasy";
+import { useStoreState, useStoreRehydrated } from "easy-peasy";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
+  useLocation,
 } from "react-router-dom";
-import { Login } from "./pages";
-import { SelectItem } from "./components";
+import {
+  SelectItem,
+  SelectItemunlink,
+  SyncSettings,
+  LinkFields,
+} from "./pages";
+import { Login, ErrorLog  } from "./pages";
+import {JiraIssueContent, Navigation} from "../src/components"
+const Test = () => {
+  const loggedIn = useStoreState((state) => state.accountStore.loggedIn);
+  const check = useStoreState((state => state.jamaitem.checklinking))
+  const location = useLocation();
+  const noNav = location.pathname.includes("NoNav");
 
-function App() {
-  const loginState = useStoreState((state) => state.accountStore.loggedIn);
   return (
-    
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            {loginState ? <Redirect to="/selectItem" /> : <Login />}
-          </Route>
-          <Route path="/selectItem" exact>
-            {!loginState ? <Redirect to="/" /> : <SelectItem />}
-          </Route>
-        </Switch>
-      </Router>
-    
-  );
-}
+    <>
+      {!noNav && loggedIn && <Navigation />}
 
+      <Switch>
+        <Route path="/login">
+          {loggedIn ? <Redirect to="/selectItem" /> : <Login />}
+        </Route>
+        <Route path="/selectItem">
+          { check ? <Redirect to="/linkFields" /> : <SelectItem />}
+        </Route>
+        <Route path="/unlink">
+          {!loggedIn ? <Redirect to="/login" /> : <SelectItemunlink />}
+        </Route>
+        <Route path="/linkFields">
+          {!loggedIn ? <Redirect to="/login" /> : <LinkFields />}
+        </Route>
+        <Route path="/syncSettings">
+          {!loggedIn ? <Redirect to="/login" /> : <SyncSettings />}
+        </Route>
+        <Route path="/errorLog">
+          {!loggedIn ? <Redirect to="/login" /> : <ErrorLog/>}
+        </Route>
+        <Route path="/selectItemNoNav">
+          {!loggedIn ? "Please login through jama plugin" : <JiraIssueContent/>}
+        </Route>
+      </Switch>
+    </>
+  );
+};
+
+const App = () => {
+  const isRehydrated = useStoreRehydrated();
+
+  return <Router>{isRehydrated ? <Test /> : "Loading"}</Router>;
+};
 export default App;
