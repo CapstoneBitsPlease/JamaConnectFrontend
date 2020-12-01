@@ -12,6 +12,8 @@ const SelectItemunlink = () => {
 	// const [token, setToken] = useState(0);
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
+	const [flag , setflag ] =useState(true)
+	const [listLength, setListLength] = useState(0);
 
 	//test if the jama id is valid
 	const [testjama, settestjama] = useState(false)
@@ -32,14 +34,17 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
+				/*if(res.data.length === 0){
+					makeToast("error", "There is no Jama item in our database.")
+				}*/ 
 				console.log(res);
 				setlist(res.data);
+				setListLength(res.data.length);
 			})
 			.catch(err => {
 				console.log(err);
 				makeToast("error", "There is something wrong when getting item list")
 			})
-		console.log(token);
 	}
 
 
@@ -54,7 +59,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item ID not found.") {
+				if (res.data === "Item ID not found.") {
 					console.log("The item is found!!!!!")
 					settestjama(false);
 				}
@@ -65,7 +70,7 @@ const SelectItemunlink = () => {
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jama ID")
+				//makeToast("error", "There is something wrong with your Jama ID")
 			})
 
 	}
@@ -84,7 +89,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				makeToast("info",res.data);
+				makeToast("success",res.data);
 				console.log(res);
 
 			})
@@ -92,22 +97,27 @@ const SelectItemunlink = () => {
 				console.log(err.data);
 				makeToast("error", "There is something wrong while unlinking")
 			})
+
+			setflag(!flag);
 	}
 
 	const check_again = () => {
 
-		if (item_id == 0) {
+		if (item_id === 0) {
 			makeToast("error", "You have to enter an jama ID!")
 		}
 		else {
 			if (testjama) {
 				unlink_items();
 				check(true);
+				setListLength(listLength-1);
 			}
 			else {
 				makeToast("error", "This is not a valid jama ID!")
 			}
 		}
+
+		document.getElementById("itemid").value = "";
 
 	}
 
@@ -116,9 +126,14 @@ const SelectItemunlink = () => {
 	//simulated with json file
 	const temp = () => {
 		const tempArray = [];
-		list.map((element) => {
-			tempArray.push('ID: ' + element[0]);
-		});
+		if(listLength === 0) {
+			tempArray.push("No Jama items currently in our database.");
+		}
+		else {
+			list.map((element) => {
+				tempArray.push('ID: ' + element[0]);
+			});
+		}
 		return tempArray;
 	}
 
@@ -131,7 +146,7 @@ const SelectItemunlink = () => {
 		if (token) {
 			get_list();
 		}
-	}, [token])
+	}, [token, listLength])
 
 
 	useEffect(() => {
@@ -139,7 +154,6 @@ const SelectItemunlink = () => {
 			check_error();
 		}
 	}, [item_id])
-
 
 
 	return (
@@ -170,7 +184,7 @@ const SelectItemunlink = () => {
 
 					<div className="select_item_unlink-list">
 						<ul >
-							{temp().map(s => (<li className="test">{s}</li>))}
+							{temp().map((s) => (<li className="test">{s}</li>))}
 						</ul>
 					</div>
 				</div>

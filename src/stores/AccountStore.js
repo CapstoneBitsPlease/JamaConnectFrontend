@@ -2,7 +2,7 @@ import { action, thunk, persist } from "easy-peasy";
 import axios from "axios";
 import makeToast from "../components/Toaster";
 
-const accountStore = persist(
+const accountStore = /*persist*/(
   {
     loggedIn: false,
     token: null,
@@ -20,17 +20,20 @@ const accountStore = persist(
           makeToast("error", "Invalid login");
         });
     }),
-
+    logout: action((state) => {
+      state.token = null;
+      state.loggedIn = false;
+    }),
     setLoggedIn: action((state, newLoggedIn) => {
       state.loggedIn = newLoggedIn;
     }),
     setToken: action((state, newToken) => {
       state.token = newToken;
     }),
-  },
+  }/*,
   {
     storage: "localStorage",
-  }
+  }*/
 );
 
 export default accountStore;

@@ -1,5 +1,5 @@
-import React from 'react';
-import axios from 'axios'
+import React from "react";
+import axios from "axios";
 import "../../styles/pages/SelectItems.sass";
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
@@ -65,7 +65,6 @@ const SelectItem = () => {
 				makeToast("error", "Having trouble getting project information")
 
 			})
-		console.log(token);
 	}
 
 	//Getting all the item type with API call
@@ -124,7 +123,7 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item ID not found.") {
+				if (res.data === "Item ID not found.") {
 					console.log("The item is found!!!!!")
 					settestjamaid(false);
 				}
@@ -136,7 +135,7 @@ const SelectItem = () => {
 			.catch(err => {
 				settesttoken(false);
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jama ID")
+				//makeToast("error", "There is something wrong with your Jama ID")
 			})
 
 	}
@@ -151,7 +150,7 @@ const SelectItem = () => {
 				}
 			})
 			.then(res => {
-				if (res.data == "Item key not found.") {
+				if (res.data === "Item key not found.") {
 					console.log("We can't find Jira ID!!!!!!!!!!!!!")
 					settestjiraid(false);
 				}
@@ -164,7 +163,7 @@ const SelectItem = () => {
 				console.log("are we getting here?")
 				settesttoken(false);
 				console.log(err);
-				makeToast("error", "There is something wrong with your Jira ID")
+				//makeToast("error", "There is something wrong with your Jira ID")
 			})
 	}
 
@@ -179,11 +178,11 @@ const SelectItem = () => {
 		}
 		else if (!testjamaid) {
 			settestjamaid(false);
-					makeToast("error", "Sorry, we can't find that Jama ID")
+			makeToast("error", "Sorry, we can't find that Jama ID")
 		}
 		else if (!testjiraid) {
 			settestjiraid(false);
-					makeToast("error", "Sorry, we can't find that Jira ID")
+			makeToast("error", "Sorry, we can't find that Jira ID")
 		}
 	}
 
@@ -234,14 +233,14 @@ const SelectItem = () => {
 	}, [types_id, projects_id])
 
 	useEffect(() => {
-		if (item_id != 0) {
+		if (item_id !== 0) {
 			check_error();
 			console.log(testjamaid)
 		}
 	}, [item_id])
 
 	useEffect(() => {
-		if (jira_id != 0) {
+		if (jira_id !== 0) {
 			check_error2();
 			console.log(testjiraid)
 		}
@@ -301,7 +300,7 @@ const SelectItem = () => {
 
 				<div className="select_item-list">
 					<ul >
-						{temp().map(s => (<li className="test">{s}</li>))}
+						{temp().map( (s,index) => (<li key={index} className="test">{s}</li>))}
 					</ul>
 				</div>
 
