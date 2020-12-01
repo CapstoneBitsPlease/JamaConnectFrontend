@@ -3,7 +3,6 @@ import Button from "@atlaskit/button";
 import { useStoreActions} from "easy-peasy";
 import "../styles/components/Navigation.style.sass";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
-<<<<<<< HEAD
 
 const Navigation = () => {
   const logout = useStoreActions((actions) => actions.accountStore.logout);
@@ -13,25 +12,6 @@ const Navigation = () => {
     history.push("/login")
     
   }
-=======
-import {useStoreActions} from "easy-peasy";
-
-const Navigation = () => {
-  const history = useHistory();
-  const setLoggedIn = useStoreActions(actions => actions.accountStore.setLoggedIn);
-  const setToken = useStoreActions(actions => actions.accountStore.setToken);
-
-  // handles the "sign out" button. asks user to confirm, erases token and moves back to login page if they do
-  const handleSignOut = () => {
-    var answer = window.confirm("Are you sure you want to sign out?")
-    if(answer) {
-      setLoggedIn(false);
-      setToken(null);
-      history.push("/login");
-    }
-  }
-
->>>>>>> 0646b6ffbb2b52df011d630a10f6449fe63b2d22
   return (
     <div>
       <nav>
