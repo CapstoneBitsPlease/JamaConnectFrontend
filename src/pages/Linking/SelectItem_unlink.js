@@ -13,6 +13,7 @@ const SelectItemunlink = () => {
 	const [list, setlist] = useState([])
 	const [item_id, setitem_id] = useState(0)
 	const [flag , setflag ] =useState(true)
+	const [listLength, setListLength] = useState(0);
 
 	//test if the jama id is valid
 	const [testjama, settestjama] = useState(false)
@@ -33,11 +34,12 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				if(res.data.length === 0){
-					makeToast("error", "There is no Jama item")
-				}
+				/*if(res.data.length === 0){
+					makeToast("error", "There is no Jama item in our database.")
+				}*/ 
 				console.log(res);
 				setlist(res.data);
+				setListLength(res.data.length);
 			})
 			.catch(err => {
 				console.log(err);
@@ -68,7 +70,7 @@ const SelectItemunlink = () => {
 			})
 			.catch(err => {
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jama ID")
+				//makeToast("error", "There is something wrong with your Jama ID")
 			})
 
 	}
@@ -87,7 +89,7 @@ const SelectItemunlink = () => {
 				}
 			})
 			.then(res => {
-				makeToast("info",res.data);
+				makeToast("success",res.data);
 				console.log(res);
 
 			})
@@ -108,6 +110,7 @@ const SelectItemunlink = () => {
 			if (testjama) {
 				unlink_items();
 				check(true);
+				setListLength(listLength-1);
 			}
 			else {
 				makeToast("error", "This is not a valid jama ID!")
@@ -123,9 +126,14 @@ const SelectItemunlink = () => {
 	//simulated with json file
 	const temp = () => {
 		const tempArray = [];
-		list.map((element) => {
-			tempArray.push('ID: ' + element[0]);
-		});
+		if(listLength === 0) {
+			tempArray.push("No Jama items currently in our database.");
+		}
+		else {
+			list.map((element) => {
+				tempArray.push('ID: ' + element[0]);
+			});
+		}
 		return tempArray;
 	}
 
@@ -138,7 +146,7 @@ const SelectItemunlink = () => {
 		if (token) {
 			get_list();
 		}
-	}, [token, unlink_items])
+	}, [token, listLength])
 
 
 	useEffect(() => {
@@ -176,7 +184,7 @@ const SelectItemunlink = () => {
 
 					<div className="select_item_unlink-list">
 						<ul >
-							{temp().map(s => (<li className="test">{s}</li>))}
+							{temp().map((s) => (<li className="test">{s}</li>))}
 						</ul>
 					</div>
 				</div>

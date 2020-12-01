@@ -2,7 +2,11 @@
   "name": "Jama Connect Plugin",
   "description": "Atlassian Connect app",
   "key": "com.example.myapp",
+<<<<<<< HEAD
   "baseUrl": "https://4933649ba4fd.ngrok.io",
+=======
+  "baseUrl": "https://56b5645d4d84.ngrok.io",
+>>>>>>> 0646b6ffbb2b52df011d630a10f6449fe63b2d22
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -25,7 +29,7 @@
     "webItems": [{
       "location": "jira.project.sidebar.plugins.navigation",
       "key": "connect-provided-link-to-panel",
-      "url": "/projects/EX?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
+      "url": "/projects/TJP2?selectedItem=com.example.myaddon:connect-provided-link-to-panel",
       "context": "product",
       "name": {
         "value": "Jama Plugin"
@@ -33,7 +37,7 @@
     }],
     "webPanels": [{
       "key": "connect-provided-web-panel",
-      "url": "/login?pkey=EX",
+      "url": "/login?pkey=TJP2",
       "location": "com.example.myaddon:connect-provided-link-to-panel",
       "name": {
         "value": "My Web Panel"

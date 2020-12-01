@@ -3,6 +3,7 @@ import Button from "@atlaskit/button";
 import { useStoreActions} from "easy-peasy";
 import "../styles/components/Navigation.style.sass";
 import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
+<<<<<<< HEAD
 
 const Navigation = () => {
   const logout = useStoreActions((actions) => actions.accountStore.logout);
@@ -12,21 +13,43 @@ const Navigation = () => {
     history.push("/login")
     
   }
+=======
+import {useStoreActions} from "easy-peasy";
+
+const Navigation = () => {
+  const history = useHistory();
+  const setLoggedIn = useStoreActions(actions => actions.accountStore.setLoggedIn);
+  const setToken = useStoreActions(actions => actions.accountStore.setToken);
+
+  // handles the "sign out" button. asks user to confirm, erases token and moves back to login page if they do
+  const handleSignOut = () => {
+    var answer = window.confirm("Are you sure you want to sign out?")
+    if(answer) {
+      setLoggedIn(false);
+      setToken(null);
+      history.push("/login");
+    }
+  }
+
+>>>>>>> 0646b6ffbb2b52df011d630a10f6449fe63b2d22
   return (
     <div>
       <nav>
         <ul className="navigation-container">
-          <Button id="navigation" appearance="primary" type="button">
-            <Link to="/selectItem">Select Item to link</Link>
+          <Button id="navigation" appearance="subtle" type="button">
+            <Link to="/selectItem">Select item to link</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
+          <Button id="navigation" appearance="subtle" type="button">
             <Link to="/unlink">Unlink</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
-            <Link to="/syncSettings">Sync Settings</Link>
+          <Button id="navigation" appearance="subtle" type="button">
+            <Link to="/syncSettings">Sync settings</Link>
           </Button>
-          <Button id="navigation" appearance="primary" type="button">
-            <Link to="/errorLog">Error Log</Link>
+          <Button id="navigation" appearance="subtle" type="button">
+            <Link to="/errorLog">Error log</Link>
+          </Button>
+          <Button id="navigation" appearance="primary" type="button" onClick={handleSignOut}>
+            Sign out
           </Button>
           <Button
             id="navigation"
