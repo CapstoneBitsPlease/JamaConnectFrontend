@@ -300,11 +300,7 @@ const SelectItem = () => {
 
 				<div className="select_item-list">
 					<ul >
-<<<<<<< HEAD
 						{temp().map( (s,index) => (<li key={index} className="test">{s}</li>))}
-=======
-						{temp().map((s) => (<li className="test">{s}</li>))}
->>>>>>> d361de4173cea9dba3b982976b0fcc00a73ac7c4
 					</ul>
 				</div>
 
