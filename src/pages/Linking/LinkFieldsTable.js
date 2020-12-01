@@ -3,7 +3,7 @@ import React from "react";
 const LinkFieldsTable = (props) => {
 
     // handles the radio button input. adds formatted array of service ID and name to another array if it is checked
-    const handleRadio = (event) => {
+    const handleRadio = () => {
         var radioValues = [];
         var radioData = [];
         
@@ -45,17 +45,26 @@ const LinkFieldsTable = (props) => {
 
         // parse/replace for a more readable field name. add index, service ID and name 
         Object.entries(itemData).forEach((key) => {
-            if(typeof key[1] !== 'object' && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null 
-            && !key[0].includes("customfield_10019") && !key[0].includes("customfield_10025")) {  // customfield_10019 = "i|1009:"" and customfield_10025 = "10000_*:*_1_*:*_174049426_*|*_10002_*:*..." so ¯\_(ツ)_/¯
+            // not looking at Jira's nested fields 
+            if(typeof key[1] !== 'object' 
+            // making sure it's not empty 
+            && key[1] !== "[]" && key[1] !== "{}" && key[1] !== null 
+            // not sure how to name the kind of data these fields are holding 
+            && !key[0].includes("customfield_10019") 
+            && !key[0].includes("customfield_10025") 
+            // these are read-only fields and cannot be linked
+            && !key[0].includes("globalId")
+            && !key[0].includes("documentKey")) {  
+
+                // handle camelCase
                 if(!key[0].includes("$") && !key[0].includes("_")) {
                     formattedData.push({
                         "index": i+1, 
                         "fieldServiceID": key[0],
-                        // adds a space before uppercase letters if in camelCase
                         "fieldName": key[0].replace((/([^A-Z](?=[A-Z]))/g), "$1 ").toLowerCase()
                     })
                 }
-                // we know this field is story points 
+                // this field is story points 
                 else if(key[0].includes("customfield_10016")) {
                     formattedData.push({
                         "index": i+1, 
@@ -63,7 +72,7 @@ const LinkFieldsTable = (props) => {
                         "fieldName": key[0].replace("customfield_10016", "story points")
                     })
                 }
-                // Spencer specifically set this field to be the Jama URL 
+                // this field was specifically set to be the Jama URL 
                 else if(key[0].includes("customfield_10029")) {
                     formattedData.push({
                         "index": i+1, 
@@ -71,6 +80,7 @@ const LinkFieldsTable = (props) => {
                         "fieldName": key[0].replace("customfield_10029", "Jama URL")
                     })
                 }
+                // base case (only $ and _ to replace)
                 else {
                     formattedData.push({
                         "index": i+1, 
@@ -88,6 +98,7 @@ const LinkFieldsTable = (props) => {
     const renderTable = () => {
         var data = formatData(props.itemData);
         var radioName = (props.service === "Jama") ? "jama_radio" : "jira_radio";
+
         // map each data point and a radio button to a new row in the table
         return data.map((row) => {
             const { index, fieldServiceID, fieldName, checked } = row;

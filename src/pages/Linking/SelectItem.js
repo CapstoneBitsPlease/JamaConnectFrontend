@@ -135,7 +135,7 @@ const SelectItem = () => {
 			.catch(err => {
 				settesttoken(false);
 				console.log(err.data);
-				makeToast("error", "There is something wrong with your Jama ID")
+				//makeToast("error", "There is something wrong with your Jama ID")
 			})
 
 	}
@@ -163,7 +163,7 @@ const SelectItem = () => {
 				console.log("are we getting here?")
 				settesttoken(false);
 				console.log(err);
-				makeToast("error", "There is something wrong with your Jira ID")
+				//makeToast("error", "There is something wrong with your Jira ID")
 			})
 	}
 
@@ -178,11 +178,11 @@ const SelectItem = () => {
 		}
 		else if (!testjamaid) {
 			settestjamaid(false);
-					makeToast("error", "Sorry, we can't find that Jama ID")
+			makeToast("error", "Sorry, we can't find that Jama ID")
 		}
 		else if (!testjiraid) {
 			settestjiraid(false);
-					makeToast("error", "Sorry, we can't find that Jira ID")
+			makeToast("error", "Sorry, we can't find that Jira ID")
 		}
 	}
 
@@ -300,7 +300,11 @@ const SelectItem = () => {
 
 				<div className="select_item-list">
 					<ul >
+<<<<<<< HEAD
 						{temp().map( (s,index) => (<li key={index} className="test">{s}</li>))}
+=======
+						{temp().map((s) => (<li className="test">{s}</li>))}
+>>>>>>> d361de4173cea9dba3b982976b0fcc00a73ac7c4
 					</ul>
 				</div>
 

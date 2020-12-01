@@ -1,5 +1,5 @@
 import React from "react";
-
+import Button from "@atlaskit/button";
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -10,9 +10,15 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   return (
     <div>
       {pageNumbers.map((number) => (
-        <button key={number} onClick={() => paginate(number)}>
+        <Button
+          id="paginate"
+          appearance="primary"
+          type="button"
+          key={number}
+          onClick={() => paginate(number)}
+        >
           {number}
-        </button>
+        </Button>
       ))}
     </div>
   );
